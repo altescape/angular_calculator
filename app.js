@@ -4,31 +4,45 @@
 
 var app = angular.module('myApp', ['highcharts-ng', 'LocalStorageModule']);
 
-app.controller('userCtrl', function ($scope, localStorageService) {
+app.controller('UserCtrl', function ($scope, localStorageService) {
   /* Check user data */
   $scope.user = localStorageService.get('user') || {};
   $scope.user.name = localStorageService.get('user') && localStorageService.get('user').name
       ? localStorageService.get('user').name
       : "";
 
-  $scope.updateUser = function() {
+  $scope.updateUser = function () {
     localStorageService.set('user', $scope.user);
   };
 });
 
-app.controller('sessionCtrl', function ($scope, localStorageService) {
+app.controller('SessionCtrl', function ($scope, localStorageService) {
   /* Check session data */
   $scope.session = localStorageService.get('session') || {};
   $scope.session.name = localStorageService.get('session') && localStorageService.get('session').name
       ? localStorageService.get('session').name
       : "";
 
-  $scope.updateSession = function() {
+  $scope.updateSession = function () {
     localStorageService.set('session', $scope.session);
   };
 });
 
-app.controller('chartCtrl', function ($scope, localStorageService) {
+app.controller('InfoCtrl', function ($scope, localStorageService) {
+  /* Check user data */
+  $scope.user = localStorageService.get('user') || {};
+  $scope.user.name = localStorageService.get('user') && localStorageService.get('user').name
+      ? localStorageService.get('user').name
+      : "";
+
+  /* Check session data */
+  $scope.session = localStorageService.get('session') || {};
+  $scope.session.name = localStorageService.get('session') && localStorageService.get('session').name
+      ? localStorageService.get('session').name
+      : "";
+});
+
+app.controller('ChartCtrl', function ($scope, localStorageService) {
 
   $scope.cal = {};
   $scope.cal.param1 = 50;
@@ -50,7 +64,7 @@ app.controller('chartCtrl', function ($scope, localStorageService) {
     ['Safari', $scope.cal.param4]
   ];
 
-  $scope.updateSession = function() {
+  $scope.updateSession = function () {
     localStorageService.set('session', $scope.session);
   };
 
