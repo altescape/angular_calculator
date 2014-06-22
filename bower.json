@@ -1,0 +1,30 @@
+{
+  "name": "hoz_calculator",
+  "version": "0.0.1",
+  "authors": [
+    "Michael Watts <hello@michaelwatts.me>"
+  ],
+  "description": "Horizon Value Prop Calculator",
+  "main": "app.js",
+  "license": "MIT",
+  "homepage": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "*",
+    "ngstorage": "~0.3.0",
+    "angular-route": "~1.2.17",
+    "offlinejs-simulate-ui": "~0.1.2",
+    "bootstrap": "~3.1.1",
+    "jquery": "~2.1.1",
+    "offline": "~0.7.3",
+    "highcharts-ng": "~0.0.6",
+    "angular-local-storage": "~0.0.5"
+  }
+}

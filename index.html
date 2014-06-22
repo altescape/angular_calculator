@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Horizon Calculator</title>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/dist/css/app.css">
+  <link rel="stylesheet" href="/bower_components/offline/themes/offline-theme-dark.css">
+  <link rel="stylesheet" href="/bower_components/offline/themes/offline-language-english.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div ng-controller="chartCtrl">
+    <h4>{{ chartConfig.series[0].name }}
+      <small>(Figures: {{ param1 }} | {{ param2 }} | {{ param3 }} | {{ param4 }})</small>
+    </h4>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-3" ng-controller="userCtrl">
+        <input type="text" ng-model="user.name" ng-change="updateUser()" class="form-control" ng-value="" placeholder="user.name" />
+      </div>
+      <div class="col-xs-3" ng-controller="sessionCtrl">
+        <input type="text" ng-model="session.name" ng-change="updateSession()" class="form-control" placeholder="session.name" />
+      </div>
+      <hr>
+      <div class="col-xs-3">
+        <input type="number" ng-model="cal.param1" ng-change="updateChart()" class="form-control" step="10" />
+      </div>
+      <div class="col-xs-3">
+        <input type="number" ng-model="cal.param2" ng-change="updateChart()" class="form-control" step="10"/>
+      </div>
+      <div class="col-xs-3">
+        <input type="number" ng-model="cal.param3" ng-change="updateChart()" class="form-control" step="10"/>
+      </div>
+      <div class="col-xs-3">
+        <input type="number" ng-model="cal.param4" ng-change="updateChart()" class="form-control" step="10"/>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <highchart config="chartConfig" style="height: 200px;"></highchart>
+      </div>
+      <div class="col-xs-6">
+        <highchart config="chartConfig2" style="height: 200px;"></highchart>
+      </div>
+    </div>
+    add {{ colors }}
+  </div>
+</div>
+<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="/bower_components/angular-local-storage/angular-local-storage.js"></script>
+
+<script type="text/javascript" src="/src/js/charts/highcharts.js"></script>
+<script type="text/javascript" src="/src/js/charts/exporting.js"></script>
+<script type="text/javascript" src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
+
+<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/src/js/ui/snap.js"></script>
+<script type="text/javascript" src="/src/js/ui/fastclick.js"></script>
+<script type="text/javascript" src="/src/js/ui/appscroll.min.js"></script>
+
+<script type="text/javascript" src="/bower_components/offline/offline.min.js"></script>
+<script type="text/javascript" src="/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
+</body>
+</html>

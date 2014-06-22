@@ -1,0 +1,31 @@
+{
+  "name": "sita_calc",
+  "version": "0.0.1",
+  "description": "Horizon Value Prop Calculator",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "gulp": "~3.8.0",
+    "gulp-ruby-sass": "~0.5.0",
+    "gulp-autoprefixer": "0.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/altescape/sita_calc.git"
+  },
+  "keywords": [
+    "angularjs"
+  ],
+  "author": "Michael Watts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/altescape/sita_calc/issues"
+  },
+  "homepage": "https://github.com/altescape/sita_calc"
+}
