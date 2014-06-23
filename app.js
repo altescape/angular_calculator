@@ -2,194 +2,262 @@
  * Created by michaelwatts on 21/06/2014.
  */
 
-var app = angular.module('myApp', ['highcharts-ng', 'LocalStorageModule']);
+var app = angular.module('myApp', ['highcharts-ng', 'LocalStorageModule'])
 
-app.controller('UserCtrl', function ($scope, localStorageService) {
-  /* Check user data */
-  $scope.user = localStorageService.get('user') || {};
-  $scope.user.name = localStorageService.get('user') && localStorageService.get('user').name
-      ? localStorageService.get('user').name
-      : "";
+	.factory('InfoFactory', function (localStorageService) {
+		return {
+			"user"   : {
+				"name": localStorageService.get('user') && localStorageService.get('user').name
+					? localStorageService.get('user').name
+					: ""
+			},
+			"session": {
+				"name": localStorageService.get('session') && localStorageService.get('session').name
+					? localStorageService.get('session').name
+					: ""
+			}
+		}
+	})
 
-  $scope.updateUser = function () {
-    localStorageService.set('user', $scope.user);
-  };
-});
+	.controller('InfoCtrl', function ($scope, localStorageService, InfoFactory) {
+		/* User data from InfoFactory */
+		$scope.user = InfoFactory.user;
+		/* Session data from InfoFactory */
+		$scope.session = InfoFactory.session;
 
-app.controller('SessionCtrl', function ($scope, localStorageService) {
-  /* Check session data */
-  $scope.session = localStorageService.get('session') || {};
-  $scope.session.name = localStorageService.get('session') && localStorageService.get('session').name
-      ? localStorageService.get('session').name
-      : "";
+	})
 
-  $scope.updateSession = function () {
-    localStorageService.set('session', $scope.session);
-  };
-});
+	.controller('UserCtrl', function ($scope, localStorageService, InfoFactory) {
 
-app.controller('InfoCtrl', function ($scope, localStorageService) {
-  /* Check user data */
-  $scope.user = localStorageService.get('user') || {};
-  $scope.user.name = localStorageService.get('user') && localStorageService.get('user').name
-      ? localStorageService.get('user').name
-      : "";
+		$scope.user = InfoFactory.user;
 
-  /* Check session data */
-  $scope.session = localStorageService.get('session') || {};
-  $scope.session.name = localStorageService.get('session') && localStorageService.get('session').name
-      ? localStorageService.get('session').name
-      : "";
-});
+		$scope.updateUser = function () {
+			localStorageService.set('user', $scope.user);
+			InfoFactory.user = $scope.user;
+		};
+	})
 
-app.controller('ChartCtrl', function ($scope, localStorageService) {
+	.controller('SessionCtrl', function ($scope, localStorageService, InfoFactory) {
 
-  $scope.cal = {};
-  $scope.cal.param1 = 50;
-  $scope.cal.param2 = 50;
-  $scope.cal.param3 = 0;
-  $scope.cal.param4 = 0;
+		$scope.session = InfoFactory.session;
 
-  $scope.colors = {};
+		$scope.updateSession = function () {
+			localStorageService.set('session', $scope.session);
+			InfoFactory.session = $scope.session;
+		};
+	})
+
+	.factory('ChartFactory', function (localStorageService) {
+		return {
+			"cal" : localStorageService.get('cal')
+				? localStorageService.get('cal')
+				: {
+				"services": {
+					"op1": 0,
+					"op2": 0,
+					"op3": 0,
+					"op4": 0
+				},
+				"param1"  : 1000000,
+				"param2"  : 50,
+				"param3"  : 0,
+				"param4"  : 0
+			},
+			"colors" : function () {
+				{
+					return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
+						key : value[key];
+					})
+				}
+			}
+		}
+	})
+
+	.controller('ChartCtrl', function ($scope, localStorageService, ChartFactory) {
+
+		$scope.cal = ChartFactory.cal;
+
+		$scope.colors = ChartFactory.colors();
+
+		$scope.graphData = function (flag) {
+
+			$scope.op1_con = 0;
+			$scope.op1_agg = 0;
+
+			if ($scope.cal.services.op1 === "1") {
+				$scope.op1_con = parseInt($scope.cal.param1 / 500000, 10);
+				$scope.op1_agg = parseInt($scope.cal.param1 / 200000, 10);
+			}
+
+			$scope.op2_con = 0;
+			$scope.op2_agg = 0;
+
+			if ($scope.cal.services.op2 === "1") {
+				$scope.op2_con = parseInt($scope.cal.param1 / 100000, 10);
+				$scope.op2_agg = parseInt($scope.cal.param1 / 80000, 10);
+			}
+
+			$scope.op3_con = 0;
+			$scope.op3_agg = 0;
+
+			if ($scope.cal.services.op3 === "1") {
+				$scope.op3_con = parseInt($scope.cal.param1 / 500000, 10);
+				$scope.op3_agg = parseInt($scope.cal.param1 / 200000, 10);
+			}
+
+			$scope.op4_con = 0;
+			$scope.op4_agg = 0;
+
+			if ($scope.cal.services.op4 === "1") {
+				$scope.op4_con = parseInt($scope.cal.param1 / 600000, 10);
+				$scope.op4_agg = parseInt($scope.cal.param1 / 300000, 10);
+			}
 
 
-  $scope.toggleLoading = function () {
-    this.chartConfig.loading = !this.chartConfig.loading;
-  };
+			if (flag === "normal") {
+				return [
+					['Revenue Integrity', $scope.op1_con],
+					['Revenue Integrity process improvement', $scope.op2_con],
+					['Channel Shift', $scope.op3_con],
+					['Ancillary sales', $scope.op4_con]
+				];
+			}
+			if (flag === "aggressive") {
+				return [
+					['Revenue Integrity', $scope.op1_agg],
+					['Revenue Integrity process improvement', $scope.op2_agg],
+					['Channel Shift', $scope.op3_agg],
+					['Ancillary sales', $scope.op4_agg]
+				];
+			}
+		};
 
-  $scope.loadData = [
-    ['Firefox', $scope.cal.param1],
-    ['IE', $scope.cal.param2],
-    ['Chrome', $scope.cal.param3],
-    ['Safari', $scope.cal.param4]
-  ];
+		$scope.updateChart = function () {
 
-  $scope.updateSession = function () {
-    localStorageService.set('session', $scope.session);
-  };
+			localStorageService.set('cal', $scope.cal);
 
-  $scope.updateChart = function () {
+			/* Update conservative graph */
+			var seriesArray = $scope.chartConfig.series[0];
+			seriesArray.data = $scope.graphData("normal");
 
-    localStorageService.set('cal', $scope.cal);
+			/* Update conservative totals */
+			$scope.total_con = 0;
+			$scope.total_cons = angular.forEach(seriesArray.data, function (key) {
+				$scope.total_con = parseInt($scope.total_con, 10) + parseInt(key[1], 10);
+				return parseInt($scope.total_con, 10);
+			});
 
-    var seriesArray = $scope.chartConfig.series[0];
-    var seriesArray2 = $scope.chartConfig2.series[0];
-    var newData = [
-      ['Firefox', $scope.cal.param1],
-      ['IE', $scope.cal.param2],
-      ['Chrome', $scope.cal.param3],
-      ['Safari', $scope.cal.param4]
-    ];
-    var newData2 = [
-      ['Firefox', $scope.cal.param1 + 122],
-      ['IE', $scope.cal.param2 + 15],
-      ['Chrome', $scope.cal.param3 + 36],
-      ['Safari', $scope.cal.param4 + 140]
-    ];
-    seriesArray.data = newData;
-    seriesArray2.data = newData2;
+			console.log($scope.total_cons);
 
-    $scope.colors = {
-      1: Highcharts.getOptions().colors[0],
-      2: Highcharts.getOptions().colors[1],
-      3: Highcharts.getOptions().colors[2],
-      4: Highcharts.getOptions().colors[3]
-    };
-  };
+			/* Update aggressive graph */
+			var seriesArray2 = $scope.chartConfig2.series[0];
+			seriesArray2.data = $scope.graphData("aggressive");
 
-  /* Start Highcharts config */
-  $scope.chartConfig = {
-    options: {
-      chart      : {
-        type               : 'pie',
-        backgroundColor    : 'rgba(255, 255, 255, 0)',
-        plotBackgroundColor: 'rgba(255, 255, 255, 0)'
-      },
-      tooltip    : {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        series: {
-          tooltip  : {
-            followPointer: false
-          },
-          animation: true
-        },
-        pie   : {
-          allowPointSelect: true,
-          cursor          : 'pointer',
-          borderColor     : 'rgba(255, 255, 255, 0)',
-          dataLabels      : {
-            enabled: false
-          },
-          center          : ['50%', '50%']
-        }
-      }
-    },
-    series : [
-      {
-        name     : 'Browser share',
-        innerSize: '20%',
-        data     : $scope.loadData
-      }
-    ],
-    title  : {
-      text         : $scope.param1 + $scope.param2 + $scope.param3 + $scope.param4,
-      style        : {
-        'color': '#333'
-      },
-      align        : 'center',
-      verticalAlign: 'middle',
-      y            : 100
-    }
-  };
-  /* End Highcharts config */
+			/* Update aggressive totals */
+			$scope.total_agg = 0;
+			$scope.total_aggrs = angular.forEach(seriesArray2.data, function (key) {
+				$scope.total_agg = parseInt($scope.total_agg, 10) + parseInt(key[1], 10);
+				return parseInt($scope.total_agg, 10);
+			});
+		};
 
-  /* Start Highcharts config */
-  $scope.chartConfig2 = {
-    options: {
-      chart      : {
-        type               : 'pie',
-        backgroundColor    : 'rgba(255, 255, 255, 0)',
-        plotBackgroundColor: 'rgba(255, 255, 255, 0)'
-      },
-      tooltip    : {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      },
-      plotOptions: {
-        series: {
-          tooltip  : {
-            followPointer: false
-          },
-          animation: true
-        },
-        pie   : {
-          allowPointSelect: true,
-          cursor          : 'pointer',
-          borderColor     : 'rgba(255, 255, 255, 0)',
-          dataLabels      : {
-            enabled: false
-          },
-          center          : ['50%', '50%']
-        }
-      }
-    },
-    series : [
-      {
-        name     : 'Browser share',
-        innerSize: '20%',
-        data     : $scope.loadData
-      }
-    ],
-    title  : {
-      text         : $scope.param1 + $scope.param2,
-      style        : {
-        'color': '#333'
-      },
-      align        : 'center',
-      verticalAlign: 'middle',
-      y            : 100
-    }
-  };
-  /* End Highcharts config */
-});
+		/* Start Highcharts config */
+		$scope.chartConfig = {
+			options: {
+				chart      : {
+					type               : 'pie',
+					backgroundColor    : 'rgba(255, 255, 255, 0)',
+					plotBackgroundColor: 'rgba(255, 255, 255, 0)'
+				},
+				tooltip    : {
+					pointFormat: '<b>{point.y}</b>'
+				},
+				plotOptions: {
+					series: {
+						tooltip  : {
+							followPointer: false
+						},
+						animation: true
+					},
+					pie   : {
+						allowPointSelect: true,
+						cursor          : 'pointer',
+						borderColor     : 'rgba(255, 255, 255, 0)',
+						dataLabels      : {
+							enabled: false
+						},
+						center          : ['50%', '40%'],
+						size            : 220
+					}
+				}
+			},
+			series : [
+				{
+					name     : 'Value of moving to SITA (Conservative)',
+					innerSize: '20%',
+					data     : $scope.graphData("normal")
+				}
+			],
+			title  : {
+				text         : "Value of moving to SITA (Conservative)",
+				style        : {
+					'color': '#333'
+				},
+				align        : 'center',
+				verticalAlign: 'middle',
+				y            : 110
+			}
+		};
+		/* End Highcharts config */
+
+		/* Start Highcharts config */
+		$scope.chartConfig2 = {
+			options: {
+				chart      : {
+					type               : 'pie',
+					backgroundColor    : 'rgba(255, 255, 255, 0)',
+					plotBackgroundColor: 'rgba(255, 255, 255, 0)'
+				},
+				tooltip    : {
+					pointFormat: '<b>{point.y}</b>'
+				},
+				plotOptions: {
+					series: {
+						tooltip  : {
+							followPointer: false
+						},
+						animation: true
+					},
+					pie   : {
+						allowPointSelect: true,
+						cursor          : 'pointer',
+						borderColor     : 'rgba(255, 255, 255, 0)',
+						dataLabels      : {
+							enabled: false
+						},
+						center          : ['50%', '40%'],
+						size            : 220
+					}
+				}
+			},
+			series : [
+				{
+					name     : 'Value of moving to SITA (Aggressive)',
+					innerSize: '20%',
+					data     : $scope.graphData("aggressive")
+				}
+			],
+			title  : {
+				text         : "Value of moving to SITA (Aggressive)",
+				style        : {
+					'color': '#333'
+				},
+				align        : 'center',
+				verticalAlign: 'middle',
+				y            : 110
+			}
+		};
+		/* End Highcharts config */
+
+		$scope.updateChart();
+	});

@@ -1,3 +1,29 @@
 /* line 1, app.scss */
 body {
   background-color: #f5f5f5; }
+
+/* line 5, app.scss */
+.pos-rel {
+  position: relative; }
+
+/* line 8, app.scss */
+.pos-abs {
+  position: absolute; }
+
+/* line 12, app.scss */
+.chart_total {
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  background: #8D4653;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 30px;
+  color: #FFF;
+  position: absolute;
+  left: 160px;
+  top: 117px;
+  z-index: 0;
+  -webkit-box-shadow: 0 0 0 5px #ffa536;
+  box-shadow: 0 0 0 5px #ffa536; }

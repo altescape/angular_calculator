@@ -15,7 +15,7 @@ gulp.task('default', function () {
       .pipe(gulp.dest('dist/css'));
 });
 
-var sass_watcher = gulp.watch('src/*.scss', ['default']);
+var sass_watcher = gulp.watch('src/css/*.scss', ['default']);
 sass_watcher.on('change', function(event) {
   console.log('File '+event.path+' was '+event.type+', running tasks...');
 });
