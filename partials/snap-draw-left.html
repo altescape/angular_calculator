@@ -2,9 +2,9 @@
     <div class="padder">
         <img class="logo" ng-src="/app/img/logo-small.png">
         <ul class="list-unstyled side-nav">
-            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-user.png">{{ user.name }} <span class="edit">(Edit)</span> <span
+            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-user.png">{{ user.name }} <span class="edit" ng-show="user.name">(Edit)</span> <span
                       ng-hide="user.name">Add your name here</span></a></li>
-            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-company.png">{{ session.name }} <span class="edit">(Edit)</span> <span ng-hide="session.name">Add a name for this session</span></a>
+            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-company.png">{{ session.name }} <span class="edit" ng-show="user.name">(Edit)</span> <span ng-hide="session.name">Name for this session</span></a>
             </li>
             <li><a href="/#/calculator"><img src="/app/img/nav-icon-calc.png">Calculator</a></li>
             <li>

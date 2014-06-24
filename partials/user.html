@@ -1,4 +1,10 @@
-<div class="col-md-4 col-md-offset-4"  ng-controller="InfoCtrl">
+<div class="col-md-4 col-md-offset-4" ng-controller="InfoCtrl">
+
+    <div class="row">
+        <div class="col-md-8 col-sm-offset-2">
+            <img ng-src="/app/img/sita-logo.png" style="width: 100%">
+        </div>
+    </div>
 
     <div class="row mt-50">
         <div class="col-md-12 form-group" ng-controller="UserCtrl">
@@ -12,7 +18,8 @@
                    placeholder="Please name this session." required>
         </div>
         <div class="col-md-4">
-            <a ng-href="/#/calculator" ng-disabled="!session.name || !user.name" class="input-lg user-action"><span class="txt">GO</span> <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <a ng-href="/#/calculator" ng-disabled="!session.name || !user.name" class="input-lg user-action"><span class="txt">GO</span>
+                <span class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
     </div>
 
