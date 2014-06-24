@@ -24,6 +24,7 @@ angular.module('myApp.services', []).
 			}
 		}
 	}).
+
 	/* Init factory for chart objects */
 	factory('ChartInitFctry', function (localStorageService) {
 		return {
@@ -52,6 +53,7 @@ angular.module('myApp.services', []).
 			}
 		}
 	}).
+
 	/* Data builder factory for chart objects and inputs */
 	factory('ServicesBuilderFcty', function () {
 		return [
@@ -62,6 +64,7 @@ angular.module('myApp.services', []).
 			{"name": "CMAP"}
 		]
 	}).
+
 	/* Saved sessions factory */
 	factory('SessionsFcty', function () {
 		return {
@@ -136,4 +139,16 @@ angular.module('myApp.services', []).
 				}
 			}
 		};
-	});
+	}).
+
+    /* Firebase */
+    factory("FbService", ["$firebase", function($firebase) {
+      var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/sita");
+      return $firebase(ref);
+    }]).
+
+    /* Firebase 2 */
+    factory("FbService2", ["$firebase", function($firebase) {
+      var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/text");
+      return $firebase(ref);
+    }]);

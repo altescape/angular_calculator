@@ -431,15 +431,16 @@ a.user-action.disabled, a.user-action[disabled] {
   margin-left: -999px !important;
   visibility: hidden !important;
   height: 0 !important;
-  padding: 0 !important; }
+  padding: 0 !important;
+  position: absolute; }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
-/* line 390, app.scss */
+/* line 391, app.scss */
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
   max-width: 180px; }
-  /* line 394, app.scss */
+  /* line 395, app.scss */
   .postfix-label .form-control, .prefix-label .form-control {
     position: relative;
     z-index: 2;
@@ -447,7 +448,7 @@ a.user-action.disabled, a.user-action[disabled] {
     width: 70%;
     max-width: 250px;
     float: left; }
-  /* line 402, app.scss */
+  /* line 403, app.scss */
   .postfix-label .label, .prefix-label .label {
     position: relative;
     width: 50px;
@@ -464,15 +465,15 @@ a.user-action.disabled, a.user-action[disabled] {
     font-weight: normal;
     font-size: 15px;
     border-radius: 0 5px 5px 0; }
-    /* line 419, app.scss */
+    /* line 420, app.scss */
     .postfix-label .label .glyphicon, .prefix-label .label .glyphicon {
       font-weight: normal; }
 
-/* line 423, app.scss */
+/* line 424, app.scss */
 .prefix-label .form-control {
   border-radius: 0 5px 5px 0;
   left: 50px; }
-/* line 427, app.scss */
+/* line 428, app.scss */
 .prefix-label .label {
   border-radius: 5px 0 0 5px;
   left: 0;

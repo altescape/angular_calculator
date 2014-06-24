@@ -25,6 +25,7 @@
     "jquery": "~2.1.1",
     "offline": "~0.7.3",
     "highcharts-ng": "~0.0.6",
-    "angular-local-storage": "~0.0.5"
+    "angular-local-storage": "~0.0.5",
+    "angularfire": "~0.7.1"
   }
 }
