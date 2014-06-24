@@ -159,6 +159,12 @@ $class-slug: mt;
 }
 
 /* SIDE NAV (SNAP DRAW LEFT) */
+.snap-drawer-left {
+  .logo {
+    margin: 10px;
+  }
+}
+
 .side-nav {
   li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -171,10 +177,21 @@ $class-slug: mt;
       border: none;
     }
     a {
+      display: block;
       opacity: 0.7;
+      .edit {
+        transition: all 0.1s ease-in-out;
+        opacity: 0;
+      }
       &:hover {
         opacity: 1;
         text-decoration: none;
+        .edit {
+          opacity: .7;
+          &:hover {
+            color: $brand-info;
+          }
+        }
         img {
           opacity: 1
         }
@@ -183,8 +200,6 @@ $class-slug: mt;
         opacity: .5;
         margin-right: 1em;
         width: 50px;
-        -webkit-transition: all 0.4s ease-in-out;
-        -moz-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
       }
     }

@@ -466,6 +466,6 @@ angular.module('myApp.controllers', [])
 	})
 
 	/* List captured screens */
-	.controller('CapturedScreensCtrl', function ($scope) {
-
+	.controller('SaveSessionCtrl', function ($scope) {
+		console.log('Hello');
 	});
