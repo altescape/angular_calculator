@@ -1,0 +1,22 @@
+<div class="snap-drawer snap-drawer-left" ng-controller="InfoCtrl">
+    <div class="padder">
+        <ul class="list-unstyled side-nav">
+            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-user.png">{{ user.name }} <span
+                      ng-hide="user.name">Add your name here</span></a></li>
+            <li><a href="/#/user"><img ng-src="/app/img/nav-icon-company.png">{{ session.name }} <span ng-hide="session.name">Add a name for this session</span></a>
+            </li>
+            <li><a href="/#/calculator"><img src="/app/img/nav-icon-calc.png">Calculator</a></li>
+            <li>
+                    <span class="online" ng-show="isNetUp">
+                        <a href="#"><img ng-src="/app/img/network-connected.png"> Online</a>
+                    </span>
+                    <span class="offline" ng-hide="isNetUp">
+                        <a href="#"><img ng-src="/app/img/network-not-connected.png"> Offline</a>
+                    </span>
+            </li>
+            <li><a href="/#/sessions"><img ng-src="/app/img/nav-icon-graph.png"> Sessions <span class="badge">5</span></a></li>
+            <li><a href="/#/captured-screens"><img ng-src="/app/img/nav-icon-graphics.png"> Captured Screens <span class="badge">0</span></a></li>
+            <li><a href="/#/logout"><img ng-src="/app/img/nav-icon-logout.png"> Log Out</a></li>
+        </ul>
+    </div>
+</div>

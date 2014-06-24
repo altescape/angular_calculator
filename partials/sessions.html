@@ -1,0 +1,15 @@
+<div ng-controller="SessionsCtrl" ng-cloak>
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="col-md-4" ng-repeat="session in saved_sessions">
+                <div class="well">
+                    <h2><a ng-href="/#/sessions/{{ $index }}">{{ session.session }}</a></h2>
+                    <p><small>{{ session.date }}</small></p>
+                    <h4>{{ session.name }}</h4>
+                    <p>{{ session.description }}</p>
+                    <p><a ng-href="/#/sessions/{{ $index }}" class="btn btn-info">View <span class="glyphicon glyphicon-chevron-right"></span></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

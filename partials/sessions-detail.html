@@ -1,0 +1,31 @@
+<div ng-controller="SessionsCtrl" ng-cloak>
+    <div class="col-md-8 col-md-offset-2">
+        <a ng-href="/#/sessions" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+        <h1>{{ saved_sessions[currentId].session }}</h1>
+
+        <p>
+            <small>{{ saved_sessions[currentId].date }}</small>
+        </p>
+        <h4>{{ saved_sessions[currentId].name }}</h4>
+
+        <p>
+            {{ saved_sessions[currentId].description }}
+            {{ saved_sessions[currentId].description }}
+            {{ saved_sessions[currentId].description }}
+        </p>
+
+        <div ng-controller="SessionsDetailCtrl" class="mt-50">
+            <div id="chart" class="col-md-12">
+                <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+                    <span class="chart_total">{{  total_con }}</span>
+                    <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+                </div>
+                <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+                    <span class="chart_total">{{ total_agg }}</span>
+                    <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

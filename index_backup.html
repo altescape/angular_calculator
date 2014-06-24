@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+
+  <title>Horizon Calculator</title>
+
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/dist/css/app.css">
+  <link rel="stylesheet" href="/bower_components/offline/themes/offline-theme-dark.css">
+  <link rel="stylesheet" href="/bower_components/offline/themes/offline-language-english.css">
+
+</head>
+<body>
+<div class="container-fluid">
+
+  <div class="row" ng-controller="InfoCtrl" ng-cloak>
+
+    <div class="col-md-12">
+      <h1>Welcome {{ user.name }}, this is {{ session.name }}</h1>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-12 form-group">
+      <fieldset>
+        <legend>User & Session</legend>
+        <div class="row">
+          <div class="col-md-3 form-group" ng-controller="UserCtrl">
+            <label for="uname">User</label>
+            <input id="uname" type="text" ng-model="user.name" ng-change="updateUser()" class="form-control" ng-value=""
+                   placeholder="user.name">
+          </div>
+          <div class="col-md-3 form-group" ng-controller="SessionCtrl">
+            <label for="sname">Session</label>
+            <input id="sname" type="text" ng-model="session.name" ng-change="updateSession()" class="form-control"
+                   placeholder="session.name">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row" ng-controller="ChartCtrl" ng-cloak>
+
+    <div class="col-md-12 form-group">
+      <fieldset>
+        <legend>
+          Numbers
+        </legend>
+        <div class="row">
+          <div class="col-md-3 form-group">
+            <input type="number" ng-model="cal.param1" ng-change="updateChart()" class="form-control" step="10" min="0">
+          </div>
+          <div class="col-md-3 form-group">
+            <input type="number" ng-model="cal.param2" ng-change="updateChart()" class="form-control" step="10" min="0">
+          </div>
+          <div class="col-md-3 form-group">
+            <input type="number" ng-model="cal.param3" ng-change="updateChart()" class="form-control" step="10" min="0">
+          </div>
+          <div class="col-md-3 form-group">
+            <input type="number" ng-model="cal.param4" ng-change="updateChart()" class="form-control" step="10" min="0">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <div class="col-md-12 checkbox form-group">
+      <fieldset>
+        <legend>
+          Services
+        </legend>
+
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>Revenue Integrity</h4>
+            <label class="col-md-3">
+              <input type="radio" value="0" ng-model="cal.services.op1" ng-change="updateChart()"> No
+            </label>
+            <label class="col-md-3">
+              <input type="radio" value="1" ng-model="cal.services.op1" ng-change="updateChart()"> Yes
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>Revenue Integrity process improvement</h4>
+            <label class="col-md-3">
+              <input type="radio" value="0" ng-model="cal.services.op2" ng-change="updateChart()"> No
+            </label>
+            <label class="col-md-3">
+              <input type="radio" value="1" ng-model="cal.services.op2" ng-change="updateChart()"> Yes
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>Channel Shift</h4>
+            <label class="col-md-3">
+              <input type="radio" value="0" ng-model="cal.services.op3" ng-change="updateChart()"> No
+            </label>
+            <label class="col-md-3">
+              <input type="radio" value="1" ng-model="cal.services.op3" ng-change="updateChart()"> Yes
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>Ancillary sales</h4>
+            <label class="col-md-3">
+              <input type="radio" value="0" ng-model="cal.services.op4" ng-change="updateChart()"> No
+            </label>
+            <label class="col-md-3">
+              <input type="radio" value="1" ng-model="cal.services.op4" ng-change="updateChart()"> Yes
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12">
+            <h4>Something else</h4>
+            <label class="col-md-3">
+              <input type="radio" value="0" ng-model="cal.services.op5" ng-change="updateChart()"> No
+            </label>
+            <label class="col-md-3">
+              <input type="radio" value="1" ng-model="cal.services.op5" ng-change="updateChart()"> Yes
+            </label>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <hr>
+
+    <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+      <span class="chart_total">{{  total_con }}</span>
+      <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+    </div>
+    <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+      <span class="chart_total">{{ total_agg }}</span>
+      <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
+    </div>
+
+    <hr>
+
+    <div class="col-md-12">
+      <ul>
+
+      </ul>
+      <p>add {{ colors }}</p>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="/bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="/bower_components/angular-local-storage/angular-local-storage.js"></script>
+
+<script type="text/javascript" src="/src/js/charts/highcharts.js"></script>
+<script type="text/javascript" src="/src/js/charts/exporting.js"></script>
+<script type="text/javascript" src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+
+<script type="text/javascript" src="app.js"></script>
+
+<script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/src/js/ui/snap.js"></script>
+<script type="text/javascript" src="/src/js/ui/fastclick.js"></script>
+<script type="text/javascript" src="/src/js/ui/appscroll.min.js"></script>
+
+<script type="text/javascript" src="/bower_components/offline/offline.min.js"></script>
+<script type="text/javascript" src="/bower_components/offlinejs-simulate-ui/offline-simulate-ui.min.js"></script>
+</body>
+</html>
