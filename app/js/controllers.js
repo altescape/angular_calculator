@@ -13,12 +13,6 @@ angular.module('myApp.controllers', [])
   /* General information */
     .controller('InfoCtrl', function ($scope, localStorageService, InfoFctry) {
 
-      /* User data from InfoFctry */
-      $scope.user = InfoFctry.user;
-
-      /* Session data from InfoFctry */
-      $scope.session = InfoFctry.session;
-
       $scope.isNetUp = true;
 
       FastClick.attach(document.body, null);
@@ -43,26 +37,20 @@ angular.module('myApp.controllers', [])
       });
       $scope.resizeContentWrapper($scope.wrap);
 
-    })
+      /* USER INFORMATION */
+      $scope.info = InfoFctry.info;
+      $scope.info.date = {
+        timestamp: Math.round(new Date().getTime() / 1000),
+        date     : new Date().toISOString()
+      }
 
-  /* User data controller */
-    .controller('UserCtrl', function ($scope, localStorageService, InfoFctry) {
-      $scope.user = InfoFctry.user;
+      $scope.updateInfo = function () {
 
-      $scope.updateUser = function () {
-        localStorageService.set('user', $scope.user);
-        InfoFctry.user = $scope.user;
+        localStorageService.set('info', $scope.info);
+
+        InfoFctry.info = $scope.info;
       };
-    })
 
-  /* Session data controller */
-    .controller('SessionCtrl', function ($scope, localStorageService, InfoFctry) {
-      $scope.session = InfoFctry.session;
-
-      $scope.updateSession = function () {
-        localStorageService.set('session', $scope.session);
-        InfoFctry.session = $scope.session;
-      };
     })
 
   /* Chart controller to build and update chart */
@@ -471,12 +459,20 @@ angular.module('myApp.controllers', [])
       /* End Highcharts config */
     })
 
-  /* List captured screens */
+  /* Save session */
     .controller('SaveSessionCtrl', function ($scope, localStorageService, FbService) {
 
       FbService.$add({
-        from   : localStorageService.get('user'),
-        session: localStorageService.get('session'),
-        content: localStorageService.get('cal')
+        meta        : localStorageService.get('info'),
+        calculations: localStorageService.get('cal')
+      });
+    })
+
+    /* Get list of saved sessions */
+    .controller('SaveSessionCtrl', function ($scope, localStorageService, FbService) {
+
+      FbService.$add({
+        meta        : localStorageService.get('info'),
+        calculations: localStorageService.get('cal')
       });
     });
