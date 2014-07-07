@@ -280,8 +280,10 @@ angular.module('myApp.controllers', [])
     .controller('SessionsCtrl', function ($scope, SessionsFcty, FbService2) {
       $scope.saved_sessions = SessionsFcty;
 
+
       /* FIREBASE TEST */
       $scope.fbtest = function () {
+        $scope.text.sum = 0;
         FbService2.$bind($scope, "text");
       };
 
