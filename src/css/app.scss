@@ -15,6 +15,17 @@ $brand-info: #5bc0de !default;
 $brand-warning: #f0ad4e !default;
 $brand-danger: #d9534f !default;
 
+/* TRANSPARENT BUTTON */
+.btn-trans {
+  background-color: transparent;
+  color: $brand-primary;
+  border-color: $brand-primary;
+  &:hover {
+    border-color: $gray-darker;
+    color: $gray-darker;
+  }
+}
+
 
 /* GLOBAL STYLES */
 body {
@@ -44,16 +55,30 @@ body {
 }
 
 $class-slug: mb;
-@for $i from 0 through 10 {
+@for $i from 0 through 20 {
   .#{$class-slug}-#{$i * 5} {
-    margin-bottom: #{$i * 5}px;
+    margin-bottom: #{$i * 5}px !important;
   }
 }
 
 $class-slug: mt;
-@for $i from 0 through 10 {
+@for $i from 0 through 20 {
   .#{$class-slug}-#{$i * 5} {
-    margin-top: #{$i * 5}px;
+    margin-top: #{$i * 5}px !important;
+  }
+}
+
+$class-slug: pb;
+@for $i from 0 through 20 {
+  .#{$class-slug}-#{$i * 5} {
+    padding-bottom: #{$i * 5}px !important;
+  }
+}
+
+$class-slug: pt;
+@for $i from 0 through 20 {
+  .#{$class-slug}-#{$i * 5} {
+    padding-top: #{$i * 5}px !important;
   }
 }
 

@@ -1,29 +1,49 @@
-<div ng-controller="SessionsCtrl" ng-cloak>
+<div ng-controller="ListSessionCtrl" ng-cloak>
     <div class="col-md-8 col-md-offset-2">
-        <a ng-href="/#/sessions" class="btn btn-info"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-        <h1>{{ saved_sessions[currentId].session }}</h1>
 
-        <p>
-            <small>{{ saved_sessions[currentId].date }}</small>
-        </p>
-        <h4>{{ saved_sessions[currentId].name }}</h4>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h5>{{ item.meta.user.name | uppercase }}</h5>
+            </div>
+            <div class="panel-body">
+                <div class="col-sm-4">
+                    <h5 class="mb-5">
+                        <small>OPPORTUNITY</small>
+                    </h5>
+                    <h2 class="mt-0 mb-5">{{ item.meta.opportunity.name }}</h2>
 
-        <p>
-            {{ saved_sessions[currentId].description }}
-            {{ saved_sessions[currentId].description }}
-            {{ saved_sessions[currentId].description }}
-        </p>
-
-        <div ng-controller="SessionsDetailCtrl" class="mt-50">
-            <div id="chart" class="col-md-12">
-                <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
-                    <span class="chart_total">{{  total_con }}</span>
-                    <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+                    <h5 class="mb-5">
+                        <small>AIRLINE</small>
+                    </h5>
+                    <h2 class="mt-0">{{ item.meta.airline.code }}</h2>
+                    <hr>
+                    <h5 class="mt-0 mb-10">
+                        <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
+                    </h5>
                 </div>
-                <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
-                    <span class="chart_total">{{ total_agg }}</span>
-                    <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
+                <div class="col-sm-8">
+                    <div ng-controller="SessionsDetailCtrl">
+                        <div id="chart" class="col-md-12">
+                            <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+                                <span class="chart_total">{{  total_con }}</span>
+                                <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+                            </div>
+                            <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
+                                <span class="chart_total">{{ total_agg }}</span>
+                                <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="panel-footer">
+                <a ng-href="/#/sessions" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                <a ng-click="useSession(item.$id)" class="btn btn-default">Use
+                    <span class="glyphicon glyphicon glyphicon-cloud-download"></span>
+                </a>
+                <a ng-click="deleteSession(item.$id)" class="btn btn-danger pull-right">Delete
+                    <span class="glyphicon glyphicon glyphicon-remove"></span>
+                </a>
             </div>
         </div>
 

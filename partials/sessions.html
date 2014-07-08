@@ -1,16 +1,56 @@
-<div ng-controller="SessionsCtrl" ng-cloak>
+<div ng-controller="ListSessionCtrl" ng-cloak>
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
-            <div class="col-md-4" ng-repeat="session in saved_sessions">
-                <div class="well">
-                    <h2><a ng-href="/#/sessions/{{ $index }}">{{ session.session }}</a></h2>
-                    <p><small>{{ session.date }}</small></p>
-                    <h4>{{ session.name }}</h4>
-                    <p>{{ session.description }}</p>
-                    <p>
-                        <a ng-href="/#/sessions/{{ $index }}" class="btn btn-primary">View <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        <a ng-href="/#/save-session/{{ $index }}" class="btn btn-default pull-right">Save <span class="glyphicon glyphicon glyphicon-cloud-upload"></span></a>
-                    </p>
+            <h1>{{ confirm }}</h1>
+            <div class="col-md-4" ng-repeat="item in items | orderByPriority | reverse">
+                <div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
+                    <div class="panel-heading">
+                        <h5>{{ item.meta.user.name | uppercase }}</h5>
+                    </div>
+                    <div class="panel-body">
+
+                        <h5 class="mb-5">
+                            <small>OPPORTUNITY</small>
+                        </h5>
+                        <h2 class="mt-0 mb-5"><a ng-href="/#/sessions/{{ item.$id }}">{{ item.meta.opportunity.name }}</a></h2>
+
+                        <h5 class="mb-5">
+                            <small>AIRLINE</small>
+                        </h5>
+                        <h2 class="mt-0">{{ item.meta.airline.code }}</h2>
+                        <hr>
+                        <h5 class="mt-0 mb-10">
+                            <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
+                        </h5>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="btn-group">
+                            <button ng-click="useSession(item.$id)" class="btn btn-default">
+                                <span class="glyphicon glyphicon glyphicon-cloud-download" popover="Use this session" popover-trigger="mouseenter" popover-placement="right"></span>
+                            </button>
+                            <button ng-click="copySession(item.$id)" class="btn btn-default" popover="Copy this session" popover-trigger="mouseenter" popover-placement="right">
+                                <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
+                            </button>
+                            <a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary" popover="View this session" popover-trigger="mouseenter" popover-placement="right">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                        <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger pull-right">Delete
+                            <span class="glyphicon glyphicon glyphicon-remove"></span>
+                        </a>
+                        <div ng-hide="confirm == false" class="btn-group pull-right">
+                            <button ng-click="deleteSession(item.$id)" class="btn btn-success">
+                                <span class="glyphicon glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button ng-click="confirm = false" class="btn btn-danger">
+                                <span class="glyphicon glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                        <p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">SURE?</p>
+                    </div>
+
+                    {{ item.description }}
+
                 </div>
             </div>
         </div>
