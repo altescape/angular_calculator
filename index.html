@@ -8,7 +8,6 @@
           type="image/png"
           href="favicon.png">
 
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/dist/css/app.css">
     <link rel="stylesheet" href="/bower_components/offline/themes/offline-theme-dark.css">
     <link rel="stylesheet" href="/bower_components/offline/themes/offline-language-english.css">
@@ -16,12 +15,13 @@
 </head>
 <body>
 
+
 <div id="wrap">
-    <div class="snap-drawers" ng-cloak>
+  <div main-nav ng-cloak ng-controller="InfoCtrl" class="navbar navbar-default navbar-static-top"></div>
+  <div class="snap-drawers" ng-cloak>
         <div snap-draw-left style="height: 100%;"></div>
     </div>
     <div id="main-content" class="container-fluid snap-content">
-        <div main-nav ng-cloak ng-controller="InfoCtrl" class="navbar-fixed-top pos-fixed"></div>
         <div class="row main-content" ng-controller="InfoCtrl" ng-cloak>
             <div ng-view></div>
         </div>

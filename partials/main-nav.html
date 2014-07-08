@@ -1,7 +1,15 @@
-<nav class="col-md-12 main-nav white-content" role="navigation">
-  <a id="open-left" class="open-left" ng-click="openLeft()">
-    <span></span>
-    <span></span>
-    <span></span>
-  </a>
+<nav class="main-nav white-content navbar-inner row" role="navigation">
+  <div class="navbar-header">
+    <a id="open-left" class="open-left" ng-click="openLeft()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+  <div class="col-sm-10">
+    <h4 style="color: white; line-height: 36px; margin: 0 15px; float: left;">{{ info.opportunity.name }}</h4>
+  </div>
+  <div class="pull-right">
+    <img class="logo" ng-src="/app/img/logo-small.png">
+  </div>
 </nav>

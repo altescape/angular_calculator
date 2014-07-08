@@ -220,9 +220,7 @@ angular.module('myApp.chart_controllers', [])
 
       /* Promise for loaded data */
       $scope.item.$on("loaded", function () {
-        console.log("Initial data received!");
         $scope.cal = $scope.item.calculations;
-        console.log($scope.item.calculations);
 
         $scope.graphData = function (flag) {
 

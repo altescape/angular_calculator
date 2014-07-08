@@ -75,41 +75,49 @@ angular.module('myApp.controllers', [])
       };
     }])
 
-    .controller('ListSessionCtrl', ['$scope', '$firebase', 'localStorageService', 'InfoFctry', 'ChartInitFctry', '$location', function ($scope, $firebase, localStorageService, InfoFctry, ChartInitFctry, $location) {
+    .controller('ListSessionCtrl', [
+      '$scope',
+      '$firebase',
+      'localStorageService',
+      'InfoFctry',
+      'ChartInitFctry',
+      '$location',
+        '$routeParams',
+      function ($scope, $firebase, localStorageService, InfoFctry, ChartInitFctry, $location, $routeParams) {
 
-      /* Gets session items from firebase */
-      $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
+        /* Gets session items from firebase */
+        $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
 
-      /* Delete associated session */
-      $scope.deleteSession = function (id) {
-        $scope.items.$remove(id);
-        $location.path('sessions');
-      };
+        /* Delete associated session */
+        $scope.deleteSession = function (id) {
+          $scope.items.$remove(id);
+          $location.path('sessions');
+        };
 
-      /* Copy a session */
-      $scope.copySession = function (id) {
+        /* Copy a session */
+        $scope.copySession = function (id) {
 
-        $scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
-        $scope.copy_info = $scope.item.meta;
-        $scope.copy_cal = $scope.item.calculations;
+          $scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+          $scope.copy_info = $scope.item.meta;
+          $scope.copy_cal = $scope.item.calculations;
 
-        $scope.items.$add({
-          meta        : $scope.copy_info,
-          calculations: $scope.copy_cal
-        });
-      };
+          $scope.items.$add({
+            meta        : $scope.copy_info,
+            calculations: $scope.copy_cal
+          });
+        };
 
-      /* Use associated session, replaces local storage with associated session */
-      $scope.useSession = function (id) {
-        $scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
-        localStorageService.set('info', $scope.item.meta);
-        localStorageService.set('cal', $scope.item.calculations);
+        /* Use associated session, replaces local storage with associated session */
+        $scope.useSession = function (id) {
+          $scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+          localStorageService.set('info', $scope.item.meta);
+          localStorageService.set('cal', $scope.item.calculations);
 
-        InfoFctry.info = $scope.item.meta;
-        ChartInitFctry.cal = $scope.item.calculations;
-      };
+          InfoFctry.info = $scope.item.meta;
+          ChartInitFctry.cal = $scope.item.calculations;
+        };
 
-    }])
+      }])
 
     .controller('SessionsCtrl', ['$scope', 'FbService', 'FbService2', function ($scope, FbService, FbService2) {
 

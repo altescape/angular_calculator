@@ -1,5 +1,5 @@
 <div ng-controller="ListSessionCtrl" ng-cloak>
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-10 col-md-offset-1">
         <div class="row">
             <h1>{{ confirm }}</h1>
             <div class="col-md-4" ng-repeat="item in items | orderByPriority | reverse">
@@ -25,26 +25,26 @@
                     </div>
                     <div class="panel-footer">
                         <div class="btn-group">
-                            <button ng-click="useSession(item.$id)" class="btn btn-default">
-                                <span class="glyphicon glyphicon glyphicon-cloud-download" popover="Use this session" popover-trigger="mouseenter" popover-placement="right"></span>
-                            </button>
-                            <button ng-click="copySession(item.$id)" class="btn btn-default" popover="Copy this session" popover-trigger="mouseenter" popover-placement="right">
+                            <a ng-click="useSession(item.$id)" class="btn btn-default">
+                                <span class="glyphicon glyphicon glyphicon-retweet"></span>
+                            </a>
+                            <a ng-click="copySession(item.$id)" class="btn btn-default">
                                 <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
-                            </button>
-                            <a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary" popover="View this session" popover-trigger="mouseenter" popover-placement="right">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                            <a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-circle-arrow-right"></span>
                             </a>
                         </div>
-                        <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger pull-right">Delete
-                            <span class="glyphicon glyphicon glyphicon-remove"></span>
+                        <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger pull-right">
+                            <span class="glyphicon glyphicon glyphicon-minus-sign"></span>
                         </a>
                         <div ng-hide="confirm == false" class="btn-group pull-right">
-                            <button ng-click="deleteSession(item.$id)" class="btn btn-success">
-                                <span class="glyphicon glyphicon glyphicon-ok"></span>
-                            </button>
-                            <button ng-click="confirm = false" class="btn btn-danger">
-                                <span class="glyphicon glyphicon glyphicon-remove"></span>
-                            </button>
+                            <a ng-click="deleteSession(item.$id)" class="btn btn-success">
+                                <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                            </a>
+                            <a ng-click="confirm = false" class="btn btn-danger">
+                                <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+                            </a>
                         </div>
                         <p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">SURE?</p>
                     </div>
