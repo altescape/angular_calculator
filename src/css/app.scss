@@ -11,12 +11,123 @@ $gray-light: lighten(#000, 70%) !default;
 $gray-lighter: lighten(#000, 93.5%) !default;
 // #eee
 
-$brand-primary: #0079C1 !default;
+$brand-primary: #36474F !default;
 $brand-success: #5cb85c !default;
 $brand-info: #5bc0de !default;
 $brand-warning: #f0ad4e !default;
 $brand-danger: #d9534f !default;
 $brand-grey: #36474F;
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.ng-cloak.show {
+  display: block !important;
+}
+
+.reveal-animation.ng-enter {
+  animation: enter_sequence .6s cubic-bezier(.5, 0, .5, 1);
+}
+@keyframes enter_sequence {
+  from { opacity:0;}
+  to { opacity:1;}
+}
+
+a:hover {cursor: pointer}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+//.loading {
+//  .loader {
+//    transform-origin: 50%;
+//    animation: rotating 2s linear infinite;
+//    display: block;
+//    &.ng-hide {
+//      display: none !important;
+//    }
+//  }
+//}
+
+$gmb-loader-size: 120px;
+$gmb-loader-color: lighten($brand-grey, 30%);
+
+@keyframes load-bounce {
+  10% {
+    transform: translate3d(0, $gmb-loader-size/4, 0);
+    animation-timing-function: cubic-bezier(.5, 0, .5, 1);
+    height: $gmb-loader-size/4;
+  }
+  14% {
+    height: $gmb-loader-size*3/4;
+  }
+  15% {
+    height: $gmb-loader-size/4;
+    transform: translate3d(0, -$gmb-loader-size/2, 0);
+    animation-timing-function: cubic-bezier(0.8, 0, .8, 1);
+  }
+  35% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.loading {
+
+  .loader {
+
+    font-size: 0;
+    display: block;
+    margin: 0 auto;
+    top: 45%;
+    position: fixed;
+    left: 50%;
+    height: $gmb-loader-size;
+    width: $gmb-loader-size;
+
+    div {
+
+      background: $gmb-loader-color;
+      width: $gmb-loader-size/4;
+      height: $gmb-loader-size/4;
+      border-radius: $gmb-loader-size/4;
+      position: absolute;
+      animation: load-bounce 1.75s infinite;
+      top: 50%;
+      margin-top: -$gmb-loader-size/8;
+
+      &:nth-child(2) {
+        animation-delay: 0.25s;
+        left: 50%;
+        margin-left: -$gmb-loader-size/8;
+      }
+      &:nth-child(3) {
+        animation-delay: 0.5s;
+        right: 0;
+      }
+    }
+  }
+}
+
+.hide_on_loading {display: none !important;}
+.show_on_loaded {
+  display: inherit !important;
+  &.ng-hide {
+    display: none !important;
+  }
+}
+
+.loaded {
+  .loader {
+    display: none;
+  }
+}
 
 /* TRANSPARENT BUTTON */
 .btn-trans {
@@ -29,6 +140,17 @@ $brand-grey: #36474F;
   }
 }
 
+.op25 {
+  opacity: .25
+}
+
+.op50 {
+  opacity: .5
+}
+
+.op75 {
+  opacity: .75
+}
 
 /* GLOBAL STYLES */
 body {
@@ -44,7 +166,11 @@ body {
   bottom: 0;
   height: 100%;
 }
-.snap-drawers, .snap-content {margin-top: 56px;}
+
+.snap-drawers, .snap-content {
+  margin-top: 56px;
+  margin-bottom: 50px
+}
 
 .pos-rel {
   position: relative;
@@ -100,7 +226,9 @@ $class-slug: pt;
   padding: 10px 15px;
   background-color: $brand-grey;
 
-  .navbar-header {margin-left: 15px;}
+  .navbar-header {
+    margin-left: 15px;
+  }
 
   .open-left {
     display: block;
@@ -192,18 +320,18 @@ $class-slug: pt;
 }
 
 .side-nav {
+  margin: 0;
+  padding: 0;
   li {
     border-bottom: 1px solid rgba($brand-grey, 0.15);
-    padding: 1.8em 0;
     font-size: 12px;
-    &:first-child {
-      padding-top: 0.5em;
-    }
     &:last-child {
       border: none;
     }
     a {
+      padding: 1.8em 0.8em;
       display: block;
+      border-top: 1px solid $body-bg;
       .edit {
         transition: all 0.1s ease-in-out;
         opacity: 0;
@@ -211,10 +339,13 @@ $class-slug: pt;
       &:hover {
         color: darken($brand-grey, 15%);
         text-decoration: none;
+        transition: all .2s linear;
+        background-color: rgba($brand-primary, .1);
+        border-top: 1px solid rgba(0, 0, 0, 0);
         .edit {
           opacity: .7;
           &:hover {
-            color: $brand-info;
+            color: $brand-danger;
           }
         }
         img {
@@ -277,6 +408,7 @@ a.user-action.disabled, a.user-action[disabled] {
   overflow: auto;
   -webkit-overflow-scrolling: touch;
   transform: translate3d(0, 0, 0);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
 }
 
 .snap-drawers {
@@ -374,7 +506,9 @@ $input-group-fontsize: $input-group-height/2.2;
     border-radius: 5px 0 0 5px;
     box-shadow: 0 0 3px #000 inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
 
-    &:last-child {border-radius: 0 5px 5px 0;}
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
 
     &.active {
       background-color: $brand-primary !important;
@@ -382,7 +516,9 @@ $input-group-fontsize: $input-group-height/2.2;
       opacity: 1;
       box-shadow: none;
     }
-    .glyphicon {font-weight: normal}
+    .glyphicon {
+      font-weight: normal
+    }
     &:hover {
       background-color: darken($brand-primary, 10%);
       color: lighten($brand-primary, 60%);
@@ -403,7 +539,7 @@ $input-group-fontsize: $input-group-height/2.2;
 }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
-$input-group-height : 34px;
+$input-group-height: 34px;
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
@@ -433,9 +569,12 @@ $input-group-height : 34px;
     font-weight: normal;
     font-size: 15px;
     border-radius: 0 5px 5px 0;
-    .glyphicon {font-weight: normal}
+    .glyphicon {
+      font-weight: normal
+    }
   }
 }
+
 .prefix-label {
   .form-control {
     border-radius: 0 5px 5px 0;

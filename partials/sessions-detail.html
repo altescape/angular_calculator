@@ -1,12 +1,12 @@
 <div ng-controller="SessionsDetailCtrl" ng-cloak>
     <div class="col-md-10 col-md-offset-1">
 
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
             <div class="panel-heading">
                 <h5>{{ item.meta.user.name | uppercase }}</h5>
             </div>
-            <div class="panel-body">
-                <div class="col-sm-3">
+            <div class="panel-body" ng-class="{'op25' : confirm == true}">
+                <div class="col-sm-3 col-md-3 col-lg-4">
                     <h5 class="mb-5">
                         <small>OPPORTUNITY</small>
                     </h5>
@@ -21,30 +21,45 @@
                         <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
                     </h5>
                 </div>
-                <div class="col-sm-9">
-                    <div ng-controller="SessionsDetailCtrl">
-                        <div id="chart" class="col-md-12">
-                            <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
-                                <span class="chart_total">{{  total_con }}</span>
-                                <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
-                            </div>
-                            <div class="col-md-6 pos-rel text-center" style="width: 340px; height: 340px">
-                                <span class="chart_total">{{ total_agg }}</span>
-                                <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
-                            </div>
+                <div class="col-sm-9 col-md-9 col-lg-8">
+                    <div id="chart" class="row">
+                        <div class="col-sm-6 pos-rel text-center" style="width: 340px; height: 340px">
+                            <span class="chart_total">{{  total_con }}</span>
+                            <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+                        </div>
+                        <div class="col-sm-6 pos-rel text-center" style="width: 340px; height: 340px">
+                            <span class="chart_total">{{ total_agg }}</span>
+                            <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="panel-footer">
-                <a ng-href="/#/sessions" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
-                <a ng-click="useSession(item.$id)" class="btn btn-default">Use
-                    <span class="glyphicon glyphicon glyphicon-cloud-download"></span>
+                <div class="btn-group">
+                    <a ng-href="/#/sessions" class="btn btn-primary"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                    <a ng-click="useSession(item.$id)" class="btn btn-default">Use
+                        <span class="glyphicon glyphicon glyphicon-retweet"></span>
+                    </a>
+                    <a ng-click="copySession(item.$id)" class="btn btn-default">Copy
+                        <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
+                    </a>
+                </div>
+                <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger pull-right">
+                    <span class="glyphicon glyphicon glyphicon-minus-sign"></span>
                 </a>
-                <a ng-click="deleteSession(item.$id)" class="btn btn-danger pull-right">Delete
-                    <span class="glyphicon glyphicon glyphicon-remove"></span>
-                </a>
+
+                <div ng-hide="confirm == false" class="btn-group pull-right">
+                    <a ng-click="deleteSession(item.$id)" class="btn btn-success">
+                        <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                    </a>
+                    <a ng-click="confirm = false" class="btn btn-danger">
+                        <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+                    </a>
+                </div>
+                <p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">
+                    SURE?</p>
             </div>
+
         </div>
 
     </div>

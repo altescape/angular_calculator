@@ -1,8 +1,17 @@
-<div ng-controller="ListSessionCtrl" ng-cloak>
+<div ng-controller="ListSessionCtrl" ng-cloak class="{{ load_status }}">
     <div class="col-md-10 col-md-offset-1">
+
+        <div class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
         <div class="row">
-            <h1>{{ confirm }}</h1>
-            <div class="col-md-4" ng-repeat="item in items | orderByPriority | reverse">
+
+            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>You haven't saved any sessions yet<br> . . .</h1>
+
+            <div class="col-md-4 {{ ele_load_status }}" ng-repeat="item in items | orderByPriority | reverse">
                 <div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
                     <div class="panel-heading">
                         <h5>{{ item.meta.user.name | uppercase }}</h5>
@@ -26,7 +35,7 @@
                     <div class="panel-footer">
                         <div class="btn-group">
                             <a ng-click="useSession(item.$id)" class="btn btn-default">
-                                <span class="glyphicon glyphicon glyphicon-retweet"></span>
+                                <span class="glyphicon glyphicon glyphicon-circle-arrow-down"></span>
                             </a>
                             <a ng-click="copySession(item.$id)" class="btn btn-default">
                                 <span class="glyphicon glyphicon glyphicon-plus-sign"></span>

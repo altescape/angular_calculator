@@ -1,33 +1,32 @@
 <div class="snap-drawer snap-drawer-left" ng-controller="InfoCtrl">
-    <div class="padder">
-        <ul class="list-unstyled side-nav">
-            <li>
-                <a href="/#/user">
-                    <img ng-src="/app/img/nav-icon-user.png">
-                    {{ info.user.name }} <span class="edit" ng-show="info.user.name">(Edit)</span>
-                    <span ng-hide="info.user.name">Add your name here</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/user">
-                    <img ng-src="/app/img/nav-icon-company.png">
-                    {{ info.opportunity.name }} <span class="edit" ng-show="info.opportunity.name">(Edit)</span>
-                    <span ng-hide="info.opportunity.name">Name this opportunity</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/user">
-                    <img ng-src="/app/img/nav-icon-code.png">
-                    {{ info.airline.code }} <span class="edit" ng-show="info.airline.code">(Edit)</span>
-                    <span ng-hide="info.airline.code">Enter airline code</span>
-                </a>
-            </li>
-            <li>
-                <a href="/#/calculator">
-                    <img src="/app/img/nav-icon-calc.png">Calculator
-                </a>
-            </li>
-            <li>
+    <ul class="list-unstyled side-nav">
+        <li>
+            <a href="/#/user">
+                <img ng-src="/app/img/nav-icon-user.png">
+                {{ info.user.name }} <span class="edit" ng-show="info.user.name">(Edit)</span>
+                <span ng-hide="info.user.name">Add your name here</span>
+            </a>
+        </li>
+        <li>
+            <a href="/#/user">
+                <img ng-src="/app/img/nav-icon-company.png">
+                {{ info.opportunity.name }} <span class="edit" ng-show="info.opportunity.name">(Edit)</span>
+                <span ng-hide="info.opportunity.name">Name this opportunity</span>
+            </a>
+        </li>
+        <li>
+            <a href="/#/user">
+                <img ng-src="/app/img/nav-icon-code.png">
+                {{ info.airline.code }} <span class="edit" ng-show="info.airline.code">(Edit)</span>
+                <span ng-hide="info.airline.code">Enter airline code</span>
+            </a>
+        </li>
+        <li>
+            <a href="/#/calculator">
+                <img src="/app/img/nav-icon-calc.png">Calculator
+            </a>
+        </li>
+        <li>
                 <span class="online" ng-show="isNetUp">
                     <a href="#">
                         <img ng-src="/app/img/network-connected.png"> Online
@@ -38,10 +37,9 @@
                             <img ng-src="/app/img/network-not-connected.png"> Offline
                         </a>
                     </span>
-            </li>
-            <li><a href="/#/sessions"><img ng-src="/app/img/nav-icon-graph.png"> Sessions</a></li>
-            <li><a href="/#/save-session"><img ng-src="/app/img/nav-icon-graphics.png"> Save this session</a></li>
-            <li><a href="/#/logout"><img ng-src="/app/img/nav-icon-logout.png"> Log Out</a></li>
-        </ul>
-    </div>
+        </li>
+        <li><a href="/#/sessions"><img ng-src="/app/img/nav-icon-graph.png"> Sessions</a></li>
+        <li ng-controller="SaveSessionCtrl"><a ng-click="saveSession()"><img ng-src="/app/img/nav-icon-graphics.png"> Save this session</a></li>
+        <li><a href="/#/logout"><img ng-src="/app/img/nav-icon-logout.png"> Log Out</a></li>
+    </ul>
 </div>

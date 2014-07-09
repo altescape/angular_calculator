@@ -79,6 +79,9 @@ angular.module('myApp.chart_controllers', [])
 
       $scope.updateChart = function () {
 
+        $scope.var_revenue_integrity = Math.round( ( (0.02 * $scope.cal.param6) + (0.05 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.01 * $scope.cal.param6) ) / $scope.cal.adjustment );
+        $scope.var_revenue_integrity_low = Math.round( ( (0.01 * $scope.cal.param6) + (0.03 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.001 * $scope.cal.param6) ) / $scope.cal.adjustment );
+
         localStorageService.set('cal', $scope.cal);
 
         /* Update conservative graph */

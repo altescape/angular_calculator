@@ -30,9 +30,20 @@
     </div>
     <div id="main-content" class="container-fluid snap-content">
         <div class="row main-content" ng-controller="InfoCtrl" ng-cloak>
-            <div ng-view></div>
+            <div ng-view class="reveal-animation"></div>
         </div>
     </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-controller="SaveSessionCtrl">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <a ng-hide="running_session == true" ng-click="saveSession()" class="btn btn-success btn-sm mt-10">SAVE <span class="glyphicon glyphicon-export"></span></a>
+                    <a ng-show="running_session == true" ng-click="saveSession()" class="btn btn-trans btn-sm mt-10">COPY <span class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
+                    <a ng-show="running_session == true" ng-click="updateSession()" class="btn btn-success btn-sm mt-10">SAVE <span class="glyphicon glyphicon-export"></span></a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 
 <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>

@@ -82,11 +82,24 @@ angular.module('myApp.controllers', [])
       'InfoFctry',
       'ChartInitFctry',
       '$location',
-        '$routeParams',
-      function ($scope, $firebase, localStorageService, InfoFctry, ChartInitFctry, $location, $routeParams) {
+      function ($scope, $firebase, localStorageService, InfoFctry, ChartInitFctry, $location) {
+
 
         /* Gets session items from firebase */
         $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
+
+        /* Loading data */
+        $scope.load_status = "loading";
+        $scope.ele_load_status = "hide_on_loading";
+        $scope.items.$on("loaded", function () {
+          $scope.load_status = "loaded";
+          $scope.ele_load_status = "show_on_loaded";
+        });
+
+        /* Count sessions */
+        $scope.sessionCount = function () {
+          return $scope.items.$getIndex().length;
+        };
 
         /* Delete associated session */
         $scope.deleteSession = function (id) {
@@ -100,6 +113,11 @@ angular.module('myApp.controllers', [])
           $scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
           $scope.copy_info = $scope.item.meta;
           $scope.copy_cal = $scope.item.calculations;
+
+          $scope.copy_info.date = {
+            timestamp: Math.round(new Date().getTime() / 1000),
+            date     : new Date().toISOString()
+          };
 
           $scope.items.$add({
             meta        : $scope.copy_info,
@@ -115,6 +133,8 @@ angular.module('myApp.controllers', [])
 
           InfoFctry.info = $scope.item.meta;
           ChartInitFctry.cal = $scope.item.calculations;
+
+          localStorageService.set('current_key', id);
         };
 
       }])
@@ -132,11 +152,38 @@ angular.module('myApp.controllers', [])
       };
     }])
 
-  /* Save session */
-    .controller('SaveSessionCtrl', ['$scope', 'localStorageService', 'FbService', function ($scope, localStorageService, FbService) {
+    .controller('SaveSessionCtrl', ['$scope', 'localStorageService', '$firebase', function ($scope, localStorageService, $firebase) {
 
-      FbService.$add({
-        meta        : localStorageService.get('info'),
-        calculations: localStorageService.get('cal')
-      });
+      $scope.running_session = false;
+
+      if (localStorageService.get('current_key')) {
+        $scope.running_session = true;
+      }
+
+      /* Saves new session */
+      $scope.saveSession = function () {
+        $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
+        $scope.items.$add({
+          meta        : localStorageService.get('info'),
+          calculations: localStorageService.get('cal')
+        }).then(function (ref) {
+          localStorageService.set('current_key', ref.name());
+          $scope.running_session = true;
+        })
+      };
+
+      /* Update the current session, takes key from localstorage */
+      $scope.updateSession = function () {
+
+        if ( $scope.running_session === true ) {
+
+          $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + localStorageService.get('current_key')));
+
+          $scope.items.$set({
+            meta        : localStorageService.get('info'),
+            calculations: localStorageService.get('cal')
+          });
+        }
+
+      }
     }]);
