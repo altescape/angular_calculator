@@ -129,6 +129,36 @@ $gmb-loader-color: lighten($brand-grey, 30%);
   }
 }
 
+/* CHART AREA */
+.chart-panel-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 50%;
+  overflow-y: scroll;
+  background: whitesmoke;
+  padding-top: 10px;
+}
+.chart-panel-chart {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background: #EEE;
+}
+.chart-panel-item {
+  background: #F3F3F3;
+  overflow: hidden;
+  margin: 10px;
+}
+.panel-default > .panel-heading {
+  background-color: #DDDDDD;
+}
+
+
 /* TRANSPARENT BUTTON */
 .btn-trans {
   background-color: transparent;
@@ -154,7 +184,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 
 /* GLOBAL STYLES */
 body {
-  background-color: darken($body-bg, 5%);
+  background-color: darken($body-bg, 10%);
 }
 
 #wrap {
@@ -479,7 +509,7 @@ a.user-action.disabled, a.user-action[disabled] {
   border-radius: 30px;
   color: #FFF;
   position: absolute;
-  left: 160px;
+  left: 150px;
   top: 117px;
   z-index: 0;
   box-shadow: 0 0 0 5px rgba(255, 165, 54, 1);
