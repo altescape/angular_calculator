@@ -16,6 +16,7 @@ $brand-success: #5cb85c !default;
 $brand-info: #5bc0de !default;
 $brand-warning: #f0ad4e !default;
 $brand-danger: #d9534f !default;
+$brand-grey: #36474F;
 
 /* TRANSPARENT BUTTON */
 .btn-trans {
@@ -31,7 +32,7 @@ $brand-danger: #d9534f !default;
 
 /* GLOBAL STYLES */
 body {
-  background-color: darken($brand-primary, 25%);
+  background-color: darken($body-bg, 5%);
 }
 
 #wrap {
@@ -97,7 +98,7 @@ $class-slug: pt;
   right: 0;
   top: 0;
   padding: 10px 15px;
-  background-color: darken($brand-primary, 15%);
+  background-color: $brand-grey;
 
   .navbar-header {margin-left: 15px;}
 
@@ -155,12 +156,8 @@ $class-slug: pt;
     position: absolute;
     top: 5px;
     left: 0;
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
     transform-origin: 4px;
-    -webkit-transform-origin: 4px;
-    -moz-transform-origin: 4px;
     &:nth-child(2) {
       top: 15px;
     }
@@ -175,20 +172,13 @@ $class-slug: pt;
     span {
       &:first-child {
         transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        -moz-transform: rotate(45deg);
       }
       &:nth-child(2) {
         opacity: 0;
       }
       &:last-child {
         transform-origin: 18px -3px;
-        -webkit-transform-origin: 18px -3px;
-        -moz-transform-origin: 18px -3px;
         transform: rotate(-225deg);
-        -webkit-transform: rotate(-225deg);
-        -moz-transform: rotate(-225deg);
-        -o-transform: rotate(-225deg);
       }
     }
   }
@@ -203,7 +193,7 @@ $class-slug: pt;
 
 .side-nav {
   li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba($brand-grey, 0.15);
     padding: 1.8em 0;
     font-size: 12px;
     &:first-child {
@@ -214,13 +204,12 @@ $class-slug: pt;
     }
     a {
       display: block;
-      opacity: 0.7;
       .edit {
         transition: all 0.1s ease-in-out;
         opacity: 0;
       }
       &:hover {
-        opacity: 1;
+        color: darken($brand-grey, 15%);
         text-decoration: none;
         .edit {
           opacity: .7;
@@ -276,7 +265,7 @@ a.user-action.disabled, a.user-action[disabled] {
 
 /* SNAPJS STYLES */
 .snap-content {
-  background-color: #f5f5f5;
+  background-color: $body-bg;
   position: absolute;
   top: 0;
   right: 0;
@@ -287,10 +276,6 @@ a.user-action.disabled, a.user-action[disabled] {
   z-index: 2;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
 
@@ -314,14 +299,10 @@ a.user-action.disabled, a.user-action[disabled] {
   height: 100%;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
-  -webkit-transition: width 0.3s ease;
-  -moz-transition: width 0.3s ease;
-  -ms-transition: width 0.3s ease;
-  -o-transition: width 0.3s ease;
   transition: width 0.3s ease;
-  color: white;
+  color: $brand-grey;
   p, a, li {
-    color: white;
+    color: $brand-grey;
   }
   .padder {
     padding: 1em;
