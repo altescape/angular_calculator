@@ -1,312 +1,351 @@
 <div ng-controller="ChartCtrl" ng-cloak>
 
-<!-- SHEET: VARIABLES C20 - C25 -->
-<div class="chart-panel-form">
-<div class="col-sm-12 form-group">
-    <fieldset>
-        <legend>
-            Figures
-            <small class="pull-right">
-                <a ng-click="fig_collapsed = true" ng-hide="fig_collapsed"
-                   style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                    collapse <span class="glyphicon glyphicon-resize-small"></span>
-                </a>
-                <a ng-click="fig_collapsed = false" ng-show="fig_collapsed"
-                   style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                    show <span class="glyphicon glyphicon-resize-full"></span>
-                </a>
-            </small>
-        </legend>
-        <div class="row" ng-hide="fig_collapsed">
-            <div class="col-sm-12 form-group">
-                <label for="param1">Current total passengers boarded per year</label>
-                <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number" ng-model="cal.param1"
-                       ng-change="updateChart()" class="form-control" step="20000"
-                       min="0">
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param2">Expected passenger growth per year - for the next 5 years</label>
+    <!-- SHEET: VARIABLES C20 - C25 -->
+    <div class="chart-panel-form">
+        <div class="col-sm-12 form-group">
+            <fieldset>
+                <legend>
+                    Figures
+                    <small class="pull-right">
+                        <a ng-click="fig_collapsed = true" ng-hide="fig_collapsed"
+                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
+                            collapse <span class="glyphicon glyphicon-resize-small"></span>
+                        </a>
+                        <a ng-click="fig_collapsed = false" ng-show="fig_collapsed"
+                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
+                            show <span class="glyphicon glyphicon-resize-full"></span>
+                        </a>
+                    </small>
+                </legend>
+                <div class="row" ng-hide="fig_collapsed">
+                    <div class="col-sm-12 form-group">
+                        <label for="param1">Current total passengers boarded per year</label>
+                        <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number" ng-model="cal.param1"
+                               ng-change="updateChart()" class="form-control" step="20000"
+                               min="0">
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param2">Expected passenger growth per year - for the next 5 years</label>
 
-                <div class="postfix-label">
-                    <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number" ng-model="cal.param2"
-                           ng-change="updateChart()" class="form-control"
-                           step="10"
+                        <div class="postfix-label">
+                            <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number" ng-model="cal.param2"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="10"
+                                   min="0">
+                            <span class="label">%</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param3">Number of tickets issued per year</label>
+                        <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number" ng-model="cal.param3"
+                               ng-change="updateChart()" class="form-control" step="20000"
+                               min="0">
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param4">Percentage of tickets reissued</label>
+
+                        <div class="postfix-label">
+                            <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number" ng-model="cal.param4"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="10"
+                                   min="0">
+                            <span class="label">%</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param5">Hourly labour costs</label>
+
+                        <div class="prefix-label">
+                            <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number" ng-model="cal.param5"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="10"
+                                   min="0">
+                            <span class="label">$</span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- SHEET: VARIABLES C27 - C31 -->
+        <div class="col-sm-12 form-group">
+            <fieldset>
+                <legend>
+                    Revenue, etc.
+                    <small class="pull-right">
+                        <a ng-click="rev_collapsed = true" ng-hide="rev_collapsed"
+                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
+                            collapse <span class="glyphicon glyphicon-resize-small"></span>
+                        </a>
+                        <a ng-click="rev_collapsed = false" ng-show="rev_collapsed"
+                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
+                            show <span class="glyphicon glyphicon-resize-full"></span>
+                        </a>
+                    </small>
+                </legend>
+                <div class="row" ng-hide="rev_collapsed">
+                    <div class="col-sm-12 form-group">
+                        <label for="param6">Airline's annual revenue</label>
+                        <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number" ng-model="cal.param6"
+                               ng-change="updateChart()" class="form-control" step="20000"
+                               min="0">
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param7">Airline's annual cost base</label>
+                        <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number" ng-model="cal.param7"
+                               ng-change="updateChart()" class="form-control" step="20000"
+                               min="0">
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param8">Annual distribution costs rate</label>
+
+                        <div class="postfix-label">
+                            <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number" ng-model="cal.param8"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="5"
+                                   min="0">
+                            <span class="label">%</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param9">Average yield per ticket</label>
+
+                        <div class="prefix-label">
+                            <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number" ng-model="cal.param9"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="10"
+                                   min="0">
+                            <span class="label">$</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 form-group">
+                        <label for="param10">Annual fuel cost rate</label>
+
+                        <div class="postfix-label">
+                            <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number" ng-model="cal.param10"
+                                   ng-change="updateChart()" class="form-control"
+                                   step="10"
+                                   min="0">
+                            <span class="label">%</span>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="col-sm-12 checkbox form-group">
+            <fieldset>
+                <legend>
+                    Services
+                </legend>
+
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C34">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>Revenue Integrity</h4>
+                        <input id="op1yes" type="radio" value="0" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
+                        <label for="op1yes" class="choice text-center" ng-class="{'active':cal.services.op1==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op1no" type="radio" value="1" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
+                        <label for="op1no" class="choice text-center" ng-class="{'active':cal.services.op1==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C37">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>Revenue Integrity process improvement</h4>
+                        <input id="op2yes" type="radio" value="0" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
+                        <label for="op2yes" class="choice text-center" ng-class="{'active':cal.services.op2==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op2no" type="radio" value="1" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
+                        <label for="op2no" class="choice text-center" ng-class="{'active':cal.services.op2==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C38">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>Channel Shift</h4>
+                        <input id="op3yes" type="radio" value="0" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
+                        <label for="op3yes" class="choice text-center" ng-class="{'active':cal.services.op3==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op3no" type="radio" value="1" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
+                        <label for="op3no" class="choice text-center" ng-class="{'active':cal.services.op3==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C40">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>Ancillary sales</h4>
+                        <input id="op4yes" type="radio" value="0" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
+                        <label for="op4yes" class="choice text-center" ng-class="{'active':cal.services.op4==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op4no" type="radio" value="1" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
+                        <label for="op4no" class="choice text-center" ng-class="{'active':cal.services.op4==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C41">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>CMAP</h4>
+                        <input id="op5yes" type="radio" value="0" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
+                        <label for="op5yes" class="choice text-center" ng-class="{'active':cal.services.op5==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op5no" type="radio" value="1" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
+                        <label for="op5no" class="choice text-center" ng-class="{'active':cal.services.op5==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C44">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>O&D</h4>
+                        <input id="op6yes" type="radio" value="0" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
+                        <label for="op6yes" class="choice text-center" ng-class="{'active':cal.services.op6==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op6no" type="radio" value="1" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
+                        <label for="op6no" class="choice text-center" ng-class="{'active':cal.services.op6==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C46">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>POS</h4>
+                        <input id="op7yes" type="radio" value="0" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
+                        <label for="op7yes" class="choice text-center" ng-class="{'active':cal.services.op7==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op7no" type="radio" value="1" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
+                        <label for="op7no" class="choice text-center" ng-class="{'active':cal.services.op7==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C47">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>ARR</h4>
+                        <input id="op8yes" type="radio" value="0" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
+                        <label for="op8yes" class="choice text-center" ng-class="{'active':cal.services.op8==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op8no" type="radio" value="1" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
+                        <label for="op8no" class="choice text-center" ng-class="{'active':cal.services.op8==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+                <div class="row" data-xl-sheet="variables" data-xl-cell="C52">
+                    <div class="form-group col-sm-12 postfix-choice">
+                        <h4>Insight</h4>
+                        <input id="op9yes" type="radio" value="0" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
+                        <label for="op9yes" class="choice text-center" ng-class="{'active':cal.services.op9==0}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-remove"></span></label>
+
+                        <input id="op9no" type="radio" value="1" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
+                        <label for="op9no" class="choice text-center" ng-class="{'active':cal.services.op9==1}"
+                               ng-click="cal.updateChart()"><span
+                              class="glyphicon glyphicon-ok"></span></label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="col-sm-12 form-group">
+            <div class="row" data-xl-sheet="variables" data-xl-cell="C54">
+                <div class="col-sm-12 form-group">
+                    <label for="param11">Chart number adjustment</label>
+                    <input id="param11" type="number" ng-model="cal.adjustment" ng-change="updateChart()" class="form-control"
+                           step="1000000"
                            min="0">
-                    <span class="label">%</span>
                 </div>
             </div>
-            <div class="col-sm-12 form-group">
-                <label for="param3">Number of tickets issued per year</label>
-                <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number" ng-model="cal.param3"
-                       ng-change="updateChart()" class="form-control" step="20000"
-                       min="0">
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param4">Percentage of tickets reissued</label>
-
-                <div class="postfix-label">
-                    <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number" ng-model="cal.param4"
-                           ng-change="updateChart()" class="form-control"
-                           step="10"
-                           min="0">
-                    <span class="label">%</span>
-                </div>
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param5">Hourly labour costs</label>
-
-                <div class="prefix-label">
-                    <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number" ng-model="cal.param5"
-                           ng-change="updateChart()" class="form-control"
-                           step="10"
-                           min="0">
-                    <span class="label">$</span>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-</div>
-
-<!-- SHEET: VARIABLES C27 - C31 -->
-<div class="col-sm-12 form-group">
-    <fieldset>
-        <legend>
-            Revenue, etc.
-            <small class="pull-right">
-                <a ng-click="rev_collapsed = true" ng-hide="rev_collapsed"
-                   style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                    collapse <span class="glyphicon glyphicon-resize-small"></span>
-                </a>
-                <a ng-click="rev_collapsed = false" ng-show="rev_collapsed"
-                   style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                    show <span class="glyphicon glyphicon-resize-full"></span>
-                </a>
-            </small>
-        </legend>
-        <div class="row" ng-hide="rev_collapsed">
-            <div class="col-sm-12 form-group">
-                <label for="param6">Airline's annual revenue</label>
-                <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number" ng-model="cal.param6"
-                       ng-change="updateChart()" class="form-control" step="20000"
-                       min="0">
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param7">Airline's annual cost base</label>
-                <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number" ng-model="cal.param7"
-                       ng-change="updateChart()" class="form-control" step="20000"
-                       min="0">
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param8">Annual distribution costs rate</label>
-
-                <div class="postfix-label">
-                    <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number" ng-model="cal.param8"
-                           ng-change="updateChart()" class="form-control"
-                           step="5"
-                           min="0">
-                    <span class="label">%</span>
-                </div>
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param9">Average yield per ticket</label>
-
-                <div class="prefix-label">
-                    <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number" ng-model="cal.param9"
-                           ng-change="updateChart()" class="form-control"
-                           step="10"
-                           min="0">
-                    <span class="label">$</span>
-                </div>
-            </div>
-            <div class="col-sm-12 form-group">
-                <label for="param10">Annual fuel cost rate</label>
-
-                <div class="postfix-label">
-                    <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number" ng-model="cal.param10"
-                           ng-change="updateChart()" class="form-control"
-                           step="10"
-                           min="0">
-                    <span class="label">%</span>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-</div>
-
-<div class="col-sm-12 checkbox form-group">
-    <fieldset>
-        <legend>
-            Services
-        </legend>
-
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C34">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>Revenue Integrity</h4>
-                <input id="op1yes" type="radio" value="0" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
-                <label for="op1yes" class="choice text-center" ng-class="{'active':cal.services.op1==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op1no" type="radio" value="1" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
-                <label for="op1no" class="choice text-center" ng-class="{'active':cal.services.op1==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C37">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>Revenue Integrity process improvement</h4>
-                <input id="op2yes" type="radio" value="0" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
-                <label for="op2yes" class="choice text-center" ng-class="{'active':cal.services.op2==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op2no" type="radio" value="1" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
-                <label for="op2no" class="choice text-center" ng-class="{'active':cal.services.op2==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C38">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>Channel Shift</h4>
-                <input id="op3yes" type="radio" value="0" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
-                <label for="op3yes" class="choice text-center" ng-class="{'active':cal.services.op3==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op3no" type="radio" value="1" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
-                <label for="op3no" class="choice text-center" ng-class="{'active':cal.services.op3==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C40">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>Ancillary sales</h4>
-                <input id="op4yes" type="radio" value="0" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
-                <label for="op4yes" class="choice text-center" ng-class="{'active':cal.services.op4==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op4no" type="radio" value="1" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
-                <label for="op4no" class="choice text-center" ng-class="{'active':cal.services.op4==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C41">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>CMAP</h4>
-                <input id="op5yes" type="radio" value="0" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
-                <label for="op5yes" class="choice text-center" ng-class="{'active':cal.services.op5==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op5no" type="radio" value="1" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
-                <label for="op5no" class="choice text-center" ng-class="{'active':cal.services.op5==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C44">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>O&D</h4>
-                <input id="op6yes" type="radio" value="0" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
-                <label for="op6yes" class="choice text-center" ng-class="{'active':cal.services.op6==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op6no" type="radio" value="1" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
-                <label for="op6no" class="choice text-center" ng-class="{'active':cal.services.op6==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C46">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>POS</h4>
-                <input id="op7yes" type="radio" value="0" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
-                <label for="op7yes" class="choice text-center" ng-class="{'active':cal.services.op7==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op7no" type="radio" value="1" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
-                <label for="op7no" class="choice text-center" ng-class="{'active':cal.services.op7==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C47">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>ARR</h4>
-                <input id="op8yes" type="radio" value="0" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
-                <label for="op8yes" class="choice text-center" ng-class="{'active':cal.services.op8==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op8no" type="radio" value="1" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
-                <label for="op8no" class="choice text-center" ng-class="{'active':cal.services.op8==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C52">
-            <div class="form-group col-sm-12 postfix-choice">
-                <h4>Insight</h4>
-                <input id="op9yes" type="radio" value="0" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
-                <label for="op9yes" class="choice text-center" ng-class="{'active':cal.services.op9==0}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-remove"></span></label>
-
-                <input id="op9no" type="radio" value="1" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
-                <label for="op9no" class="choice text-center" ng-class="{'active':cal.services.op9==1}"
-                       ng-click="cal.updateChart()"><span
-                      class="glyphicon glyphicon-ok"></span></label>
-            </div>
-        </div>
-        <div class="row" data-xl-sheet="variables" data-xl-cell="C54">
-            <div class="col-sm-12 form-group">
-                <label for="param11">Annual fuel cost rate</label>
-                <input id="param11" type="number" ng-model="cal.adjustment" ng-change="updateChart()" class="form-control"
-                       step="1000000"
-                       min="0">
-            </div>
-        </div>
-    </fieldset>
-</div>
-</div>
-
-<div id="chart" class="chart-panel-chart">
-    <div class="row panel panel-default chart-panel-item">
-      <div class="panel-heading">Chart</div>
-      <div class="panel-body">
-        <div class="col-sm-6 pos-rel text-center">
-          <span class="chart_total">{{  total_con }}</span>
-          <highchart config="chartConfig" style="height: 320px; width: 300px"></highchart>
-        </div>
-        <div class="col-sm-6 pos-rel text-center">
-          <span class="chart_total">{{ total_agg }}</span>
-          <highchart config="chartConfig2" style="height: 320px; width: 300px;"></highchart>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 text-center">
-
-          Revenue integrity = {{ var_revenue_integrity }} | {{ var_revenue_integrity_low }}
-
-            <h4>Legend</h4>
-            <ul class="list-inline text-center">
-                <li ng-repeat="color in colors">
-                    <span
-                      style="width: 10px; height: 10px; border-radius: 10px; display: block; float: left; margin-right: 5px; background-color: {{ color }}"></span>
-                    <span
-                      style="color: #666; height: 10px; line-height: 10px; display: block; float: left; font-size: 10px; text-transform: uppercase; margin-right: 5px">Service name</span>
-                </li>
-            </ul>
         </div>
     </div>
-</div>
+    <div id="chart" class="chart-panel-chart">
+        <div class="row panel panel-default chart-panel-item">
+            <div class="panel-heading">Chart</div>
+            <div class="panel-body">
+                <div class="col-sm-6 pos-rel text-center">
+                    <span class="chart_total">{{  total_con }}</span>
+                    <highchart config="chartConfig" style="height: 320px; width: 300px"></highchart>
+                </div>
+                <div class="col-sm-6 pos-rel text-center">
+                    <span class="chart_total">{{ total_agg }}</span>
+                    <highchart config="chartConfig2" style="height: 320px; width: 300px;"></highchart>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+
+                <div class="test">
+                    <p>Revenue integrity = {{ var_revenue_integrity }} | {{ var_revenue_integrity_low }}</p>
+
+                    <p id="var_revenue_integrity_proc_imp">{{ var_revenue_integrity_proc_imp }}</p>
+
+                    <p id="ref1">{{ ref1('low') }}</p>
+
+                    <p id="ref2">{{ ref2('low') }}</p>
+
+                    <p id="ref3">{{ ref3('low') }}</p>
+
+                    <p id="ref4">{{ ref4('low') }}</p>
+
+                    <p id="ref5">{{ ref5('low') }}</p>
+
+                    <p id="ref6">{{ ref6('low') }}</p>
+
+                    <p id="ref7">{{ ref7('low') }}</p>
+
+                    <p id="ref8">{{ ref8('low') }}</p>
+
+                    <p id="ref9">{{ ref9('low') }}</p>
+
+                    <p id="ref10">{{ ref10('low') }}</p>
+
+                    <p id="ref11">{{ ref11('low') }}</p>
+
+                    <p id="ref12">{{ ref12('low') }}</p>
+
+                    <p id="ref13">{{ ref13('low') }}</p>
+
+
+                    <p id="var_revenue_integrity_proc_imp_high">{{ var_revenue_integrity_proc_imp_high }}</p>
+
+                    <p id="ref5_h">{{ ref5("high") }}</p>
+                    <p id="ref6_h">{{ ref6("high") }}</p>
+                    <p id="ref7_h">{{ ref7("high") }}</p>
+                </div>
+
+                <h4>Legend</h4>
+                <ul class="list-inline text-center">
+                    <li ng-repeat="color in colors">
+                        <span
+                          style="width: 10px; height: 10px; border-radius: 10px; display: block; float: left; margin-right: 5px; background-color: {{ color }}"></span>
+                        <span
+                          style="color: #666; height: 10px; line-height: 10px; display: block; float: left; font-size: 10px; text-transform: uppercase; margin-right: 5px">Service name</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
 </div>
