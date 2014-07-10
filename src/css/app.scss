@@ -18,6 +18,29 @@ $brand-warning: #f0ad4e !default;
 $brand-danger: #d9534f !default;
 $brand-grey: #36474F;
 
+.btn-gradient {
+  background-image: linear-gradient($brand-primary, darken($brand-primary, 20%));
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  background-position: 0 100%;
+  background-size: auto 200%;
+  padding: 6px 10px;
+  transition: background-position .3s ease-in-out;
+  font-size: 12px;
+  &:hover {
+    background-position: 0 0;
+  }
+  &.btn-success {background-image: linear-gradient($brand-success, darken($brand-success, 20%))}
+  &.btn-warning {background-image: linear-gradient($brand-warning, darken($brand-warning, 20%))}
+  &.btn-danger {background-image: linear-gradient($brand-danger, darken($brand-danger, 20%))}
+  &.btn-trans, &.btn-default {background-image: linear-gradient($body-bg, darken($body-bg, 20%))}
+}
+
+.btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
+  margin-left: 0;
+}
+
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
@@ -32,6 +55,10 @@ $brand-grey: #36474F;
 @keyframes enter_sequence {
   from { opacity:0;}
   to { opacity:1;}
+}
+.btn.ng-animate, .btn-group.ng-animate {
+  transition: none !important;
+  animation: none 0s !important;
 }
 
 a:hover {cursor: pointer}
@@ -426,7 +453,7 @@ a.user-action.disabled, a.user-action[disabled] {
 
 /* SNAPJS STYLES */
 .snap-content {
-  background-color: $body-bg;
+  background-color: whitesmoke;
   position: absolute;
   top: 0;
   right: 0;
@@ -615,4 +642,28 @@ $input-group-height: 34px;
     left: 0;
     position: absolute;
   }
+}
+
+.message {
+  position: fixed;
+  left: 25%;
+  right: 25%;
+  height: 50px;
+  bottom: -25px;
+  z-index: 1040;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  transition: all .2s ease;
+  opacity: 1;
+  &.reveal-animation {
+    &.ng-hide {
+      bottom: -100px;
+      opacity: 0;
+    }
+  }
+}
+
+.navbar-default {
+  background-color: $body-bg;
+  border-color: rgba(0,0,0,0);
 }

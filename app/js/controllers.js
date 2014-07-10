@@ -152,15 +152,15 @@ angular.module('myApp.controllers', [])
       };
     }])
 
-    .controller('SaveSessionCtrl', ['$scope', 'localStorageService', '$firebase', function ($scope, localStorageService, $firebase) {
+    .controller('SaveSessionCtrl', ['$scope', 'localStorageService', '$firebase', '$timeout', function ($scope, localStorageService, $firebase, $timeout) {
 
+      // Saves new session
       $scope.running_session = false;
 
       if (localStorageService.get('current_key')) {
         $scope.running_session = true;
       }
 
-      /* Saves new session */
       $scope.saveSession = function () {
         $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
         $scope.items.$add({
@@ -172,18 +172,28 @@ angular.module('myApp.controllers', [])
         })
       };
 
-      /* Update the current session, takes key from localstorage */
+      // Update the current session, takes key from localstorage
+      $scope.saving = false;
+      $scope.saved = false;
+
       $scope.updateSession = function () {
-
         if ( $scope.running_session === true ) {
-
+          $scope.saving = true;
           $scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + localStorageService.get('current_key')));
 
           $scope.items.$set({
             meta        : localStorageService.get('info'),
             calculations: localStorageService.get('cal')
+          }).then(function () {
+            $scope.saving = false;
+            console.log('saved = true');
+            $scope.saved = true;
+
+            $timeout(function () {
+              $scope.saved = false;
+              console.log('setting saved to false');
+            }, 2500);
           });
         }
-
       }
     }]);
