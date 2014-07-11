@@ -47,6 +47,37 @@ angular.module('myApp.services', []).
       }
     }).
 
+    factory('ChartData',function (localStorageService) {
+      return {
+        summary: localStorageService.get('summary')
+            ? localStorageService.get('summary')
+            : {
+          high: {
+            revenue_integrity:  0,
+            revenue_integrity_process_improvement : 0,
+            channel_shift: 0,
+            ancillary_sales: 0,
+            cmap :  0,
+            o_and_d: 0,
+            pos: 0,
+            reprice: 0,
+            airfare_insight: 0
+          },
+          low : {
+            revenue_integrity:  0,
+            revenue_integrity_process_improvement : 0,
+            channel_shift: 0,
+            ancillary_sales: 0,
+            cmap :  0,
+            o_and_d: 0,
+            pos: 0,
+            reprice: 0,
+            airfare_insight: 0
+          }
+        }
+      }
+    }).
+
   /* Data builder factory for chart objects and inputs */
     factory('ServicesBuilderFcty',function () {
       return [

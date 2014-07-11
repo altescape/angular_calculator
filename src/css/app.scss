@@ -157,7 +157,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 }
 
 /* CHART AREA */
-.chart-panel-form {
+.panel__1 {
   position: absolute;
   top: 0;
   left: 0;
@@ -167,22 +167,70 @@ $gmb-loader-color: lighten($brand-grey, 30%);
   background: whitesmoke;
   padding-top: 10px;
 }
-.chart-panel-chart {
-  position: fixed;
+.panel__2 {
+  position: absolute;
   top: 0;
   left: 50%;
   right: 0;
   bottom: 0;
   height: 100%;
   background: #EEE;
+  overflow: hidden;
 }
-.chart-panel-item {
+.panel__inner {
+  overflow-y: scroll;
+  height: 100%;
+}
+.panel__padding {
+  padding: 15px;
+}
+.panel__item {
   background: #F3F3F3;
   overflow: hidden;
   margin: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .panel-body {
+    padding: 0;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
 }
 .panel-default > .panel-heading {
   background-color: #DDDDDD;
+}
+.panel-heading-btn-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  .btn {
+    height: 100%;
+    line-height: 25px;
+    border-radius: 0;
+    background-color: darken(#DDD, 10%);
+    font-weight: bold;
+    border: none;
+    color: $brand-primary;
+    font-size: 12px;
+    border-left: 1px solid rgba(255, 255, 255, 0.46);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    transition: all .4s linear;
+    &:last-child {
+      border-radius: 0 5px 0 0;
+    }
+    &:hover, &.active {
+      background-color: $body-bg;
+      color: darken($brand-primary, 15%);
+    }
+  }
 }
 
 

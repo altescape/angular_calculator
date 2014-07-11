@@ -1,0 +1,52 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><strong>Revenue</strong></td>
+        <td class="text-right">{{ cal.param6 | commas }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><strong>Distribution costs</strong></td>
+        <td class="text-right">{{ cal.param7 * cal.param8 / 100 | commas }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="text-center"><strong class="text-warning">High</strong></td>
+        <td class="text-center"><strong class="text-warning">Low</strong></td>
+    </tr>
+    <tr>
+        <td><strong>Renevue improvement</strong></td>
+        <td class="text-right">1%</td>
+        <td class="text-right">0.1%</td>
+    </tr>
+    <tr>
+        <td><strong>Value</strong></td>
+        <td class="text-right">{{ cal.param6 * 0.01 | commas }}</td>
+        <td class="text-right">{{ cal.param6 * 0.0005 | commas }}</td>
+    </tr>
+    <tr>
+        <td><strong>Cost saving</strong></td>
+        <td class="text-right">5%</td>
+        <td class="text-right">3%</td>
+    </tr>
+    <tr>
+        <td><strong>Value</strong></td>
+        <td class="text-right">{{ (cal.param7 * cal.param8 / 100) * 0.05 | commas }}</td>
+        <td class="text-right">{{ (cal.param7 * cal.param8 / 100) * 0.03 | commas }}</td>
+    </tr>
+    <tr>
+        <td><strong>Real-time</strong></td>
+        <td class="text-right">2%</td>
+        <td class="text-right">1%</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="text-right">{{ cal.param6 * 0.02 | commas }}</td>
+        <td class="text-right">{{ cal.param6 * 0.01 | commas }}</td>
+    </tr>
+    <tr class="success">
+        <td><strong>Total</strong></td>
+        <td class="text-right">{{ (cal.param6 * 0.02) + ( (cal.param7 * cal.param8 / 100) * 0.05 ) + (cal.param6 * 0.01) | commas }}</td>
+        <td class="text-right">{{ (cal.param6 * 0.01) + ( (cal.param7 * cal.param8 / 100) * 0.03 ) + (cal.param6 * 0.0005) | commas }}</td>
+    </tr>
+</table>

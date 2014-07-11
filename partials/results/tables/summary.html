@@ -1,0 +1,49 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td></td>
+        <td class="text-center"><strong class="text-warning">High</strong></td>
+        <td class="text-center"><strong class="text-warning">Low</strong></td>
+    </tr>
+    <tr>
+        <td>Revenue integrity</td>
+        <td class="text-center">{{ revenue_integrity_high }}</td>
+        <td class="text-center">{{ revenue_integrity_low }}</td>
+    </tr>
+    <tr>
+        <td>Revenue integrity process improvement</td>
+        <td class="text-center">{{ revenue_integrity_process_improvement_high }}</td>
+        <td class="text-center">{{ revenue_integrity_process_improvement_low }}</td>
+    </tr>
+    <tr class="success">
+        <td><strong>Total</strong></td>
+        <td class="text-center">{{ revenue_integrity_high + revenue_integrity_process_improvement_high }}</td>
+        <td class="text-center">{{ revenue_integrity_low + revenue_integrity_process_improvement_low }}</td>
+    </tr>
+</table>
+<div class="test collapse">
+    <p>Revenue integrity = {{ revenue_integrity_high }} | {{ revenue_integrity_low }}</p>
+    <p>Revenue integrity process improvement = {{ revenue_integrity_process_improvement_high }} | {{ revenue_integrity_process_improvement_low }}</p>
+
+    <div class="collapse for-testing-only">
+        <p id="var_revenue_integrity_proc_imp">{{ revenue_integrity_process_improvement_low }}</p>
+        <p id="ref1">{{ ref1('low') }}</p>
+        <p id="ref2">{{ ref2('low') }}</p>
+        <p id="ref3">{{ ref3('low') }}</p>
+        <p id="ref4">{{ ref4('low') }}</p>
+        <p id="ref5">{{ ref5('low') }}</p>
+        <p id="ref6">{{ ref6('low') }}</p>
+        <p id="ref7">{{ ref7('low') }}</p>
+        <p id="ref8">{{ ref8('low') }}</p>
+        <p id="ref9">{{ ref9('low') }}</p>
+        <p id="ref10">{{ ref10('low') }}</p>
+        <p id="ref11">{{ ref11('low') }}</p>
+        <p id="ref12">{{ ref12('low') }}</p>
+        <p id="ref13">{{ ref13('low') }}</p>
+        <p id="var_revenue_integrity_proc_imp_high">{{ revenue_integrity_process_improvement_high }}</p>
+        <p id="ref5_h">{{ ref5("high") }}</p>
+        <p id="ref6_h">{{ ref6("high") }}</p>
+        <p id="ref7_h">{{ ref7("high") }}</p>
+    </div>
+
+</div>
+

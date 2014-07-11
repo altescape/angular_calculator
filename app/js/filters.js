@@ -27,4 +27,12 @@ angular.module('myApp.filters', []).
       return function(items) {
         return toArray(items).slice().reverse();
       };
+    }).
+    filter('commas', function () {
+      return function numberWithCommas(input) {
+        input = input || '';
+        var parts = input.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return parts.join(".");
+      };
     });

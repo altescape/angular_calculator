@@ -8,81 +8,50 @@
 
 angular.module('myApp.chart_controllers', [])
 
-    .controller('ChartCtrl', ['$scope', 'localStorageService', 'ServicesBuilderFcty', 'ChartInitFctry', function ($scope, localStorageService, ServicesBuilderFcty, ChartInitFctry) {
+    .controller('ChartCtrl', [
+      '$rootScope',
+      '$scope',
+      'localStorageService',
+      'ServicesBuilderFcty',
+      'ChartInitFctry',
+      '$state',
+      'ChartData', function (
+          $rootScope,
+          $scope,
+          localStorageService,
+          ServicesBuilderFcty,
+          ChartInitFctry,
+          $state,
+          ChartData) {
+
+      // Saves name of open view for results (from dataView)
+      $rootScope.$on('$stateChangeSuccess',
+          function (event, toState, toParams, fromState, fromParams) {
+            event.preventDefault();
+            localStorageService.set('results_view', toState);
+          });
+
+      // Initiates the view for results (from dataView)
+      $scope.result_view = localStorageService.get('results_view');
+      if ($scope.result_view) {
+        $state.go($scope.result_view.name);
+      } else {
+        $state.go('chart');
+      }
 
       $scope.cal = ChartInitFctry.cal;
       $scope.colors = ChartInitFctry.colors();
       $scope.services = ServicesBuilderFcty;
 
-      $scope.graphData = function (flag) {
-
-        $scope.op1_con = 0;
-        $scope.op1_agg = 0;
-
-        if ($scope.cal.services.op1 === "1") {
-          $scope.op1_con = parseInt($scope.cal.param1 / 500000, 10);
-          $scope.op1_agg = parseInt($scope.cal.param1 / 200000, 10);
-        }
-
-        $scope.op2_con = 0;
-        $scope.op2_agg = 0;
-
-        if ($scope.cal.services.op2 === "1") {
-          $scope.op2_con = parseInt($scope.cal.param1 / 100000, 10);
-          $scope.op2_agg = parseInt($scope.cal.param1 / 80000, 10);
-        }
-
-        $scope.op3_con = 0;
-        $scope.op3_agg = 0;
-
-        if ($scope.cal.services.op3 === "1") {
-          $scope.op3_con = parseInt($scope.cal.param1 / 500000, 10);
-          $scope.op3_agg = parseInt($scope.cal.param1 / 200000, 10);
-        }
-
-        $scope.op4_con = 0;
-        $scope.op4_agg = 0;
-
-        if ($scope.cal.services.op4 === "1") {
-          $scope.op4_con = parseInt($scope.cal.param1 / 600000, 10);
-          $scope.op4_agg = parseInt($scope.cal.param1 / 300000, 10);
-        }
-
-        $scope.op5_con = 0;
-        $scope.op5_agg = 0;
-
-        if ($scope.cal.services.op5 === "1") {
-          $scope.op5_con = parseInt($scope.cal.param1 / 300000, 10);
-          $scope.op5_agg = parseInt($scope.cal.param1 / 150000, 10);
-        }
-
-        if (flag === "normal") {
-          return [
-            ['Revenue Integrity', $scope.op1_con],
-            ['Revenue Integrity process improvement', $scope.op2_con],
-            ['Channel Shift', $scope.op3_con],
-            ['Ancillary sales', $scope.op4_con],
-            ['CMAP', $scope.op5_con]
-          ];
-        }
-        if (flag === "aggressive") {
-          return [
-            ['Revenue Integrity', $scope.op1_agg],
-            ['Revenue Integrity process improvement', $scope.op2_agg],
-            ['Channel Shift', $scope.op3_agg],
-            ['Ancillary sales', $scope.op4_agg],
-            ['CMAP', $scope.op5_agg]
-          ];
-        }
-        return false;
-      };
 
       $scope.updateChart = function () {
 
+        // Table 1
         // Revenue Integrity
-        $scope.var_revenue_integrity = Math.round( ( (0.02 * $scope.cal.param6) + (0.05 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.01 * $scope.cal.param6) ) / $scope.cal.adjustment );
-        $scope.var_revenue_integrity_low = Math.round( ( (0.01 * $scope.cal.param6) + (0.03 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.001 * $scope.cal.param6) ) / $scope.cal.adjustment );
+        $scope.revenue_integrity_high = Math.round(( (0.02 * $scope.cal.param6) + (0.05 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.01 * $scope.cal.param6) ) / $scope.cal.adjustment);
+        $scope.revenue_integrity_low = Math.round(( (0.01 * $scope.cal.param6) + (0.03 * ($scope.cal.param7 * $scope.cal.param8 / 100)) + (0.001 * $scope.cal.param6) ) / $scope.cal.adjustment);
 
+        // Table 2
         // Revenue Integrity process improvement
         // ref:1
         $scope.ref1 = function (val) {
@@ -116,7 +85,7 @@ angular.module('myApp.chart_controllers', [])
               g37 = $scope.ref5(val) * 0.054547,
               g38 = $scope.ref5(val) * 0.006698;
 
-          if (val === 'high') {
+          if (val === 'low') {
             g30 = g30 / 2;
             g31 = g31 / 2;
             g32 = g32 / 2;
@@ -133,7 +102,7 @@ angular.module('myApp.chart_controllers', [])
         // ref:7
         $scope.ref7 = function (val) {
           var num;
-          if (val === 'low') {
+          if (val === 'high') {
             num = 0.1;
           } else {
             num = 0.05;
@@ -155,7 +124,7 @@ angular.module('myApp.chart_controllers', [])
         // ref:11
         $scope.ref11 = function (val) {
           var num;
-          if (val === 'low') {
+          if (val === 'high') {
             num = 0.2;
           } else {
             num = 0.1;
@@ -171,32 +140,71 @@ angular.module('myApp.chart_controllers', [])
           return Math.round($scope.ref9(val) + $scope.ref12(val) / 2);
         };
 
+        $scope.revenue_integrity_process_improvement_high  = Math.round($scope.ref13("high") / $scope.cal.adjustment);
+        $scope.revenue_integrity_process_improvement_low = Math.round($scope.ref13("low") / $scope.cal.adjustment);
 
-        $scope.var_revenue_integrity_proc_imp = Math.round($scope.ref13("low") / $scope.cal.adjustment);
-        $scope.var_revenue_integrity_proc_imp_high = Math.round($scope.ref13("high") / $scope.cal.adjustment);
+        //
+        // End of table functions
+        //
 
+        //
+        // Add data to data service / factory arrays
+        //
+        // revenue_integrity
+        if ($scope.cal.services.op1 === "1") {
+          ChartData.summary.high.revenue_integrity = $scope.revenue_integrity_high;
+          ChartData.summary.low.revenue_integrity = $scope.revenue_integrity_low;
+        } else {
+          ChartData.summary.high.revenue_integrity = 0;
+          ChartData.summary.low.revenue_integrity = 0;
+        }
+
+        // revenue_integrity_process_improvement
+        if ($scope.cal.services.op2 === "1") {
+          ChartData.summary.high.revenue_integrity_process_improvement = $scope.revenue_integrity_process_improvement_high;
+          ChartData.summary.low.revenue_integrity_process_improvement = $scope.revenue_integrity_process_improvement_low;
+        } else {
+          ChartData.summary.high.revenue_integrity_process_improvement = 0;
+          ChartData.summary.low.revenue_integrity_process_improvement = 0;
+        }
+
+        localStorageService.set('summary', ChartData.summary);
+
+
+        // Save calculations to localstorage
         localStorageService.set('cal', $scope.cal);
 
-        /* Update conservative graph */
-        var seriesArray = $scope.chartConfig.series[0];
-        seriesArray.data = $scope.graphData("normal");
+        // Convert object to array
+        $scope.obj_to_array = function (data) {
+          var arr =[];
+          for( var i in data ) {
+            if (data.hasOwnProperty(i)){
+              arr.push(data[i]);
+            }
+          }
+          return arr;
+        };
 
-        /* Update conservative totals */
-        $scope.total_con = 0;
-        $scope.total_cons = angular.forEach(seriesArray.data, function (key) {
-          $scope.total_con = parseInt($scope.total_con, 10) + parseInt(key[1], 10);
-          return parseInt($scope.total_con, 10);
+        // Update high graph
+        var seriesArray = $scope.chartConfig.series[0];
+        seriesArray.data = $scope.obj_to_array(ChartData.summary.high);
+
+        /* Update high totals */
+        $scope.total_high = 0;
+        $scope.total_services_high = angular.forEach(seriesArray.data, function (value, key) {
+          $scope.total_high += parseInt(value, 10);
+          return parseInt($scope.total_high, 10);
         });
 
-        /* Update aggressive graph */
+        /* Update low graph */
         var seriesArray2 = $scope.chartConfig2.series[0];
-        seriesArray2.data = $scope.graphData("aggressive");
+        seriesArray2.data = $scope.obj_to_array(ChartData.summary.low);
 
-        /* Update aggressive totals */
-        $scope.total_agg = 0;
-        $scope.total_aggrs = angular.forEach(seriesArray2.data, function (key) {
-          $scope.total_agg = parseInt($scope.total_agg, 10) + parseInt(key[1], 10);
-          return parseInt($scope.total_agg, 10);
+        /* Update low totals */
+        $scope.total_low = 0;
+        $scope.total_services_low = angular.forEach(seriesArray2.data, function (value, key) {
+          $scope.total_low += parseInt(value, 10);
+          return parseInt($scope.total_low, 10);
         });
       };
 
@@ -232,13 +240,13 @@ angular.module('myApp.chart_controllers', [])
         },
         series : [
           {
-            name     : 'Value of moving to SITA (Conservative)',
+            name     : 'Value of moving to SITA (High)',
             innerSize: '20%',
-            data     : $scope.graphData("normal")
+            data     : ChartData.summary.high
           }
         ],
         title  : {
-          text         : "Value of moving to SITA (Conservative)",
+          text         : "Value of moving to SITA (High)",
           style        : {
             'color': '#333'
           },
@@ -281,13 +289,13 @@ angular.module('myApp.chart_controllers', [])
         },
         series : [
           {
-            name     : 'Value of moving to SITA (Aggressive)',
+            name     : 'Value of moving to SITA (Low)',
             innerSize: '20%',
-            data     : $scope.graphData("aggressive")
+            data     : ChartData.summary.low
           }
         ],
         title  : {
-          text         : "Value of moving to SITA (Aggressive)",
+          text         : "Value of moving to SITA (Low)",
           style        : {
             'color': '#333'
           },
@@ -299,13 +307,6 @@ angular.module('myApp.chart_controllers', [])
       /* End Highcharts config */
 
       $scope.updateChart();
-
-      $scope.collapsed = false;
-      $scope.collapse = function () {
-        if ($scope.collapsed === false) {
-          $scope.collapsed = true;
-        }
-      };
     }])
 
 

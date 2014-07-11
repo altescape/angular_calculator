@@ -1,7 +1,7 @@
 <div ng-controller="ChartCtrl" ng-cloak>
 
     <!-- SHEET: VARIABLES C20 - C25 -->
-    <div class="chart-panel-form">
+    <div class="panel__1">
         <div class="col-sm-12 form-group">
             <fieldset>
                 <legend>
@@ -279,71 +279,16 @@
             </div>
         </div>
     </div>
-    <div id="chart" class="chart-panel-chart">
-        <div class="row panel panel-default chart-panel-item">
-            <div class="panel-heading">Chart</div>
-            <div class="panel-body">
-                <div class="col-sm-6 pos-rel text-center">
-                    <span class="chart_total">{{  total_con }}</span>
-                    <highchart config="chartConfig" style="height: 320px; width: 300px"></highchart>
-                </div>
-                <div class="col-sm-6 pos-rel text-center">
-                    <span class="chart_total">{{ total_agg }}</span>
-                    <highchart config="chartConfig2" style="height: 320px; width: 300px;"></highchart>
+    <div id="chart" class="panel__2">
+        <div class="row panel panel-default panel__item">
+            <div class="panel-heading pos-rel">Results
+                <div class="panel-heading-btn-group pull-right btn-group">
+                    <a ui-sref="table" class="btn btn-primary" ui-sref-active="active">Tables</a>
+                    <a ui-sref="chart" class="btn btn-primary" ui-sref-active="active">Chart</a>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-12 text-center">
-
-                <div class="test">
-                    <p>Revenue integrity = {{ var_revenue_integrity }} | {{ var_revenue_integrity_low }}</p>
-
-                    <p id="var_revenue_integrity_proc_imp">{{ var_revenue_integrity_proc_imp }}</p>
-
-                    <p id="ref1">{{ ref1('low') }}</p>
-
-                    <p id="ref2">{{ ref2('low') }}</p>
-
-                    <p id="ref3">{{ ref3('low') }}</p>
-
-                    <p id="ref4">{{ ref4('low') }}</p>
-
-                    <p id="ref5">{{ ref5('low') }}</p>
-
-                    <p id="ref6">{{ ref6('low') }}</p>
-
-                    <p id="ref7">{{ ref7('low') }}</p>
-
-                    <p id="ref8">{{ ref8('low') }}</p>
-
-                    <p id="ref9">{{ ref9('low') }}</p>
-
-                    <p id="ref10">{{ ref10('low') }}</p>
-
-                    <p id="ref11">{{ ref11('low') }}</p>
-
-                    <p id="ref12">{{ ref12('low') }}</p>
-
-                    <p id="ref13">{{ ref13('low') }}</p>
-
-
-                    <p id="var_revenue_integrity_proc_imp_high">{{ var_revenue_integrity_proc_imp_high }}</p>
-
-                    <p id="ref5_h">{{ ref5("high") }}</p>
-                    <p id="ref6_h">{{ ref6("high") }}</p>
-                    <p id="ref7_h">{{ ref7("high") }}</p>
-                </div>
-
-                <h4>Legend</h4>
-                <ul class="list-inline text-center">
-                    <li ng-repeat="color in colors">
-                        <span
-                          style="width: 10px; height: 10px; border-radius: 10px; display: block; float: left; margin-right: 5px; background-color: {{ color }}"></span>
-                        <span
-                          style="color: #666; height: 10px; line-height: 10px; display: block; float: left; font-size: 10px; text-transform: uppercase; margin-right: 5px">Service name</span>
-                    </li>
-                </ul>
+            <div class="panel-body">
+                <div ui-view="dataView" autoscroll="false" class="fade-content panel__inner" onload=""></div>
             </div>
         </div>
     </div>

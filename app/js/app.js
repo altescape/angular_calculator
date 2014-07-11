@@ -17,8 +17,7 @@ var app = angular.module('myApp', [
       'myApp.services',
       'myApp.controllers',
       'myApp.chart_controllers'
-    ]
-    ).config(['$routeProvider', function ($routeProvider) {
+    ]).config(['$routeProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $stateProvider, $urlRouterProvider) {
       $routeProvider.when('/user', {templateUrl: 'partials/user.html', controller: 'InfoCtrl'});
       $routeProvider.when('/calculator', {templateUrl: 'partials/calculator.html', controller: 'ChartCtrl'});
       $routeProvider.when('/logout', {templateUrl: 'partials/logout.html', controller: 'LogOutCtrl'});
@@ -27,7 +26,30 @@ var app = angular.module('myApp', [
       $routeProvider.when('/sessions/:id', {templateUrl: 'partials/sessions-detail.html', controller: 'ListSessionCtrl'});
       $routeProvider.when('/save-session', {templateUrl: 'partials/save-session.html', controller: 'SaveSessionCtrl'});
       $routeProvider.when('/update-session', {templateUrl: 'partials/update-session.html', controller: 'UpdateSessionCtrl'});
-//      $routeProvider.when('/save-session/:id', {templateUrl: 'partials/save-session.html', controller: 'SaveSessionCtrl'});
+
       $routeProvider.otherwise({redirectTo: '/user'});
+
+      $stateProvider
+          .state('calculator', {
+            views : {
+              "dataView" : {templateUrl: "partials/results/chart.html"}
+            },
+            controller: 'ChartCtrl'
+          });
+
+      $stateProvider
+          .state('table', {
+            views : {
+              "dataView" : {templateUrl: "partials/results/table.html"}
+            }
+          });
+
+      $stateProvider
+          .state('chart', {
+            views : {
+              "dataView" : {templateUrl: "partials/results/chart.html"}
+            }
+          });
+
     }
     ]);

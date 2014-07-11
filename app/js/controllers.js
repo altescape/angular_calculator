@@ -52,7 +52,7 @@ angular.module('myApp.controllers', [])
         InfoFctry.info = $scope.info;
       };
 
-      /* Holy fuck - this is working! */
+      /* Watches InfoFcty */
       $scope.$watch(function () {
             return InfoFctry.info;
           },
