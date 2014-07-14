@@ -174,8 +174,15 @@ angular.module('myApp.services', []).
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
+                  crop: true,
                   enabled: true,
-                  format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                  formatter: function() {
+                    if (this.y != 0) {
+                      return '<b>' + this.point.name + '</b>:' + Math.round(this.point.percentage) + '%';
+                    } else {
+                      return null;
+                    }
+                  },
                   style: {
                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
                   }
@@ -183,7 +190,7 @@ angular.module('myApp.services', []).
               }
             },
             tooltip: {
-              pointFormat: '<b>{point.percentage:.1f}%</b>'
+              pointFormat: '<b>{point.y}</b>'
             }
           },
           title  : {
