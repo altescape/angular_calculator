@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><strong>Fuel cost</strong></td>
+        <td class="text-right">{{ ref14() | commas }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="text-center"><strong class="text-warning">High</strong></td>
+        <td class="text-center"><strong class="text-warning">Low</strong></td>
+    </tr>
+    <tr>
+        <td><strong>CMAP savings</strong></td>
+        <td class="text-right">{{ ref15('high') | commas }}</td>
+        <td class="text-right">{{ ref15('low') | commas }}</td>
+    </tr>
+    <tr>
+        <td><strong>Portable water</strong></td>
+        <td class="text-right">{{ ref17('high') | commas }}</td>
+        <td class="text-right">{{ ref17('low') | commas }}</td>
+    </tr>
+    <tr class="text-muted">
+        <td><strong>Justification</strong></td>
+        <td class="text-right" colspan="2">W&B - IATA figure of 2-3%; Liberator conservative figure of around 1%(CMAP-cg)</td>
+    </tr>
+</table>

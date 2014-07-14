@@ -14,10 +14,30 @@
         <td class="text-center">{{ revenue_integrity_process_improvement_high }}</td>
         <td class="text-center">{{ revenue_integrity_process_improvement_low }}</td>
     </tr>
+    <tr>
+        <td>Weight and Balance Cost Manager Application (for fuel) (CMAP)</td>
+        <td class="text-center">{{ cmap_high }}</td>
+        <td class="text-center">{{ cmap_low }}</td>
+    </tr>
+    <tr>
+        <td>O&D (origin and destination) revenue management</td>
+        <td class="text-center">{{ o_and_d_high }}</td>
+        <td class="text-center">{{ o_and_d_low }}</td>
+    </tr>
+    <tr>
+        <td>Point of sale controls</td>
+        <td class="text-center">{{ pos_high }}</td>
+        <td class="text-center">{{ pos_low }}</td>
+    </tr>
+    <tr>
+        <td>Airfare Insight</td>
+        <td class="text-center">{{ insight_high }}</td>
+        <td class="text-center">{{ insight_low }}</td>
+    </tr>
     <tr class="success">
         <td><strong>Total</strong></td>
-        <td class="text-center">{{ revenue_integrity_high + revenue_integrity_process_improvement_high }}</td>
-        <td class="text-center">{{ revenue_integrity_low + revenue_integrity_process_improvement_low }}</td>
+        <td class="text-center">{{ revenue_integrity_high + revenue_integrity_process_improvement_high + cmap_high + o_and_d_high + pos_high + insight_high }}</td>
+        <td class="text-center">{{ revenue_integrity_low + revenue_integrity_process_improvement_low + cmap_low + o_and_d_low + pos_low + insight_low }}</td>
     </tr>
 </table>
 <div class="test collapse">

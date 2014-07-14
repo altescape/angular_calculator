@@ -1,0 +1,21 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><strong>Revenue</strong></td>
+        <td class="text-right">{{ ref18() | commas }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="text-center"><strong class="text-warning">High</strong></td>
+        <td class="text-center"><strong class="text-warning">Low</strong></td>
+    </tr>
+    <tr>
+        <td><strong>O&S impact</strong></td>
+        <td class="text-right">{{ ref19('high') | commas }}</td>
+        <td class="text-right">{{ ref19('low') | commas }}</td>
+    </tr>
+    <tr class="text-muted">
+        <td><strong>Justification</strong></td>
+        <td class="text-right" colspan="2">An indicative 1%-3% figure from analysis provided by PROS/SITA (S7, Aer Lingus, MAS, etc.)</td>
+    </tr>
+</table>

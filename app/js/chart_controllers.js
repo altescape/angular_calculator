@@ -139,6 +139,120 @@ angular.module('myApp.chart_controllers', [])
 				$scope.revenue_integrity_process_improvement_high = Math.round($scope.ref13("high") / $scope.cal.adjustment);
 				$scope.revenue_integrity_process_improvement_low = Math.round($scope.ref13("low") / $scope.cal.adjustment);
 
+        // Table 5
+        // Weight and Balance Cost Manager Application (for fuel) (CMAP)
+        // ref:14
+        $scope.ref14 = function () {
+          return Math.round(($scope.cal.param10 / 100) * $scope.cal.param7);
+        };
+
+        // ref:15
+        $scope.ref15 = function(val) {
+          var num;
+          if (val === 'high') {
+            num = 0.005;
+          } else {
+            num = 0.0025;
+          }
+          return $scope.ref14() * num;
+        };
+
+        // ref: 16
+        $scope.ref16 = function(val) {
+          return $scope.ref15(val) / $scope.cal.adjustment;
+        };
+
+        // ref: 17
+        $scope.ref17 = function(val) {
+          var num;
+          if (val === 'high') {
+            num = 0.01;
+          } else {
+            num = 0.005;
+          }
+          return $scope.ref14(val) * num;
+        }
+
+        $scope.cmap_high = Math.round($scope.ref16("high"));
+        $scope.cmap_low = Math.round($scope.ref16("low"));
+
+        // Table 6
+        // O&D (origin and destination) revenue management
+        // ref: 18
+        $scope.ref18 = function () {
+          return $scope.cal.param6;
+        }
+        // ref:19
+        $scope.ref19 = function (val) {
+          var num;
+          if (val === 'high') {
+            num = 0.02;
+          } else {
+            num = 0.01;
+          }
+          return $scope.cal.param6 * num;
+        };
+
+        // ref:20
+        $scope.ref20 = function (val) {
+          return $scope.ref19(val) / $scope.cal.adjustment;
+        };
+
+        $scope.o_and_d_high = Math.round($scope.ref20("high"));
+        $scope.o_and_d_low = Math.round($scope.ref20("low"));
+
+        // Table 7
+        // Point of sale controls
+        // ref:21
+        $scope.ref21 = function () {
+          return $scope.cal.param6;
+        };
+
+        // ref:22
+        $scope.ref22 = function (val) {
+          var num;
+          if (val === 'high') {
+            num = 0.005;
+          } else {
+            num = 0.0025;
+          }
+          return $scope.ref21() * num;
+        };
+
+        // ref:23
+        $scope.ref23 = function (val) {
+          return $scope.ref22(val) / $scope.cal.adjustment;
+        };
+
+        $scope.pos_high = Math.round($scope.ref23("high"));
+        $scope.pos_low = Math.round($scope.ref23("low"));
+
+        // Table 9
+        // Airfare Insight
+        // ref:24
+        $scope.ref24 = function () {
+          return $scope.cal.param6;
+        };
+
+        // ref:25
+        $scope.ref25 = function (val) {
+          var num;
+          if (val === 'high') {
+            num = 0.01;
+          } else {
+            num = 0.005;
+          }
+          return $scope.ref24() * num;
+        };
+
+        // ref:26
+        $scope.ref26 = function (val) {
+          return $scope.ref25(val) / $scope.cal.adjustment;
+        };
+
+        $scope.insight_high = Math.round($scope.ref26("high"));
+        $scope.insight_low = Math.round($scope.ref26("low"));
+
 				//
 				// End of table functions
 				//
@@ -162,6 +276,42 @@ angular.module('myApp.chart_controllers', [])
 				} else {
 					ChartData.summary.high.revenue_integrity_process_improvement = 0;
 					ChartData.summary.low.revenue_integrity_process_improvement = 0;
+				}
+
+				// cmap
+				if ( $scope.cal.services.op5 === true ) {
+					ChartData.summary.high.cmap = $scope.cmap_high;
+					ChartData.summary.low.cmap = $scope.cmap_low;
+				} else {
+					ChartData.summary.high.cmap = 0;
+					ChartData.summary.low.cmap = 0;
+				}
+
+				// o&d
+				if ( $scope.cal.services.op6 === true ) {
+					ChartData.summary.high.o_and_d = $scope.o_and_d_high;
+					ChartData.summary.low.o_and_d = $scope.o_and_d_low;
+				} else {
+					ChartData.summary.high.o_and_d = 0;
+					ChartData.summary.low.o_and_d = 0;
+				}
+
+				// o&d
+				if ( $scope.cal.services.op7 === true ) {
+					ChartData.summary.high.pos = $scope.pos_high;
+					ChartData.summary.low.pos = $scope.pos_low;
+				} else {
+					ChartData.summary.high.pos = 0;
+					ChartData.summary.low.pos = 0;
+				}
+
+				// insight
+				if ( $scope.cal.services.op9 === true ) {
+					ChartData.summary.high.insight = $scope.insight_high;
+					ChartData.summary.low.insight = $scope.insight_low;
+				} else {
+					ChartData.summary.high.insight = 0;
+					ChartData.summary.low.insight = 0;
 				}
 
 				// Save summary to local storage

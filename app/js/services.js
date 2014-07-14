@@ -25,11 +25,17 @@ angular.module('myApp.services', []).
 				? localStorageService.get('cal')
 				: {
 				"services" : {},
-				"param1" : 1000000,
-				"param2" : 50,
-				"param3" : 0,
-				"param4" : 0,
-				"param5" : 0
+				"param1" : 6500000,
+				"param2" : 3,
+				"param3" : 3611111,
+				"param4" : 10,
+				"param5" : 7,
+				"param6" : 2500000000,
+				"param7" : 2565000000,
+				"param8" : 15,
+				"param9" : 100,
+				"param10" : 34,
+        "adjustment" : 1000000
 			},
 			"colors" : function () {
 				{

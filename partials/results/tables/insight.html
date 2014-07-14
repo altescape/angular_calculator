@@ -1,0 +1,17 @@
+<table class="table table-striped table-bordered">
+    <tr>
+        <td><strong>Revenue</strong></td>
+        <td class="text-right">{{ ref21() | commas }}</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="text-center"><strong class="text-warning">High</strong></td>
+        <td class="text-center"><strong class="text-warning">Low</strong></td>
+    </tr>
+    <tr>
+        <td><strong>O&S impact</strong></td>
+        <td class="text-right">{{ ref25('high') | commas }}</td>
+        <td class="text-right">{{ ref25('low') | commas }}</td>
+    </tr>
+</table>

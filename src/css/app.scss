@@ -637,6 +637,20 @@ $input-group-fontsize: $input-group-height/2.2;
     padding: 0 !important;
     position: absolute;
   }
+  .postfix-choice-label {
+    float: left;
+    margin-right: 20px;
+    width: 50%;
+    margin-left: 15px;
+  }
+}
+.postfix-choice {
+  border-bottom: 1px solid #EEE;
+  margin: 0;
+  padding: 7px 0 5px;
+  &:hover {
+    background-color: #EEE;
+  }
 }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
