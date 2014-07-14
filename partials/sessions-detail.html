@@ -36,24 +36,24 @@
             </div>
             <div class="panel-footer">
                 <div class="btn-group">
-                    <a ng-href="/#/sessions" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                    <a ng-href="/#/sessions" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
                     <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">Use
-                        <span class="glyphicon glyphicon glyphicon-retweet"></span>
+                        <span class="glyphicon glyphicon-circle-arrow-down"></span>
                     </a>
                     <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">Copy
                         <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
                     </a>
                 </div>
                 <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
-                    <span class="glyphicon glyphicon glyphicon-minus-sign"></span>
+                    <span class="glyphicon glyphicon-plus-sign"></span>
                 </a>
 
                 <div ng-hide="confirm == false" class="btn-group pull-right">
                     <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
-                        <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                        <span class="glyphicon glyphicon-ok-circle"></span>
                     </a>
                     <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
-                        <span class="glyphicon glyphicon glyphicon-remove-circle"></span>
+                        <span class="glyphicon glyphicon-remove-circle"></span>
                     </a>
                 </div>
                 <p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">

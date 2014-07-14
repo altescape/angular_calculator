@@ -1,13 +1,25 @@
 <div class="panel__padding">
-    <div class="col-sm-6 pos-rel text-center">
-        <span class="chart_total">{{  total_high }}</span>
-        <highchart config="chartConfig" style="height: 320px; width: 300px"></highchart>
-    </div>
-    <div class="col-sm-6 pos-rel text-center">
-        <span class="chart_total">{{ total_low }}</span>
-        <highchart config="chartConfig2" style="height: 320px; width: 300px;"></highchart>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h2>Value of moving to SITA</h2>
+        </div>
     </div>
     <div class="row">
+        <div class="col-sm-12 pos-rel text-center">
+            <highchart config="chartConfig3"></highchart>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 pos-rel text-center">
+            <span class="chart_total">{{  total_high }}</span>
+            <highchart config="chartConfig" style="height: 320px; width: 300px"></highchart>
+        </div>
+        <div class="col-sm-6 pos-rel text-center">
+            <span class="chart_total">{{ total_low }}</span>
+            <highchart config="chartConfig2" style="height: 320px; width: 300px;"></highchart>
+        </div>
+    </div>
+    <div class="row collapse">
         <div class="col-sm-12 text-center">
             <h4>Legend</h4>
             <ul class="list-inline text-center">

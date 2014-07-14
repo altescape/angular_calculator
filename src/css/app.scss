@@ -370,6 +370,19 @@ $class-slug: pt;
       }
     }
   }
+  .main-nav-header {
+    color: $body-bg;
+    line-height: 36px;
+    margin: 0 15px;
+    float: left;
+    a {
+      color: $body-bg;
+      &:hover {
+        color: darken($body-bg, 10%);
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 .open-left {
