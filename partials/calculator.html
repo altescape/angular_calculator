@@ -2,6 +2,7 @@
 
     <!-- SHEET: VARIABLES C20 - C25 -->
     <div class="panel__1">
+
         <div class="col-sm-12 form-group">
             <fieldset>
                 <legend>
@@ -133,140 +134,7 @@
             </fieldset>
         </div>
 
-        <div class="col-sm-12 checkbox form-group">
-            <fieldset>
-                <legend>
-                    Services
-                </legend>
-
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C34">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>Revenue Integrity</h4>
-                        <input id="op1yes" type="radio" value="0" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
-                        <label for="op1yes" class="choice text-center" ng-class="{'active':cal.services.op1==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op1no" type="radio" value="1" ng-model="cal.services.op1" ng-change="updateChart()" class="radio">
-                        <label for="op1no" class="choice text-center" ng-class="{'active':cal.services.op1==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C37">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>Revenue Integrity process improvement</h4>
-                        <input id="op2yes" type="radio" value="0" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
-                        <label for="op2yes" class="choice text-center" ng-class="{'active':cal.services.op2==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op2no" type="radio" value="1" ng-model="cal.services.op2" ng-change="updateChart()" class="radio">
-                        <label for="op2no" class="choice text-center" ng-class="{'active':cal.services.op2==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C38">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>Channel Shift</h4>
-                        <input id="op3yes" type="radio" value="0" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
-                        <label for="op3yes" class="choice text-center" ng-class="{'active':cal.services.op3==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op3no" type="radio" value="1" ng-model="cal.services.op3" ng-change="updateChart()" class="radio">
-                        <label for="op3no" class="choice text-center" ng-class="{'active':cal.services.op3==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C40">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>Ancillary sales</h4>
-                        <input id="op4yes" type="radio" value="0" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
-                        <label for="op4yes" class="choice text-center" ng-class="{'active':cal.services.op4==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op4no" type="radio" value="1" ng-model="cal.services.op4" ng-change="updateChart()" class="radio">
-                        <label for="op4no" class="choice text-center" ng-class="{'active':cal.services.op4==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C41">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>CMAP</h4>
-                        <input id="op5yes" type="radio" value="0" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
-                        <label for="op5yes" class="choice text-center" ng-class="{'active':cal.services.op5==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op5no" type="radio" value="1" ng-model="cal.services.op5" ng-change="updateChart()" class="radio">
-                        <label for="op5no" class="choice text-center" ng-class="{'active':cal.services.op5==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C44">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>O&D</h4>
-                        <input id="op6yes" type="radio" value="0" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
-                        <label for="op6yes" class="choice text-center" ng-class="{'active':cal.services.op6==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op6no" type="radio" value="1" ng-model="cal.services.op6" ng-change="updateChart()" class="radio">
-                        <label for="op6no" class="choice text-center" ng-class="{'active':cal.services.op6==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C46">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>POS</h4>
-                        <input id="op7yes" type="radio" value="0" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
-                        <label for="op7yes" class="choice text-center" ng-class="{'active':cal.services.op7==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op7no" type="radio" value="1" ng-model="cal.services.op7" ng-change="updateChart()" class="radio">
-                        <label for="op7no" class="choice text-center" ng-class="{'active':cal.services.op7==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C47">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>ARR</h4>
-                        <input id="op8yes" type="radio" value="0" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
-                        <label for="op8yes" class="choice text-center" ng-class="{'active':cal.services.op8==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op8no" type="radio" value="1" ng-model="cal.services.op8" ng-change="updateChart()" class="radio">
-                        <label for="op8no" class="choice text-center" ng-class="{'active':cal.services.op8==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-                <div class="row" data-xl-sheet="variables" data-xl-cell="C52">
-                    <div class="form-group col-sm-12 postfix-choice">
-                        <h4>Insight</h4>
-                        <input id="op9yes" type="radio" value="0" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
-                        <label for="op9yes" class="choice text-center" ng-class="{'active':cal.services.op9==0}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-remove"></span></label>
-
-                        <input id="op9no" type="radio" value="1" ng-model="cal.services.op9" ng-change="updateChart()" class="radio">
-                        <label for="op9no" class="choice text-center" ng-class="{'active':cal.services.op9==1}"
-                               ng-click="cal.updateChart()"><span
-                              class="glyphicon glyphicon-ok"></span></label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
+		<services></services>
 
         <div class="col-sm-12 form-group">
             <div class="row" data-xl-sheet="variables" data-xl-cell="C54">

@@ -608,16 +608,12 @@ $input-group-fontsize: $input-group-height/2.2;
     display: inline-block;
     width: $input-group-height;
     float: left;
-    border-radius: 5px 0 0 5px;
+    border-radius: 100%;
     box-shadow: 0 0 3px #000 inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
 
-    &:last-child {
-      border-radius: 0 5px 5px 0;
-    }
-
     &.active {
-      background-color: $brand-primary !important;
-      color: lighten($brand-primary, 45%) !important;
+      background-color: $brand-success !important;
+      color: lighten($brand-success, 45%) !important;
       opacity: 1;
       box-shadow: none;
     }
@@ -625,8 +621,8 @@ $input-group-fontsize: $input-group-height/2.2;
       font-weight: normal
     }
     &:hover {
-      background-color: darken($brand-primary, 10%);
-      color: lighten($brand-primary, 60%);
+      background-color: rgba(darken($brand-primary, 10%), .5);
+      color: darken($brand-primary, 60%);
       cursor: pointer;
     }
     &:focus {
