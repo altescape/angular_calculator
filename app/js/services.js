@@ -178,7 +178,7 @@ angular.module('myApp.services', []).
                   enabled: true,
                   formatter: function() {
                     if (this.y != 0) {
-                      return '<b>' + this.point.name + '</b>:' + Math.round(this.point.percentage) + '%';
+                      return '<b>' + this.point.name + '</b>:' + this.point.y + ' (' + Math.round(this.point.percentage) + '%)';
                     } else {
                       return null;
                     }
