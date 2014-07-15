@@ -1,9 +1,3 @@
-/**
- * Created by michaelwatts
- * Date: 08/07/2014
- * Time: 15:16
- */
-
 'use strict';
 
 /* Filters */

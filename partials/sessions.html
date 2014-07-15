@@ -1,70 +1,74 @@
 <div ng-controller="ListSessionCtrl" ng-cloak class="{{ load_status }}">
-	<div class="col-md-12">
+    <div class="col-md-12">
 
-		<div class="loader">
-			<div></div>
-			<div></div>
-			<div></div>
-		</div>
+        <div class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
-		<div class="row">
+        <div class="row">
 
-			<h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>You haven't saved any sessions yet<br> . . .
-			</h1>
+            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>You haven't saved any
+                sessions yet<br> . . .
+            </h1>
 
-			<div class="col-md-3 {{ ele_load_status }}" ng-repeat="item in items | orderByPriority | reverse">
-				<div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
-					<div class="panel-heading">
-						<h6>{{ item.meta.user.name | uppercase }}</h6>
-					</div>
-					<div class="panel-body">
+            <div class="col-md-3 {{ ele_load_status }}" ng-repeat="item in items | orderByPriority | reverse">
+                <div class="panel panel-default" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
+                    <div class="panel-heading pos-rel">
+                        {{ item.meta.user.name | uppercase }}
+                        <div class="panel-heading-btn-group pull-right btn-group">
+                            <a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary">
+                                Summary
+                            </a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
 
-						<h5 class="mb-5 mt-0">
-							<small>OPPORTUNITY</small>
-						</h5>
-						<h3 class="mt-0 mb-5">
-							<a ng-href="/#/sessions/{{ item.$id }}">{{ item.meta.opportunity.name }}</a></h3>
+                        <h5 class="mb-5 mt-0">
+                            <small>OPPORTUNITY</small>
+                        </h5>
+                        <h3 class="mt-0 mb-5">
+                            <a ng-href="/#/sessions/{{ item.$id }}">{{ item.meta.opportunity.name }}</a></h3>
 
-						<h5 class="mb-5">
-							<small>AIRLINE</small>
-						</h5>
-						<h3 class="mt-0 mb-0">{{ item.meta.airline.code }}</h3>
-						<hr class="mt-10 mb-10">
-						<h5 class="mt-0 mb-0">
-							<small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
-						</h5>
-					</div>
-					<div class="panel-footer">
-						<div class="btn-group">
-							<a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
-								<span class="glyphicon glyphicon-circle-arrow-down"></span>
-							</a>
-							<a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
-								<span class="glyphicon glyphicon-plus-sign"></span>
-							</a>
-							<a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary btn-gradient">
-								<span class="glyphicon glyphicon-circle-arrow-right"></span>
-							</a>
-						</div>
-						<a ng-hide="confirm == true" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
-							<span class="glyphicon glyphicon-minus-sign"></span>
-						</a>
+                        <h5 class="mb-5">
+                            <small>AIRLINE</small>
+                        </h5>
+                        <h3 class="mt-0 mb-0">{{ item.meta.airline.code }}</h3>
+                        <hr class="mt-10 mb-10">
+                        <h5 class="mt-0 mb-0">
+                            <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
+                        </h5>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="btn-group">
+                            <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
+                                Display calculator
+                            </a>
+                            <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
+                                Copy <span class="glyphicon glyphicon-plus-sign"></span>
+                            </a>
+                        </div>
+                        <a ng-hide="confirm == true" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
+                            <span class="glyphicon glyphicon-minus-sign"></span>
+                        </a>
 
-						<div ng-hide="confirm == false" class="btn-group pull-right">
-							<a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
-								<span class="glyphicon glyphicon-ok-circle"></span>
-							</a>
-							<a ng-click="confirm = false" class="btn btn-danger btn-gradient">
-								<span class="glyphicon glyphicon-remove-circle"></span>
-							</a>
-						</div>
-						<p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">SURE?</p>
-					</div>
+                        <div ng-hide="confirm == false" class="btn-group pull-right">
+                            <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </a>
+                            <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        </div>
+                        <p ng-hide="confirm == false" class="pull-right"
+                           style="margin: 6px; font-size: 10px; opacity: 0.5; font-weight: bold">SURE?</p>
+                    </div>
 
-					{{ item.description }}
+                    {{ item.description }}
 
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

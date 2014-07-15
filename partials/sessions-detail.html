@@ -1,4 +1,5 @@
 <div ng-controller="SessionsDetailCtrl" ng-cloak>
+
     <div class="col-md-10 col-md-offset-1">
 
         <div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
@@ -20,43 +21,157 @@
                     <h5 class="mt-0 mb-10">
                         <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
                     </h5>
+                    <hr>
+                    <h3>Data</h3>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>Current total passengers boarded per year</td>
+                            <td>{{ cal.param1 | commas }}</td>
+                        </tr>
+                        <tr>
+                            <td>Expected passenger growth per year - for the next 5 years</td>
+                            <td>{{ cal.param2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Number of tickets issued per year</td>
+                            <td>{{ cal.param3 | commas }}</td>
+                        </tr>
+                        <tr>
+                            <td>Percentage of tickets reissued</td>
+                            <td>{{ cal.param4 }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Hourly labour costs</td>
+                            <td>${{ cal.param5 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Airline's annual revenue</td>
+                            <td>${{ cal.param6 | commas }}</td>
+                        </tr>
+                        <tr>
+                            <td>Airline's annual cost base</td>
+                            <td>${{ cal.param7 | commas }}</td>
+                        </tr>
+                        <tr>
+                            <td>Annual distribution costs rate</td>
+                            <td>{{ cal.param8 }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Average yield per ticket</td>
+                            <td>${{ cal.param9 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Annual fuel cost rate</td>
+                            <td>{{ cal.param10 }}%</td>
+                        </tr>
+                    </table>
+
+                    <h3>Services</h3>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>Revenue Integrity</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op1" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op1" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Revenue Integrity process improvement</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op2" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op2" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Channel Shift</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op3" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op3" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ancillary sales</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op4" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op4" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>CMAP</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op5" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op5" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>O&D</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op6" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op6" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>POS</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op7" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op7" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ARR</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op8" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op8" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Insight</td>
+                            <td class="text-center">
+                                <span ng-show="cal.services.op9" class="glyphicon glyphicon-ok-circle text-success"></span>
+                                <span ng-hide="cal.services.op9" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-sm-9 col-md-9 col-lg-8">
-                    <div id="chart" class="row">
-                        <div class="col-sm-6 pos-rel text-center" style="width: 340px; height: 340px">
-                            <span class="chart_total">{{  total_con }}</span>
-                            <highchart config="chartConfig" style="height: 320px; width: 320px"></highchart>
+                    <div class="panel__padding">
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <h3>Value of moving to SITA (High) <span class="label label-success">{{ value_total }}</span></h3>
+                            </div>
                         </div>
-                        <div class="col-sm-6 pos-rel text-center" style="width: 340px; height: 340px">
-                            <span class="chart_total">{{ total_agg }}</span>
-                            <highchart config="chartConfig2" style="height: 320px; width: 320px;"></highchart>
+                        <div class="row">
+                            <div class="col-sm-12 pos-rel text-center">
+                                <highchart config="chartConfigHigh"></highchart>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
             <div class="panel-footer">
                 <div class="btn-group">
                     <a ng-href="/#/sessions" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
-                    <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">Use
-                        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                    <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
+                        Display calculator
                     </a>
                     <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">Copy
                         <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
                     </a>
                 </div>
                 <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
-                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    <span class="glyphicon glyphicon-minus-sign"></span>
                 </a>
 
                 <div ng-hide="confirm == false" class="btn-group pull-right">
                     <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
-                        <span class="glyphicon glyphicon-ok-circle"></span>
+                        <span class="glyphicon glyphicon-ok"></span>
                     </a>
                     <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
-                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
                     </a>
                 </div>
-                <p ng-hide="confirm == false" class="pull-right" style="margin: 9px; font-size: 12px; opacity: 0.5; font-weight: bold">
+                <p ng-hide="confirm == false" class="pull-right" style="margin: 6px; font-size: 10px; opacity: 0.5; font-weight: bold">
                     SURE?</p>
             </div>
 

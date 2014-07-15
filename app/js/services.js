@@ -1,276 +1,176 @@
-/**
- * Created by michaelwatts
- * Date: 24/06/2014
- * Time: 10:22
- */
-
 'use strict';
 
 /* Services */
 
 angular.module('myApp.services', []).
-  /* Information factory to build user and session objects */
-    factory('InfoFctry',function (localStorageService) {
-      return {
-        info: localStorageService.get('info')
-            ? localStorageService.get('info')
-            : {}
-      }
-    }).
 
-  /* Init factory for chart objects */
-    factory('ChartInitFctry',function (localStorageService) {
-      return {
-        "cal"   : localStorageService.get('cal')
-            ? localStorageService.get('cal')
-            : {
-          "services"  : {},
-          "param1"    : 6500000,
-          "param2"    : 3,
-          "param3"    : 3611111,
-          "param4"    : 10,
-          "param5"    : 7,
-          "param6"    : 2500000000,
-          "param7"    : 2565000000,
-          "param8"    : 15,
-          "param9"    : 100,
-          "param10"   : 34,
-          "adjustment": 1000000
-        },
-        "colors": function () {
-          {
-            return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
-              key : value[key];
-            })
-          }
-        }
-      }
-    }).
+		factory('InfoFctry',function (localStorageService) {
+			/*
+			 Information object that holds user and session objects.
+			 These objects hold meta data about the user and session such
+			 as name, airline name, etc.
+			 */
+			return {
+				info : localStorageService.get('info') ? localStorageService.get('info') : {}
+			}
+		}).
 
-    factory('ChartDraw',function (ChartData) {
-      return {
+		factory('ChartInitFctry',function (localStorageService) {
+			/*
+			 Default values for inputs.
+			 If it's a new session then these are the default values.
+			 */
+			return {
+				"cal" : localStorageService.get('cal') ? localStorageService.get('cal') :
+				{
+					"services" : {},
+					"param1" : 6500000,
+					"param2" : 3,
+					"param3" : 3611111,
+					"param4" : 10,
+					"param5" : 7,
+					"param6" : 2500000000,
+					"param7" : 2565000000,
+					"param8" : 15,
+					"param9" : 100,
+					"param10" : 34,
+					"adjustment" : 1000000
+				},
 
-        numbers: {},
-        title  : "",
+				// Not used but keeping as might be useful later
+				"colors" : function () {
+					{
+						return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
+							key : value[key];
+						})
+					}
+				}
+			}
+		}).
 
-        setValue: function (val) {
-          if (val === 'high') {
-            this.numbers = ChartData.summary.high;
-          } else {
-            this.numbers = ChartData.summary.low
-          }
-        },
+		factory('ChartDraw',function ($rootScope, ChartData, $state) {
+			/*
+			 Draws a chart with highcharts-ng options.
 
-        chartConfig: {
-          options: {
-            chart      : {
-              type               : 'pie',
-              backgroundColor    : 'rgba(255, 255, 255, 0)',
-              plotBackgroundColor: 'rgba(255, 255, 255, 0)'
-            },
-            tooltip    : {
-              pointFormat: '<b>{point.y}</b>'
-            },
-            plotOptions: {
-              series: {
-                tooltip  : {
-                  followPointer: false
-                },
-                animation: true
-              },
-              pie   : {
-                allowPointSelect: true,
-                cursor          : 'pointer',
-                borderColor     : 'rgba(255, 255, 255, 0)',
-                dataLabels      : {
-                  enabled: false
-                },
-                center          : ['50%', '40%'],
-                size            : 220
-              }
-            }
-          },
-          series : [
-            {
-              name     : this.title,
-              innerSize: '20%',
-              data     : this.numbers
-            }
-          ],
-          title  : {
-            text         : this.title,
-            style        : {
-              'color': '#333'
-            },
-            align        : 'center',
-            verticalAlign: 'middle',
-            y            : 110
-          }
-        },
+			 setValue(val) function sets the value to be 'low' or 'high'
+			 chartConfigPie object holds all the options for the highchart.
+			 Note: that this object is not exactly like the highchart options object,
+			 it is an highcharts-ng object!
 
-        chartConfigBar: {
-          options: {
-            chart: {
-              type               : 'bar',
-              backgroundColor    : 'rgba(255, 255, 255, 0)',
-              plotBackgroundColor: 'rgba(255, 255, 255, 0)'
-            }
-          },
-          title  : {
-            text: ''
-          },
-          credits: {
-            enabled: false
-          },
-          series : [
-            {
-              name: 'High',
-              data: []
-            }
-          ],
-          xAxis  : {
-            categories   : [
-              'Revenue Integrity',
-              'RI Process Improvement',
-              'Channel Shift',
-              'Ancillary Sales',
-              'CMAP',
-              'O & D',
-              'POS',
-              'ARR',
-              'Insight'
-            ],
-            allowDecimals: false,
-            title        : {
-              text: 'Value'
-            }
-          },
-          yAxis  : {
-            min   : 0,
-            labels: {
-              overflow: 'justify'
-            }
-          },
-          tooltip: {
-            formatter: function () {
-              return '<b>' + this.series.name + '</b><br/>' +
-                  this.point.y + ' ' + this.point.name.toLowerCase();
-            }
-          }
-        },
+			 See https://github.com/pablojim/highcharts-ng for clarification.
 
-        chartConfigPie: {
-          options: {
-            chart: {
-              type               : 'pie',
-              backgroundColor    : 'rgba(255, 255, 255, 0)',
-              plotBackgroundColor: 'rgba(255, 255, 255, 0)'
-            },
-            plotOptions: {
-              series: {
-                animation: true
-              },
-              pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                  crop: true,
-                  enabled: true,
-                  formatter: function() {
-                    if (this.y != 0) {
-                      return '<b>' + this.point.name + '</b>:' + this.point.y + ' (' + Math.round(this.point.percentage) + '%)';
-                    } else {
-                      return null;
-                    }
-                  },
-                  style: {
-                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                  }
-                }
-              }
-            },
-            tooltip: {
-              pointFormat: '<b>{point.y}</b>'
-            }
-          },
-          title  : {
-            text: null
-          },
-          credits: {
-            enabled: false
-          },
-          series : [
-            {
-              name: 'High',
-              data: []
-            }
-          ],
-          xAxis  : {
-            categories   : [
-              'Revenue Integrity',
-              'RI Process Improvement',
-              'Channel Shift',
-              'Ancillary Sales',
-              'CMAP',
-              'O & D',
-              'POS',
-              'ARR',
-              'Insight'
-            ],
-            allowDecimals: false,
-            title        : {
-              text: 'Value'
-            }
-          },
-          yAxis  : {
-            min   : 0,
-            labels: {
-              overflow: 'justify'
-            }
-          }
-        }
-      }
-    }).
+			 Note: The the service names (categories) are hard coded in here.
+			 */
+			return {
 
-    factory('ChartData',function (localStorageService) {
-      return {
-        summary: localStorageService.get('summary')
-            ? localStorageService.get('summary')
-            : {
-          high: {
-            revenue_integrity                    : 0,
-            revenue_integrity_process_improvement: 0,
-            channel_shift                        : 0,
-            ancillary_sales                      : 0,
-            cmap                                 : 0,
-            o_and_d                              : 0,
-            pos                                  : 0,
-            arr                                  : 0,
-            insight                              : 0
-          },
-          low : {
-            revenue_integrity                    : 0,
-            revenue_integrity_process_improvement: 0,
-            channel_shift                        : 0,
-            ancillary_sales                      : 0,
-            cmap                                 : 0,
-            o_and_d                              : 0,
-            pos                                  : 0,
-            arr                                  : 0,
-            insight                              : 0
-          }
-        }
-      }
-    }).
+				numbers : {},
+				title : "",
 
-  /* Firebase */
-    factory("FbService", ["$firebase", function ($firebase) {
-      var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/sita");
-      return $firebase(ref);
-    }]).
+				chartConfigPie : {
+					options : {
+						chart : {
+							type : 'pie',
+							backgroundColor : 'rgba(255, 255, 255, 0)',
+							plotBackgroundColor : 'rgba(255, 255, 255, 0)'
+						},
+						plotOptions : {
+							series : {
+								animation : true
+							},
+							pie : {
+								allowPointSelect : true,
+								cursor : 'pointer',
+								dataLabels : {
+									enabled : true,
+									formatter : function () {
+										if ( this.y != 0 ) {
+											return '<b>' + this.point.name + '</b>: ' + this.point.y;
+										} else {
+											return null;
+										}
+									},
+									style : {
+										color: 'black'
+									}
+								}
+							}
+						},
+						tooltip : {
+							pointFormat : '<b>{point.y}</b>'
+						}
+					},
+					title : {
+						text : 0
+					},
+					credits : {
+						enabled : false
+					},
+					series : [
+						{
+							name : 'High',
+							data : []
+						}
+					],
+					yAxis : {
+						min : 0,
+						labels : {
+							overflow : 'justify'
+						}
+					}
+				}
+			}
+		}).
 
-  /* Firebase 2 */
-    factory("FbService2", ["$firebase", function ($firebase) {
-      var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/text");
-      return $firebase(ref);
-    }]);
+		factory('ChartData',function (localStorageService) {
+			/*
+			 Summary object where default values for service options are stored.
+			 Creates an object and saves to localstorage with key called 'ls.summary'.
+			 The values are then added to this object when services are chosen.
+
+			 Note: There are places where summary is used - will clarify where these are.
+			 */
+			return {
+				summary : localStorageService.get('summary')
+						? localStorageService.get('summary')
+						: {
+					high : {
+						revenue_integrity : 0,
+						revenue_integrity_process_improvement : 0,
+						channel_shift : 0,
+						ancillary_sales : 0,
+						cmap : 0,
+						o_and_d : 0,
+						pos : 0,
+						arr : 0,
+						insight : 0
+					},
+					low : {
+						revenue_integrity : 0,
+						revenue_integrity_process_improvement : 0,
+						channel_shift : 0,
+						ancillary_sales : 0,
+						cmap : 0,
+						o_and_d : 0,
+						pos : 0,
+						arr : 0,
+						insight : 0
+					}
+				}
+			}
+		}).
+
+		factory("FbService", ["$firebase", function ($firebase) {
+			/*
+			 Firebase
+			 */
+			var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/sita");
+			return $firebase(ref);
+		}]).
+
+		factory("FbService2", ["$firebase", function ($firebase) {
+			/*
+			 Firebase 2
+			 */
+			var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/text");
+			return $firebase(ref);
+		}]);
