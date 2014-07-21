@@ -5,10 +5,10 @@
 angular.module('myApp.services', []).
 
 		factory('InfoFctry',function (localStorageService) {
-			/*
-			 Information object that holds user and session objects.
-			 These objects hold meta data about the user and session such
-			 as name, airline name, etc.
+			/**
+			 *	Information object that holds user and session objects.
+			 *	These objects hold meta data about the user and session such
+			 *	as name, airline name, etc.
 			 */
 			return {
 				info : localStorageService.get('info') ? localStorageService.get('info') : {}
@@ -16,9 +16,10 @@ angular.module('myApp.services', []).
 		}).
 
 		factory('ChartInitFctry',function (localStorageService) {
-			/*
-			 Default values for inputs.
-			 If it's a new session then these are the default values.
+			/**
+			 * Default values for inputs.
+			 * If it's a new session then these are the default values
+			 * that are entered into the input fields.
 			 */
 			return {
 				"cal" : localStorageService.get('cal') ? localStorageService.get('cal') :
@@ -49,17 +50,17 @@ angular.module('myApp.services', []).
 		}).
 
 		factory('ChartDraw',function ($rootScope, ChartData, $state) {
-			/*
-			 Draws a chart with highcharts-ng options.
-
-			 setValue(val) function sets the value to be 'low' or 'high'
-			 chartConfigPie object holds all the options for the highchart.
-			 Note: that this object is not exactly like the highchart options object,
-			 it is an highcharts-ng object!
-
-			 See https://github.com/pablojim/highcharts-ng for clarification.
-
-			 Note: The the service names (categories) are hard coded in here.
+			/**
+			 * Draws a chart with highcharts-ng options.
+			 *
+			 * setValue(val) function sets the value to be 'low' or 'high'
+			 * chartConfigPie object holds all the options for the highchart.
+			 * Note: that this object is not exactly like the highchart options object,
+			 * it is an highcharts-ng object!
+			 *
+			 * See https://github.com/pablojim/highcharts-ng for clarification.
+			 *
+			 * Note: The the service names (categories) are hard coded in here.
 			 */
 			return {
 
@@ -122,12 +123,12 @@ angular.module('myApp.services', []).
 		}).
 
 		factory('ChartData',function (localStorageService) {
-			/*
-			 Summary object where default values for service options are stored.
-			 Creates an object and saves to localstorage with key called 'ls.summary'.
-			 The values are then added to this object when services are chosen.
-
-			 Note: There are places where summary is used - will clarify where these are.
+			/**
+			 * Summary object where default values for service options are stored.
+			 * Creates an object and saves to localstorage with key called 'ls.summary'.
+			 * The values are then added to this object when services are chosen.
+			 *
+			 * Note: There are places where summary is used - will clarify where these are.
 			 */
 			return {
 				summary : localStorageService.get('summary')
@@ -160,16 +161,16 @@ angular.module('myApp.services', []).
 		}).
 
 		factory("FbService", ["$firebase", function ($firebase) {
-			/*
-			 Firebase
+			/**
+			 * Firebase
 			 */
 			var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/sita");
 			return $firebase(ref);
 		}]).
 
 		factory("FbService2", ["$firebase", function ($firebase) {
-			/*
-			 Firebase 2
+			/**
+			 * Firebase 2
 			 */
 			var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/text");
 			return $firebase(ref);

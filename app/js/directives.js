@@ -15,46 +15,26 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 				templateUrl : 'partials/main-nav.html',
 				scope : {},
 				transclude : true,
-				controller : function ($scope) {
-
-					$scope.settings = {
-						disable : 'right',
-						hyperextensible : false,
-						transitionSpeed : 0.3,
-						easing : 'ease'
-					};
-
-					$scope.snapper = new Snap({
-						element : document.getElementById('main-content')
-					});
-
-					$scope.snapper.settings($scope.settings);
-
-					$scope.openLeft = function () {
-						if ( $scope.snapper.state().state == "left" ) {
-							$scope.snapper.close();
-						} else {
-							$scope.snapper.open('left');
-						}
-					};
-
-				},
-				controllerAs : 'mainNav'
+				controller : 'InfoCtrl'
 			};
 		}).
+
 		directive("snapDrawLeft",function () {
 			return {
 				restrict : "A",
 				scope : {},
-				templateUrl : "partials/snap-draw-left.html"
+				templateUrl : "partials/snap-draw-left.html",
+				controller : 'InfoCtrl'
 			}
 		}).
+
 		directive('navBottom', function () {
 			return {
 				restrict : "E",
 				templateUrl : "partials/nav-bottom.html"
 			}
 		}).
+
 		directive('integer',function () {
 			return {
 				require : 'ngModel',
@@ -65,6 +45,7 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 				}
 			};
 		}).
+
 		directive('contenteditable', ['$sce', function ($sce) {
 			return {
 				restrict : 'A', // only activate on element attribute
@@ -96,6 +77,7 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 				}
 			};
 		}]).
+
 		directive('services', [function () {
 			return {
 				restrict : 'E',

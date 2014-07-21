@@ -14,7 +14,7 @@ var app = angular.module('myApp', [
 			'myApp.controllers',
 			'myApp.chart_controllers'
 		]).config(['$routeProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $stateProvider, $urlRouterProvider) {
-			$routeProvider.when('/user', {templateUrl : 'partials/user.html', controller : 'InfoCtrl'});
+			$routeProvider.when('/user', {templateUrl : 'partials/user.html'});
 			$routeProvider.when('/calculator', {templateUrl : 'partials/calculator.html', controller : 'ChartCtrl'});
 			$routeProvider.when('/logout', {templateUrl : 'partials/logout.html', controller : 'LogOutCtrl'});
 			$routeProvider.when('/logged-out', {templateUrl : 'partials/logged-out.html', controller : 'LogOutCtrl'});

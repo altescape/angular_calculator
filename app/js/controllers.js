@@ -77,6 +77,29 @@ angular.module('myApp.controllers', [])
 						$scope.info = InfoFctry.info;
 					}, true);
 
+			var settings = {
+				disable : 'right',
+				hyperextensible : false,
+				transitionSpeed : .3,
+				easing : 'ease'
+			};
+
+			var snapper = new Snap({
+				element : document.getElementById('main-content')
+			});
+
+			snapper.settings(settings);
+
+			$scope.openLeft = function () {
+				if ( snapper.state().state == "left" ) {
+					snapper.close();
+					return false;
+				} else {
+					snapper.open('left');
+					return true;
+				}
+			};
+
 		}])
 
 		.controller('LogOutCtrl', ['$scope', 'localStorageService', '$location', 'InfoFctry', function ($scope, localStorageService, $location, InfoFctry) {
