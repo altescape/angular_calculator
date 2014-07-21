@@ -49,6 +49,12 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 				templateUrl : "partials/snap-draw-left.html"
 			}
 		}).
+		directive('navBottom', function () {
+			return {
+				restrict : "E",
+				templateUrl : "partials/nav-bottom.html"
+			}
+		}).
 		directive('integer',function () {
 			return {
 				require : 'ngModel',

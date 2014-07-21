@@ -8,52 +8,32 @@
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Horizon Calculator</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon-precomposed" href="/app/img/apple-touch-icon-precomposed.png">
-  <link rel="icon" type="image/png" href="/app/img/favicon.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Horizon Calculator</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon-precomposed" href="/app/img/apple-touch-icon-precomposed.png">
+    <link rel="icon" type="image/png" href="/app/img/favicon.png">
 
-  <link rel="stylesheet" href="/dist/css/app.css">
-  <link rel="stylesheet" href="/bower_components/offline/themes/offline-theme-dark.css">
-  <link rel="stylesheet" href="/bower_components/offline/themes/offline-language-english.css">
+    <link rel="stylesheet" href="/dist/css/app.css">
+    <link rel="stylesheet" href="/bower_components/offline/themes/offline-theme-dark.css">
+    <link rel="stylesheet" href="/bower_components/offline/themes/offline-language-english.css">
 
 </head>
 <body>
 
-<div id="wrap">
-  <div main-nav ng-cloak ng-controller="InfoCtrl" class="navbar navbar-default navbar-static-top"></div>
-  <div class="snap-drawers" ng-cloak>
-    <div snap-draw-left style="height: 100%;"></div>
-  </div>
-  <div id="main-content" class="container-fluid snap-content">
-    <div class="row main-content" ng-controller="InfoCtrl" ng-cloak>
-      <div ng-view class="reveal-animation"></div>
+<div id="wrap" ng-controller="InfoCtrl">
+    <div main-nav ng-cloak class="navbar navbar-default navbar-static-top"></div>
+    <div class="snap-drawers" ng-cloak>
+        <div snap-draw-left style="height: 100%;"></div>
     </div>
-  </div>
-  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-controller="SaveSessionCtrl">
-    <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save successful</strong></div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 text-right">
-          <a ng-hide="running_session == true" ng-click="saveSession()" class="btn btn-success btn-sm mt-10">SAVE <span
-              class="glyphicon glyphicon-export"></span></a>
-
-          <div class="btn-group" ng-show="running_session == true" ng-cloak>
-            <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span
-                class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
-            <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
-               ng-disabled="saving == true">
-              <span ng-show="saving == false">SAVE</span>
-              <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
-            </a>
-          </div>
+    <div id="main-content" class="container-fluid snap-content">
+        <div class="row main-content" ng-cloak>
+            <div ng-view class="reveal-animation"></div>
         </div>
-      </div>
     </div>
-  </nav>
+    <nav-bottom></nav-bottom>
 </div>
 
 <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
