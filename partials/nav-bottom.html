@@ -1,8 +1,15 @@
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-controller="SaveSessionCtrl">
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-controller="SaveSessionCtrl as save">
     <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save successful</strong></div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 text-right">
+            <div class="col-sm-7">
+                <ul class="list-inline info-links">
+                    <li ng-show="info.user.name"><span class="text-muted">Name:</span> <a href="/#/user">{{ info.user.name }}</a></li>
+                    <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a href="/#/user">{{ info.airline.code }}</a></li>
+                    <li ng-show="info.opportunity.name"><span class="text-muted">Opportunity:</span> <a href="/#/user">{{ info.opportunity.name }}</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-5 text-right">
                 <a ng-hide="running_session == true" ng-click="saveSession()" class="btn btn-success btn-sm mt-10">SAVE <span
                       class="glyphicon glyphicon-export"></span></a>
 

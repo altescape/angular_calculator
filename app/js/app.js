@@ -18,10 +18,10 @@ var app = angular.module('myApp', [
 			$routeProvider.when('/calculator', {templateUrl : 'partials/calculator.html', controller : 'ChartCtrl'});
 			$routeProvider.when('/logout', {templateUrl : 'partials/logout.html', controller : 'LogOutCtrl'});
 			$routeProvider.when('/logged-out', {templateUrl : 'partials/logged-out.html', controller : 'LogOutCtrl'});
-			$routeProvider.when('/sessions', {templateUrl : 'partials/sessions.html', controller : 'ListSessionCtrl'});
-			$routeProvider.when('/sessions/:id', {templateUrl : 'partials/sessions-detail.html', controller : 'ListSessionCtrl'});
-			$routeProvider.when('/save-session', {templateUrl : 'partials/save-session.html', controller : 'SaveSessionCtrl'});
-			$routeProvider.when('/update-session', {templateUrl : 'partials/update-session.html', controller : 'UpdateSessionCtrl'});
+			$routeProvider.when('/saved-calculations', {templateUrl : 'partials/calculations/saved-calculations.html', controller : 'ListSessionCtrl'});
+			$routeProvider.when('/saved-calculations/:id', {templateUrl : 'partials/calculations/saved-calculations-detail.html', controller : 'SessionsDetailCtrl'});
+			$routeProvider.when('/save-calculation', {templateUrl : 'partials/calculations/save-calculation.html', controller : 'SaveSessionCtrl'});
+			$routeProvider.when('/update-calculation', {templateUrl : 'partials/calculations/update-calculation.html', controller : 'UpdateSessionCtrl'});
 
 			$routeProvider.otherwise({redirectTo : '/user'});
 

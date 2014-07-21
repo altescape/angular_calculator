@@ -17,14 +17,21 @@ angular.module('myApp.chart_controllers', [])
 			'ChartDraw',
 			'ChartData', function ($rootScope, $scope, localStorageService, ChartInitFctry, $state, ChartDraw, ChartData) {
 
-				// Saves name of open view for results (from dataView) in local storage
-				$rootScope.$on('$stateChangeSuccess',
-						function (event, toState, toParams, fromState, fromParams) {
-							event.preventDefault();
-							localStorageService.set('results_view', toState);
-						});
+				/**
+				 *	Stores the state of collapsed sections, collapsed = true|false.
+				 *
+				 *	@type {*|Array|Choice|Undefined|Object|array|promise|Object}
+				 */
+				$scope.view_state = localStorageService.get('view_state');
+				$scope.collapseSection = function () {
+					localStorageService.set('view_state', $scope.view_state);
+				};
 
-				// Initiates the view for results (from dataView)
+				/**
+				 *	Initiates the process for saving the open results view, Charts or table.
+				 *
+				 *	@type {*|Array|Choice|Undefined|Object|array|promise|Object}
+				 */
 				$scope.result_view = localStorageService.get('results_view');
 				if ( $scope.result_view ) {
 					$state.go($scope.result_view.name);
@@ -32,10 +39,29 @@ angular.module('myApp.chart_controllers', [])
 					$state.go('chart_high');
 				}
 
+				/**
+				 *	Saves the state of the open results view, Charts or table,
+				 *	when loaded. Uses state and state change success event ($stateChangeSuccess).
+				 */
+				$rootScope.$on('$stateChangeSuccess',
+						function (event, toState, toParams, fromState, fromParams) {
+							event.preventDefault();
+							localStorageService.set('results_view', toState);
+						});
+
+				// Get the defaults values from the Chart Initialisation Factory
 				$scope.cal = ChartInitFctry.cal;
 				$scope.colors = ChartInitFctry.colors();
 
+				/**
+				 *	Updates the chart.
+				 *
+				 *	Called whenever a value is changed in an input box and on initial load of /#/calculator page.
+				 */
 				$scope.updateChart = function () {
+
+					// Here is where hell begins... tread carefully or ye will trip and fall to an untimely death.
+					// Check reference docs for references or you'll get lost.
 
 					// Check $scope.cal.adjustment exists
 					if (!$scope.cal.adjustment || $scope.cal.adjustment === null) {
@@ -262,56 +288,56 @@ angular.module('myApp.chart_controllers', [])
 					//
 					// revenue_integrity
 					if ( $scope.cal.services.op1 === true ) {
-						ChartData.summary.high.revenue_integrity = $scope.revenue_integrity_high;
-						ChartData.summary.low.revenue_integrity = $scope.revenue_integrity_low;
+						ChartData.summary.high.revenue_integrity.value = $scope.revenue_integrity_high;
+						ChartData.summary.low.revenue_integrity.value = $scope.revenue_integrity_low;
 					} else {
-						ChartData.summary.high.revenue_integrity = 0;
-						ChartData.summary.low.revenue_integrity = 0;
+						ChartData.summary.high.revenue_integrity.value = 0;
+						ChartData.summary.low.revenue_integrity.value = 0;
 					}
 
 					// revenue_integrity_process_improvement
 					if ( $scope.cal.services.op2 === true ) {
-						ChartData.summary.high.revenue_integrity_process_improvement = $scope.revenue_integrity_process_improvement_high;
-						ChartData.summary.low.revenue_integrity_process_improvement = $scope.revenue_integrity_process_improvement_low;
+						ChartData.summary.high.revenue_integrity_process_improvement.value = $scope.revenue_integrity_process_improvement_high;
+						ChartData.summary.low.revenue_integrity_process_improvement.value = $scope.revenue_integrity_process_improvement_low;
 					} else {
-						ChartData.summary.high.revenue_integrity_process_improvement = 0;
-						ChartData.summary.low.revenue_integrity_process_improvement = 0;
+						ChartData.summary.high.revenue_integrity_process_improvement.value = 0;
+						ChartData.summary.low.revenue_integrity_process_improvement.value = 0;
 					}
 
 					// cmap
 					if ( $scope.cal.services.op5 === true ) {
-						ChartData.summary.high.cmap = $scope.cmap_high;
-						ChartData.summary.low.cmap = $scope.cmap_low;
+						ChartData.summary.high.cmap.value = $scope.cmap_high;
+						ChartData.summary.low.cmap.value = $scope.cmap_low;
 					} else {
-						ChartData.summary.high.cmap = 0;
-						ChartData.summary.low.cmap = 0;
+						ChartData.summary.high.cmap.value = 0;
+						ChartData.summary.low.cmap.value = 0;
 					}
 
 					// o&d
 					if ( $scope.cal.services.op6 === true ) {
-						ChartData.summary.high.o_and_d = $scope.o_and_d_high;
-						ChartData.summary.low.o_and_d = $scope.o_and_d_low;
+						ChartData.summary.high.o_and_d.value = $scope.o_and_d_high;
+						ChartData.summary.low.o_and_d.value = $scope.o_and_d_low;
 					} else {
-						ChartData.summary.high.o_and_d = 0;
-						ChartData.summary.low.o_and_d = 0;
+						ChartData.summary.high.o_and_d.value = 0;
+						ChartData.summary.low.o_and_d.value = 0;
 					}
 
 					// pos
 					if ( $scope.cal.services.op7 === true ) {
-						ChartData.summary.high.pos = $scope.pos_high;
-						ChartData.summary.low.pos = $scope.pos_low;
+						ChartData.summary.high.pos.value = $scope.pos_high;
+						ChartData.summary.low.pos.value = $scope.pos_low;
 					} else {
-						ChartData.summary.high.pos = 0;
-						ChartData.summary.low.pos = 0;
+						ChartData.summary.high.pos.value = 0;
+						ChartData.summary.low.pos.value = 0;
 					}
 
 					// insight
 					if ( $scope.cal.services.op9 === true ) {
-						ChartData.summary.high.insight = $scope.insight_high;
-						ChartData.summary.low.insight = $scope.insight_low;
+						ChartData.summary.high.insight.value = $scope.insight_high;
+						ChartData.summary.low.insight.value = $scope.insight_low;
 					} else {
-						ChartData.summary.high.insight = 0;
-						ChartData.summary.low.insight = 0;
+						ChartData.summary.high.insight.value = 0;
+						ChartData.summary.low.insight.value = 0;
 					}
 
 					// Save summary to local storage
@@ -320,26 +346,15 @@ angular.module('myApp.chart_controllers', [])
 					// Save calculations to local storage
 					localStorageService.set('cal', $scope.cal);
 
-					// Pie chart drawing functions
-					// Labels for pie chart
-					$scope.pie_titles = [
-						'Revenue Integrity',
-						'RI Process Improvement',
-						'Channel Shift',
-						'Ancillary Sales',
-						'CMAP',
-						'O & D',
-						'POS',
-						'ARR',
-						'Insight'
-					];
-
+					/**
+					 *	Pie chart drawing functions
+					 */
 					// Function to convert data object to array for chart
 					$scope.pie_values = [];
 					$scope.getPieValue = function (pie_data, pie_array) {
 						var i = 0;
 						angular.forEach(pie_data, function (value, key) {
-							pie_array.push([$scope.pie_titles[i], value]);
+							pie_array.push([value.name, value.value]);
 							i++;
 						});
 					};
@@ -401,18 +416,9 @@ angular.module('myApp.chart_controllers', [])
 								seriesArrayPie.data = $scope.pie_values;
 							});
 
-					// Update service totals
-//					$scope.value_total = 0;
-//					$scope.total_services = angular.forEach(seriesArrayPie.data, function (value, key) {
-//						$scope.value_total += parseInt(value[1], 10);
-//						return parseInt($scope.value_total, 10);
-//					});
-
 				};
 
-				/* End Highcharts config */
-
-				// Initiate chart on controller load
+				// Update chart on load
 				$scope.updateChart();
 			}])
 

@@ -4,18 +4,17 @@
 
 angular.module('myApp.controllers', [])
 
-	/* General information */
 		.controller('InfoCtrl', ['$scope', 'localStorageService', 'InfoFctry', function ($scope, localStorageService, InfoFctry) {
 
 			/**
-			 *	Fast click, removes time delay for click on mobile
+			 *  Fast click, removes time delay for click on mobile
 			 */
 			FastClick.attach(document.body, null);
 
 			/**
-			 *	Check net is up
+			 *  Check net is up
 			 */
-			// Default value for flag
+				// Default value for flag
 			$scope.isNetUp = true;
 
 			// Checks whether net is up
@@ -33,7 +32,7 @@ angular.module('myApp.controllers', [])
 			});
 
 			/**
-			 *	Resizing the windows updates various elements
+			 *  Resizing the windows updates various elements
 			 */
 			$scope.resizeContentWrapper = function (ele_id) {
 				$scope.winHeight = document.documentElement.clientHeight;
@@ -52,9 +51,9 @@ angular.module('myApp.controllers', [])
 			$scope.resizeContentWrapper(wrap);
 
 			/**
-			 *	User information
+			 *  User information
 			 */
-			// Add info from InfoFctry to scope.info
+				// Add info from InfoFctry to scope.info
 			$scope.info = InfoFctry.info;
 
 			// Add latest timestamp and date
@@ -104,16 +103,13 @@ angular.module('myApp.controllers', [])
 
 		.controller('LogOutCtrl', ['$scope', 'localStorageService', '$location', 'InfoFctry', function ($scope, localStorageService, $location, InfoFctry) {
 			/**
-			 *	Logs out the user and clears locally stored data
+			 *  Logs out the user and clears locally stored data
 			 */
 			$scope.confirmLogout = function () {
 				localStorageService.clearAll();
 
 				// Reset models
-				InfoFctry.user = {};
-				InfoFctry.session = {};
-				$scope.user = {};
-				$scope.session = {};
+				InfoFctry.info = {};
 
 				$location.path('confirm-logout');
 			};
@@ -136,7 +132,12 @@ angular.module('myApp.controllers', [])
 			function ($scope, $firebase, localStorageService, InfoFctry, ChartInitFctry, $location) {
 
 				/**
-				 *	Gets saved calculations from firebase
+				 *  Get current key
+				 */
+				$scope.current_key = localStorageService.get('current_key');
+
+				/**
+				 *  Gets saved calculations from firebase
 				 *
 				 * @type {*}
 				 */
@@ -162,19 +163,19 @@ angular.module('myApp.controllers', [])
 				};
 
 				/**
-				 *	Delete saved calculations
+				 *  Delete saved calculations
 				 *
-				 *	@param id
+				 *  @param id
 				 */
 				$scope.deleteSession = function (id) {
 					$scope.items.$remove(id);
-					$location.path('sessions');
+					$location.path('saved-calculations');
 				};
 
 				/**
-				 *	Copy a saved calculation
+				 *  Copy a saved calculation
 				 *
-				 *	@param id
+				 *  @param id
 				 */
 				$scope.copySession = function (id) {
 
@@ -199,12 +200,14 @@ angular.module('myApp.controllers', [])
 				};
 
 				/**
-				 *	Use a particular saved calculation,
-				 *	replaces data in local storage with this copied calculation
+				 *  Use a particular saved calculation,
+				 *  replaces data in local storage with this copied calculation
 				 *
-				 *	@param id
+				 *  @param id
 				 */
 				$scope.useSession = function (id) {
+
+					// need to confirm that user has saved current calculation before going further
 
 					// Connect to firebase to retrieve saved calculation with id
 					$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
@@ -220,6 +223,11 @@ angular.module('myApp.controllers', [])
 
 					// Set the current key in localstorage
 					localStorageService.set('current_key', id);
+
+					// Set current_key
+					$scope.current_key = localStorageService.get('current_key');
+
+					$location.path('calculator');
 				};
 
 			}])
@@ -227,7 +235,7 @@ angular.module('myApp.controllers', [])
 		.controller('SessionsCtrl', ['$scope', 'FbService', 'FbService2', function ($scope, FbService, FbService2) {
 
 			/**
-			 *	Firebase
+			 *  Firebase
 			 */
 			$scope.fbtest = function () {
 				$scope.text.sum = 0;
@@ -251,7 +259,7 @@ angular.module('myApp.controllers', [])
 			 * Check current_key exists
 			 * It means we're currently running a session
 			 */
-			if (localStorageService.get('current_key')) {
+			if ( localStorageService.get('current_key') ) {
 				$scope.running_session = true;
 			} else $scope.running_session = false;
 
@@ -275,14 +283,16 @@ angular.module('myApp.controllers', [])
 
 					// Update running_session flag
 					$scope.running_session = true;
-				})
+
+				});
+
 			};
 
 			/**
 			 * Updates the current calculation and uploads it to Firebase
 			 */
 
-			// Flags
+				// Flags
 			$scope.saving = false;
 			$scope.saved = false;
 

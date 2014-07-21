@@ -18,6 +18,10 @@ $brand-warning: #f0ad4e !default;
 $brand-danger: #d9534f !default;
 $brand-grey: #36474F;
 
+.text-capitalize {
+	text-transform: uppercase;
+}
+
 .btn-gradient {
 	background-image: linear-gradient($brand-primary, darken($brand-primary, 20%));
 	font-weight: bold;
@@ -775,6 +779,18 @@ $input-group-height: 34px;
 .nav-tabs-justified, .nav-tabs.nav-justified {
 	font-size: 12px;
 	white-space: nowrap;
+}
+
+.info-links {
+	margin: 18px 0 0;
+	font-size: 10px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	li {
+		border-right: 1px solid $gray-lighter;
+		&:last-child {border: none;}
+		padding-right: 10px;
+	}
 }
 
 @media (min-width: $screen-xs-min) {

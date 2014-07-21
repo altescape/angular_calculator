@@ -9,16 +9,15 @@
 
         <div class="row">
 
-            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>You haven't saved any
-                sessions yet<br> . . .
+            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>Cannot find any saved calculations<br> . . .
             </h1>
 
             <div class="col-md-3 {{ ele_load_status }}" ng-repeat="item in items | orderByPriority | reverse">
-                <div class="panel panel-default" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
+                <div class="panel " ng-class="{'panel-danger' : confirm == true, 'panel-success' : item.$id == current_key, 'panel-default' : confirm != true && item.$id != current_key}" ng-init="confirm = false">
                     <div class="panel-heading pos-rel">
                         {{ item.meta.user.name | uppercase }}
                         <div class="panel-heading-btn-group pull-right btn-group">
-                            <a ng-href="/#/sessions/{{ item.$id }}" class="btn btn-primary">
+                            <a ng-href="/#/saved-calculations/{{ item.$id }}" class="btn btn-primary">
                                 Summary
                             </a>
                         </div>
@@ -29,7 +28,7 @@
                             <small>OPPORTUNITY</small>
                         </h5>
                         <h3 class="mt-0 mb-5">
-                            <a ng-href="/#/sessions/{{ item.$id }}">{{ item.meta.opportunity.name }}</a></h3>
+                            <a ng-href="/#/saved-calculations/{{ item.$id }}">{{ item.meta.opportunity.name }}</a></h3>
 
                         <h5 class="mb-5">
                             <small>AIRLINE</small>
@@ -61,8 +60,6 @@
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         </div>
-                        <p ng-hide="confirm == false" class="pull-right"
-                           style="margin: 6px; font-size: 10px; opacity: 0.5; font-weight: bold">SURE?</p>
                     </div>
 
                     {{ item.description }}

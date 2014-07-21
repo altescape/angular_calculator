@@ -12,19 +12,14 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 		directive('mainNav',function () {
 			return {
 				restrict : 'A',
-				templateUrl : 'partials/main-nav.html',
-				scope : {},
-				transclude : true,
-				controller : 'InfoCtrl'
+				templateUrl : 'partials/main-nav.html'
 			};
 		}).
 
 		directive("snapDrawLeft",function () {
 			return {
 				restrict : "A",
-				scope : {},
-				templateUrl : "partials/snap-draw-left.html",
-				controller : 'InfoCtrl'
+				templateUrl : "partials/snap-draw-left.html"
 			}
 		}).
 

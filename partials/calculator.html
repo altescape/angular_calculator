@@ -1,4 +1,4 @@
-<div ng-controller="ChartCtrl" ng-cloak>
+<div ng-cloak>
 
     <!-- SHEET: VARIABLES C20 - C25 -->
     <div class="panel__1">
@@ -8,17 +8,17 @@
                 <legend>
                     Figures
                     <small class="pull-right">
-                        <a ng-click="fig_collapsed = true" ng-hide="fig_collapsed"
+                        <a ng-click="view_state.fig_collapsed = true; collapseSection(view_state.fig_collapsed)" ng-hide="view_state.fig_collapsed"
                            style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
                             collapse <span class="glyphicon glyphicon-resize-small"></span>
                         </a>
-                        <a ng-click="fig_collapsed = false" ng-show="fig_collapsed"
+                        <a ng-click="view_state.fig_collapsed = false; collapseSection(view_state.fig_collapsed)" ng-show="view_state.fig_collapsed"
                            style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
                             show <span class="glyphicon glyphicon-resize-full"></span>
                         </a>
                     </small>
                 </legend>
-                <div class="row" ng-hide="fig_collapsed">
+                <div class="row" ng-hide="view_state.fig_collapsed">
                     <div class="col-sm-12 form-group">
                         <label for="param1">Current total passengers boarded per year</label>
                         <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number" ng-model="cal.param1"
@@ -74,17 +74,17 @@
                 <legend>
                     Revenue, etc.
                     <small class="pull-right">
-                        <a ng-click="rev_collapsed = true" ng-hide="rev_collapsed"
+                        <a ng-click="view_state.rev_collapsed = true; collapseSection(view_state.rev_collapsed)" ng-hide="view_state.rev_collapsed"
                            style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
                             collapse <span class="glyphicon glyphicon-resize-small"></span>
                         </a>
-                        <a ng-click="rev_collapsed = false" ng-show="rev_collapsed"
+                        <a ng-click="view_state.rev_collapsed = false; collapseSection(view_state.rev_collapsed)" ng-show="view_state.rev_collapsed"
                            style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
                             show <span class="glyphicon glyphicon-resize-full"></span>
                         </a>
                     </small>
                 </legend>
-                <div class="row" ng-hide="rev_collapsed">
+                <div class="row" ng-hide="view_state.rev_collapsed">
                     <div class="col-sm-12 form-group">
                         <label for="param6">Airline's annual revenue</label>
                         <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number" ng-model="cal.param6"

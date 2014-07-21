@@ -6629,6 +6629,10 @@ button.close {
   .hidden-print {
     display: none !important; } }
 /* line 21, app.scss */
+.text-capitalize {
+  text-transform: uppercase; }
+
+/* line 25, app.scss */
 .btn-gradient {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#36474f), to(#0d1112));
   background-image: -webkit-linear-gradient(#36474f, #0d1112);
@@ -6643,101 +6647,101 @@ button.close {
   -webkit-transition: background-position .3s ease-in-out;
   transition: background-position .3s ease-in-out;
   font-size: 12px; }
-  /* line 31, app.scss */
+  /* line 35, app.scss */
   .btn-gradient:hover {
     background-position: 0 0; }
-  /* line 34, app.scss */
+  /* line 38, app.scss */
   .btn-gradient.btn-success {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#5cb85c), to(#357935));
     background-image: -webkit-linear-gradient(#5cb85c, #357935);
     background-image: linear-gradient(#5cb85c, #357935); }
-  /* line 37, app.scss */
+  /* line 41, app.scss */
   .btn-gradient.btn-warning {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#f0ad4e), to(#c77c11));
     background-image: -webkit-linear-gradient(#f0ad4e, #c77c11);
     background-image: linear-gradient(#f0ad4e, #c77c11); }
-  /* line 40, app.scss */
+  /* line 44, app.scss */
   .btn-gradient.btn-danger {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#a02622));
     background-image: -webkit-linear-gradient(#d9534f, #a02622);
     background-image: linear-gradient(#d9534f, #a02622); }
-  /* line 43, app.scss */
+  /* line 47, app.scss */
   .btn-gradient.btn-trans, .btn-gradient.btn-default {
     background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#cccccc));
     background-image: -webkit-linear-gradient(white, #cccccc);
     background-image: linear-gradient(white, #cccccc); }
 
-/* line 48, app.scss */
+/* line 52, app.scss */
 .btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
   margin-left: 0;
   border-left: 1px solid #CCC; }
 
-/* line 53, app.scss */
+/* line 57, app.scss */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
 
-/* line 57, app.scss */
+/* line 61, app.scss */
 .ng-cloak.show {
   display: block !important; }
 
-/* line 61, app.scss */
+/* line 65, app.scss */
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence 0.6s cubic-bezier(0.5, 0, 0.5, 1);
   animation: enter_sequence 0.6s cubic-bezier(0.5, 0, 0.5, 1); }
 
 @-webkit-keyframes enter_sequence {
-  /* line 66, app.scss */
+  /* line 70, app.scss */
   from {
     opacity: 0; }
 
-  /* line 69, app.scss */
+  /* line 73, app.scss */
   to {
     opacity: 1; } }
 
 @keyframes enter_sequence {
-  /* line 66, app.scss */
+  /* line 70, app.scss */
   from {
     opacity: 0; }
 
-  /* line 69, app.scss */
+  /* line 73, app.scss */
   to {
     opacity: 1; } }
 
-/* line 74, app.scss */
+/* line 78, app.scss */
 .btn.ng-animate, .btn-group.ng-animate {
   -webkit-transition: none !important;
   transition: none !important;
   -webkit-animation: none 0s !important;
   animation: none 0s !important; }
 
-/* line 79, app.scss */
+/* line 83, app.scss */
 a:hover {
   cursor: pointer; }
 
 @-webkit-keyframes rotating {
-  /* line 84, app.scss */
+  /* line 88, app.scss */
   from {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
 
-  /* line 87, app.scss */
+  /* line 91, app.scss */
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
 @keyframes rotating {
-  /* line 84, app.scss */
+  /* line 88, app.scss */
   from {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
 
-  /* line 87, app.scss */
+  /* line 91, app.scss */
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
 @-webkit-keyframes load-bounce {
-  /* line 107, app.scss */
+  /* line 111, app.scss */
   10% {
     -webkit-transform: translate3d(0, 30px, 0);
     transform: translate3d(0, 30px, 0);
@@ -6745,11 +6749,11 @@ a:hover {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     height: 30px; }
 
-  /* line 112, app.scss */
+  /* line 116, app.scss */
   14% {
     height: 90px; }
 
-  /* line 115, app.scss */
+  /* line 119, app.scss */
   15% {
     height: 30px;
     -webkit-transform: translate3d(0, -60px, 0);
@@ -6757,13 +6761,13 @@ a:hover {
     -webkit-animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1);
     animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1); }
 
-  /* line 120, app.scss */
+  /* line 124, app.scss */
   35% {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
 @keyframes load-bounce {
-  /* line 107, app.scss */
+  /* line 111, app.scss */
   10% {
     -webkit-transform: translate3d(0, 30px, 0);
     transform: translate3d(0, 30px, 0);
@@ -6771,11 +6775,11 @@ a:hover {
     animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     height: 30px; }
 
-  /* line 112, app.scss */
+  /* line 116, app.scss */
   14% {
     height: 90px; }
 
-  /* line 115, app.scss */
+  /* line 119, app.scss */
   15% {
     height: 30px;
     -webkit-transform: translate3d(0, -60px, 0);
@@ -6783,12 +6787,12 @@ a:hover {
     -webkit-animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1);
     animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1); }
 
-  /* line 120, app.scss */
+  /* line 124, app.scss */
   35% {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0); } }
 
-/* line 127, app.scss */
+/* line 131, app.scss */
 .loading .loader {
   font-size: 0;
   display: block;
@@ -6798,7 +6802,7 @@ a:hover {
   left: 50%;
   height: 120px;
   width: 120px; }
-  /* line 138, app.scss */
+  /* line 142, app.scss */
   .loading .loader div {
     background: #7a97a4;
     width: 30px;
@@ -6809,35 +6813,35 @@ a:hover {
     animation: load-bounce 1.75s infinite;
     top: 50%;
     margin-top: -15px; }
-    /* line 149, app.scss */
+    /* line 153, app.scss */
     .loading .loader div:nth-child(2) {
       -webkit-animation-delay: 0.25s;
       animation-delay: 0.25s;
       left: 50%;
       margin-left: -15px; }
-    /* line 154, app.scss */
+    /* line 158, app.scss */
     .loading .loader div:nth-child(3) {
       -webkit-animation-delay: 0.5s;
       animation-delay: 0.5s;
       right: 0; }
 
-/* line 162, app.scss */
+/* line 166, app.scss */
 .hide_on_loading {
   display: none !important; }
 
-/* line 166, app.scss */
+/* line 170, app.scss */
 .show_on_loaded {
   display: inherit !important; }
-  /* line 168, app.scss */
+  /* line 172, app.scss */
   .show_on_loaded.ng-hide {
     display: none !important; }
 
-/* line 174, app.scss */
+/* line 178, app.scss */
 .loaded .loader {
   display: none; }
 
 /* CHART AREA */
-/* line 180, app.scss */
+/* line 184, app.scss */
 .panel__1 {
   position: absolute;
   top: 0;
@@ -6848,7 +6852,7 @@ a:hover {
   background: whitesmoke;
   padding-top: 10px; }
 
-/* line 191, app.scss */
+/* line 195, app.scss */
 .panel__2 {
   position: absolute;
   top: 0;
@@ -6859,16 +6863,16 @@ a:hover {
   background: #EEE;
   overflow: hidden; }
 
-/* line 202, app.scss */
+/* line 206, app.scss */
 .panel__inner {
   overflow-y: scroll;
   height: 100%; }
 
-/* line 207, app.scss */
+/* line 211, app.scss */
 .panel__padding {
   padding: 15px; }
 
-/* line 211, app.scss */
+/* line 215, app.scss */
 .panel__item {
   background: #F3F3F3;
   overflow: hidden;
@@ -6878,7 +6882,7 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0; }
-  /* line 220, app.scss */
+  /* line 224, app.scss */
   .panel__item .panel-body {
     padding: 0;
     position: absolute;
@@ -6888,17 +6892,17 @@ a:hover {
     bottom: 0;
     overflow: hidden; }
 
-/* line 231, app.scss */
+/* line 235, app.scss */
 .panel-default > .panel-heading {
   background-color: #DDDDDD; }
 
-/* line 235, app.scss */
+/* line 239, app.scss */
 .panel-heading-btn-group {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0; }
-  /* line 240, app.scss */
+  /* line 244, app.scss */
   .panel-heading-btn-group .btn {
     height: 100%;
     line-height: 25px;
@@ -6913,43 +6917,43 @@ a:hover {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     -webkit-transition: all .4s linear;
     transition: all .4s linear; }
-    /* line 252, app.scss */
+    /* line 256, app.scss */
     .panel-heading-btn-group .btn:last-child {
       border-radius: 0 5px 0 0; }
-    /* line 255, app.scss */
+    /* line 259, app.scss */
     .panel-heading-btn-group .btn:hover, .panel-heading-btn-group .btn.active {
       background-color: white;
       color: #171e22; }
 
 /* TRANSPARENT BUTTON */
-/* line 263, app.scss */
+/* line 267, app.scss */
 .btn-trans {
   background-color: transparent;
   color: #36474f;
   border-color: #36474f; }
-  /* line 267, app.scss */
+  /* line 271, app.scss */
   .btn-trans:hover {
     border-color: #222222;
     color: #222222; }
 
-/* line 273, app.scss */
+/* line 277, app.scss */
 .op25 {
   opacity: 0.25; }
 
-/* line 277, app.scss */
+/* line 281, app.scss */
 .op50 {
   opacity: 0.5; }
 
-/* line 281, app.scss */
+/* line 285, app.scss */
 .op75 {
   opacity: 0.75; }
 
 /* GLOBAL STYLES */
-/* line 286, app.scss */
+/* line 290, app.scss */
 body {
   background-color: #e6e6e6; }
 
-/* line 290, app.scss */
+/* line 294, app.scss */
 #wrap {
   overflow: hidden;
   position: absolute;
@@ -6959,366 +6963,366 @@ body {
   bottom: 0;
   height: 100%; }
 
-/* line 300, app.scss */
+/* line 304, app.scss */
 .snap-drawers, .snap-content {
   margin-top: 56px;
   margin-bottom: 50px; }
 
-/* line 305, app.scss */
+/* line 309, app.scss */
 .pos-rel {
   position: relative; }
 
-/* line 309, app.scss */
+/* line 313, app.scss */
 .pos-abs {
   position: absolute; }
 
-/* line 313, app.scss */
+/* line 317, app.scss */
 .pos-fixed {
   position: fixed; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-0 {
   margin-bottom: 0px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-5 {
   margin-bottom: 5px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-10 {
   margin-bottom: 10px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-15 {
   margin-bottom: 15px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-20 {
   margin-bottom: 20px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-25 {
   margin-bottom: 25px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-30 {
   margin-bottom: 30px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-35 {
   margin-bottom: 35px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-40 {
   margin-bottom: 40px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-45 {
   margin-bottom: 45px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-50 {
   margin-bottom: 50px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-55 {
   margin-bottom: 55px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-60 {
   margin-bottom: 60px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-65 {
   margin-bottom: 65px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-70 {
   margin-bottom: 70px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-75 {
   margin-bottom: 75px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-80 {
   margin-bottom: 80px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-85 {
   margin-bottom: 85px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-90 {
   margin-bottom: 90px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-95 {
   margin-bottom: 95px !important; }
 
-/* line 319, app.scss */
+/* line 323, app.scss */
 .mb-100 {
   margin-bottom: 100px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-0 {
   margin-top: 0px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-5 {
   margin-top: 5px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-10 {
   margin-top: 10px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-15 {
   margin-top: 15px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-20 {
   margin-top: 20px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-25 {
   margin-top: 25px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-30 {
   margin-top: 30px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-35 {
   margin-top: 35px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-40 {
   margin-top: 40px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-45 {
   margin-top: 45px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-50 {
   margin-top: 50px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-55 {
   margin-top: 55px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-60 {
   margin-top: 60px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-65 {
   margin-top: 65px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-70 {
   margin-top: 70px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-75 {
   margin-top: 75px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-80 {
   margin-top: 80px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-85 {
   margin-top: 85px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-90 {
   margin-top: 90px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-95 {
   margin-top: 95px !important; }
 
-/* line 326, app.scss */
+/* line 330, app.scss */
 .mt-100 {
   margin-top: 100px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-0 {
   padding-bottom: 0px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-5 {
   padding-bottom: 5px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-10 {
   padding-bottom: 10px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-15 {
   padding-bottom: 15px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-20 {
   padding-bottom: 20px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-25 {
   padding-bottom: 25px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-30 {
   padding-bottom: 30px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-35 {
   padding-bottom: 35px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-40 {
   padding-bottom: 40px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-45 {
   padding-bottom: 45px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-50 {
   padding-bottom: 50px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-55 {
   padding-bottom: 55px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-60 {
   padding-bottom: 60px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-65 {
   padding-bottom: 65px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-70 {
   padding-bottom: 70px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-75 {
   padding-bottom: 75px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-80 {
   padding-bottom: 80px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-85 {
   padding-bottom: 85px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-90 {
   padding-bottom: 90px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-95 {
   padding-bottom: 95px !important; }
 
-/* line 333, app.scss */
+/* line 337, app.scss */
 .pb-100 {
   padding-bottom: 100px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-0 {
   padding-top: 0px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-5 {
   padding-top: 5px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-10 {
   padding-top: 10px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-15 {
   padding-top: 15px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-20 {
   padding-top: 20px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-25 {
   padding-top: 25px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-30 {
   padding-top: 30px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-35 {
   padding-top: 35px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-40 {
   padding-top: 40px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-45 {
   padding-top: 45px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-50 {
   padding-top: 50px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-55 {
   padding-top: 55px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-60 {
   padding-top: 60px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-65 {
   padding-top: 65px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-70 {
   padding-top: 70px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-75 {
   padding-top: 75px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-80 {
   padding-top: 80px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-85 {
   padding-top: 85px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-90 {
   padding-top: 90px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-95 {
   padding-top: 95px !important; }
 
-/* line 340, app.scss */
+/* line 344, app.scss */
 .pt-100 {
   padding-top: 100px !important; }
 
-/* line 345, app.scss */
+/* line 349, app.scss */
 .logo {
   margin-top: 3px;
   margin-right: 15px; }
 
 /* MENU STYLES */
-/* line 351, app.scss */
+/* line 355, app.scss */
 .main-nav {
   position: absolute;
   left: 0;
@@ -7326,20 +7330,20 @@ body {
   top: 0;
   padding: 10px 15px;
   background-color: #36474f; }
-  /* line 359, app.scss */
+  /* line 363, app.scss */
   .main-nav .navbar-header {
     margin-left: 15px; }
-  /* line 363, app.scss */
+  /* line 367, app.scss */
   .main-nav .open-left {
     display: block;
     width: 36px;
     height: 36px;
     position: relative;
     float: left; }
-    /* line 370, app.scss */
+    /* line 374, app.scss */
     .main-nav .open-left:hover {
       cursor: pointer; }
-    /* line 374, app.scss */
+    /* line 378, app.scss */
     .main-nav .open-left span {
       background-color: white;
       display: block;
@@ -7354,37 +7358,37 @@ body {
       transform-origin: 4px;
       -webkit-transform-origin: 4px;
       -moz-transform-origin: 4px; }
-      /* line 389, app.scss */
+      /* line 393, app.scss */
       .main-nav .open-left span:nth-child(2) {
         top: 15px; }
-      /* line 393, app.scss */
+      /* line 397, app.scss */
       .main-nav .open-left span:last-child {
         top: 25px; }
-  /* line 398, app.scss */
+  /* line 402, app.scss */
   .main-nav .main-nav-header {
     color: white;
     line-height: 36px;
     margin: 0 15px;
     float: left; }
-    /* line 403, app.scss */
+    /* line 407, app.scss */
     .main-nav .main-nav-header a {
       color: white; }
-      /* line 405, app.scss */
+      /* line 409, app.scss */
       .main-nav .main-nav-header a:hover {
         color: #e6e6e6;
         text-decoration: none; }
 
-/* line 413, app.scss */
+/* line 417, app.scss */
 .open-left {
   display: block;
   width: 36px;
   height: 36px;
   position: relative;
   float: left; }
-  /* line 419, app.scss */
+  /* line 423, app.scss */
   .open-left:hover {
     cursor: pointer; }
-  /* line 422, app.scss */
+  /* line 426, app.scss */
   .open-left span {
     background-color: white;
     display: block;
@@ -7398,22 +7402,22 @@ body {
     -webkit-transform-origin: 4px;
     -ms-transform-origin: 4px;
     transform-origin: 4px; }
-    /* line 432, app.scss */
+    /* line 436, app.scss */
     .open-left span:nth-child(2) {
       top: 15px; }
-    /* line 435, app.scss */
+    /* line 439, app.scss */
     .open-left span:last-child {
       top: 25px; }
 
-/* line 444, app.scss */
+/* line 448, app.scss */
 .snapjs-left .open-left span:first-child {
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg); }
-/* line 447, app.scss */
+/* line 451, app.scss */
 .snapjs-left .open-left span:nth-child(2) {
   opacity: 0; }
-/* line 450, app.scss */
+/* line 454, app.scss */
 .snapjs-left .open-left span:last-child {
   -webkit-transform-origin: 18px -3px;
   -ms-transform-origin: 18px -3px;
@@ -7423,32 +7427,32 @@ body {
   transform: rotate(-225deg); }
 
 /* SIDE NAV (SNAP DRAW LEFT) */
-/* line 460, app.scss */
+/* line 464, app.scss */
 .snap-drawer-left .logo {
   margin: 10px; }
 
-/* line 465, app.scss */
+/* line 469, app.scss */
 .side-nav {
   margin: 0;
   padding: 0; }
-  /* line 468, app.scss */
+  /* line 472, app.scss */
   .side-nav li {
     border-bottom: 1px solid rgba(54, 71, 79, 0.15);
     font-size: 12px; }
-    /* line 471, app.scss */
+    /* line 475, app.scss */
     .side-nav li:last-child {
       border: none; }
-    /* line 474, app.scss */
+    /* line 478, app.scss */
     .side-nav li a {
       padding: 1.8em 0.8em;
       display: block;
       border-top: 1px solid white; }
-      /* line 478, app.scss */
+      /* line 482, app.scss */
       .side-nav li a .edit {
         -webkit-transition: all 0.1s ease-in-out;
         transition: all 0.1s ease-in-out;
         opacity: 0; }
-      /* line 482, app.scss */
+      /* line 486, app.scss */
       .side-nav li a:hover {
         color: #171e22;
         text-decoration: none;
@@ -7456,16 +7460,16 @@ body {
         transition: all .2s linear;
         background-color: rgba(54, 71, 79, 0.1);
         border-top: 1px solid rgba(0, 0, 0, 0); }
-        /* line 488, app.scss */
+        /* line 492, app.scss */
         .side-nav li a:hover .edit {
           opacity: .7; }
-          /* line 490, app.scss */
+          /* line 494, app.scss */
           .side-nav li a:hover .edit:hover {
             color: #d9534f; }
-        /* line 494, app.scss */
+        /* line 498, app.scss */
         .side-nav li a:hover img {
           opacity: 1; }
-      /* line 498, app.scss */
+      /* line 502, app.scss */
       .side-nav li a img {
         opacity: .5;
         margin-right: 1em;
@@ -7474,7 +7478,7 @@ body {
         transition: all 0.4s ease-in-out; }
 
 /* USER STYLES */
-/* line 509, app.scss */
+/* line 513, app.scss */
 a.user-action {
   color: #36474f;
   -webkit-transition: all 0.2s ease-in-out;
@@ -7484,11 +7488,11 @@ a.user-action {
   overflow: hidden;
   margin-top: 27px;
   font-weight: bold; }
-  /* line 517, app.scss */
+  /* line 521, app.scss */
   a.user-action .txt {
     color: #36474f;
     display: inline; }
-  /* line 521, app.scss */
+  /* line 525, app.scss */
   a.user-action .glyphicon {
     color: #36474f;
     -webkit-transition: all 0.05s ease-in-out;
@@ -7498,13 +7502,13 @@ a.user-action {
     -ms-transform: rotate(0deg);
     transform: rotate(0deg); }
 
-/* line 529, app.scss */
+/* line 533, app.scss */
 a.user-action.disabled, a.user-action[disabled] {
   opacity: .4; }
-  /* line 531, app.scss */
+  /* line 535, app.scss */
   a.user-action.disabled .txt, a.user-action[disabled] .txt {
     display: none; }
-  /* line 534, app.scss */
+  /* line 538, app.scss */
   a.user-action.disabled .glyphicon, a.user-action[disabled] .glyphicon {
     color: #d9534f;
     -webkit-transform: rotate(180deg);
@@ -7512,7 +7516,7 @@ a.user-action.disabled, a.user-action[disabled] {
     transform: rotate(180deg); }
 
 /* SNAPJS STYLES */
-/* line 541, app.scss */
+/* line 545, app.scss */
 .snap-content {
   background-color: whitesmoke;
   position: absolute;
@@ -7530,7 +7534,7 @@ a.user-action.disabled, a.user-action[disabled] {
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2); }
 
-/* line 557, app.scss */
+/* line 561, app.scss */
 .snap-drawers {
   position: absolute;
   top: 0;
@@ -7540,7 +7544,7 @@ a.user-action.disabled, a.user-action[disabled] {
   width: auto;
   height: auto; }
 
-/* line 567, app.scss */
+/* line 571, app.scss */
 .snap-drawer {
   position: absolute;
   top: 0;
@@ -7554,41 +7558,41 @@ a.user-action.disabled, a.user-action[disabled] {
   -webkit-transition: width 0.3s ease;
   transition: width 0.3s ease;
   color: #36474f; }
-  /* line 579, app.scss */
+  /* line 583, app.scss */
   .snap-drawer p, .snap-drawer a, .snap-drawer li {
     color: #36474f; }
-  /* line 582, app.scss */
+  /* line 586, app.scss */
   .snap-drawer .padder {
     padding: 1em; }
 
-/* line 587, app.scss */
+/* line 591, app.scss */
 .snap-drawer-left {
   left: 0;
   z-index: 1;
   position: relative; }
 
-/* line 593, app.scss */
+/* line 597, app.scss */
 .snap-drawer-right {
   right: 0;
   z-index: 1; }
 
-/* line 599, app.scss */
+/* line 603, app.scss */
 .snapjs-left .snap-drawer-right,
 .snapjs-right .snap-drawer-left {
   display: none; }
 
-/* line 604, app.scss */
+/* line 608, app.scss */
 .snapjs-expand-left .snap-drawer-left,
 .snapjs-expand-right .snap-drawer-right {
   width: 100%; }
 
 /* MAIN CONTENT STYLES */
-/* line 609, app.scss */
+/* line 613, app.scss */
 .main-content {
   margin-top: 50px; }
 
 /* CHART STYLES */
-/* line 614, app.scss */
+/* line 618, app.scss */
 .chart_total {
   display: block;
   text-align: center;
@@ -7607,7 +7611,7 @@ a.user-action.disabled, a.user-action[disabled] {
   box-shadow: 0 0 0 5px #ffa536; }
 
 /* RADIO BUTTONS */
-/* line 635, app.scss */
+/* line 639, app.scss */
 .postfix-choice .choice, .input-choices-group .choice {
   height: 36px;
   line-height: 36px;
@@ -7625,25 +7629,25 @@ a.user-action.disabled, a.user-action[disabled] {
   border-radius: 100%;
   -webkit-box-shadow: 0 0 3px black inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
   box-shadow: 0 0 3px black inset, 0 0 13px rgba(0, 0, 0, 0.5) inset; }
-  /* line 652, app.scss */
+  /* line 656, app.scss */
   .postfix-choice .choice.active, .input-choices-group .choice.active {
     background-color: #5cb85c !important;
     color: #fcfefc !important;
     opacity: 1;
     -webkit-box-shadow: none;
     box-shadow: none; }
-  /* line 658, app.scss */
+  /* line 662, app.scss */
   .postfix-choice .choice .glyphicon, .input-choices-group .choice .glyphicon {
     font-weight: normal; }
-  /* line 661, app.scss */
+  /* line 665, app.scss */
   .postfix-choice .choice:hover, .input-choices-group .choice:hover {
     background-color: rgba(33, 44, 49, 0.5);
     color: black;
     cursor: pointer; }
-  /* line 666, app.scss */
+  /* line 670, app.scss */
   .postfix-choice .choice:focus, .input-choices-group .choice:focus {
     outline: none; }
-/* line 670, app.scss */
+/* line 674, app.scss */
 .postfix-choice input.radio:empty, .input-choices-group input.radio:empty {
   margin: 0 !important;
   margin-left: -999px !important;
@@ -7651,7 +7655,7 @@ a.user-action.disabled, a.user-action[disabled] {
   height: 0 !important;
   padding: 0 !important;
   position: absolute; }
-/* line 678, app.scss */
+/* line 682, app.scss */
 .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
   float: left;
   margin-right: 20px;
@@ -7659,22 +7663,22 @@ a.user-action.disabled, a.user-action[disabled] {
   margin-left: 15px;
   margin-top: 10px; }
 
-/* line 687, app.scss */
+/* line 691, app.scss */
 .postfix-choice {
   border-bottom: 1px solid #EEE;
   margin: 0;
   padding: 7px 0 5px; }
-  /* line 691, app.scss */
+  /* line 695, app.scss */
   .postfix-choice:hover {
     background-color: #EEE; }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
-/* line 698, app.scss */
+/* line 702, app.scss */
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
   max-width: 180px; }
-  /* line 702, app.scss */
+  /* line 706, app.scss */
   .postfix-label .form-control, .prefix-label .form-control {
     position: relative;
     z-index: 2;
@@ -7682,7 +7686,7 @@ a.user-action.disabled, a.user-action[disabled] {
     width: 70%;
     max-width: 250px;
     float: left; }
-  /* line 710, app.scss */
+  /* line 714, app.scss */
   .postfix-label .label, .prefix-label .label {
     position: relative;
     width: 50px;
@@ -7699,21 +7703,21 @@ a.user-action.disabled, a.user-action[disabled] {
     font-weight: normal;
     font-size: 15px;
     border-radius: 0 5px 5px 0; }
-    /* line 727, app.scss */
+    /* line 731, app.scss */
     .postfix-label .label .glyphicon, .prefix-label .label .glyphicon {
       font-weight: normal; }
 
-/* line 734, app.scss */
+/* line 738, app.scss */
 .prefix-label .form-control {
   border-radius: 0 5px 5px 0;
   left: 50px; }
-/* line 738, app.scss */
+/* line 742, app.scss */
 .prefix-label .label {
   border-radius: 5px 0 0 5px;
   left: 0;
   position: absolute; }
 
-/* line 745, app.scss */
+/* line 749, app.scss */
 .message {
   position: fixed;
   left: 25%;
@@ -7727,24 +7731,38 @@ a.user-action.disabled, a.user-action[disabled] {
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
   opacity: 1; }
-  /* line 757, app.scss */
+  /* line 761, app.scss */
   .message.reveal-animation.ng-hide {
     bottom: -100px;
     opacity: 0; }
 
-/* line 765, app.scss */
+/* line 769, app.scss */
 .panel-footer .btn {
   font-size: 8px; }
 
-/* line 770, app.scss */
+/* line 774, app.scss */
 .navbar-default {
   background-color: white;
   border-color: rgba(0, 0, 0, 0); }
 
-/* line 775, app.scss */
+/* line 779, app.scss */
 .nav-tabs-justified, .nav-tabs.nav-justified, .nav-tabs.nav-justified {
   font-size: 12px;
   white-space: nowrap; }
+
+/* line 784, app.scss */
+.info-links {
+  margin: 18px 0 0;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px; }
+  /* line 789, app.scss */
+  .info-links li {
+    border-right: 1px solid #eeeeee;
+    padding-right: 10px; }
+    /* line 791, app.scss */
+    .info-links li:last-child {
+      border: none; }
 
 @media (min-width: 480px) {
   /* rules for mobile horizontal (480 > 768)  */ }
@@ -7752,28 +7770,28 @@ a.user-action.disabled, a.user-action[disabled] {
   /* rules for tablet (768 > 992) */ }
 @media (min-width: 992px) {
   /* rules for desktop (992 > 1200) */
-  /* line 790, app.scss */
+  /* line 806, app.scss */
   body {
     font-size: 11px; }
 
   /* CHART AREA */
-  /* line 795, app.scss */
+  /* line 811, app.scss */
   .panel__1 {
     right: 70%; }
 
-  /* line 798, app.scss */
+  /* line 814, app.scss */
   .panel__2 {
     left: 30%; }
 
-  /* line 802, app.scss */
+  /* line 818, app.scss */
   .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
     width: 70%; } }
 @media (min-width: 1200px) {
   /* rules for large (> 1200) */
-  /* line 810, app.scss */
+  /* line 826, app.scss */
   body {
     font-size: 13px; }
 
-  /* line 814, app.scss */
+  /* line 830, app.scss */
   .panel-footer .btn {
     font-size: 12px; } }

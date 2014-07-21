@@ -1,10 +1,10 @@
-<div ng-controller="SessionsDetailCtrl" ng-cloak>
+<div ng-cloak>
 
     <div class="col-md-10 col-md-offset-1">
 
-        <div class="panel panel-primary" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
+        <div class="panel panel-default" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">
             <div class="panel-heading">
-                <h5>{{ item.meta.user.name | uppercase }}</h5>
+                <h5>{{ item.meta.user.name | uppercase }} <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small></h5>
             </div>
             <div class="panel-body" ng-class="{'op25' : confirm == true}">
                 <div class="col-sm-3 col-md-3 col-lg-4">
@@ -17,10 +17,6 @@
                         <small>AIRLINE</small>
                     </h5>
                     <h2 class="mt-0">{{ item.meta.airline.code }}</h2>
-                    <hr>
-                    <h5 class="mt-0 mb-10">
-                        <small>SAVED ON: {{ item.meta.date.date | date: 'medium' | uppercase }}</small>
-                    </h5>
                     <hr>
                     <h3>Data</h3>
                     <table class="table table-bordered table-striped">
@@ -151,7 +147,7 @@
             </div>
             <div class="panel-footer">
                 <div class="btn-group">
-                    <a ng-href="/#/sessions" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                    <a ng-href="/#/saved-calculations" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
                     <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
                         Display calculator
                     </a>

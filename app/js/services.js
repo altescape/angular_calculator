@@ -135,26 +135,80 @@ angular.module('myApp.services', []).
 						? localStorageService.get('summary')
 						: {
 					high : {
-						revenue_integrity : 0,
-						revenue_integrity_process_improvement : 0,
-						channel_shift : 0,
-						ancillary_sales : 0,
-						cmap : 0,
-						o_and_d : 0,
-						pos : 0,
-						arr : 0,
-						insight : 0
+						revenue_integrity : {
+							name: 'Revenue Integrity',
+							value: 0
+						},
+						revenue_integrity_process_improvement : {
+							name: 'Revenue Integrity Process Improvement',
+							value: 0
+						},
+						channel_shift : {
+							name: 'Channel Shift',
+							value: 0
+						},
+						ancillary_sales : {
+							name: 'Ancillary Sales',
+							value: 0
+						},
+						cmap : {
+							name: 'CMAP',
+							value: 0
+						},
+						o_and_d : {
+							name: 'O & D',
+							value: 0
+						},
+						pos : {
+							name: 'POS',
+							value: 0
+						},
+						arr : {
+							name: 'ARR',
+							value: 0
+						},
+						insight : {
+							name: 'Insight',
+							value: 0
+						}
 					},
 					low : {
-						revenue_integrity : 0,
-						revenue_integrity_process_improvement : 0,
-						channel_shift : 0,
-						ancillary_sales : 0,
-						cmap : 0,
-						o_and_d : 0,
-						pos : 0,
-						arr : 0,
-						insight : 0
+						revenue_integrity : {
+							name: 'Revenue Integrity',
+							value: 0
+						},
+						revenue_integrity_process_improvement : {
+							name: 'Revenue Integrity Process Improvement',
+							value: 0
+						},
+						channel_shift : {
+							name: 'Channel Shift',
+							value: 0
+						},
+						ancillary_sales : {
+							name: 'Ancillary Sales',
+							value: 0
+						},
+						cmap : {
+							name: 'CMAP',
+							value: 0
+						},
+						o_and_d : {
+							name: 'O & D',
+							value: 0
+						},
+						pos : {
+							name: 'POS',
+							value: 0
+						},
+						arr : {
+							name: 'ARR',
+							value: 0
+						},
+						insight : {
+							name: 'Insight',
+							value: 0
+						}
 					}
 				}
 			}
