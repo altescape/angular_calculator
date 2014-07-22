@@ -53,19 +53,15 @@ angular.module('myApp.controllers', [])
 			/**
 			 *  User information
 			 */
-				// Add info from InfoFctry to scope.info
-			$scope.info = InfoFctry.info;
-
-			// Add latest timestamp and date
-			$scope.info.date = {
-				timestamp : Math.round(new Date().getTime() / 1000),
-				date : new Date().toISOString()
-			};
 
 			// Update info, store in localstorage and send data back to InfoFctry
 			$scope.updateInfo = function () {
+				// Add latest timestamp and date
+				$scope.info.date = {
+					timestamp : Math.round(new Date().getTime() / 1000),
+					date : new Date().toISOString()
+				};
 				localStorageService.set('info', $scope.info);
-				InfoFctry.info = $scope.info;
 			};
 
 			// Watch InfoFctry for updates
@@ -101,7 +97,7 @@ angular.module('myApp.controllers', [])
 
 		}])
 
-		.controller('LogOutCtrl', ['$scope', 'localStorageService', '$location', 'InfoFctry', function ($scope, localStorageService, $location, InfoFctry) {
+		.controller('LogOutCtrl', ['$scope', 'localStorageService', '$location', 'InfoFctry', 'ChartInitFctry', function ($scope, localStorageService, $location, InfoFctry, ChartInitFctry) {
 			/**
 			 *  Logs out the user and clears locally stored data
 			 */
@@ -110,6 +106,20 @@ angular.module('myApp.controllers', [])
 
 				// Reset models
 				InfoFctry.info = {};
+				ChartInitFctry.cal = {
+					"services" : {},
+					"param1" : 6500000,
+					"param2" : 3,
+					"param3" : 3611111,
+					"param4" : 10,
+					"param5" : 7,
+					"param6" : 2500000000,
+					"param7" : 2565000000,
+					"param8" : 15,
+					"param9" : 100,
+					"param10" : 34,
+					"adjustment" : 1000000
+				};
 
 				$location.path('confirm-logout');
 			};
@@ -120,6 +130,7 @@ angular.module('myApp.controllers', [])
 			$scope.startOver = function () {
 				$location.path('user');
 			};
+
 		}])
 
 		.controller('ListSessionCtrl', [
@@ -228,6 +239,9 @@ angular.module('myApp.controllers', [])
 					$scope.current_key = localStorageService.get('current_key');
 
 					$location.path('calculator');
+
+					// Set running session flag to true
+					InfoFctry.info.running_session = true;
 				};
 
 			}])
@@ -253,15 +267,27 @@ angular.module('myApp.controllers', [])
 			};
 		}])
 
-		.controller('SaveSessionCtrl', ['$scope', 'localStorageService', '$firebase', '$timeout', function ($scope, localStorageService, $firebase, $timeout) {
+		.controller('SaveSessionCtrl', ['$scope', 'localStorageService', '$firebase', '$timeout', 'InfoFctry', function ($scope, localStorageService, $firebase, $timeout, InfoFctry) {
+
+			// Watch InfoFctry for updates
+			$scope.$watch(function () {
+						return InfoFctry.info;
+					},
+					function (newVal, oldVal) {
+						$scope.info = InfoFctry.info;
+					}, true);
 
 			/**
 			 * Check current_key exists
 			 * It means we're currently running a session
 			 */
 			if ( localStorageService.get('current_key') ) {
-				$scope.running_session = true;
-			} else $scope.running_session = false;
+				$scope.info.running_session = true;
+			} else $scope.info.running_session = false;
+
+			// Save status flags
+			$scope.saving = false;
+			$scope.saved = false;
 
 			/**
 			 * Save session to Firebase
@@ -269,7 +295,10 @@ angular.module('myApp.controllers', [])
 			$scope.saveSession = function () {
 
 				// Store to Firebase address
-				$scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
+				$scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/'));
+
+				// Set flag: saving to true
+				$scope.saving = true;
 
 				// Add the data from localstorage and add it to Firebase
 				$scope.items.$add({
@@ -282,7 +311,18 @@ angular.module('myApp.controllers', [])
 					localStorageService.set('current_key', ref.name());
 
 					// Update running_session flag
-					$scope.running_session = true;
+					$scope.info.running_session = true;
+
+					// Saving has finished so reset saving flag
+					$scope.saving = false;
+
+					// And flag that it's been saved
+					$scope.saved = true;
+
+					// After a while set the saved flag back to default, this takes saved message back off screen
+					$timeout(function () {
+						$scope.saved = false;
+					}, 2500);
 
 				});
 
@@ -291,15 +331,10 @@ angular.module('myApp.controllers', [])
 			/**
 			 * Updates the current calculation and uploads it to Firebase
 			 */
-
-				// Flags
-			$scope.saving = false;
-			$scope.saved = false;
-
 			$scope.updateSession = function () {
 
 				// we are currently running a calculation/session
-				if ( $scope.running_session === true ) {
+				if ( $scope.info.running_session === true ) {
 
 					// Set flag: saving to true
 					$scope.saving = true;

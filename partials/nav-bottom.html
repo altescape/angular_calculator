@@ -1,19 +1,26 @@
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-controller="SaveSessionCtrl as save">
-    <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save successful</strong></div>
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-7">
                 <ul class="list-inline info-links">
                     <li ng-show="info.user.name"><span class="text-muted">Name:</span> <a href="/#/user">{{ info.user.name }}</a></li>
-                    <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a href="/#/user">{{ info.airline.code }}</a></li>
-                    <li ng-show="info.opportunity.name"><span class="text-muted">Opportunity:</span> <a href="/#/user">{{ info.opportunity.name }}</a></li>
+                    <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a href="/#/user">{{ info.airline.code }}</a>
+                    </li>
+                    <li ng-show="info.opportunity.name"><span class="text-muted">Opportunity:</span> <a href="/#/user">{{
+                            info.opportunity.name }}</a></li>
                 </ul>
             </div>
-            <div class="col-sm-5 text-right">
-                <a ng-hide="running_session == true" ng-click="saveSession()" class="btn btn-success btn-sm mt-10">SAVE <span
-                      class="glyphicon glyphicon-export"></span></a>
+            <div class="col-sm-5 text-right" ng-controller="SaveSessionCtrl">
 
-                <div class="btn-group" ng-show="running_session == true" ng-cloak>
+                <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
+                        successful</strong></div>
+
+                <a ng-hide="info.running_session == true" ng-click="saveSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
+                    <span ng-show="saving == false">SAVE NEW</span>
+                    <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
+                </a>
+
+                <div class="btn-group" ng-show="info.running_session == true" ng-cloak>
                     <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span
                           class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
                     <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
@@ -22,6 +29,8 @@
                         <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
                     </a>
                 </div>
+
+
             </div>
         </div>
     </div>

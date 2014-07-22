@@ -60,7 +60,7 @@ angular.module('myApp.chart_controllers', [])
 				 */
 				$scope.updateChart = function () {
 
-					// Here is where hell begins... tread carefully or ye will trip and fall to an untimely death.
+					// Here is where hell begins... tread carefully or ye will trip and fall.
 					// Check reference docs for references or you'll get lost.
 
 					// Check $scope.cal.adjustment exists
@@ -369,21 +369,8 @@ angular.module('myApp.chart_controllers', [])
 					};
 
 					// On load/refresh get the view so we can display the right results
-					if ( localStorageService.get('results_view') && localStorageService.get('results_view').name === "chart_high" ) {
-
-						// Highcharts config for pie chart (high value)
-						$scope.chartConfigHigh = ChartDraw.chartConfigPie;
-
-						// Store the chart object child in seriesArrayPie variable
-						var seriesArrayPie = $scope.chartConfigHigh.series[0];
-
-						$scope.getPieValue(ChartData.summary.high, $scope.pie_values);
-
-						seriesArrayPie.data = $scope.pie_values;
-
-						$scope.serviceTotals(seriesArrayPie.data);
-
-					} else {
+					// Because the chart displaying high value is default, checking that low value chart is showing
+					if ( localStorageService.get('results_view') && localStorageService.get('results_view').name === "chart_low" ) {
 
 						// Highcharts config for pie chart (high value)
 						$scope.chartConfigLow = ChartDraw.chartConfigPie;
@@ -392,6 +379,20 @@ angular.module('myApp.chart_controllers', [])
 						var seriesArrayPie = $scope.chartConfigLow.series[0];
 
 						$scope.getPieValue(ChartData.summary.low, $scope.pie_values);
+
+						seriesArrayPie.data = $scope.pie_values;
+
+						$scope.serviceTotals(seriesArrayPie.data);
+
+					} else {
+
+						// Highcharts config for pie chart (high value)
+						$scope.chartConfigHigh = ChartDraw.chartConfigPie;
+
+						// Store the chart object child in seriesArrayPie variable
+						var seriesArrayPie = $scope.chartConfigHigh.series[0];
+
+						$scope.getPieValue(ChartData.summary.high, $scope.pie_values);
 
 						seriesArrayPie.data = $scope.pie_values;
 
@@ -433,11 +434,16 @@ angular.module('myApp.chart_controllers', [])
 				$scope.cal = $scope.item.calculations;
 				$scope.detail_summary = $scope.item.summary;
 
-				// Pie chart drawing functions
-				// Function to convert data object to array for chart
+				/**
+				 *	Pie chart drawing functions
+				 */
+					// Function to convert data object to array for chart
+				$scope.pie_values = [];
 				$scope.getPieValue = function (pie_data, pie_array) {
+					var i = 0;
 					angular.forEach(pie_data, function (value, key) {
-						pie_array.push([key, value]);
+						pie_array.push([value.name, value.value]);
+						i++;
 					});
 				};
 
