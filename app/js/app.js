@@ -22,6 +22,7 @@ var app = angular.module('myApp', [
 			$routeProvider.when('/saved-calculations/:id', {templateUrl : 'partials/calculations/saved-calculations-detail.html', controller : 'SessionsDetailCtrl'});
 			$routeProvider.when('/save-calculation', {templateUrl : 'partials/calculations/save-calculation.html', controller : 'SaveSessionCtrl'});
 			$routeProvider.when('/update-calculation', {templateUrl : 'partials/calculations/update-calculation.html', controller : 'UpdateSessionCtrl'});
+			$routeProvider.when('/test', {templateUrl : 'partials/test.html', controller : 'TestCtrl'});
 
 			$routeProvider.otherwise({redirectTo : '/user'});
 
@@ -52,6 +53,14 @@ var app = angular.module('myApp', [
 						views : {
 							"dataView" : {templateUrl : "partials/results/chart_low.html"}
 						}
+					});
+
+			$stateProvider
+					.state('test', {
+						views : {
+							"dataView" : {templateUrl : "partials/test.html"}
+						},
+						controller : 'TestCtrl'
 					});
 
 		}
