@@ -30,10 +30,10 @@
                 <td>{{ revenue_integrity_process_improvement.high }}</td>
                 <td>{{ revenue_integrity_process_improvement.low }}</td>
             </tr>
-            <tr ng-repeat="ripi in revenue_integrity_process_improvement.summary">
-                <td>{{ ripi.name }}</td>
-                <td>{{ ripi.high | commas }}</td>
-                <td>{{ ripi.low | commas }}</td>
+            <tr ng-repeat="item in revenue_integrity_process_improvement.summary">
+                <td>{{ item.name }}</td>
+                <td>{{ item.high | commas }}</td>
+                <td>{{ item.low | commas }}</td>
             </tr>
         </table>
         <p class="text-muted">Example: {{ revenue_integrity_process_improvement.summary.pnrs.high | commas }}</p>
@@ -56,10 +56,10 @@
                 <td>{{ cmap.fuel_cost.name }}</td>
                 <td colspan="2">{{ cmap.fuel_cost.value | commas }}</td>
             </tr>
-            <tr ng-repeat="cm in cmap.summary">
-                <td>{{ cm.name }}</td>
-                <td>{{ cm.high | commas }}</td>
-                <td>{{ cm.low | commas }}</td>
+            <tr ng-repeat="item in cmap.summary">
+                <td>{{ item.name }}</td>
+                <td>{{ item.high | commas }}</td>
+                <td>{{ item.low | commas }}</td>
             </tr>
         </table>
     </div>
@@ -81,10 +81,35 @@
                 <td>Revenue</td>
                 <td colspan="2">{{ origin_and_destination.revenue | commas }}</td>
             </tr>
-            <tr ng-repeat="od in origin_and_destination.summary">
-                <td>{{ od.name }}</td>
-                <td>{{ od.high | commas }}</td>
-                <td>{{ od.low | commas }}</td>
+            <tr ng-repeat="item in origin_and_destination.summary">
+                <td>{{ item.name }}</td>
+                <td>{{ item.high | commas }}</td>
+                <td>{{ item.low | commas }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="well">
+        <h4>{{ pos.name }}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <td></td>
+                <td>High</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Graph numbers</td>
+                <td>{{ pos.high }}</td>
+                <td>{{ pos.low }}</td>
+            </tr>
+            <tr>
+                <td>Revenue</td>
+                <td colspan="2">{{ pos.revenue | commas }}</td>
+            </tr>
+            <tr ng-repeat="item in pos.summary">
+                <td>{{ item.name }}</td>
+                <td>{{ item.high | commas }}</td>
+                <td>{{ item.low | commas }}</td>
             </tr>
         </table>
     </div>

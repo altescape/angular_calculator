@@ -230,6 +230,221 @@ angular.module('myApp.services', [])
 			return $firebase(ref);
 		}])
 
+		.factory('passengersBoardedData', function () {
+
+			var cost_per_pb = {
+				core_passenger_services_cost_per_pb : {
+					name : "Core passenger services cost per PB (Res, ticketing, fares, DCS)",
+					cost_per_pb : {
+						current_provider : 1.2,
+						sita : 0.8
+					}
+				},
+				direct_dist_costs_per_pb : {
+					name : "Direct distribution costs per PB",
+					current_channel_mix_total : 0,
+					channel_shift_over_5_yrs_total : 0,
+					steady_state_channel_mix_total : 0,
+					call_centre : {
+						name : "Call centre",
+						cost_per_pb : {
+							current_provider : 1.21,
+							sita : 1.21
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 10,
+								channel_shift_over_5_yrs : 0
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					ecommerce : {
+						name : "Ecommerce",
+						cost_per_pb : {
+							current_provider : 1,
+							sita : 1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 7,
+								channel_shift_over_5_yrs : 6
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					travel_agent : {
+						name : "Travel agent/OTA/Corporate direct (split GUI/API)",
+						cost_per_pb : {
+							current_provider : 1,
+							sita : 1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 0,
+								channel_shift_over_5_yrs : 0
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					mobile : {
+						name : "Mobile",
+						cost_per_pb : {
+							current_provider : 1,
+							sita : 1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 0,
+								channel_shift_over_5_yrs : 2
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					}
+				},
+				indirect_dist_costs_per_pb : {
+					name : "Indirect disribution costs per PB",
+					current_channel_mix_total : 0,
+					channel_shift_over_5_yrs_total : 0,
+					steady_state_channel_mix_total : 0,
+					amadeus : {
+						name : "Amadeus",
+						cost_per_pb : {
+							current_provider : 5.1,
+							sita : 5.1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 53,
+								channel_shift_over_5_yrs : -2
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					sabre : {
+						name : "SABRE",
+						cost_per_pb : {
+							current_provider : 5.1,
+							sita : 5.1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 15,
+								channel_shift_over_5_yrs : -1
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					galileo : {
+						name : "Galileo",
+						cost_per_pb : {
+							current_provider : 5.1,
+							sita : 5.1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 15,
+								channel_shift_over_5_yrs : -5
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					},
+					abacus : {
+						name : "Abacus",
+						cost_per_pb : {
+							current_provider : 5.1,
+							sita : 5.1
+						},
+						channel : (function () {
+							var n = {
+								current_channel_mix : 0,
+								channel_shift_over_5_yrs : 0
+							};
+							return {
+								current_channel_mix : n.current_channel_mix,
+								channel_shift_over_5_yrs : n.channel_shift_over_5_yrs,
+								steady_state_channel_mix : n.current_channel_mix + n.channel_shift_over_5_yrs
+							}
+						})()
+					}
+				}
+			};
+
+
+			// Direct distribution costs per PB. [Variables]:B6-B9
+
+			/**
+			 * Get totals for current channel mix, channel shift over 5 years, and steady state channel mix,
+			 * from the direct distribution costs per PB.
+			 *
+			 * @param column
+			 * @returns {*} (results are percentages)
+			 */
+			var directDistChannelTotals = function channelTotals (column) {
+				var c = cost_per_pb.direct_dist_costs_per_pb;
+				return c.call_centre.channel[column] +
+						c.ecommerce.channel[column] +
+						c.travel_agent.channel[column] +
+						c.mobile.channel[column];
+			};
+			cost_per_pb.direct_dist_costs_per_pb.current_channel_mix_total = directDistChannelTotals('current_channel_mix');
+			cost_per_pb.direct_dist_costs_per_pb.channel_shift_over_5_yrs_total = directDistChannelTotals('channel_shift_over_5_yrs');
+			cost_per_pb.direct_dist_costs_per_pb.steady_state_channel_mix_total = directDistChannelTotals('steady_state_channel_mix');
+
+			// Indirect disribution costs per PB [Variables]:B13-B16
+
+			/**
+			 * Get totals for current channel mix, channel shift over 5 years, and steady state channel mix,
+			 * from the indirect distribution costs per PB.
+			 *
+			 * @param column
+			 * @returns {*} (results are percentages)
+			 */
+			var indirectDistChannelTotals = function channelTotals (column) {
+				var c = cost_per_pb.indirect_dist_costs_per_pb;
+				return c.amadeus.channel[column] + c.sabre.channel[column] + c.galileo.channel[column] + c.abacus.channel[column];
+			};
+			cost_per_pb.indirect_dist_costs_per_pb.current_channel_mix_total = indirectDistChannelTotals('current_channel_mix');
+			cost_per_pb.indirect_dist_costs_per_pb.channel_shift_over_5_yrs_total = indirectDistChannelTotals('channel_shift_over_5_yrs');
+			cost_per_pb.indirect_dist_costs_per_pb.steady_state_channel_mix_total = indirectDistChannelTotals('steady_state_channel_mix');
+
+			// Probably not needed but worth keeping in case
+			var overall_current_channel_mix_total = directDistChannelTotals('current_channel_mix') + indirectDistChannelTotals('current_channel_mix');
+			var overall_channel_shift_total = directDistChannelTotals('channel_shift_over_5_yrs') + indirectDistChannelTotals('channel_shift_over_5_yrs');
+			var overall_steady_state_channel_mix_total = directDistChannelTotals('steady_state_channel_mix') + indirectDistChannelTotals('steady_state_channel_mix');
+
+			console.log(cost_per_pb);
+
+		})
+
 		.factory('allData', function () {
 			return {
 				revenue_integrity : {
@@ -251,7 +466,19 @@ angular.module('myApp.services', [])
 				},
 				origin_and_destination : {
 					name : "Origin and Destination",
-					high: 0,
+					high : 0,
+					low : 0,
+					summary : {}
+				},
+				pos : {
+					name : "Point of Sale",
+					high : 0,
+					low : 0,
+					summary : {}
+				},
+				arr : {
+					name : "Airfare Insight",
+					high : 0,
 					low : 0,
 					summary : {}
 				}
@@ -290,6 +517,8 @@ angular.module('myApp.services', [])
 				},
 
 				/**
+				 * allData
+				 *
 				 * Writes data to allData object
 				 */
 				writeToObj : function () {
@@ -401,6 +630,8 @@ angular.module('myApp.services', [])
 				},
 
 				/**
+				 * allData
+				 *
 				 * Writes data to allData object
 				 */
 				writeToObj : function () {
@@ -511,11 +742,13 @@ angular.module('myApp.services', [])
 				},
 
 				portable_water : function (value) {  // REF 16 | [Weight and Balance]:C6/D6
-					if ( value === 'low' ) return this.cmap_savings(value) * this.MISC_CONST_4;
+					if ( value === 'low' ) return this.fuel_cost() * this.MISC_CONST_4;
 					return this.fuel_cost() * this.MISC_CONST_3;
 				},
 
 				/**
+				 * allData
+				 *
 				 * Writes data to allData object
 				 */
 				writeToObj : function () {
@@ -565,16 +798,18 @@ angular.module('myApp.services', [])
 				MISC_CONST_1 : 2 / 100,
 				MISC_CONST_2 : 1 / 100,
 
-				revenue : function () {
+				revenue : function () { // REF 18 | [O&D] C3
 					return inputData.cal.param6;
 				},
 
-				os_impact : function (value) {
-					if (value === 'low') return this.revenue() * this.MISC_CONST_2;
+				os_impact : function (value) { // REF 19 | [O&D] C5/D5
+					if ( value === 'low' ) return this.revenue() * this.MISC_CONST_2;
 					return this.revenue() * this.MISC_CONST_1;
 				},
 
 				/**
+				 * allData
+				 *
 				 * Writes data to allData object
 				 */
 				writeToObj : function () {
@@ -585,7 +820,7 @@ angular.module('myApp.services', [])
 
 					allData.origin_and_destination.summary = {
 						os_impact : {
-							name: "O&S Impact",
+							name : "O&S Impact",
 							high : this.os_impact('high'),
 							low : this.os_impact('low')
 						}
@@ -600,7 +835,138 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.os_impact(value) /  inputData.cal.adjustment);
+					return Math.round(this.os_impact(value) / inputData.cal.adjustment);
+				}
+			}
+		})
+
+		.factory('pointOfSale', function (inputData, allData) {
+			return {
+				/**
+				 * Constants
+				 *
+				 * These are percentages and divided by 100 to get point value to multiply by.
+				 */
+				MISC_CONST_1 : 0.5 / 100,
+				MISC_CONST_2 : 0.25 / 100,
+
+				/* Calculation functions */
+				revenue : function () { // REF 21 | [POS] C3
+					return inputData.cal.param6;
+				},
+
+				os_impact : function (value) { // REF 22 | [POS] C5/D5
+					if ( value === 'low' ) return this.revenue() * this.MISC_CONST_2;
+					return this.revenue() * this.MISC_CONST_1;
+				},
+
+				/**
+				 * allData
+				 *
+				 * Writes data to allData object
+				 */
+				writeToObj : function () {
+					allData.pos.high = this.result('high');
+					allData.pos.low = this.result('low');
+
+					allData.pos.revenue = this.revenue();
+
+					allData.pos.summary = {
+						os_impact : {
+							name : "O&S Impact",
+							high : this.os_impact('high'),
+							low : this.os_impact('low')
+						}
+					};
+				},
+
+				/**
+				 * Resulting value
+				 *
+				 * @param value : value is 'high' or 'low'.
+				 * @returns {number}
+				 */
+				result : function (value) {
+					return Math.round(this.os_impact(value) / inputData.cal.adjustment);
+				}
+			}
+		})
+
+		.factory('airfareInsight', function (inputData, allData, passengersBoardedData) {
+			return {
+
+				/**
+				 * Constants
+				 *
+				 * These are percentages and divided by 100 to get point value to multiply by.
+				 */
+				MISC_CONST_1 : 1 / 100,
+				MISC_CONST_2 : 0.5 / 100,
+
+				/* Calculation Functions */
+				totalTicketsIssued : function () { // REF 23 | [ARR] C3/D3
+					return inputData.cal.param3;
+				},
+
+				ticketsIssuedByDirectChannels : function () {
+					return this.totalTicketsIssued() * 0
+				},
+
+				template : function () {
+
+				},
+
+				/**
+				 * allData
+				 *
+				 * Writes data to allData object
+				 */
+				writeToObj : function () {
+				},
+
+				/**
+				 * Resulting value
+				 *
+				 * @param value : value is 'high' or 'low'.
+				 * @returns {number}
+				 */
+				result : function (value) {
+					return Math.round(0);
+				}
+			}
+		})
+
+		.factory('template', function (inputData, allData) {
+			return {
+
+				/**
+				 * Constants
+				 *
+				 * These are percentages and divided by 100 to get point value to multiply by.
+				 */
+				MISC_CONST_1 : 0.5 / 100,
+
+				/* Calculation Functions */
+				calcFunctions : function () { // REF No. | [SHEET] CELL No.
+					/* return . . . */
+				},
+
+				/**
+				 * allData
+				 *
+				 * Writes data to allData object
+				 */
+				writeToObj : function () {
+				},
+
+				/**
+				 * Resulting value
+				 *
+				 * @param value : value is 'high' or 'low'.
+				 * @returns {number}
+				 */
+				result : function (value) {
+					return Math.round(0);
 				}
 			}
 		});

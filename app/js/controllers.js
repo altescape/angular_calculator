@@ -392,7 +392,9 @@ angular.module('myApp.controllers', [])
 					'revenueIntegrityProcessImprovement',
 					'cmap',
 					'originAndDestination',
-					function ($scope, localStorageService, chartData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination) {
+					'pointOfSale',
+					'passengersBoardedData',
+					function ($scope, localStorageService, chartData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData) {
 
 						/**
 						 * Calls the factories for each service
@@ -410,10 +412,16 @@ angular.module('myApp.controllers', [])
 							originAndDestination.writeToObj();
 							$scope.origin_and_destination = allData.origin_and_destination;
 
+							pointOfSale.writeToObj();
+							$scope.pos = allData.pos;
+
 						};
 
+						$scope.pb_data = passengersBoardedData;
+
 						/**
-						 * Watches inputData factory, if any changes detected then update allData factory
+						 * Watches inputData factory, if any changes detected then
+						 * call updateData() and allData factory will be updated
 						 */
 						$scope.$watch(function () {
 									return inputData;
