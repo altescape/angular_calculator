@@ -15,7 +15,7 @@ var app = angular.module('myApp', [
 			'myApp.chart_controllers'
 		]).config(['$routeProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $stateProvider, $urlRouterProvider) {
 			$routeProvider.when('/user', {templateUrl : 'partials/user.html'});
-			$routeProvider.when('/calculator', {templateUrl : 'partials/calculator.html', controller : 'ChartCtrl'});
+			$routeProvider.when('/calculator', {templateUrl : 'partials/calculator.html', controller : 'TestCtrl'});
 			$routeProvider.when('/logout', {templateUrl : 'partials/logout.html', controller : 'LogOutCtrl'});
 			$routeProvider.when('/logged-out', {templateUrl : 'partials/logged-out.html', controller : 'LogOutCtrl'});
 			$routeProvider.when('/saved-calculations', {templateUrl : 'partials/calculations/saved-calculations.html', controller : 'ListSessionCtrl'});
@@ -31,7 +31,7 @@ var app = angular.module('myApp', [
 						views : {
 							"dataView" : {templateUrl : "partials/results/chart_high.html"}
 						},
-						controller : 'ChartCtrl'
+						controller : 'TestCtrl'
 					});
 
 			$stateProvider

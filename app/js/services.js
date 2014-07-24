@@ -24,18 +24,28 @@ angular.module('myApp.services', [])
 			return {
 				"cal" : localStorageService.get('cal') ? localStorageService.get('cal') :
 				{
-					"services" : {},
-					"param1" : 6500000,
-					"param2" : 3,
-					"param3" : 3611111,
-					"param4" : 10,
-					"param5" : 7,
-					"param6" : 2500000000,
-					"param7" : 2565000000,
-					"param8" : 15,
-					"param9" : 100,
-					"param10" : 34,
-					"adjustment" : 1000000
+					services : {
+						op1 : null,
+						op2 : null,
+						op3 : null,
+						op4 : null,
+						op5 : null,
+						op6 : null,
+						op7 : null,
+						op8 : null,
+						op9 : null
+					},
+					param1 : 6500000,
+					param2 : 3,
+					param3 : 3611111,
+					param4 : 10,
+					param5 : 7,
+					param6 : 2500000000,
+					param7 : 2565000000,
+					param8 : 15,
+					param9 : 100,
+					param10 : 34,
+					adjustment : 1000000
 				},
 
 				// Not used but keeping as might be useful later
@@ -398,7 +408,6 @@ angular.module('myApp.services', [])
 				}
 			};
 
-
 			// Direct distribution costs per PB. [Variables]:B6-B9
 
 			/**
@@ -441,7 +450,7 @@ angular.module('myApp.services', [])
 			var overall_channel_shift_total = directDistChannelTotals('channel_shift_over_5_yrs') + indirectDistChannelTotals('channel_shift_over_5_yrs');
 			var overall_steady_state_channel_mix_total = directDistChannelTotals('steady_state_channel_mix') + indirectDistChannelTotals('steady_state_channel_mix');
 
-			console.log(cost_per_pb);
+			return cost_per_pb;
 
 		})
 
@@ -900,20 +909,53 @@ angular.module('myApp.services', [])
 				 *
 				 * These are percentages and divided by 100 to get point value to multiply by.
 				 */
-				MISC_CONST_1 : 1 / 100,
-				MISC_CONST_2 : 0.5 / 100,
+				TIME_TO_MANUALLY_REISSUE_TICKET_HIGH : 30,
+				TIME_TO_MANUALLY_REISSUE_TICKET_LOW : 20,
+				MISC_PERCENTAGE_1 : 10 / 100,
+				MISC_PERCENTAGE_2 : 20 / 100,
 
 				/* Calculation Functions */
 				totalTicketsIssued : function () { // REF 23 | [ARR] C3/D3
 					return inputData.cal.param3;
 				},
 
-				ticketsIssuedByDirectChannels : function () {
-					return this.totalTicketsIssued() * 0
+				ticketsIssuedByDirectChannels : function () { // REF 24 | [ARR] C4/D4
+					return Math.round(this.totalTicketsIssued() * (passengersBoardedData.direct_dist_costs_per_pb.steady_state_channel_mix_total / 100));
 				},
 
-				template : function () {
+				ticketsReissued : function () { // REF 25 | [ARR] C5/D5
+					return inputData.cal.param4;
+				},
 
+				totalTicketsReissued : function () { // REF 25 | [ARR] C6/D6
+					return Math.round(this.ticketsIssuedByDirectChannels() * (this.ticketsReissued() / 100));
+				},
+
+				averageLabourCost : function () { // REF 26 | [ARR] C7/D7
+					return parseInt(inputData.cal.param5, 10).toFixed(2);
+				},
+
+				timeToIssueManualReissue : function (value) { // REF 27 | [ARR] C8/D8
+					if (value === 'low') return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW;
+					return this.TIME_TO_MANUALLY_REISSUE_TICKET_HIGH;
+				},
+
+				timeToIssueAutoReissue : function (value) { // REF 28 | [ARR] C9/D9
+					if (value === 'low') return Math.round(this.timeToIssueManualReissue(value) * this.MISC_PERCENTAGE_2);
+					return Math.round(this.timeToIssueManualReissue(value) * this.MISC_PERCENTAGE_1);
+				},
+
+				timeSavedPerTicket : function (value) { // REF 29 | [ARR] C10/D10
+					if (value === 'low') return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW - this.timeToIssueAutoReissue(value);
+					return this.TIME_TO_MANUALLY_REISSUE_TICKET_HIGH - this.timeToIssueAutoReissue(value);
+				},
+
+				costSavingPerReissue : function (value) { // REF 30 | [ARR] C11/D11
+					return this.timeSavedPerTicket(value) * this.averageLabourCost()
+				},
+
+				totalCostSaving : function (value) { // REF 31 | [ARR] C12/D12
+					return this.costSavingPerReissue(value) * this.totalTicketsReissued();
 				},
 
 				/**
@@ -922,6 +964,68 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				writeToObj : function () {
+					allData.arr.high = this.result();
+					allData.arr.low = this.result('low');
+
+					allData.arr.summary = {
+						total_tickets_issued : {
+							name : "Total number of tickets issued",
+							high : this.totalTicketsIssued(),
+							low : this.totalTicketsIssued()
+						},
+						tickets_issued_by_direct_channels : {
+							name : "Tickets issued through direct channels",
+							high : this.ticketsIssuedByDirectChannels(),
+							low : this.ticketsIssuedByDirectChannels()
+						},
+						tickets_reissued : {
+							name : "Tickets reissued",
+							unit : "percentage",
+							high : this.ticketsReissued(),
+							low : this.ticketsReissued()
+						},
+						total_tickets_reissued : {
+							name : "Total tickets reissued",
+							high : this.totalTicketsReissued(),
+							low : this.totalTicketsReissued()
+						},
+						average_labour_cost : {
+							name : "Average labour cost",
+							unit : "currency",
+							high : this.averageLabourCost(),
+							low : this.averageLabourCost()
+						},
+						time_to_issue_manual_reissue : {
+							name : "Time to manually reissue a ticket (mins)",
+							unit : "minutes",
+							high : this.timeToIssueManualReissue('high'),
+							low : this.timeToIssueManualReissue('low')
+						},
+						time_to_issue_auto_reissue : {
+							name : "Time to issue automated reissue",
+							unit : "minutes",
+							high : this.timeToIssueAutoReissue('high'),
+							low : this.timeToIssueAutoReissue('low')
+						},
+						time_saved_per_ticket : {
+							name : "Time saved per ticket",
+							unit : "minutes",
+							high : this.timeSavedPerTicket('high'),
+							low : this.timeSavedPerTicket('low')
+						},
+						cost_saving_per_reissue : {
+							name : "Cost saving per reissue",
+							unit : "currency",
+							high : this.costSavingPerReissue('high'),
+							low : this.costSavingPerReissue('low')
+						},
+						total_cost_saving : {
+							name : "Total cost saving",
+							unit : "currency",
+							high : this.totalCostSaving('high'),
+							low : this.totalCostSaving('low')
+						}
+					}
 				},
 
 				/**
@@ -931,7 +1035,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(0);
+					return Math.round(this.totalCostSaving(value) / inputData.cal.adjustment);
 				}
 			}
 		})

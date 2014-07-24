@@ -1,11 +1,11 @@
-<div class="col-sm-6 col-sm-offset-3" ng-controller="TestCtrl">
+<div class="col-sm-12" ng-controller="TestCtrl">
     <h3>Test screen</h3>
 
     <div class="well">
         <h4>{{ revenue_integrity.name }}</h4>
         <table class="table table-bordered">
             <tr>
-                <td></td>
+                <td width="70%"></td>
                 <td>High</td>
                 <td>Low</td>
             </tr>
@@ -21,7 +21,7 @@
         <h4>{{ revenue_integrity_process_improvement.name }}</h4>
         <table class="table table-bordered">
             <tr>
-                <td></td>
+                <td width="70%"></td>
                 <td>High</td>
                 <td>Low</td>
             </tr>
@@ -43,7 +43,7 @@
         <h4>{{ cmap.name }}</h4>
         <table class="table table-bordered">
             <tr>
-                <td></td>
+                <td width="70%"></td>
                 <td>High</td>
                 <td>Low</td>
             </tr>
@@ -68,7 +68,7 @@
         <h4>{{ origin_and_destination.name }}</h4>
         <table class="table table-bordered">
             <tr>
-                <td></td>
+                <td width="70%"></td>
                 <td>High</td>
                 <td>Low</td>
             </tr>
@@ -93,7 +93,7 @@
         <h4>{{ pos.name }}</h4>
         <table class="table table-bordered">
             <tr>
-                <td></td>
+                <td width="70%"></td>
                 <td>High</td>
                 <td>Low</td>
             </tr>
@@ -107,6 +107,27 @@
                 <td colspan="2">{{ pos.revenue | commas }}</td>
             </tr>
             <tr ng-repeat="item in pos.summary">
+                <td>{{ item.name }}</td>
+                <td>{{ item.high | commas }}</td>
+                <td>{{ item.low | commas }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="well">
+        <h4>{{ arr.name }}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <td width="70%"></td>
+                <td>High</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Graph numbers</td>
+                <td>{{ arr.high }}</td>
+                <td>{{ arr.low }}</td>
+            </tr>
+            <tr ng-repeat="item in arr.summary">
                 <td>{{ item.name }}</td>
                 <td>{{ item.high | commas }}</td>
                 <td>{{ item.low | commas }}</td>

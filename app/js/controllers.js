@@ -394,7 +394,19 @@ angular.module('myApp.controllers', [])
 					'originAndDestination',
 					'pointOfSale',
 					'passengersBoardedData',
-					function ($scope, localStorageService, chartData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData) {
+					'airfareInsight',
+					function ($scope,
+										localStorageService,
+										chartData,
+										inputData,
+										allData,
+										revenueIntegrity,
+										revenueIntegrityProcessImprovement,
+										cmap,
+										originAndDestination,
+										pointOfSale,
+										passengersBoardedData,
+										airfareInsight) {
 
 						/**
 						 * Calls the factories for each service
@@ -415,8 +427,12 @@ angular.module('myApp.controllers', [])
 							pointOfSale.writeToObj();
 							$scope.pos = allData.pos;
 
+							airfareInsight.writeToObj();
+							$scope.arr = allData.arr;
+
 						};
 
+						// See variables sheet C2 - C16
 						$scope.pb_data = passengersBoardedData;
 
 						/**
