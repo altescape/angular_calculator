@@ -21,47 +21,47 @@ angular.module('myApp.services', [])
 			 * If it's a new session then these are the default values
 			 * that are entered into the input fields.
 			 */
-            if (!localStorageService.get('input')) {
-                return {
-                    cal : {
-                        services : {
-                            op1 : null,
-                            op2 : null,
-                            op3 : null,
-                            op4 : null,
-                            op5 : null,
-                            op6 : null,
-                            op7 : null,
-                            op8 : null,
-                            op9 : null
-                        },
-                        param1 : 6500000,
-                        param2 : 3,
-                        param3 : 3611111,
-                        param4 : 10,
-                        param5 : 7,
-                        param6 : 2500000000,
-                        param7 : 2565000000,
-                        param8 : 15,
-                        param9 : 100,
-                        param10 : 34,
-                        adjustment : 1000000
-                    },
-                    // Not used but keeping as might be useful later
-                    colors : function () {
-                        {
-                            return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
-                                key : value[key];
-                            })
-                        }
-                    }
-                }
-            }
+			if ( !localStorageService.get('input') ) {
+				return {
+					cal : {
+						services : {
+							op1 : null,
+							op2 : null,
+							op3 : null,
+							op4 : null,
+							op5 : null,
+							op6 : null,
+							op7 : null,
+							op8 : null,
+							op9 : null
+						},
+						param1 : 6500000,
+						param2 : 3,
+						param3 : 3611111,
+						param4 : 10,
+						param5 : 7,
+						param6 : 2500000000,
+						param7 : 2565000000,
+						param8 : 15,
+						param9 : 100,
+						param10 : 34,
+						adjustment : 1000000
+					},
+					// Not used but keeping as might be useful later
+					colors : function () {
+						{
+							return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
+								key : value[key];
+							})
+						}
+					}
+				}
+			}
 
-            return localStorageService.get('input');
+			return localStorageService.get('input');
 		})
 
-		.factory('chartConfig', function (allData) {
+		.factory('chartConfig', function () {
 			/**
 			 * Draws a chart with highcharts-ng options.
 			 *
@@ -74,155 +74,222 @@ angular.module('myApp.services', [])
 			 *
 			 * Note: The the service names (categories) are hard coded in here.
 			 */
-			return {
 
-				numbers : {},
-				title : "",
-
-				chartConfigPie : {
-					options : {
-						chart : {
-							type : 'pie',
-							backgroundColor : 'rgba(255, 255, 255, 0)',
-							plotBackgroundColor : 'rgba(255, 255, 255, 0)'
+			var chartConfigTemplate = {
+				options : {
+					chart : {
+						type : 'pie',
+						backgroundColor : 'rgba(255, 255, 255, 0)',
+						plotBackgroundColor : 'rgba(255, 255, 255, 0)'
+					},
+					plotOptions : {
+						series : {
+							animation : true
 						},
-						plotOptions : {
-							series : {
-								animation : true
-							},
-							pie : {
-								allowPointSelect : true,
-								cursor : 'pointer',
-								dataLabels : {
-									enabled : true,
-									formatter : function () {
-										if ( this.y != 0 ) {
-											return '<b>' + this.point.name + '</b>: ' + this.point.y;
-										} else {
-											return null;
-										}
-									},
-									style : {
-										color : 'black'
+						pie : {
+							allowPointSelect : true,
+							cursor : 'pointer',
+							dataLabels : {
+								enabled : true,
+								formatter : function () {
+									if ( this.y != 0 ) {
+										return '<b>' + this.point.name + '</b>: ' + this.point.y;
+									} else {
+										return null;
 									}
+								},
+								style : {
+									color : 'black'
 								}
 							}
-						},
-						tooltip : {
-							pointFormat : '<b>{point.y}</b>'
 						}
 					},
-					title : {
-						text : 0
-					},
-					credits : {
-						enabled : false
-					},
-					series : [
-						{
-							name : 'High',
-							data : []
-						}
-					],
-					yAxis : {
-						min : 0,
-						labels : {
-							overflow : 'justify'
-						}
+					tooltip : {
+						pointFormat : '<b>{point.y}</b>'
+					}
+				},
+				title : {
+					text : 0
+				},
+				credits : {
+					enabled : false
+				},
+				series : [
+					{
+						name : 'High',
+						data : []
+					}
+				],
+				yAxis : {
+					min : 0,
+					labels : {
+						overflow : 'justify'
 					}
 				}
 			}
+
+			var chartConfigHigh = chartConfigTemplate;
+			var chartConfigLow = chartConfigTemplate;
+			var chartConfigBar = chartConfigTemplate;
+
+			return {
+				high : chartConfigHigh,
+				low : chartConfigLow,
+				bar : chartConfigBar
+			}
+
 		})
 
-		.factory('chartData', function (localStorageService) {
-            // NOT USED
+		.factory('chartData', function (localStorageService, chartConfig, inputData) {
+			// NOT USED
 			/**
 			 * Summary object where default values for service options are stored.
 			 * Creates an object and saves to localstorage with key called 'ls.summary'.
 			 * The values are then added to this object when services are chosen.
 			 *
 			 * Note: There are places where summary is used - will clarify where these are.
+			 *
+			 * Format for data should be this:
+			 *
+			 data: [
+			 ['Revenue Integrity', 45],
+			 ['Revenue Integrity Process Improvement', 26],
+			 ['Channel Shift', 8],
+			 ['Ancillary Sales', 6],
+			 ['CMAP', 2]
+			 ]
 			 */
+
+			// @todo: Not sure this is needed, delete if unecessary
+			var chartObj = {
+				revenue_integrity : {
+					name : 'Revenue Integrity',
+					high : 0,
+					low : 0
+				},
+				revenue_integrity_process_improvement : {
+					name : 'Revenue Integrity Process Improvement',
+					high : 0,
+					low : 0
+				},
+				channel_shift : {
+					name : 'Channel Shift',
+					high : 0,
+					low : 0
+				},
+				ancillary_sales : {
+					name : 'Ancillary Sales',
+					high : 0,
+					low : 0
+				},
+				cmap : {
+					name : 'CMAP',
+					high : 0,
+					low : 0
+				},
+				o_and_d : {
+					name : 'O & D',
+					high : 0,
+					low : 0
+				},
+				pos : {
+					name : 'POS',
+					high : 0,
+					low : 0
+				},
+				arr : {
+					name : 'ARR',
+					high : 0,
+					low : 0
+				},
+				insight : {
+					name : 'Insight',
+					high : 0,
+					low : 0
+				}
+			};
+
 			return {
-				summary : localStorageService.get('summary')
-						? localStorageService.get('summary')
-						: {
-					high : {
-						revenue_integrity : {
-							name : 'Revenue Integrity',
-							value : 0
-						},
-						revenue_integrity_process_improvement : {
-							name : 'Revenue Integrity Process Improvement',
-							value : 0
-						},
-						channel_shift : {
-							name : 'Channel Shift',
-							value : 0
-						},
-						ancillary_sales : {
-							name : 'Ancillary Sales',
-							value : 0
-						},
-						cmap : {
-							name : 'CMAP',
-							value : 0
-						},
-						o_and_d : {
-							name : 'O & D',
-							value : 0
-						},
-						pos : {
-							name : 'POS',
-							value : 0
-						},
-						arr : {
-							name : 'ARR',
-							value : 0
-						},
-						insight : {
-							name : 'Insight',
-							value : 0
+
+				/**
+				 * Transpose data between locally stored or firebase
+				 *
+				 * @var:dataLocation = 'local' or 'firebase'
+				 * @var:dataSource = object from local storage or firebase.
+				 */
+				dataSource : function (src) {
+					if ( src === 'local' ) {
+						if ( localStorageService.get('data') ) {
+							return localStorageService.get('data');
+						} else {
+							console.error('no locally stored data available')
 						}
-					},
-					low : {
-						revenue_integrity : {
-							name : 'Revenue Integrity',
-							value : 0
-						},
-						revenue_integrity_process_improvement : {
-							name : 'Revenue Integrity Process Improvement',
-							value : 0
-						},
-						channel_shift : {
-							name : 'Channel Shift',
-							value : 0
-						},
-						ancillary_sales : {
-							name : 'Ancillary Sales',
-							value : 0
-						},
-						cmap : {
-							name : 'CMAP',
-							value : 0
-						},
-						o_and_d : {
-							name : 'O & D',
-							value : 0
-						},
-						pos : {
-							name : 'POS',
-							value : 0
-						},
-						arr : {
-							name : 'ARR',
-							value : 0
-						},
-						insight : {
-							name : 'Insight',
-							value : 0
-						}
+					} else {
+						return 'firebase location';
 					}
+				},
+
+				/**
+				 * Chart data, pulled from localstorage (through dataSource())
+				 * and converted into an array that ng-highcharts can understand.
+				 * Returns high or low values which can be inserted into config object for ng-highcharts.
+				 *
+				 * @param va
+				 * @param src
+				 * @returns {Array}
+				 */
+				chartData : function (va, src) {
+					var chartArrayHigh = [],
+							chartArrayLow = [];
+					angular.forEach(this.dataSource(src), function (value, key) {
+						chartArrayHigh.push([value.name, value.high]);
+						chartArrayLow.push([value.name, value.low]);
+					});
+					if ( va === 'high' ) {
+						return chartArrayHigh;
+					} else {
+						return chartArrayLow;
+					}
+				},
+
+				/**
+				 * Sets the data for use in the high value chart and the low value chart.
+				 * Returns config object for ng-highcharts.
+				 *
+				 * @param value
+				 * @returns {*}
+				 */
+				drawChart : function (value) {
+
+					if ( value === 'low' ) {
+						chartConfig.low.options.chart.type = "pie";
+						chartConfig.low.series[0].data = this.chartData('low', 'local');
+						return chartConfig.low;
+					} else {
+						chartConfig.high.options.chart.type = "pie";
+						chartConfig.high.series[0].data = this.chartData('high', 'local');
+						return chartConfig.high;
+					}
+				},
+
+				drawBarChart : function (src) {
+					chartConfig.bar.options.chart.type = "column";
+
+					var names = [];
+					angular.forEach(this.dataSource(src), function (value, key) {
+						names.push(value.name);
+					});
+					chartConfig.bar.xAxis = {
+						categories : names
+					};
+
+					var newObj = [
+						{name : "low", data : this.chartData('low', 'local'), color: 'rgba(248,161,63,1)'},
+						{name : "high", data : this.chartData('high', 'local'), color: 'rgba(126,86,134,.9)'}
+					];
+					chartConfig.bar.series = newObj;
+
+					return chartConfig.bar;
 				}
 			}
 		})
@@ -534,11 +601,12 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op1) {
-                        allData.revenue_integrity.high = 0;
-                        allData.revenue_integrity.low = 0;
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op1 ) {
+						allData.revenue_integrity.high = 0;
+						allData.revenue_integrity.low = 0;
+						return;
+					}
 					allData.revenue_integrity.high = this.result();
 					allData.revenue_integrity.low = this.result('low');
 				},
@@ -652,12 +720,13 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op2) {
-                        allData.revenue_integrity_process_improvement.high = 0;
-                        allData.revenue_integrity_process_improvement.low = 0;
-                        allData.revenue_integrity_process_improvement.summary = {};
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op2 ) {
+						allData.revenue_integrity_process_improvement.high = 0;
+						allData.revenue_integrity_process_improvement.low = 0;
+						allData.revenue_integrity_process_improvement.summary = {};
+						return;
+					}
 					allData.revenue_integrity_process_improvement.high = this.result();
 					allData.revenue_integrity_process_improvement.low = this.result('low');
 
@@ -775,12 +844,13 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op5) {
-                        allData.cmap.high = 0;
-                        allData.cmap.low = 0;
-                        allData.cmap.summary = {};
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op5 ) {
+						allData.cmap.high = 0;
+						allData.cmap.low = 0;
+						allData.cmap.summary = {};
+						return;
+					}
 					allData.cmap.high = this.result();
 					allData.cmap.low = this.result('low');
 
@@ -842,12 +912,13 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op6) {
-                        allData.origin_and_destination.high = 0;
-                        allData.origin_and_destination.low = 0;
-                        allData.origin_and_destination.summary = {};
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op6 ) {
+						allData.origin_and_destination.high = 0;
+						allData.origin_and_destination.low = 0;
+						allData.origin_and_destination.summary = {};
+						return;
+					}
 					allData.origin_and_destination.high = this.result('high');
 					allData.origin_and_destination.low = this.result('low');
 
@@ -901,12 +972,13 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op7) {
-                        allData.pos.high = 0;
-                        allData.pos.low = 0;
-                        allData.pos.summary = {};
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op7 ) {
+						allData.pos.high = 0;
+						allData.pos.low = 0;
+						allData.pos.summary = {};
+						return;
+					}
 					allData.pos.high = this.result('high');
 					allData.pos.low = this.result('low');
 
@@ -968,17 +1040,17 @@ angular.module('myApp.services', [])
 				},
 
 				timeToIssueManualReissue : function (value) { // REF 27 | [ARR] C8/D8
-					if (value === 'low') return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW;
+					if ( value === 'low' ) return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW;
 					return this.TIME_TO_MANUALLY_REISSUE_TICKET_HIGH;
 				},
 
 				timeToIssueAutoReissue : function (value) { // REF 28 | [ARR] C9/D9
-					if (value === 'low') return Math.round(this.timeToIssueManualReissue(value) * this.MISC_PERCENTAGE_2);
+					if ( value === 'low' ) return Math.round(this.timeToIssueManualReissue(value) * this.MISC_PERCENTAGE_2);
 					return Math.round(this.timeToIssueManualReissue(value) * this.MISC_PERCENTAGE_1);
 				},
 
 				timeSavedPerTicket : function (value) { // REF 29 | [ARR] C10/D10
-					if (value === 'low') return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW - this.timeToIssueAutoReissue(value);
+					if ( value === 'low' ) return this.TIME_TO_MANUALLY_REISSUE_TICKET_LOW - this.timeToIssueAutoReissue(value);
 					return this.TIME_TO_MANUALLY_REISSUE_TICKET_HIGH - this.timeToIssueAutoReissue(value);
 				},
 
@@ -996,12 +1068,13 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-                    if (!inputData.cal.services.op9) {
-                        allData.arr.high = 0;
-                        allData.arr.low = 0;
-                        allData.arr.summary = {};
-                        return;
-                    }
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op9 ) {
+						allData.arr.high = 0;
+						allData.arr.low = 0;
+						allData.arr.summary = {};
+						return;
+					}
 					allData.arr.high = this.result();
 					allData.arr.low = this.result('low');
 

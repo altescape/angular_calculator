@@ -56,6 +56,13 @@ var app = angular.module('myApp', [
 					});
 
 			$stateProvider
+					.state('chart_bar', {
+						views : {
+							"dataView" : {templateUrl : "partials/results/chart_bar.html"}
+						}
+					});
+
+			$stateProvider
 					.state('test', {
 						views : {
 							"dataView" : {templateUrl : "partials/test.html"}
