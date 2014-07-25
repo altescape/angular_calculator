@@ -21,45 +21,47 @@ angular.module('myApp.services', [])
 			 * If it's a new session then these are the default values
 			 * that are entered into the input fields.
 			 */
-			return {
-				"cal" : localStorageService.get('cal') ? localStorageService.get('cal') :
-				{
-					services : {
-						op1 : null,
-						op2 : null,
-						op3 : null,
-						op4 : null,
-						op5 : null,
-						op6 : null,
-						op7 : null,
-						op8 : null,
-						op9 : null
-					},
-					param1 : 6500000,
-					param2 : 3,
-					param3 : 3611111,
-					param4 : 10,
-					param5 : 7,
-					param6 : 2500000000,
-					param7 : 2565000000,
-					param8 : 15,
-					param9 : 100,
-					param10 : 34,
-					adjustment : 1000000
-				},
+            if (!localStorageService.get('input')) {
+                return {
+                    cal : {
+                        services : {
+                            op1 : null,
+                            op2 : null,
+                            op3 : null,
+                            op4 : null,
+                            op5 : null,
+                            op6 : null,
+                            op7 : null,
+                            op8 : null,
+                            op9 : null
+                        },
+                        param1 : 6500000,
+                        param2 : 3,
+                        param3 : 3611111,
+                        param4 : 10,
+                        param5 : 7,
+                        param6 : 2500000000,
+                        param7 : 2565000000,
+                        param8 : 15,
+                        param9 : 100,
+                        param10 : 34,
+                        adjustment : 1000000
+                    },
+                    // Not used but keeping as might be useful later
+                    colors : function () {
+                        {
+                            return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
+                                key : value[key];
+                            })
+                        }
+                    }
+                }
+            }
 
-				// Not used but keeping as might be useful later
-				"colors" : function () {
-					{
-						return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
-							key : value[key];
-						})
-					}
-				}
-			}
+            return localStorageService.get('input');
 		})
 
-		.factory('chartConfig', function ($rootScope, chartData, $state) {
+		.factory('chartConfig', function (allData) {
 			/**
 			 * Draws a chart with highcharts-ng options.
 			 *
@@ -133,6 +135,7 @@ angular.module('myApp.services', [])
 		})
 
 		.factory('chartData', function (localStorageService) {
+            // NOT USED
 			/**
 			 * Summary object where default values for service options are stored.
 			 * Creates an object and saves to localstorage with key called 'ls.summary'.
@@ -530,7 +533,12 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op1) {
+                        allData.revenue_integrity.high = 0;
+                        allData.revenue_integrity.low = 0;
+                        return;
+                    }
 					allData.revenue_integrity.high = this.result();
 					allData.revenue_integrity.low = this.result('low');
 				},
@@ -643,7 +651,13 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op2) {
+                        allData.revenue_integrity_process_improvement.high = 0;
+                        allData.revenue_integrity_process_improvement.low = 0;
+                        allData.revenue_integrity_process_improvement.summary = {};
+                        return;
+                    }
 					allData.revenue_integrity_process_improvement.high = this.result();
 					allData.revenue_integrity_process_improvement.low = this.result('low');
 
@@ -728,7 +742,7 @@ angular.module('myApp.services', [])
 			}
 		})
 
-		.factory('cmap', function (inputData, allData) {
+		.factory('cmap', function (inputData, allData) { // services: option 5
 			return {
 
 				/**
@@ -760,7 +774,13 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op5) {
+                        allData.cmap.high = 0;
+                        allData.cmap.low = 0;
+                        allData.cmap.summary = {};
+                        return;
+                    }
 					allData.cmap.high = this.result();
 					allData.cmap.low = this.result('low');
 
@@ -796,7 +816,7 @@ angular.module('myApp.services', [])
 			}
 		})
 
-		.factory('originAndDestination', function (inputData, allData) {
+		.factory('originAndDestination', function (inputData, allData) { // services: option 6
 			return {
 
 				/**
@@ -821,7 +841,13 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op6) {
+                        allData.origin_and_destination.high = 0;
+                        allData.origin_and_destination.low = 0;
+                        allData.origin_and_destination.summary = {};
+                        return;
+                    }
 					allData.origin_and_destination.high = this.result('high');
 					allData.origin_and_destination.low = this.result('low');
 
@@ -849,7 +875,7 @@ angular.module('myApp.services', [])
 			}
 		})
 
-		.factory('pointOfSale', function (inputData, allData) {
+		.factory('pointOfSale', function (inputData, allData) { // services: option 7
 			return {
 				/**
 				 * Constants
@@ -874,7 +900,13 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op7) {
+                        allData.pos.high = 0;
+                        allData.pos.low = 0;
+                        allData.pos.summary = {};
+                        return;
+                    }
 					allData.pos.high = this.result('high');
 					allData.pos.low = this.result('low');
 
@@ -901,7 +933,7 @@ angular.module('myApp.services', [])
 			}
 		})
 
-		.factory('airfareInsight', function (inputData, allData, passengersBoardedData) {
+		.factory('airfareInsight', function (inputData, allData, passengersBoardedData) { // services option 9
 			return {
 
 				/**
@@ -963,7 +995,13 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
+                    if (!inputData.cal.services.op9) {
+                        allData.arr.high = 0;
+                        allData.arr.low = 0;
+                        allData.arr.summary = {};
+                        return;
+                    }
 					allData.arr.high = this.result();
 					allData.arr.low = this.result('low');
 
@@ -1060,7 +1098,7 @@ angular.module('myApp.services', [])
 				 *
 				 * Writes data to allData object
 				 */
-				writeToObj : function () {
+				initObject : function () {
 				},
 
 				/**

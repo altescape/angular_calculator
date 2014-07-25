@@ -22,7 +22,7 @@
                     <div class="col-sm-12 form-group">
                         <label for="param1">Current total passengers boarded per year</label>
                         <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number" ng-model="cal.param1"
-                               ng-change="updateChart(); updateData();" class="form-control" step="20000"
+                               ng-change="updateData();" class="form-control" step="20000"
                                min="0">
                     </div>
                     <div class="col-sm-12 form-group">
@@ -30,7 +30,7 @@
 
                         <div class="postfix-label">
                             <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number" ng-model="cal.param2"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="10"
                                    min="0">
                             <span class="label">%</span>
@@ -39,7 +39,7 @@
                     <div class="col-sm-12 form-group">
                         <label for="param3">Number of tickets issued per year</label>
                         <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number" ng-model="cal.param3"
-                               ng-change="updateChart(); updateData();" class="form-control" step="20000"
+                               ng-change="updateData();" class="form-control" step="20000"
                                min="0">
                     </div>
                     <div class="col-sm-12 form-group">
@@ -47,7 +47,7 @@
 
                         <div class="postfix-label">
                             <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number" ng-model="cal.param4"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="10"
                                    min="0">
                             <span class="label">%</span>
@@ -58,7 +58,7 @@
 
                         <div class="prefix-label">
                             <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number" ng-model="cal.param5"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="10"
                                    min="0">
                             <span class="label">$</span>
@@ -88,13 +88,13 @@
                     <div class="col-sm-12 form-group">
                         <label for="param6">Airline's annual revenue</label>
                         <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number" ng-model="cal.param6"
-                               ng-change="updateChart(); updateData();" class="form-control" step="20000"
+                               ng-change="updateData();" class="form-control" step="20000"
                                min="0">
                     </div>
                     <div class="col-sm-12 form-group">
                         <label for="param7">Airline's annual cost base</label>
                         <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number" ng-model="cal.param7"
-                               ng-change="updateChart(); updateData();" class="form-control" step="20000"
+                               ng-change="updateData();" class="form-control" step="20000"
                                min="0">
                     </div>
                     <div class="col-sm-12 form-group">
@@ -102,7 +102,7 @@
 
                         <div class="postfix-label">
                             <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number" ng-model="cal.param8"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="5"
                                    min="0">
                             <span class="label">%</span>
@@ -113,7 +113,7 @@
 
                         <div class="prefix-label">
                             <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number" ng-model="cal.param9"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="10"
                                    min="0">
                             <span class="label">$</span>
@@ -124,7 +124,7 @@
 
                         <div class="postfix-label">
                             <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number" ng-model="cal.param10"
-                                   ng-change="updateChart(); updateData();" class="form-control"
+                                   ng-change="updateData();" class="form-control"
                                    step="10"
                                    min="0">
                             <span class="label">%</span>
@@ -140,7 +140,7 @@
             <div class="row" data-xl-sheet="variables" data-xl-cell="C54">
                 <div class="col-sm-12 form-group">
                     <label for="param11">Chart number adjustment</label>
-                    <input id="param11" type="number" ng-model="cal.adjustment" ng-change="updateChart(); updateData();" class="form-control"
+                    <input id="param11" type="number" ng-model="cal.adjustment" ng-change="updateData();" class="form-control"
                            step="1000000"
                            min="0">
                 </div>

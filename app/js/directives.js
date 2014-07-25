@@ -76,7 +76,6 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 		directive('services', [function () {
 			return {
 				restrict : 'E',
-				controller : 'ChartCtrl',
 				templateUrl : 'partials/calculator/services.html'
 			}
 		}]);
