@@ -101,7 +101,8 @@ angular.module('myApp.services', [])
 								style : {
 									color : 'black'
 								}
-							}
+							},
+							center: ['50%', '50%']
 						}
 					},
 					tooltip : {
@@ -117,7 +118,25 @@ angular.module('myApp.services', [])
 				series : [
 					{
 						name : 'High',
-						data : []
+						data : [],
+						innerSize: '30%'
+					},
+					{
+						name: 'Total',
+						data: [22],
+						size: '20%',
+						dataLabels: {
+							formatter: function() {
+								return this.y > 0 ? this.point.y : null;
+							},
+							color: 'white',
+							distance: -43,
+							useHTML: true
+						},
+						allowPointSelect: false,
+						enableMouseTracking: false,
+						borderWidth: 0,
+						colors: ['#36474F']
 					}
 				],
 				yAxis : {
@@ -253,6 +272,42 @@ angular.module('myApp.services', [])
 				},
 
 				/**
+				 * Chart data, pulled from localstorage (through dataSource())
+				 * and converted into an array that ng-highcharts can understand.
+				 * Returns high or low totals which can be inserted into config object for ng-highcharts.
+				 *
+				 * @param va
+				 * @param src
+				 * @returns {Array}
+				 */
+				chartTotal : function (va, src) {
+					var chartArrayHigh = [],
+							chartArrayLow = [],
+							totalHigh = 0,
+							totalLow = 0;
+					angular.forEach(this.dataSource(src), function (value, key) {
+						chartArrayHigh.push(value.high);
+						chartArrayLow.push(value.low);
+					});
+
+					angular.forEach(chartArrayHigh, function (value, key) {
+						totalHigh += value;
+					});
+
+					angular.forEach(chartArrayLow, function (value, key) {
+						totalLow += value;
+					});
+
+					if ( va === 'high' ) {
+						console.log(totalHigh);
+						return [totalHigh];
+					} else {
+						console.log(totalLow);
+						return [totalLow];
+					}
+				},
+
+				/**
 				 * Sets the data for use in the high value chart and the low value chart.
 				 * Returns config object for ng-highcharts.
 				 *
@@ -264,10 +319,12 @@ angular.module('myApp.services', [])
 					if ( value === 'low' ) {
 						chartConfig.low.options.chart.type = "pie";
 						chartConfig.low.series[0].data = this.chartData('low', 'local');
+						chartConfig.low.series[1].data = this.chartTotal('low', 'local');
 						return chartConfig.low;
 					} else {
 						chartConfig.high.options.chart.type = "pie";
 						chartConfig.high.series[0].data = this.chartData('high', 'local');
+						chartConfig.high.series[1].data = this.chartTotal('high', 'local');
 						return chartConfig.high;
 					}
 				},
