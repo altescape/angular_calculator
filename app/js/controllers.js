@@ -412,6 +412,14 @@ angular.module('myApp.controllers', [])
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);
 
+							// @todo: chart configs wont store separate values for both graphs?!?
+							// Need to find out why and stop from using this sort of if/else as makes it fragile.
+							if ( $state.current.name === 'chart_low' ) {
+								$scope.chartConfigLow = chartData.drawChart('low');
+							} else {
+								$scope.chartConfigHigh = chartData.drawChart('high');
+							}
+
 						};
 						$scope.updateData();
 
@@ -455,15 +463,8 @@ angular.module('myApp.controllers', [])
 									// Store state of view in localstorage
 									localStorageService.set('results_view', toState);
 
-									// Show high or low chart
-									if ( toState.name === 'chart_low' ) {
-										$scope.chartConfigLow = chartData.drawChart('low');
-									} else if ( toState.name === 'chart_high' ) {
-										$scope.chartConfigHigh = chartData.drawChart('high');
-									} else {
-										// @todo: barchart takes over other graphs and replaces their configs, so need to clean out config
-										// $scope.chartConfigBar = chartData.drawBarChart('local');
-									}
+									// update chart
+									$scope.updateData();
 								});
 
 						/**
@@ -474,6 +475,8 @@ angular.module('myApp.controllers', [])
 						$scope.cal = inputData.cal;
 
 						/**
+						 * Watch inputs on calculator
+						 *
 						 * Watches inputData factory, if any changes detected then
 						 * call updateData() to update allData factory.
 						 */
@@ -482,10 +485,6 @@ angular.module('myApp.controllers', [])
 								},
 								function (newVal, oldVal) {
 									$scope.updateData();
-									$scope.chartConfigLow = chartData.drawChart('low');
-									$scope.chartConfigHigh = chartData.drawChart('high');
-									// @todo: barchart takes over other graphs and replaces their configs, so need to clean out config
-									//$scope.chartConfigBar = chartData.drawBarChart('local');
 								}, true);
 
 					}]);

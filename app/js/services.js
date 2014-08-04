@@ -272,7 +272,7 @@ angular.module('myApp.services', [])
 				},
 
 				/**
-				 * Chart data, pulled from localstorage (through dataSource())
+				 * Chart total, pulled from localstorage (through dataSource())
 				 * and converted into an array that ng-highcharts can understand.
 				 * Returns high or low totals which can be inserted into config object for ng-highcharts.
 				 *
@@ -281,28 +281,26 @@ angular.module('myApp.services', [])
 				 * @returns {Array}
 				 */
 				chartTotal : function (va, src) {
-					var chartArrayHigh = [],
-							chartArrayLow = [],
+					var chartTotalHigh = [],
+							chartTotalLow = [],
 							totalHigh = 0,
 							totalLow = 0;
 					angular.forEach(this.dataSource(src), function (value, key) {
-						chartArrayHigh.push(value.high);
-						chartArrayLow.push(value.low);
+						chartTotalHigh.push(value.high);
+						chartTotalLow.push(value.low);
 					});
 
-					angular.forEach(chartArrayHigh, function (value, key) {
+					angular.forEach(chartTotalHigh, function (value, key) {
 						totalHigh += value;
 					});
 
-					angular.forEach(chartArrayLow, function (value, key) {
+					angular.forEach(chartTotalLow, function (value, key) {
 						totalLow += value;
 					});
 
 					if ( va === 'high' ) {
-						console.log(totalHigh);
 						return [totalHigh];
 					} else {
-						console.log(totalLow);
 						return [totalLow];
 					}
 				},
@@ -327,26 +325,6 @@ angular.module('myApp.services', [])
 						chartConfig.high.series[1].data = this.chartTotal('high', 'local');
 						return chartConfig.high;
 					}
-				},
-
-				drawBarChart : function (src) {
-					chartConfig.bar.options.chart.type = "column";
-
-					var names = [];
-					angular.forEach(this.dataSource(src), function (value, key) {
-						names.push(value.name);
-					});
-					chartConfig.bar.xAxis = {
-						categories : names
-					};
-
-					var newObj = [
-						{name : "low", data : this.chartData('low', 'local'), color: 'rgba(248,161,63,1)'},
-						{name : "high", data : this.chartData('high', 'local'), color: 'rgba(126,86,134,.9)'}
-					];
-					chartConfig.bar.series = newObj;
-
-					return chartConfig.bar;
 				}
 			}
 		})
