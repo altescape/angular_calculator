@@ -75,18 +75,30 @@ angular.module('myApp.services', [])
 			 * Note: The the service names (categories) are hard coded in here.
 			 */
 
+			Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+				return {
+					radialGradient : { cx : 0.5, cy : 0.3, r : 0.7 },
+					stops : [
+						[0, color],
+						[1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+					]
+				};
+			});
+
 			var chartConfigTemplate = {
 				options : {
 					chart : {
 						type : 'pie',
 						backgroundColor : 'rgba(255, 255, 255, 0)',
-						plotBackgroundColor : 'rgba(255, 255, 255, 0)'
+						plotBackgroundColor : 'rgba(255, 255, 255, 0)',
+						spacingBottom : 50
 					},
 					plotOptions : {
 						series : {
 							animation : true
 						},
 						pie : {
+							borderWidth : 0,
 							allowPointSelect : true,
 							cursor : 'pointer',
 							dataLabels : {
@@ -99,13 +111,14 @@ angular.module('myApp.services', [])
 									}
 								},
 								style : {
-									color : 'black'
+									fontFamily : 'Helvetica, Arial'
 								}
 							},
-							center: ['50%', '50%']
+							center : ['50%', '50%']
 						}
 					},
 					tooltip : {
+						enabled : false,
 						pointFormat : '<b>{point.y}</b>'
 					}
 				},
@@ -116,27 +129,49 @@ angular.module('myApp.services', [])
 					enabled : false
 				},
 				series : [
+					// Value
 					{
 						name : 'High',
 						data : [],
-						innerSize: '30%'
-					},
-					{
-						name: 'Total',
-						data: [22],
-						size: '20%',
-						dataLabels: {
-							formatter: function() {
-								return this.y > 0 ? this.point.y : null;
-							},
-							color: 'white',
-							distance: -43,
-							useHTML: true
+						innerSize : '30%',
+						dataLabels : {
+//							formatter: function() {
+//								return this.y > 0 ? this.point.y : null;
+//							},
+							style : {
+								fontWeight : 'bold'
+							}
+//							color: 'white',
+//							distance: -43
 						},
-						allowPointSelect: false,
-						enableMouseTracking: false,
-						borderWidth: 0,
-						colors: ['#36474F']
+						point : {
+							events : {
+								legendItemClick : function () {
+									return false; // <== returning false will cancel the default action
+								}
+							}
+						}
+					},
+					// Total
+					{
+						name : 'Total',
+						data : [0],
+						size : '15%',
+						dataLabels : {
+							formatter : function () {
+								return this.y > 0 ? 'Total: ' + this.point.y : null;
+							},
+//							color: 'white',
+//							distance: -37,
+							style : {
+								fontWeight : 'bold',
+								color : 'white'
+							}
+						},
+						allowPointSelect : false,
+						enableMouseTracking : false,
+						borderWidth : 0,
+						colors : ['#36474F']
 					}
 				],
 				yAxis : {
@@ -348,19 +383,19 @@ angular.module('myApp.services', [])
 		.factory('passengersBoardedData', function () {
 
 			var cost_per_pb = {
-				core_passenger_services_cost_per_pb : {
+				core_passenger_services_cost_per_pb : { // [variables] C4/D4
 					name : "Core passenger services cost per PB (Res, ticketing, fares, DCS)",
 					cost_per_pb : {
 						current_provider : 1.2,
 						sita : 0.8
 					}
 				},
-				direct_dist_costs_per_pb : {
+				direct_dist_costs_per_pb : { // [variables] E5~
 					name : "Direct distribution costs per PB",
 					current_channel_mix_total : 0,
 					channel_shift_over_5_yrs_total : 0,
 					steady_state_channel_mix_total : 0,
-					call_centre : {
+					call_centre : { // [variables] C6/D6
 						name : "Call centre",
 						cost_per_pb : {
 							current_provider : 1.21,
@@ -378,7 +413,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					ecommerce : {
+					ecommerce : { // [variables] C7/D7
 						name : "Ecommerce",
 						cost_per_pb : {
 							current_provider : 1,
@@ -396,7 +431,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					travel_agent : {
+					travel_agent : { // [variables] C8/D8
 						name : "Travel agent/OTA/Corporate direct (split GUI/API)",
 						cost_per_pb : {
 							current_provider : 1,
@@ -414,7 +449,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					mobile : {
+					mobile : { // [variables] C9/D9
 						name : "Mobile",
 						cost_per_pb : {
 							current_provider : 1,
@@ -433,12 +468,12 @@ angular.module('myApp.services', [])
 						})()
 					}
 				},
-				indirect_dist_costs_per_pb : {
+				indirect_dist_costs_per_pb : { // [variables] C12/D12
 					name : "Indirect disribution costs per PB",
 					current_channel_mix_total : 0,
 					channel_shift_over_5_yrs_total : 0,
 					steady_state_channel_mix_total : 0,
-					amadeus : {
+					amadeus : { // [variables] C13/D13
 						name : "Amadeus",
 						cost_per_pb : {
 							current_provider : 5.1,
@@ -456,7 +491,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					sabre : {
+					sabre : { // [variables] C14/D14
 						name : "SABRE",
 						cost_per_pb : {
 							current_provider : 5.1,
@@ -474,7 +509,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					galileo : {
+					galileo : { // [variables] C15/D15
 						name : "Galileo",
 						cost_per_pb : {
 							current_provider : 5.1,
@@ -492,7 +527,7 @@ angular.module('myApp.services', [])
 							}
 						})()
 					},
-					abacus : {
+					abacus : { // [variables] C16/D16
 						name : "Abacus",
 						cost_per_pb : {
 							current_provider : 5.1,
@@ -591,6 +626,12 @@ angular.module('myApp.services', [])
 					summary : {}
 				},
 				arr : {
+					name : "ARR",
+					high : 0,
+					low : 0,
+					summary : {}
+				},
+				airfare_insight : {
 					name : "Airfare Insight",
 					high : 0,
 					low : 0,
@@ -608,26 +649,50 @@ angular.module('myApp.services', [])
 				 *
 				 * These are percentages and divided by 100 to get point value to multiply by.
 				 */
-				REAL_TIME_HIGH : 2 / 100, // [Revenue Integrity]:C10
-				REAL_TIME_LOW : 1 / 100,	// [Revenue Integrity]:D10
-				COST_SAVING_HIGH : 5 / 100,	// [Revenue Integrity]:C8
-				COST_SAVING_LOW : 3 / 100,	// [Revenue Integrity]:D8
-				REVENUE_IMPROVEMENT_HIGH : 1 / 100,	// [Revenue Integrity]:C6
-				REVENUE_IMPROVEMENT_LOW : 0.1 / 100,	// [Revenue Integrity]:D6
+				REVENUE_IMPROVEMENT_HIGH : 1,	// [Revenue Integrity]:C6
+				REVENUE_IMPROVEMENT_LOW : 0.1,	// [Revenue Integrity]:D6
+				COST_SAVING_HIGH : 5,	// [Revenue Integrity]:C8
+				COST_SAVING_LOW : 3,	// [Revenue Integrity]:D8
+				REAL_TIME_HIGH : 2, // [Revenue Integrity]:C10
+				REAL_TIME_LOW : 1,	// [Revenue Integrity]:D10
 
-				real_time : function (value) {
-					if ( value === 'low' ) return this.REAL_TIME_LOW;
-					return this.REAL_TIME_HIGH;
+				revenue : function () {
+					return inputData.cal.param6;
 				},
 
-				cost_saving : function (value) {
-					if ( value === 'low' ) return this.COST_SAVING_LOW;
-					return this.COST_SAVING_HIGH;
+				distribution_costs : function () { // [Revenue Integrity] C4/D4
+					return inputData.cal.param7 * (inputData.cal.param8 / 100);
 				},
 
-				revenue_improvement : function (value) {
-					if ( value === 'low' ) return this.REVENUE_IMPROVEMENT_LOW;
-					return this.REVENUE_IMPROVEMENT_HIGH;
+				revenue_improvement : function (value) { // [Revenue Integrity] C6/D6
+					if ( value === 'low' ) return this.REVENUE_IMPROVEMENT_LOW / 100;
+					return this.REVENUE_IMPROVEMENT_HIGH / 100;
+				},
+
+				value_1 : function (value) { // [Revenue Integrity] C7/D7
+					return this.revenue_improvement(value) * this.revenue()
+				},
+
+				cost_saving : function (value) { // [Revenue Integrity] C8/D8
+					if ( value === 'low' ) return this.COST_SAVING_LOW / 100;
+					return this.COST_SAVING_HIGH / 100;
+				},
+
+				value_2 : function (value) { // [Revenue Integrity] C9/D9
+					return this.cost_saving(value) * this.distribution_costs();
+				},
+
+				real_time : function (value) { // [Revenue Integrity] C10/D10
+					if ( value === 'low' ) return this.REAL_TIME_LOW / 100;
+					return this.REAL_TIME_HIGH / 100;
+				},
+
+				wtf_1 : function (value) { // [Revenue Integrity] C11/D11
+					return this.real_time(value) * this.revenue();
+				},
+
+				total : function (value) { // [Revenue Integrity] C12/D12
+					return this.wtf_1(value) + this.value_2(value) + this.value_1(value);
 				},
 
 				/**
@@ -644,6 +709,63 @@ angular.module('myApp.services', [])
 					}
 					allData.revenue_integrity.high = this.result();
 					allData.revenue_integrity.low = this.result('low');
+
+					allData.revenue_integrity.summary = {
+						revenue : {
+							name : "Revenue",
+							unit : "currency",
+							high : this.revenue(),
+							low : this.revenue()
+						},
+						dist_costs : {
+							name : "Distribution costs",
+							unit : "currency",
+							high : this.distribution_costs(),
+							low : this.distribution_costs()
+						},
+						revenue_improvement : {
+							name : "Revenue improvement",
+							unit : "percentage",
+							high : this.REVENUE_IMPROVEMENT_HIGH,
+							low : this.REVENUE_IMPROVEMENT_LOW
+						},
+						value_1 : {
+							name : "Value 1",
+							unit : "currency",
+							high : this.value_1('high'),
+							low : this.value_1('low')
+						},
+						cost_saving : {
+							name : "Cost saving",
+							unit : "percentage",
+							high : this.COST_SAVING_HIGH,
+							low : this.COST_SAVING_LOW
+						},
+						value_2 : {
+							name : "Value 2",
+							unit : "currency",
+							high : this.value_2('high'),
+							low : this.value_2('low')
+						},
+						real_time : {
+							name : "Real-time",
+							unit : "percentage",
+							high : this.REAL_TIME_HIGH,
+							low : this.REAL_TIME_LOW
+						},
+						wtf_1 : {
+							name : "*",
+							unit : "currency",
+							high : this.wtf_1('high'),
+							low : this.wtf_1('low')
+						},
+						total : {
+							name : "Total",
+							unit : "currency",
+							high : this.total('high'),
+							low : this.total('low')
+						}
+					}
 				},
 
 				/**
@@ -1040,7 +1162,7 @@ angular.module('myApp.services', [])
 			}
 		})
 
-		.factory('airfareInsight', function (inputData, allData, passengersBoardedData) { // services option 9
+		.factory('arr', function (inputData, allData, passengersBoardedData) { // services option 9
 			return {
 
 				/**
@@ -1059,7 +1181,7 @@ angular.module('myApp.services', [])
 				},
 
 				ticketsIssuedByDirectChannels : function () { // REF 24 | [ARR] C4/D4
-					return Math.round(this.totalTicketsIssued() * (passengersBoardedData.direct_dist_costs_per_pb.steady_state_channel_mix_total / 100));
+					return this.totalTicketsIssued() * (passengersBoardedData.direct_dist_costs_per_pb.steady_state_channel_mix_total / 100);
 				},
 
 				ticketsReissued : function () { // REF 25 | [ARR] C5/D5
@@ -1067,7 +1189,7 @@ angular.module('myApp.services', [])
 				},
 
 				totalTicketsReissued : function () { // REF 25 | [ARR] C6/D6
-					return Math.round(this.ticketsIssuedByDirectChannels() * (this.ticketsReissued() / 100));
+					return this.ticketsIssuedByDirectChannels() * (this.ticketsReissued() / 100);
 				},
 
 				averageLabourCost : function () { // REF 26 | [ARR] C7/D7
@@ -1094,7 +1216,7 @@ angular.module('myApp.services', [])
 				},
 
 				totalCostSaving : function (value) { // REF 31 | [ARR] C12/D12
-					return this.costSavingPerReissue(value) * this.totalTicketsReissued();
+					return Math.round(this.costSavingPerReissue(value) * this.totalTicketsReissued());
 				},
 
 				/**
@@ -1182,6 +1304,373 @@ angular.module('myApp.services', [])
 				 */
 				result : function (value) {
 					return Math.round(this.totalCostSaving(value) / inputData.cal.adjustment);
+				}
+			}
+		})
+
+		.factory('airfareInsight', function (inputData, allData) {
+			return {
+
+				/**
+				 * Constants
+				 *
+				 * These are percentages and divided by 100 to get point value to multiply by.
+				 */
+				AIRFARE_INSIGHT_PERC_HIGH : 1,
+				AIRFARE_INSIGHT_PERC_LOW : 0.5,
+
+				/* Calculation Functions */
+				airfareInsight : function (value) { // REF 32 | [Airfare Insight] D2/D3
+					if ( value === 'low' ) return inputData.cal.param6 * (this.AIRFARE_INSIGHT_PERC_LOW / 100);
+					return inputData.cal.param6 * (this.AIRFARE_INSIGHT_PERC_HIGH / 100);
+				},
+
+				/**
+				 * allData
+				 *
+				 * Writes data to allData object
+				 */
+				initObject : function () {
+					// If option is not selected then return empty object with default values (0)
+					if ( !inputData.cal.services.op8 ) {
+						allData.airfare_insight.high = 0;
+						allData.airfare_insight.low = 0;
+						allData.airfare_insight.summary = {};
+						return;
+					}
+					allData.airfare_insight.high = this.result();
+					allData.airfare_insight.low = this.result('low');
+
+					allData.airfare_insight.summary = {
+						percentages : {
+							name : "Percentages",
+							unit : "percentage",
+							high : this.AIRFARE_INSIGHT_PERC_HIGH,
+							low : this.AIRFARE_INSIGHT_PERC_LOW
+						},
+						airfare_insight : {
+							name : "Airfare Insight",
+							unit : "currency",
+							high : this.airfareInsight('high'),
+							low : this.airfareInsight('low')
+						}
+					}
+				},
+
+				/**
+				 * Resulting value
+				 *
+				 * @param value : value is 'high' or 'low'.
+				 * @returns {number}
+				 */
+				result : function (value) {
+					return Math.round(this.airfareInsight(value) / inputData.cal.adjustment);
+				}
+			}
+		})
+
+		.factory('channelShift', function (inputData, allData, passengersBoardedData) {
+			return function () {
+
+				var TOTAL_PASSENGERS_BOARDED = (function () {
+					var CURRENT = 1250355,
+							YEAR_1 = Math.round(CURRENT + CURRENT * (inputData.cal.param2 / 100)),
+							YEAR_2 = Math.round(YEAR_1 + YEAR_1 * (inputData.cal.param2 / 100)),
+							YEAR_3 = Math.round(YEAR_2 + YEAR_2 * (inputData.cal.param2 / 100)),
+							YEAR_4 = Math.round(YEAR_3 + YEAR_3 * (inputData.cal.param2 / 100)),
+							YEAR_5 = Math.round(YEAR_4 + YEAR_4 * (inputData.cal.param2 / 100));
+					return {
+						CURRENT : CURRENT,
+						YEAR_1 : YEAR_1,
+						YEAR_2 : YEAR_2,
+						YEAR_3 : YEAR_3,
+						YEAR_4 : YEAR_4,
+						YEAR_5 : YEAR_5
+					}
+				})();
+
+				var DIRECT = (function () {
+
+					// Pax boarded
+					var pax_boarded_1 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_2 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_3 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_4 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_total = pax_boarded_1 + pax_boarded_2 + pax_boarded_3 + pax_boarded_4;
+
+					// Call centre [channel shift] ROW 6
+					var call_centre__year_1__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.channel_shift_over_5_yrs / 5,
+							call_centre__year_1__perc_pax_boarded = call_centre__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix,
+							call_centre__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.channel_shift_over_5_yrs / 5,
+							call_centre__year_2__perc_pax_boarded = call_centre__year_2__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix,
+							call_centre__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.channel_shift_over_5_yrs / 5,
+							call_centre__year_3__perc_pax_boarded = call_centre__year_3__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix,
+							call_centre__year_4__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.channel_shift_over_5_yrs / 5,
+							call_centre__year_4__perc_pax_boarded = call_centre__year_4__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix,
+							call_centre__year_5__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.channel_shift_over_5_yrs / 5,
+							call_centre__year_5__perc_pax_boarded = call_centre__year_5__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix;
+
+					// Ecommerce [channel shift] ROW 7
+					var ecommerce__year_1__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
+							ecommerce__year_1__perc_pax_boarded = ecommerce__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+
+							ecommerce__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
+							ecommerce__year_2__perc_pax_boarded = ecommerce__year_2__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+
+							ecommerce__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
+							ecommerce__year_3__perc_pax_boarded = ecommerce__year_3__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+
+							ecommerce__year_4__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
+							ecommerce__year_4__perc_pax_boarded = ecommerce__year_4__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+
+							ecommerce__year_5__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
+							ecommerce__year_5__perc_pax_boarded = ecommerce__year_5__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix;
+
+					console.log(passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix);
+					console.log(ecommerce__year_2__perc_pax_boarded);
+					console.log(ecommerce__year_3__perc_pax_boarded);
+					console.log(ecommerce__year_4__perc_pax_boarded);
+					console.log(ecommerce__year_5__perc_pax_boarded);
+
+					return {
+						PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.current_channel_mix_total, // [channel shift] D5
+						PAX_BOARDED : pax_boarded_total, // [channel shift] E5
+						CALL_CENTRE : { // [channel shift] ROW 6
+							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.current_provider, // [channel shift] B6
+							SITA : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.sita, // [channel shift] C6
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_1, // [channel shift] D6
+								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix // [channel shift] E6
+							},
+							YEAR_1 : {
+								CHANNEL_SHIFT : call_centre__year_1__channel_shift, // [channel shift] F6
+								PERC_PAX_BOARDED : call_centre__year_1__perc_pax_boarded, // [channel shift] G6
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] H6
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (call_centre__year_1__perc_pax_boarded / 100) // [channel shift] I6
+								}
+							},
+							YEAR_2 : {
+								CHANNEL_SHIFT : call_centre__year_2__channel_shift, // [channel shift] J6
+								PERC_PAX_BOARDED : call_centre__year_2__perc_pax_boarded, // [channel shift] K6
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] L6
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (call_centre__year_2__perc_pax_boarded / 100) // [channel shift] M6
+								}
+							},
+							YEAR_3 : {
+								CHANNEL_SHIFT : call_centre__year_3__channel_shift, // [channel shift] N6
+								PERC_PAX_BOARDED : call_centre__year_3__perc_pax_boarded, // [channel shift] O6
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] P6
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (call_centre__year_3__perc_pax_boarded / 100) // [channel shift] Q6
+								}
+							},
+							YEAR_4 : {
+								CHANNEL_SHIFT : call_centre__year_4__channel_shift, // [channel shift] R6
+								PERC_PAX_BOARDED : call_centre__year_4__perc_pax_boarded, // [channel shift] S6
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] T6
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (call_centre__year_4__perc_pax_boarded / 100) // [channel shift] U6
+								}
+							},
+							YEAR_5 : {
+								CHANNEL_SHIFT : call_centre__year_5__channel_shift, // [channel shift] V6
+								PERC_PAX_BOARDED : call_centre__year_5__perc_pax_boarded, // [channel shift] W6
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] X6
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (call_centre__year_5__perc_pax_boarded / 100) // [channel shift] Y6
+								}
+							}
+						},
+						ECOMMERCE : { // [channel shift] ROW 7
+							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_2,
+								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix
+							},
+							YEAR_1 : {
+								CHANNEL_SHIFT : ecommerce__year_1__channel_shift, // [channel shift] F7
+								PERC_PAX_BOARDED : ecommerce__year_1__perc_pax_boarded, // [channel shift] G7
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] H7
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (ecommerce__year_1__perc_pax_boarded / 100) // [channel shift] I7
+								}
+							},
+							YEAR_2 : {
+								CHANNEL_SHIFT : ecommerce__year_2__channel_shift, // [channel shift] J7
+								PERC_PAX_BOARDED : ecommerce__year_2__perc_pax_boarded, // [channel shift] K7
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] L7
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (ecommerce__year_2__perc_pax_boarded / 100) // [channel shift] M7
+								}
+							},
+							YEAR_3 : {
+								CHANNEL_SHIFT : ecommerce__year_3__channel_shift, // [channel shift] N7
+								PERC_PAX_BOARDED : ecommerce__year_3__perc_pax_boarded, // [channel shift] O7
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] P7
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (ecommerce__year_3__perc_pax_boarded / 100) // [channel shift] Q7
+								}
+							},
+							YEAR_4 : {
+								CHANNEL_SHIFT : ecommerce__year_4__channel_shift, // [channel shift] R7
+								PERC_PAX_BOARDED : ecommerce__year_4__perc_pax_boarded, // [channel shift] S7
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] T7
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (ecommerce__year_4__perc_pax_boarded / 100) // [channel shift] U7
+								}
+							},
+							YEAR_5 : {
+								CHANNEL_SHIFT : ecommerce__year_5__channel_shift, // [channel shift] V7
+								PERC_PAX_BOARDED : ecommerce__year_5__perc_pax_boarded, // [channel shift] W7
+								PAX_BOARDED : {
+									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] X7
+									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (ecommerce__year_5__perc_pax_boarded / 100) // [channel shift] Y7
+								}
+							}
+						},
+						A2A : {
+							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_3,
+								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						},
+						MOBILE : {
+							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_4,
+								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						}
+					}
+				})();
+
+				var TOTAL_GDS = (function () {
+					var pax_boarded_1 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_2 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_3 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_4 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+							pax_boarded_total = pax_boarded_1 + pax_boarded_2 + pax_boarded_3 + pax_boarded_4;
+
+					return {
+						PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.current_channel_mix_total,
+						PAX_BOARDED : pax_boarded_total,
+						AMADEUS : {
+							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_1,
+								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						},
+						SABRE : {
+							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_2,
+								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						},
+						GALILEO : {
+							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_3,
+								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						},
+						ABACUS : {
+							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.current_provider,
+							SITA : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.sita,
+							CURRENT : {
+								PAX_BOARDED : pax_boarded_4,
+								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix
+							},
+							YEAR_1 : {},
+							YEAR_2 : {},
+							YEAR_3 : {},
+							YEAR_4 : {},
+							YEAR_5 : {}
+						}
+					}
+				})();
+
+				return {
+					/**
+					 * Constants
+					 *
+					 * These are percentages and divided by 100 to get point value to multiply by.
+					 */
+
+					CURRENT__PAX_BOARDED__TOTAL_ETICKETS_ISSUED : 1856002, // [Channel shift] E22
+					CURRENT__PAX_BOARDED__TOTAL_EMDS_ISSUED : 102245, // [Channel shift] E23
+					CURRENT__PAX_BOARDED__TOTAL_REISSUES : 25665, // [Channel shift] E24
+					CURRENT__PAX_BOARDED__TOTAL_OTHER_AIRLINES_BOOKED : 65871, // [Channel shift] E25
+
+					TOTAL_PASSENGERS_BOARDED : TOTAL_PASSENGERS_BOARDED,
+
+					PSS : {
+						CURRENT_PROVIDER : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.current_provider,
+						SITA : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.sita
+					},
+
+					DIRECT : DIRECT,
+					TOTAL_GDS : TOTAL_GDS,
+
+
+
+					/* Calculation Functions */
+					calcFunctions : function () { // REF No. | [SHEET] CELL No.
+						/* return . . . */
+					},
+
+					/**
+					 * allData
+					 *
+					 * Writes data to allData object
+					 */
+					initObject : function () {
+					},
+
+					/**
+					 * Resulting value
+					 *
+					 * @param value : value is 'high' or 'low'.
+					 * @returns {number}
+					 */
+					result : function (value) {
+						return Math.round(0);
+					}
 				}
 			}
 		})

@@ -383,8 +383,10 @@ angular.module('myApp.controllers', [])
 					'originAndDestination',
 					'pointOfSale',
 					'passengersBoardedData',
+					'arr',
 					'airfareInsight',
-					function ($rootScope, $scope, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, airfareInsight) {
+					'channelShift',
+					function ($rootScope, $scope, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift) {
 
 						/**
 						 * Calls the factories for each service
@@ -406,8 +408,13 @@ angular.module('myApp.controllers', [])
 							pointOfSale.initObject();
 							$scope.pos = allData.pos;
 
-							airfareInsight.initObject();
+							arr.initObject();
 							$scope.arr = allData.arr;
+
+							airfareInsight.initObject();
+							$scope.airfare_insight = allData.airfare_insight;
+
+							console.log(channelShift());
 
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);

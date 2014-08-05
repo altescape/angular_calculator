@@ -30,6 +30,11 @@
                 <td>{{ revenue_integrity.high }}</td>
                 <td>{{ revenue_integrity.low }}</td>
             </tr>
+            <tr ng-repeat="item in revenue_integrity.summary">
+                <td>{{ item.name }}</td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+            </tr>
         </table>
     </div>
 
@@ -147,6 +152,27 @@
                 <td>{{ item.name }}</td>
                 <td>{{ item.high | commas }}</td>
                 <td>{{ item.low | commas }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="well">
+        <h4>{{ airfare_insight.name }}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <td width="70%"></td>
+                <td>High</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Graph numbers</td>
+                <td>{{ airfare_insight.high }}</td>
+                <td>{{ airfare_insight.low }}</td>
+            </tr>
+            <tr ng-repeat="item in airfare_insight.summary">
+                <td>{{ item.name }}</td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
             </tr>
         </table>
     </div>
