@@ -1,9 +1,11 @@
-<div class="col-md-3 col-md-offset-5  mt-50">
+<div class="col-md-3 col-md-offset-5 mt-50">
+
+    <p class="lead">Enter a name for this session, airline code and an opportunity name below.</p>
 
     <div class="form-group">
-        <label for="uname">Name</label>
-        <input id="uname" type="text" ng-model="info.user.name" ng-change="updateInfo()" class="form-control input-lg" ng-value=""
-               placeholder="Please enter your name" required>
+        <label for="sname">Name</label>
+        <input id="sname" type="text" ng-model="info.session.name" ng-change="updateInfo()" class="form-control input-lg" ng-value=""
+               placeholder="Please enter a name" required>
     </div>
     <div class="form-group">
         <label for="acode">Airline</label>
@@ -16,7 +18,7 @@
                placeholder="Opportunity name" required>
     </div>
     <div class="form-group">
-        <a ng-href="/#/calculator" ng-disabled="!info.airline.code || !info.user.name || !info.opportunity.name"
+        <a ui-sref="calculator" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
            class="input-lg user-action">CALCULATE <span class="glyphicon glyphicon-chevron-right"></span></a>
     </div>
 

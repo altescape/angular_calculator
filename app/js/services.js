@@ -23,7 +23,6 @@ angular.module('myApp.services', [])
 			 */
 			if ( !localStorageService.get('input') ) {
 				return {
-					cal : {
 						services : {
 							op1 : null,
 							op2 : null,
@@ -45,8 +44,8 @@ angular.module('myApp.services', [])
 						param8 : 15,
 						param9 : 100,
 						param10 : 34,
-						adjustment : 1000000
-					},
+						adjustment : 1000000,
+
 					// Not used but keeping as might be useful later
 					colors : function () {
 						{
@@ -272,15 +271,7 @@ angular.module('myApp.services', [])
 				 * @var:dataSource = object from local storage or firebase.
 				 */
 				dataSource : function (src) {
-					if ( src === 'local' ) {
-						if ( localStorageService.get('data') ) {
-							return localStorageService.get('data');
-						} else {
-							console.error('no locally stored data available')
-						}
-					} else {
-						return 'firebase location';
-					}
+					return src;
 				},
 
 				/**
@@ -344,24 +335,27 @@ angular.module('myApp.services', [])
 				 * Sets the data for use in the high value chart and the low value chart.
 				 * Returns config object for ng-highcharts.
 				 *
+				 * src is the injected data object
+				 *
 				 * @param value
+				 * @param src
 				 * @returns {*}
 				 */
-				drawChart : function (value) {
+				drawChart : function (value, src) {
 
 					if ( value === 'low' ) {
 						chartConfig.low.options.chart.type = "pie";
-						chartConfig.low.series[0].data = this.chartData('low', 'local');
-						chartConfig.low.series[1].data = this.chartTotal('low', 'local');
+						chartConfig.low.series[0].data = this.chartData('low', src);
+						chartConfig.low.series[1].data = this.chartTotal('low', src);
 						return chartConfig.low;
 					} else {
 						chartConfig.high.options.chart.type = "pie";
-						chartConfig.high.series[0].data = this.chartData('high', 'local');
-						chartConfig.high.series[1].data = this.chartTotal('high', 'local');
+						chartConfig.high.series[0].data = this.chartData('high', src);
+						chartConfig.high.series[1].data = this.chartTotal('high', src);
 						return chartConfig.high;
 					}
 				}
-			}
+			};
 		})
 
 		.factory('FbService', ['$firebase', function ($firebase) {
@@ -657,11 +651,11 @@ angular.module('myApp.services', [])
 				REAL_TIME_LOW : 1,	// [Revenue Integrity]:D10
 
 				revenue : function () {
-					return inputData.cal.param6;
+					return inputData.param6;
 				},
 
 				distribution_costs : function () { // [Revenue Integrity] C4/D4
-					return inputData.cal.param7 * (inputData.cal.param8 / 100);
+					return inputData.param7 * (inputData.param8 / 100);
 				},
 
 				revenue_improvement : function (value) { // [Revenue Integrity] C6/D6
@@ -702,7 +696,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op1 ) {
+					if ( !inputData.services.op1 ) {
 						allData.revenue_integrity.high = 0;
 						allData.revenue_integrity.low = 0;
 						return;
@@ -775,7 +769,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(( (this.real_time(value) * inputData.cal.param6) + (this.cost_saving(value) * (inputData.cal.param7 * inputData.cal.param8 / 100)) + (this.revenue_improvement(value) * inputData.cal.param6) ) / inputData.cal.adjustment);
+					return Math.round(( (this.real_time(value) * inputData.param6) + (this.cost_saving(value) * (inputData.param7 * inputData.param8 / 100)) + (this.revenue_improvement(value) * inputData.param6) ) / inputData.adjustment);
 				}
 			}
 		})
@@ -811,7 +805,7 @@ angular.module('myApp.services', [])
 				MISC_CONST_10 : 2,	// [Revenue Integrity]:C56
 
 				pnrs : function () {	// REF 1 | [Revenue Integrity]:C19/D19
-					return Math.round(inputData.cal.param1 * this.CURRENT_PB_LIVE_IN_SYSTEM)
+					return Math.round(inputData.param1 * this.CURRENT_PB_LIVE_IN_SYSTEM)
 				},
 				segments : function () {  // REF 2 | [Revenue Integrity]:C20/D20
 					return this.pnrs() * this.MISC_CONST_1;
@@ -852,13 +846,13 @@ angular.module('myApp.services', [])
 					return Math.round(this.MISC_CONST_3 * this.total_checks(value));
 				},
 				additional_revenue : function (value) {	// REF 8 | [Revenue Integrity]:C43/D43
-					return Math.round(inputData.cal.param9 * this.seats_resold(value));
+					return Math.round(inputData.param9 * this.seats_resold(value));
 				},
 				annual_additional_revenue : function (value) {	// REF 9 | [Revenue Integrity]:C44/D44
 					return this.additional_revenue(value) * this.MISC_CONST_5;
 				},
 				no_show_per_annum : function () {	// REF 10 | [Revenue Integrity]:C47/D47
-					return Math.round(this.MISC_CONST_6 * inputData.cal.param1);
+					return Math.round(this.MISC_CONST_6 * inputData.param1);
 				},
 				no_shows_avoided : function (value) {	// REF 11 | [Revenue Integrity]:C52/D52
 					if ( value === 'low' ) return this.no_show_per_annum() * this.MISC_CONST_8;
@@ -878,7 +872,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op2 ) {
+					if ( !inputData.services.op2 ) {
 						allData.revenue_integrity_process_improvement.high = 0;
 						allData.revenue_integrity_process_improvement.low = 0;
 						allData.revenue_integrity_process_improvement.summary = {};
@@ -963,7 +957,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.process_improvement(value) / inputData.cal.adjustment);
+					return Math.round(this.process_improvement(value) / inputData.adjustment);
 				}
 			}
 		})
@@ -982,7 +976,7 @@ angular.module('myApp.services', [])
 				MISC_CONST_4 : 0.5 / 100,
 
 				fuel_cost : function () {  // REF 14 | [Weight and Balance]:C3
-					return Math.round((inputData.cal.param10 / 100) * inputData.cal.param7);
+					return Math.round((inputData.param10 / 100) * inputData.param7);
 				},
 
 				cmap_savings : function (value) {  // REF 15 | [Weight and Balance]:C5/D5
@@ -1002,7 +996,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op5 ) {
+					if ( !inputData.services.op5 ) {
 						allData.cmap.high = 0;
 						allData.cmap.low = 0;
 						allData.cmap.summary = {};
@@ -1037,7 +1031,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.cmap_savings(value) / inputData.cal.adjustment);
+					return Math.round(this.cmap_savings(value) / inputData.adjustment);
 				}
 
 			}
@@ -1055,7 +1049,7 @@ angular.module('myApp.services', [])
 				MISC_CONST_2 : 1 / 100,
 
 				revenue : function () { // REF 18 | [O&D] C3
-					return inputData.cal.param6;
+					return inputData.param6;
 				},
 
 				os_impact : function (value) { // REF 19 | [O&D] C5/D5
@@ -1070,7 +1064,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op6 ) {
+					if ( !inputData.services.op6 ) {
 						allData.origin_and_destination.high = 0;
 						allData.origin_and_destination.low = 0;
 						allData.origin_and_destination.summary = {};
@@ -1098,7 +1092,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.os_impact(value) / inputData.cal.adjustment);
+					return Math.round(this.os_impact(value) / inputData.adjustment);
 				}
 			}
 		})
@@ -1115,7 +1109,7 @@ angular.module('myApp.services', [])
 
 				/* Calculation functions */
 				revenue : function () { // REF 21 | [POS] C3
-					return inputData.cal.param6;
+					return inputData.param6;
 				},
 
 				os_impact : function (value) { // REF 22 | [POS] C5/D5
@@ -1130,7 +1124,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op7 ) {
+					if ( !inputData.services.op7 ) {
 						allData.pos.high = 0;
 						allData.pos.low = 0;
 						allData.pos.summary = {};
@@ -1157,7 +1151,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.os_impact(value) / inputData.cal.adjustment);
+					return Math.round(this.os_impact(value) / inputData.adjustment);
 				}
 			}
 		})
@@ -1177,7 +1171,7 @@ angular.module('myApp.services', [])
 
 				/* Calculation Functions */
 				totalTicketsIssued : function () { // REF 23 | [ARR] C3/D3
-					return inputData.cal.param3;
+					return inputData.param3;
 				},
 
 				ticketsIssuedByDirectChannels : function () { // REF 24 | [ARR] C4/D4
@@ -1185,7 +1179,7 @@ angular.module('myApp.services', [])
 				},
 
 				ticketsReissued : function () { // REF 25 | [ARR] C5/D5
-					return inputData.cal.param4;
+					return inputData.param4;
 				},
 
 				totalTicketsReissued : function () { // REF 25 | [ARR] C6/D6
@@ -1193,7 +1187,7 @@ angular.module('myApp.services', [])
 				},
 
 				averageLabourCost : function () { // REF 26 | [ARR] C7/D7
-					return parseInt(inputData.cal.param5, 10).toFixed(2);
+					return parseInt(inputData.param5, 10).toFixed(2);
 				},
 
 				timeToIssueManualReissue : function (value) { // REF 27 | [ARR] C8/D8
@@ -1226,7 +1220,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op9 ) {
+					if ( !inputData.services.op9 ) {
 						allData.arr.high = 0;
 						allData.arr.low = 0;
 						allData.arr.summary = {};
@@ -1303,7 +1297,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.totalCostSaving(value) / inputData.cal.adjustment);
+					return Math.round(this.totalCostSaving(value) / inputData.adjustment);
 				}
 			}
 		})
@@ -1321,8 +1315,8 @@ angular.module('myApp.services', [])
 
 				/* Calculation Functions */
 				airfareInsight : function (value) { // REF 32 | [Airfare Insight] D2/D3
-					if ( value === 'low' ) return inputData.cal.param6 * (this.AIRFARE_INSIGHT_PERC_LOW / 100);
-					return inputData.cal.param6 * (this.AIRFARE_INSIGHT_PERC_HIGH / 100);
+					if ( value === 'low' ) return inputData.param6 * (this.AIRFARE_INSIGHT_PERC_LOW / 100);
+					return inputData.param6 * (this.AIRFARE_INSIGHT_PERC_HIGH / 100);
 				},
 
 				/**
@@ -1332,7 +1326,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.cal.services.op8 ) {
+					if ( !inputData.services.op8 ) {
 						allData.airfare_insight.high = 0;
 						allData.airfare_insight.low = 0;
 						allData.airfare_insight.summary = {};
@@ -1364,7 +1358,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					return Math.round(this.airfareInsight(value) / inputData.cal.adjustment);
+					return Math.round(this.airfareInsight(value) / inputData.adjustment);
 				}
 			}
 		})
@@ -1374,11 +1368,11 @@ angular.module('myApp.services', [])
 
 				var TOTAL_PASSENGERS_BOARDED = (function () {
 					var CURRENT = 1250355,
-							YEAR_1 = Math.round(CURRENT + CURRENT * (inputData.cal.param2 / 100)),
-							YEAR_2 = Math.round(YEAR_1 + YEAR_1 * (inputData.cal.param2 / 100)),
-							YEAR_3 = Math.round(YEAR_2 + YEAR_2 * (inputData.cal.param2 / 100)),
-							YEAR_4 = Math.round(YEAR_3 + YEAR_3 * (inputData.cal.param2 / 100)),
-							YEAR_5 = Math.round(YEAR_4 + YEAR_4 * (inputData.cal.param2 / 100));
+							YEAR_1 = Math.round(CURRENT + CURRENT * (inputData.param2 / 100)),
+							YEAR_2 = Math.round(YEAR_1 + YEAR_1 * (inputData.param2 / 100)),
+							YEAR_3 = Math.round(YEAR_2 + YEAR_2 * (inputData.param2 / 100)),
+							YEAR_4 = Math.round(YEAR_3 + YEAR_3 * (inputData.param2 / 100)),
+							YEAR_5 = Math.round(YEAR_4 + YEAR_4 * (inputData.param2 / 100));
 					return {
 						CURRENT : CURRENT,
 						YEAR_1 : YEAR_1,

@@ -8,22 +8,22 @@
 			<div class="form-group col-sm-12 postfix-choice">
 				<p class="postfix-choice-label">Revenue Integrity</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op1"
+					   ng-model="input.services.op1"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op1=true;"
-					ng-show="cal.services.op1==null">
+					ng-click="input.services.op1=true;"
+					ng-show="input.services.op1==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op1==true}"
-					ng-click="cal.services.op1=null;"
-					ng-show="cal.services.op1==true">
+					ng-class="{'active':input.services.op1==true}"
+					ng-click="input.services.op1=null;"
+					ng-show="input.services.op1==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
@@ -32,22 +32,22 @@
 			<div class="form-group col-sm-12 postfix-choice">
 				<p class="postfix-choice-label">Revenue Integrity process improvement</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op2"
+					   ng-model="input.services.op2"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op2=true;"
-					ng-show="cal.services.op2==null">
+					ng-click="input.services.op2=true;"
+					ng-show="input.services.op2==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op2==true}"
-					ng-click="cal.services.op2=null;"
-					ng-show="cal.services.op2==true">
+					ng-class="{'active':input.services.op2==true}"
+					ng-click="input.services.op2=null;"
+					ng-show="input.services.op2==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
@@ -56,70 +56,70 @@
 <!--			<div class="form-group col-sm-12 postfix-choice">-->
 <!--				<p class="postfix-choice-label">Channel Shift</p>-->
 <!--				<input type="checkbox"-->
-<!--					   ng-model="cal.services.op3"-->
+<!--					   ng-model="input.services.op3"-->
 <!--					   ng-true-value="true"-->
 <!--					   ng-false-value="null"-->
 <!--					   class="radio">-->
 <!---->
 <!--				<button-->
 <!--					class="choice text-center"-->
-<!--					ng-click="cal.services.op3=true;"-->
-<!--					ng-show="cal.services.op3==null">-->
+<!--					ng-click="input.services.op3=true;"-->
+<!--					ng-show="input.services.op3==null">-->
 <!--					<span class="glyphicon glyphicon-remove"></span>-->
 <!--				</button>-->
 <!--				<button-->
 <!--					class="choice text-center"-->
-<!--					ng-class="{'active':cal.services.op3==true}"-->
-<!--					ng-click="cal.services.op3=null;"-->
-<!--					ng-show="cal.services.op3==true">-->
+<!--					ng-class="{'active':input.services.op3==true}"-->
+<!--					ng-click="input.services.op3=null;"-->
+<!--					ng-show="input.services.op3==true">-->
 <!--					<span class="glyphicon glyphicon-ok"></span>-->
 <!--				</button>-->
 <!--			</div>-->
 <!--		</div>-->
-		<div class="row" data-xl-sheet="variables" data-xl-cell="C40">
-			<div class="form-group col-sm-12 postfix-choice">
-				<p class="postfix-choice-label">Ancillary sales</p>
-				<input type="checkbox"
-					   ng-model="cal.services.op4"
-					   ng-true-value="true"
-					   ng-false-value="null"
-					   class="radio">
-
-				<button
-					class="choice text-center"
-					ng-click="cal.services.op4=true;"
-					ng-show="cal.services.op4==null">
-					<span class="glyphicon glyphicon-remove"></span>
-				</button>
-				<button
-					class="choice text-center"
-					ng-class="{'active':cal.services.op4==true}"
-					ng-click="cal.services.op4=null;"
-					ng-show="cal.services.op4==true">
-					<span class="glyphicon glyphicon-ok"></span>
-				</button>
-			</div>
-		</div>
+<!--		<div class="row" data-xl-sheet="variables" data-xl-cell="C40">-->
+<!--			<div class="form-group col-sm-12 postfix-choice">-->
+<!--				<p class="postfix-choice-label">Ancillary sales</p>-->
+<!--				<input type="checkbox"-->
+<!--					   ng-model="input.services.op4"-->
+<!--					   ng-true-value="true"-->
+<!--					   ng-false-value="null"-->
+<!--					   class="radio">-->
+<!---->
+<!--				<button-->
+<!--					class="choice text-center"-->
+<!--					ng-click="input.services.op4=true;"-->
+<!--					ng-show="input.services.op4==null">-->
+<!--					<span class="glyphicon glyphicon-remove"></span>-->
+<!--				</button>-->
+<!--				<button-->
+<!--					class="choice text-center"-->
+<!--					ng-class="{'active':input.services.op4==true}"-->
+<!--					ng-click="input.services.op4=null;"-->
+<!--					ng-show="input.services.op4==true">-->
+<!--					<span class="glyphicon glyphicon-ok"></span>-->
+<!--				</button>-->
+<!--			</div>-->
+<!--		</div>-->
 		<div class="row" data-xl-sheet="variables" data-xl-cell="C41">
 			<div class="form-group col-sm-12 postfix-choice">
 				<p class="postfix-choice-label">CMAP</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op5"
+					   ng-model="input.services.op5"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op5=true;"
-					ng-show="cal.services.op5==null">
+					ng-click="input.services.op5=true;"
+					ng-show="input.services.op5==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op5==true}"
-					ng-click="cal.services.op5=null;"
-					ng-show="cal.services.op5==true">
+					ng-class="{'active':input.services.op5==true}"
+					ng-click="input.services.op5=null;"
+					ng-show="input.services.op5==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
@@ -128,22 +128,22 @@
 			<div class="form-group col-sm-12 postfix-choice">
 				<p class="postfix-choice-label">O&D</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op6"
+					   ng-model="input.services.op6"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op6=true;"
-					ng-show="cal.services.op6==null">
+					ng-click="input.services.op6=true;"
+					ng-show="input.services.op6==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op6==true}"
-					ng-click="cal.services.op6=null;"
-					ng-show="cal.services.op6==true">
+					ng-class="{'active':input.services.op6==true}"
+					ng-click="input.services.op6=null;"
+					ng-show="input.services.op6==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
@@ -152,70 +152,70 @@
 			<div class="form-group col-sm-12 postfix-choice">
 				<p class="postfix-choice-label">POS</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op7"
+					   ng-model="input.services.op7"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op7=true;"
-					ng-show="cal.services.op7==null">
+					ng-click="input.services.op7=true;"
+					ng-show="input.services.op7==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op7==true}"
-					ng-click="cal.services.op7=null;"
-					ng-show="cal.services.op7==true">
+					ng-class="{'active':input.services.op7==true}"
+					ng-click="input.services.op7=null;"
+					ng-show="input.services.op7==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
 		</div>
 		<div class="row" data-xl-sheet="variables" data-xl-cell="C47">
 			<div class="form-group col-sm-12 postfix-choice">
-				<p class="postfix-choice-label">Reprice/re-issue (ARR)</p>
+				<p class="postfix-choice-label">Airfare Insight</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op8"
+					   ng-model="input.services.op8"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op8=true;"
-					ng-show="cal.services.op8==null">
+					ng-click="input.services.op8=true;"
+					ng-show="input.services.op8==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op8==true}"
-					ng-click="cal.services.op8=null;"
-					ng-show="cal.services.op8==true">
+					ng-class="{'active':input.services.op8==true}"
+					ng-click="input.services.op8=null;"
+					ng-show="input.services.op8==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>
 		</div>
 		<div class="row" data-xl-sheet="variables" data-xl-cell="C52">
 			<div class="form-group col-sm-12 postfix-choice">
-				<p class="postfix-choice-label">Insight</p>
+				<p class="postfix-choice-label">Reprice/re-issue (ARR)</p>
 				<input type="checkbox"
-					   ng-model="cal.services.op9"
+					   ng-model="input.services.op9"
 					   ng-true-value="true"
 					   ng-false-value="null"
 					   class="radio">
 
 				<button
 					class="choice text-center"
-					ng-click="cal.services.op9=true;"
-					ng-show="cal.services.op9==null">
+					ng-click="input.services.op9=true;"
+					ng-show="input.services.op9==null">
 					<span class="glyphicon glyphicon-remove"></span>
 				</button>
 				<button
 					class="choice text-center"
-					ng-class="{'active':cal.services.op9==true}"
-					ng-click="cal.services.op9=null;"
-					ng-show="cal.services.op9==true">
+					ng-class="{'active':input.services.op9==true}"
+					ng-click="input.services.op9=null;"
+					ng-show="input.services.op9==true">
 					<span class="glyphicon glyphicon-ok"></span>
 				</button>
 			</div>

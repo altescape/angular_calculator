@@ -1,15 +1,15 @@
 describe('calculator', function () {
-  var total_passngrs = element(by.model('cal.param1'));
-  var passngr_growth = element(by.model('cal.param2'));
-  var num_tickets_issued = element(by.model('cal.param3'));
-  var pc_tickets_reissued = element(by.model('cal.param4'));
-  var labour_costs = element(by.model('cal.param5'));
-  var air_revenue = element(by.model('cal.param6'));
-  var ann_cst_bse = element(by.model('cal.param7'));
-  var ann_dist_rate = element(by.model('cal.param8'));
-  var av_yield_p_ticket = element(by.model('cal.param9'));
-  var ann_fuel_rate = element(by.model('cal.param10'));
-  var cal_adjust = element(by.model('cal.adjustment'));
+  var total_passngrs = element(by.model('param1'));
+  var passngr_growth = element(by.model('param2'));
+  var num_tickets_issued = element(by.model('param3'));
+  var pc_tickets_reissued = element(by.model('param4'));
+  var labour_costs = element(by.model('param5'));
+  var air_revenue = element(by.model('param6'));
+  var ann_cst_bse = element(by.model('param7'));
+  var ann_dist_rate = element(by.model('param8'));
+  var av_yield_p_ticket = element(by.model('param9'));
+  var ann_fuel_rate = element(by.model('param10'));
+  var cal_adjust = element(by.model('adjustment'));
   var var_revenue_integrity_proc_imp = element(by.binding('var_revenue_integrity_proc_imp_high'));
   var ref1 = element(by.binding('ref1()'));
   var ref2 = element(by.binding('ref2()'));

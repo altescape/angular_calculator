@@ -57,8 +57,7 @@ angular.module('myApp.controllers', [])
 					/**
 					 *  User information
 					 */
-
-						// Update info, store in localstorage and send data back to infoData
+					// Update info, store in localstorage and send data back to infoData
 					$scope.updateInfo = function () {
 						// Add latest timestamp and date
 						$scope.info.date = {
@@ -101,13 +100,14 @@ angular.module('myApp.controllers', [])
 
 				}])
 
-		.controller('LogOutCtrl',
+		.controller('ClearDataCtrl',
 				[
 					'$scope',
 					'localStorageService',
 					'$location',
 					'infoData',
-					'inputData', function ($scope, localStorageService, $location, infoData, inputData) {
+					'inputData',
+					'$state', function ($scope, localStorageService, $location, infoData, inputData, $state) {
 					/**
 					 *  Logs out the user and clears locally stored data
 					 */
@@ -117,14 +117,14 @@ angular.module('myApp.controllers', [])
 						// Reset models
 						infoData.info = {};
 
-						$location.path('confirm-logout');
+						$state.go('clear-data-confirm');
 					};
 
 					/**
 					 * Once logout has been confirmed, start over
 					 */
 					$scope.startOver = function () {
-						$location.path('user');
+						$state.go('info');
 					};
 
 				}])
@@ -136,8 +136,9 @@ angular.module('myApp.controllers', [])
 					'localStorageService',
 					'infoData',
 					'inputData',
+					'allData',
 					'$location',
-					function ($scope, $firebase, localStorageService, infoData, inputData, $location) {
+					function ($scope, $firebase, localStorageService, infoData, inputData, allData, $location) {
 
 						/**
 						 *  Get current key
@@ -191,8 +192,8 @@ angular.module('myApp.controllers', [])
 							$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
 
 							// Copy saved data to $scope variables
-							$scope.copy_info = $scope.item.meta;
-							$scope.copy_cal = $scope.item.calculations;
+							$scope.copy_info = $scope.item.info;
+							$scope.copy_cal = $scope.item.input;
 
 							// Update the timestamp and date
 							$scope.copy_info.date = {
@@ -202,7 +203,7 @@ angular.module('myApp.controllers', [])
 
 							// Add to items object the copied data
 							$scope.items.$add({
-								meta : $scope.copy_info,
+								info : $scope.copy_info,
 								calculations : $scope.copy_cal
 							});
 						};
@@ -215,19 +216,20 @@ angular.module('myApp.controllers', [])
 						 */
 						$scope.useSession = function (id) {
 
-							// need to confirm that user has saved current calculation before going further
+							// @todo: need to confirm that user has saved current calculation before going further
 
 							// Connect to firebase to retrieve saved calculation with id
 							$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
 
 							// Set the data
-							localStorageService.set('info', $scope.item.meta);
-							localStorageService.set('cal', $scope.item.calculations);
-							localStorageService.set('summary', $scope.item.summary);
+							localStorageService.set('info', $scope.item.info);
+							localStorageService.set('input', $scope.item.input);
+							localStorageService.set('data', $scope.item.data);
 
 							// Update the infoData and ChartInitFactry with new values
 							infoData.info = $scope.item.meta;
-							inputData.cal = $scope.item.calculations;
+							inputData = $scope.item.input;
+							allData.data = $scope.item.data;
 
 							// Set the current key in localstorage
 							localStorageService.set('current_key', id);
@@ -235,13 +237,83 @@ angular.module('myApp.controllers', [])
 							// Set current_key
 							$scope.current_key = localStorageService.get('current_key');
 
-							$location.path('calculator');
+//							$location.path('calculator');
 
 							// Set running session flag to true
 							infoData.info.running_session = true;
 						};
 
 					}])
+
+		.controller('SessionsDetailCtrl',
+				[
+					'$rootScope',
+					'$scope',
+					'$routeParams',
+					'$firebase',
+					'$state',
+					'$stateParams',
+					'chartData', function ($rootScope, $scope, $routeParams, $firebase, $state, $stateParams, chartData) {
+
+					/* Get associated session item from Firebase */
+					$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + $stateParams.id));
+
+					/* Promise for loaded data */
+					$scope.item.$on("loaded", function () {
+
+						var data = $scope.item.data;
+
+						/**
+						 * Calls the factories for each service
+						 */
+						$scope.updateData = function () {
+
+							$scope.revenue_integrity = data.revenue_integrity;
+
+							$scope.revenue_integrity_process_improvement = data.revenue_integrity_process_improvement;
+
+							$scope.cmap = data.cmap;
+
+							$scope.origin_and_destination = data.origin_and_destination;
+
+							$scope.pos = data.pos;
+
+							$scope.arr = data.arr;
+
+							$scope.airfare_insight = data.airfare_insight;
+
+
+//							localStorageService.set('data', allData);
+//							localStorageService.set('input', inputData);
+
+							// @todo: chart configs are not storing separate values for both graphs.
+							// Need to find out why and stop from using this sort of if/else as makes it fragile.
+							if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
+								$scope.chartConfigLow = chartData.drawChart('low', data);
+							} else {
+								$scope.chartConfigHigh = chartData.drawChart('high', data);
+							}
+
+						};
+						$scope.updateData();
+
+						$state.go('saved-calculations-detail.chart_high');
+
+						/**
+						 * View state
+						 *
+						 * Saves the state of the open results view, Charts or table,
+						 * when loaded. Uses state and state change success event ($stateChangeSuccess).
+						 */
+						$rootScope.$on('$stateChangeSuccess',
+								function (event, toState, toParams, fromState, fromParams) {
+									// update chart
+									$scope.updateData();
+								});
+
+					});
+
+				}])
 
 		.controller('SessionsCtrl', ['$scope', 'FbService', 'FbService2', function ($scope, FbService, FbService2) {
 
@@ -305,9 +377,9 @@ angular.module('myApp.controllers', [])
 
 						// Add the data from localstorage and add it to Firebase
 						$scope.items.$add({
-							meta : localStorageService.get('info'),
-							calculations : localStorageService.get('cal'),
-							summary : localStorageService.get('summary')
+							info : localStorageService.get('info'),
+							input : localStorageService.get('input'),
+							data : localStorageService.get('data')
 						}).then(function (ref) {
 
 							// Once added retrieve the ref id and set in localstorage
@@ -347,9 +419,9 @@ angular.module('myApp.controllers', [])
 
 							// Set and update the firebase item with new values from localstorage
 							$scope.items.$set({
-								meta : localStorageService.get('info'),
-								calculations : localStorageService.get('cal'),
-								summary : localStorageService.get('summary')
+								info : localStorageService.get('info'),
+								input : localStorageService.get('input'),
+								data : localStorageService.get('data')
 							}).then(function () {
 
 								// Saving has finished so reset saving flag
@@ -371,6 +443,7 @@ angular.module('myApp.controllers', [])
 				[
 					'$rootScope',
 					'$scope',
+					'$location',
 					'localStorageService',
 					'$state',
 					'chartData',
@@ -386,7 +459,7 @@ angular.module('myApp.controllers', [])
 					'arr',
 					'airfareInsight',
 					'channelShift',
-					function ($rootScope, $scope, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift) {
+					function ($rootScope, $scope, $location, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift) {
 
 						/**
 						 * Calls the factories for each service
@@ -414,17 +487,17 @@ angular.module('myApp.controllers', [])
 							airfareInsight.initObject();
 							$scope.airfare_insight = allData.airfare_insight;
 
-							console.log(channelShift());
+//							console.log(channelShift());
 
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);
 
-							// @todo: chart configs wont store separate values for both graphs?!?
+							// @todo: chart configs are not storing separate values for both graphs.
 							// Need to find out why and stop from using this sort of if/else as makes it fragile.
-							if ( $state.current.name === 'chart_low' ) {
-								$scope.chartConfigLow = chartData.drawChart('low');
+							if ( $state.current.name === 'calculator.chart_low' ) {
+								$scope.chartConfigLow = chartData.drawChart('low', localStorageService.get('data'));
 							} else {
-								$scope.chartConfigHigh = chartData.drawChart('high');
+								$scope.chartConfigHigh = chartData.drawChart('high', localStorageService.get('data'));
 							}
 
 						};
@@ -452,11 +525,10 @@ angular.module('myApp.controllers', [])
 						 *
 						 * @type {*|Array|Choice|Undefined|Object|array|promise|Object}
 						 */
-						$scope.result_view = localStorageService.get('results_view');
-						if ( $scope.result_view ) {
-							$state.go($scope.result_view.name);
+						if ( localStorageService.get('results_view') ) {
+							$state.go(localStorageService.get('results_view').name);
 						} else {
-							$state.go('chart_high');
+							$state.go('calculator.chart_high');
 						}
 
 						/**
@@ -468,7 +540,7 @@ angular.module('myApp.controllers', [])
 						$rootScope.$on('$stateChangeSuccess',
 								function (event, toState, toParams, fromState, fromParams) {
 									// Store state of view in localstorage
-									localStorageService.set('results_view', toState);
+//									localStorageService.set('results_view', toState);
 
 									// update chart
 									$scope.updateData();
@@ -479,7 +551,7 @@ angular.module('myApp.controllers', [])
 						 *
 						 * @type {cal|*|$scope.cal}
 						 */
-						$scope.cal = inputData.cal;
+						$scope.input = inputData;
 
 						/**
 						 * Watch inputs on calculator
@@ -494,4 +566,64 @@ angular.module('myApp.controllers', [])
 									$scope.updateData();
 								}, true);
 
-					}]);
+					}])
+
+		.controller("AuthCtrl", ['$scope', '$firebaseSimpleLogin', 'localStorageService',
+			function ($scope, $firebaseSimpleLogin, localStorageService) {
+				var dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
+
+				$scope.loginObj = $firebaseSimpleLogin(dataRef);
+
+				$scope.loginObj.$getCurrentUser().then(
+						function (user) {
+							if ( user === null ) {
+								$scope.isNotLoggedIn = true;
+							} else {
+								$scope.isNotLoggedIn = false;
+							}
+						}
+				);
+
+				$scope.loginUser = function () {
+					$scope.loginObj.$login("password", {
+						email : $scope.auth.email,
+						password : $scope.auth.password
+					}).then(function (user) {
+
+						// messaging
+						$scope.message = "You are logged in.";
+						$scope.reason = "Welcome, " + user.email;
+						$scope.isNotLoggedIn = false;
+
+						// emit logged in message
+
+
+					}, function (error) {
+						$scope.message = "Login failed";
+						switch (error.code) {
+							case "INVALID_EMAIL" :
+								$scope.reason = "The specified email address is incorrect.";
+								break;
+							case "INVALID_USER" :
+								$scope.reason = "The specified user does not exist.";
+								break;
+							case "INVALID_PASSWORD" :
+								$scope.reason = "The specified password is incorrect";
+								break;
+							case "UNKNOWN_ERROR" :
+								$scope.reason = "An unknown error occurred. Please contact support@firebase.com.";
+								break;
+							case "USER_DENIED" :
+								$scope.reason = "User denied authentication request.";
+								break;
+						}
+					});
+				};
+
+				$scope.logoutUser = function () {
+					$scope.message = "";
+					$scope.loginObj.$logout();
+					$scope.isNotLoggedIn = true;
+				};
+			}
+		]);

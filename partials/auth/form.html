@@ -1,0 +1,30 @@
+<div class="col-md-3 col-md-offset-5  mt-50" ng-controller="AuthCtrl">
+
+    <form ng-show="isNotLoggedIn">
+        <div class="form-group">
+            <label for="email">Username</label>
+            <input id="email" type="email" ng-model="auth.email" class="form-control input-lg"
+                   placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="pword">Password</label>
+            <input id="pword" type="password" ng-model="auth.password" ng-change="updateInfo()" class="form-control input-lg"
+                   placeholder="Enter your Password" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary input-lg user-action" ng-click="loginUser()">LOGIN</button>
+        </div>
+
+        <p class="alert alert-warning" ng-show="message">{{ message }} {{ reason }}</p>
+    </form>
+
+    <div ng-show="loginObj.user" class="text-center">
+        <h2>You're logged in, <a ng-click="logoutUser()">Log out?</a></h2>
+        <p class="lead">{{ loginObj.user.email }}</p>
+        <p class="lead"><a href="/#/calculator" class="">Calculation</a></p>
+        <a ui-sref="calculator" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
+           class="input-lg user-action">CALCULATE <span class="glyphicon glyphicon-chevron-right"></span></a>
+        <button ng-click="logoutUser()" class="btn btn-primary input-lg user-action">LOGOUT</button>
+    </div>
+
+</div>
