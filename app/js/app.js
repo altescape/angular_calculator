@@ -13,17 +13,7 @@ var app = angular.module('myApp', [
 			'myApp.services',
 			'myApp.controllers',
 			'myApp.chart_controllers'
-		]).config(['$routeProvider', '$stateProvider', '$urlRouterProvider', function ($routeProvider, $stateProvider, $urlRouterProvider) {
-//			$routeProvider.when('/info', {templateUrl : 'partials/info.html'});
-//			$routeProvider.when('/auth', {templateUrl : 'partials/auth/form.html', controller : 'AuthCtrl'});
-//			$routeProvider.when('/calculator', {templateUrl : 'partials/calculator.html', controller : 'TestCtrl'});
-//			$routeProvider.when('/logout', {templateUrl : 'partials/logout.html', controller : 'LogOutCtrl'});
-//			$routeProvider.when('/logged-out', {templateUrl : 'partials/logged-out.html', controller : 'LogOutCtrl'});
-//			$routeProvider.when('/saved-calculations', {templateUrl : 'partials/calculations/saved-calculations.html', controller : 'ListSessionCtrl'});
-//			$routeProvider.when('/saved-calculations/:id', {templateUrl : 'partials/calculations/saved-calculations-detail.html', controller : 'SessionsDetailCtrl'});
-//			$routeProvider.when('/save-calculation', {templateUrl : 'partials/calculations/save-calculation.html', controller : 'SaveSessionCtrl'});
-//			$routeProvider.when('/update-calculation', {templateUrl : 'partials/calculations/update-calculation.html', controller : 'UpdateSessionCtrl'});
-//			$routeProvider.when('/test', {templateUrl : 'partials/test.html', controller : 'TestCtrl'});
+		]).config(['$routeProvider', '$stateProvider', function ($routeProvider, $stateProvider) {
 
 			$routeProvider.otherwise({redirectTo : '/info'});
 
@@ -60,7 +50,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('calculator.chart_high', {
-//						url: "/calculator",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
@@ -72,7 +61,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('calculator.chart_low', {
-//						url: "/calculator",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
@@ -84,7 +72,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('calculator.table', {
-//						url: "/calculator",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
@@ -96,7 +83,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('calculator.test', {
-//						url: "/calculator",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
