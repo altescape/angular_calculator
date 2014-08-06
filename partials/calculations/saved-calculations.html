@@ -12,7 +12,7 @@
             <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>Cannot find any saved calculations<br> . . .
             </h1>
 
-            <div class="col-md-3 {{ ele_load_status }}" ng-repeat="item in items | orderByPriority | reverse">
+            <div class="col-xs-6 col-sm-4 col-md-3 {{ ele_load_status }} saved-panels" ng-repeat="item in items | orderByPriority | reverse">
                 <div class="panel " ng-class="{'panel-danger' : confirm == true, 'panel-success' : item.$id == current_key, 'panel-default' : confirm != true && item.$id != current_key}" ng-init="confirm = false">
                     <div class="panel-heading pos-rel">
                         <strong ng-show="item.$id == current_key">USING: </strong>{{ item.info.session.name | uppercase }}
@@ -42,7 +42,7 @@
                     <div class="panel-footer">
                         <div class="btn-group">
                             <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
-                                Display calculator
+                                Use <span class="glyphicon glyphicon-share-alt"></span>
                             </a>
                             <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
                                 Copy <span class="glyphicon glyphicon-plus-sign"></span>

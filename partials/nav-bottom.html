@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-xs-7">
                 <ul class="list-inline info-links">
                     <li ng-show="info.session.name"><span class="text-muted">Name:</span> <a ui-sref="info">{{ info.session.name }}</a></li>
                     <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a ui-sref="info">{{ info.airline.code }}</a>
@@ -10,7 +10,7 @@
                             info.opportunity.name }}</a></li>
                 </ul>
             </div>
-            <div class="col-sm-5 text-right" ng-controller="SaveSessionCtrl">
+            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl">
 
                 <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
                         successful</strong></div>

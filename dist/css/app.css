@@ -311,8 +311,8 @@ th {
     border: 1px solid #ddd !important; } }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("bootstrap/glyphicons-halflings-regular.eot");
-  src: url("bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); }
 
 /* line 25, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_glyphicons.scss */
 .glyphicon {
@@ -1163,11 +1163,11 @@ textarea {
 
 /* line 48, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #36474f;
+  color: #428bca;
   text-decoration: none; }
   /* line 53, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
   a:hover, a:focus {
-    color: #171e22;
+    color: #2a6496;
     text-decoration: underline; }
   /* line 58, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
   a:focus {
@@ -1393,11 +1393,11 @@ mark,
 
 /* line 5, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-primary {
-  color: #36474f; }
+  color: #428bca; }
 
 /* line 8, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 a.text-primary:hover {
-  color: #212c31; }
+  color: #3071a9; }
 
 /* line 5, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-success {
@@ -1437,11 +1437,11 @@ a.text-danger:hover {
 
 /* line 5, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-primary {
-  background-color: #36474f; }
+  background-color: #428bca; }
 
 /* line 8, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 a.bg-primary:hover {
-  background-color: #212c31; }
+  background-color: #3071a9; }
 
 /* line 5, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-success {
@@ -3387,23 +3387,23 @@ select[multiple].input-lg,
 /* line 60, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: white;
-  background-color: #36474f;
-  border-color: #2c3940; }
+  background-color: #428bca;
+  border-color: #357ebd; }
   /* line 15, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     color: white;
-    background-color: #212c31;
-    border-color: #13191c; }
+    background-color: #3071a9;
+    border-color: #285e8e; }
   /* line 22, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     background-image: none; }
   /* line 32, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-    background-color: #36474f;
-    border-color: #2c3940; }
+    background-color: #428bca;
+    border-color: #357ebd; }
   /* line 38, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary .badge {
-    color: #36474f;
+    color: #428bca;
     background-color: white; }
 
 /* line 64, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
@@ -3496,7 +3496,7 @@ select[multiple].input-lg,
 
 /* line 85, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link {
-  color: #36474f;
+  color: #428bca;
   font-weight: normal;
   cursor: pointer;
   border-radius: 0; }
@@ -3510,7 +3510,7 @@ select[multiple].input-lg,
     border-color: transparent; }
   /* line 105, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
   .btn-link:hover, .btn-link:focus {
-    color: #171e22;
+    color: #2a6496;
     text-decoration: underline;
     background-color: transparent; }
   /* line 113, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
@@ -3658,7 +3658,7 @@ tbody.collapse.in {
   color: white;
   text-decoration: none;
   outline: 0;
-  background-color: #36474f; }
+  background-color: #428bca; }
 
 /* line 103, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_dropdowns.scss */
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
@@ -4096,7 +4096,7 @@ tbody.collapse.in {
   /* line 48, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: #eeeeee;
-    border-color: #36474f; }
+    border-color: #428bca; }
   /* line 59, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav .nav-divider {
     height: 1px;
@@ -4143,7 +4143,7 @@ tbody.collapse.in {
   /* line 133, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: white;
-    background-color: #36474f; }
+    background-color: #428bca; }
 
 /* line 144, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
 .nav-stacked > li {
@@ -4710,7 +4710,7 @@ tbody.collapse.in {
       padding: 6px 12px;
       line-height: 1.42857;
       text-decoration: none;
-      color: #36474f;
+      color: #428bca;
       background-color: white;
       border: 1px solid #dddddd;
       margin-left: -1px; }
@@ -4729,7 +4729,7 @@ tbody.collapse.in {
   .pagination > li > a:hover, .pagination > li > a:focus,
   .pagination > li > span:hover,
   .pagination > li > span:focus {
-    color: #171e22;
+    color: #2a6496;
     background-color: #eeeeee;
     border-color: #dddddd; }
   /* line 53, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
@@ -4739,8 +4739,8 @@ tbody.collapse.in {
   .pagination > .active > span:focus {
     z-index: 2;
     color: white;
-    background-color: #36474f;
-    border-color: #36474f;
+    background-color: #428bca;
+    border-color: #428bca;
     cursor: default; }
   /* line 68, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
   .pagination > .disabled > span,
@@ -4867,10 +4867,10 @@ a.label:hover, a.label:focus {
 
 /* line 48, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_labels.scss */
 .label-primary {
-  background-color: #36474f; }
+  background-color: #428bca; }
   /* line 8, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_labels.scss */
   .label-primary[href]:hover, .label-primary[href]:focus {
-    background-color: #212c31; }
+    background-color: #3071a9; }
 
 /* line 52, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_labels.scss */
 .label-success {
@@ -4927,7 +4927,7 @@ a.label:hover, a.label:focus {
     padding: 1px 5px; }
   /* line 40, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_badges.scss */
   a.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
-    color: #36474f;
+    color: #428bca;
     background-color: white; }
   /* line 44, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_badges.scss */
   .nav-pills > li > a > .badge {
@@ -5006,7 +5006,7 @@ a.badge:hover, a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #36474f; }
+  border-color: #428bca; }
 
 /* line 9, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_alerts.scss */
 .alert {
@@ -5126,7 +5126,7 @@ a.thumbnail.active {
   line-height: 20px;
   color: white;
   text-align: center;
-  background-color: #36474f;
+  background-color: #428bca;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
@@ -5280,8 +5280,8 @@ a.list-group-item {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: white;
-  background-color: #36474f;
-  border-color: #36474f; }
+  background-color: #428bca;
+  border-color: #428bca; }
   /* line 99, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item.active .list-group-item-heading,
   .list-group-item.active .list-group-item-heading > small,
@@ -5293,7 +5293,7 @@ a.list-group-item {
     color: inherit; }
   /* line 102, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
-    color: #98aeb9; }
+    color: #e1edf7; }
 
 /* line 4, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_list-group.scss */
 .list-group-item-success {
@@ -5627,22 +5627,22 @@ a.list-group-item-danger {
 
 /* line 229, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel-primary {
-  border-color: #36474f; }
+  border-color: #428bca; }
   /* line 6, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
   .panel-primary > .panel-heading {
     color: white;
-    background-color: #36474f;
-    border-color: #36474f; }
+    background-color: #428bca;
+    border-color: #428bca; }
     /* line 11, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
     .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-      border-top-color: #36474f; }
+      border-top-color: #428bca; }
     /* line 14, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
     .panel-primary > .panel-heading .badge {
-      color: #36474f;
+      color: #428bca;
       background-color: white; }
   /* line 20, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
   .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #36474f; }
+    border-bottom-color: #428bca; }
 
 /* line 232, ../../../../../../Library/WebServer/Documents/hoz_calculator/bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel-success {
@@ -6634,9 +6634,9 @@ button.close {
 
 /* line 25, app.scss */
 .btn-gradient {
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#36474f), to(#0d1112));
-  background-image: -webkit-linear-gradient(#36474f, #0d1112);
-  background-image: linear-gradient(#36474f, #0d1112);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#428bca), to(#245682));
+  background-image: -webkit-linear-gradient(#428bca, #245682);
+  background-image: linear-gradient(#428bca, #245682);
   font-weight: bold;
   text-transform: uppercase;
   border: none;
@@ -6910,7 +6910,7 @@ a:hover {
     background-color: #c4c4c4;
     font-weight: bold;
     border: none;
-    color: #36474f;
+    color: #428bca;
     font-size: 12px;
     border-left: 1px solid rgba(255, 255, 255, 0.46);
     -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -6923,14 +6923,14 @@ a:hover {
     /* line 259, app.scss */
     .panel-heading-btn-group .btn:hover, .panel-heading-btn-group .btn.active {
       background-color: white;
-      color: #171e22; }
+      color: #2a6496; }
 
 /* TRANSPARENT BUTTON */
 /* line 267, app.scss */
 .btn-trans {
   background-color: transparent;
-  color: #36474f;
-  border-color: #36474f; }
+  color: #428bca;
+  border-color: #428bca; }
   /* line 271, app.scss */
   .btn-trans:hover {
     border-color: #222222;
@@ -7458,7 +7458,7 @@ body {
         text-decoration: none;
         -webkit-transition: all .2s linear;
         transition: all .2s linear;
-        background-color: rgba(54, 71, 79, 0.1);
+        background-color: rgba(66, 139, 202, 0.1);
         border-top: 1px solid rgba(0, 0, 0, 0); }
         /* line 492, app.scss */
         .side-nav li a:hover .edit {
@@ -7610,7 +7610,7 @@ a.user-action.disabled, a.user-action[disabled] {
   padding: 0;
   opacity: .3;
   background-color: transparent;
-  color: #36474f;
+  color: #428bca;
   border: none;
   text-transform: uppercase;
   font-weight: bold;
@@ -7632,7 +7632,7 @@ a.user-action.disabled, a.user-action[disabled] {
     font-weight: normal; }
   /* line 657, app.scss */
   .postfix-choice .choice:hover, .input-choices-group .choice:hover {
-    background-color: rgba(33, 44, 49, 0.5);
+    background-color: rgba(48, 113, 169, 0.5);
     color: black;
     cursor: pointer; }
   /* line 662, app.scss */
@@ -7755,34 +7755,39 @@ a.user-action.disabled, a.user-action[disabled] {
     .info-links li:last-child {
       border: none; }
 
+/* SAVED CALCULATIONS PANELS */
+/* line 789, app.scss */
+.saved-panels {
+  height: 290px; }
+
 @media (min-width: 480px) {
   /* rules for mobile horizontal (480 > 768)  */ }
 @media (min-width: 768px) {
   /* rules for tablet (768 > 992) */ }
 @media (min-width: 992px) {
   /* rules for desktop (992 > 1200) */
-  /* line 798, app.scss */
+  /* line 803, app.scss */
   body {
     font-size: 11px; }
 
   /* CHART AREA */
-  /* line 803, app.scss */
+  /* line 808, app.scss */
   .panel__1 {
     right: 70%; }
 
-  /* line 806, app.scss */
+  /* line 811, app.scss */
   .panel__2 {
     left: 30%; }
 
-  /* line 810, app.scss */
+  /* line 815, app.scss */
   .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
     width: 70%; } }
 @media (min-width: 1200px) {
   /* rules for large (> 1200) */
-  /* line 818, app.scss */
+  /* line 823, app.scss */
   body {
     font-size: 13px; }
 
-  /* line 822, app.scss */
+  /* line 827, app.scss */
   .panel-footer .btn {
     font-size: 12px; } }
