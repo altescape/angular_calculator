@@ -36,7 +36,22 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('calculator', {
+						abstract:true,
 						url: "/calculator",
+						views : {
+							"mainView" : {
+								templateUrl : "partials/calculator.html",
+								controller : 'TestCtrl'
+							},
+							"dataView" : {
+								templateUrl : "partials/results/chart_high.html"
+							}
+						}
+					});
+
+			$stateProvider
+					.state('calculator.index', {
+						url: "",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
@@ -111,8 +126,7 @@ var app = angular.module('myApp', [
 								templateUrl : "partials/clear-data-confirm.html",
 								controller : 'ClearDataCtrl'
 							}
-						},
-						controller : 'ClearDataCtrl'
+						}
 					});
 
 			$stateProvider

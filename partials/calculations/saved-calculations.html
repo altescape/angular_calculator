@@ -1,4 +1,4 @@
-<div ng-controller="ListSessionCtrl" ng-cloak class="{{ load_status }}">
+<div ng-cloak class="{{ load_status }}">
     <div class="col-md-12">
 
         <div class="loader">
@@ -25,15 +25,16 @@
                     <div class="panel-body">
 
                         <h5 class="mb-5 mt-0">
-                            <small>OPPORTUNITY</small>
-                        </h5>
-                        <h3 class="mt-0 mb-5">
-                            <a ui-sref="saved-calculations-detail({id:item.$id})">{{ item.info.opportunity.name }}</a></h3>
-
-                        <h5 class="mb-5">
                             <small>AIRLINE</small>
                         </h5>
-                        <h3 class="mt-0 mb-0">{{ item.info.airline.code }}</h3>
+                        <h3 class="mt-0 mb-5">{{ item.info.airline.code }}</h3>
+
+                        <h5 class="mb-5 mt-0">
+                            <small>OPPORTUNITY</small>
+                        </h5>
+                        <h3 class="mt-0 mb-0">
+                            <a ui-sref="saved-calculations-detail({id:item.$id})">{{ item.info.opportunity.name }}</a></h3>
+
                         <hr class="mt-10 mb-10">
                         <h5 class="mt-0 mb-0">
                             <small>SAVED ON: {{ item.info.date.date | date: 'medium' | uppercase }}</small>
@@ -61,11 +62,22 @@
                             </a>
                         </div>
                     </div>
-
-                    {{ item.description }}
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="useSession.html" ng-class="sm">
+    <div class="modal-header text-center">
+        <h3 class="modal-title text-danger">Alert!</h3>
+    </div>
+    <div class="modal-body text-center">
+        <p class="lead mb-0">The current calculation will be replaced!</p>
+    </div>
+    <div class="modal-footer text-center text-capitalize">
+        <strong class="text-muted" style="margin-right: 8px">Go ahead?</strong>
+        <button class="btn btn-danger" ng-click="ok()">YES</button>
+        <button class="btn btn-info" ng-click="cancel()">NO</button>
+    </div>
+</script>
+

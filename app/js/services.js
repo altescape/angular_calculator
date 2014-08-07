@@ -10,9 +10,7 @@ angular.module('myApp.services', [])
 			 *  These objects hold meta data about the user and session such
 			 *  as name, airline name, etc.
 			 */
-			return {
-				info : localStorageService.get('info') ? localStorageService.get('info') : {}
-			}
+			return localStorageService.get('info') ? localStorageService.get('info') : {}
 		})
 
 		.factory('inputData', function (localStorageService) {

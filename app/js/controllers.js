@@ -6,9 +6,10 @@ angular.module('myApp.controllers', [])
 
 		.controller('InfoCtrl',
 				[
+					'$rootScope',
 					'$scope',
 					'localStorageService',
-					'infoData', function ($scope, localStorageService, infoData) {
+					'infoData', function ($rootScope, $scope, localStorageService, infoData) {
 
 					/**
 					 *  Fast click, removes time delay for click on mobile
@@ -57,7 +58,7 @@ angular.module('myApp.controllers', [])
 					/**
 					 *  User information
 					 */
-					// Update info, store in localstorage and send data back to infoData
+						// Update info, store in localstorage and send data back to infoData
 					$scope.updateInfo = function () {
 						// Add latest timestamp and date
 						$scope.info.date = {
@@ -69,10 +70,10 @@ angular.module('myApp.controllers', [])
 
 					// Watch infoData for updates
 					$scope.$watch(function () {
-								return infoData.info;
+								return infoData;
 							},
 							function (newVal, oldVal) {
-								$scope.info = infoData.info;
+								$scope.info = infoData;
 							}, true);
 
 					var settings = {
@@ -115,7 +116,7 @@ angular.module('myApp.controllers', [])
 						localStorageService.clearAll();
 
 						// Reset models
-						infoData.info = {};
+						infoData = {};
 
 						$state.go('clear-data-confirm');
 					};
@@ -132,13 +133,15 @@ angular.module('myApp.controllers', [])
 		.controller('ListSessionCtrl',
 				[
 					'$scope',
+					'$state',
 					'$firebase',
 					'localStorageService',
 					'infoData',
 					'inputData',
 					'allData',
 					'$location',
-					function ($scope, $firebase, localStorageService, infoData, inputData, allData, $location) {
+					'$modal',
+					function ($scope, $state, $firebase, localStorageService, infoData, inputData, allData, $location, $modal) {
 
 						/**
 						 *  Get current key
@@ -178,7 +181,7 @@ angular.module('myApp.controllers', [])
 						 */
 						$scope.deleteSession = function (id) {
 							$scope.items.$remove(id);
-							$location.path('saved-calculations');
+							$state.go('saved-calculations');
 						};
 
 						/**
@@ -189,22 +192,24 @@ angular.module('myApp.controllers', [])
 						$scope.copySession = function (id) {
 
 							// Connect to firebase and retrieve saved calculations
-							$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+							var item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
 
-							// Copy saved data to $scope variables
-							$scope.copy_info = $scope.item.info;
-							$scope.copy_cal = $scope.item.input;
+							// Copy saved data
+							var copy_of_data = item.data,
+									copy_of_info = item.info,
+									copy_of_input = item.input;
 
 							// Update the timestamp and date
-							$scope.copy_info.date = {
+							copy_of_info.date = {
 								timestamp : Math.round(new Date().getTime() / 1000),
 								date : new Date().toISOString()
 							};
 
 							// Add to items object the copied data
 							$scope.items.$add({
-								info : $scope.copy_info,
-								calculations : $scope.copy_cal
+								data : copy_of_data,
+								info : copy_of_info,
+								input : copy_of_input
 							});
 						};
 
@@ -216,34 +221,75 @@ angular.module('myApp.controllers', [])
 						 */
 						$scope.useSession = function (id) {
 
-							// @todo: need to confirm that user has saved current calculation before going further
+							$scope.id = id;
 
-							// Connect to firebase to retrieve saved calculation with id
-							$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+							var modalInstance = $modal.open({
+								templateUrl : 'useSession.html',
+								controller : 'ModalConfirmUseCtrl',
+								size : 'sm',
+								resolve : {
+									id: function () {
+										return id;
+									}
+								}
+							});
 
-							// Set the data
-							localStorageService.set('info', $scope.item.info);
-							localStorageService.set('input', $scope.item.input);
-							localStorageService.set('data', $scope.item.data);
-
-							// Update the infoData and ChartInitFactry with new values
-							infoData.info = $scope.item.meta;
-							inputData = $scope.item.input;
-							allData.data = $scope.item.data;
-
-							// Set the current key in localstorage
-							localStorageService.set('current_key', id);
-
-							// Set current_key
-							$scope.current_key = localStorageService.get('current_key');
-
-//							$location.path('calculator');
-
-							// Set running session flag to true
-							infoData.info.running_session = true;
 						};
+						$scope.$on('updateScopeInfo', function(event, mess) {
+							console.log(mess);
+							console.log('123');
+							//$scope.info = infoData;
+						});
 
 					}])
+
+		.controller('ModalConfirmUseCtrl',
+				[
+					'$scope',
+					'$firebase',
+					'allData',
+					'infoData',
+					'inputData',
+					'localStorageService',
+					'$modalInstance',
+					'id', function ($scope, $firebase, allData, infoData, inputData, localStorageService, $modalInstance, id) {
+
+					$scope.id = id;
+
+					$scope.ok = function () {
+
+						// Connect to firebase to retrieve saved calculation with id
+						var item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+
+						// Set the locally stored data
+						localStorageService.set('data', item.data);
+						localStorageService.set('info', item.info);
+						localStorageService.set('input', item.input);
+
+						// Update the factories
+						allData = item.data;
+						infoData = item.info;
+						inputData = item.input;
+
+						// Set the current key in localstorage
+						localStorageService.set('current_key', id);
+
+						// Set current_key
+						$scope.current_key = localStorageService.get('current_key');
+
+						// Set running session flag to true
+						infoData.running_session = true;
+
+						$scope.$emit('updateScopeInfo', 'please change $scope.info');
+
+						$modalInstance.close();
+					};
+
+					$scope.cancel = function () {
+						$modalInstance.dismiss('cancel');
+					};
+
+				}])
 
 		.controller('SessionsDetailCtrl',
 				[
@@ -281,7 +327,6 @@ angular.module('myApp.controllers', [])
 							$scope.arr = data.arr;
 
 							$scope.airfare_insight = data.airfare_insight;
-
 
 //							localStorageService.set('data', allData);
 //							localStorageService.set('input', inputData);
@@ -346,10 +391,10 @@ angular.module('myApp.controllers', [])
 
 					// Watch infoData for updates
 					$scope.$watch(function () {
-								return infoData.info;
+								return infoData;
 							},
 							function (newVal, oldVal) {
-								$scope.info = infoData.info;
+								$scope.info = infoData;
 							}, true);
 
 					/**
@@ -596,7 +641,6 @@ angular.module('myApp.controllers', [])
 						$scope.isNotLoggedIn = false;
 
 						// emit logged in message
-
 
 					}, function (error) {
 						$scope.message = "Login failed";
