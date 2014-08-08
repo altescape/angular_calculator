@@ -15,7 +15,15 @@ var app = angular.module('myApp', [
 			'myApp.chart_controllers'
 		]).config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
-			$urlRouterProvider.otherwise("/auth");
+			$urlRouterProvider.otherwise("/home");
+
+			$stateProvider
+					.state('home', {
+						url: "/home",
+						views : {
+							"mainView" : {templateUrl : "partials/home.html"}
+						}
+					});
 
 			$stateProvider
 					.state('info', {
