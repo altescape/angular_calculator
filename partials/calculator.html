@@ -31,8 +31,9 @@
                         <div class="postfix-label">
                             <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number" ng-model="input.param2"
                                    ng-change="updateData();" class="form-control"
-                                   step="10"
-                                   min="0">
+                                   step="5"
+                                   min="0"
+                                   max="100">
                             <span class="label">%</span>
                         </div>
                     </div>
@@ -48,8 +49,9 @@
                         <div class="postfix-label">
                             <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number" ng-model="input.param4"
                                    ng-change="updateData();" class="form-control"
-                                   step="10"
-                                   min="0">
+                                   step="5"
+                                   min="0"
+                                   max="100">
                             <span class="label">%</span>
                         </div>
                     </div>
@@ -104,7 +106,8 @@
                             <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number" ng-model="input.param8"
                                    ng-change="updateData();" class="form-control"
                                    step="5"
-                                   min="0">
+                                   min="0"
+                                   max="100">
                             <span class="label">%</span>
                         </div>
                     </div>
@@ -125,8 +128,9 @@
                         <div class="postfix-label">
                             <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number" ng-model="input.param10"
                                    ng-change="updateData();" class="form-control"
-                                   step="10"
-                                   min="0">
+                                   step="5"
+                                   min="0"
+                                   max="100">
                             <span class="label">%</span>
                         </div>
                     </div>
@@ -151,10 +155,9 @@
         <div class="row panel panel-default panel__item">
             <div class="panel-heading pos-rel">Results
                 <div class="panel-heading-btn-group pull-right btn-group">
-                    <a ui-sref="calculator.chart_high" class="btn btn-primary" ui-sref-active="active">Chart (High)</a>
+                    <a ui-sref="calculator.chart_high" class="btn btn-primary" ng-class="{'active' : resultsView == 'calculator.index' || resultsView == 'calculator.chart_high'}">Chart (High)</a>
                     <a ui-sref="calculator.chart_low" class="btn btn-primary" ui-sref-active="active">Chart (Low)</a>
-                    <a ui-sref="calculator.table" class="btn btn-primary" ui-sref-active="active">Tables</a>
-                    <a ui-sref="calculator.test" class="btn btn-primary" ui-sref-active="active">Test data</a>
+                    <a ui-sref="calculator.test" class="btn btn-primary" ui-sref-active="active">Data</a>
                 </div>
             </div>
             <div class="panel-body">

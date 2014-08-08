@@ -10,26 +10,35 @@
                             info.opportunity.name }}</a></li>
                 </ul>
             </div>
-            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl">
+            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="user_forms_ready">
 
-                <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
-                        successful</strong></div>
+                <div ng-show="info.loggedIn">
+                    <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
+                            successful</strong></div>
 
-                <a ng-hide="info.running_session == true" ng-click="saveSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
-                    <span ng-show="saving == false">SAVE NEW</span>
-                    <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
-                </a>
+                    <!-- hide button if user hasnt entered any information yet -->
+                    <div ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name">
 
-                <div class="btn-group" ng-show="info.running_session == true" ng-cloak>
-                    <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span
-                          class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
-                    <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
-                       ng-disabled="saving == true">
-                        <span ng-show="saving == false">SAVE</span>
-                        <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
-                    </a>
+                        <!-- Show if session has been saved previously and is now running -->
+                        <a ng-hide="info.running_session == true" ng-click="saveSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
+                            <span ng-show="saving == false">SAVE NEW</span>
+                            <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
+                        </a>
+
+                        <!-- Show if session has not been saved yet -->
+                        <div class="btn-group" ng-show="info.running_session == true" ng-cloak>
+                            <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span
+                                  class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
+                            <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
+                               ng-disabled="saving == true">
+                                <span ng-show="saving == false">SAVE</span>
+                                <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
+                <a ng-hide="info.loggedIn" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
 
             </div>
         </div>

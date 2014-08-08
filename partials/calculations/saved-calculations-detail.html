@@ -67,107 +67,108 @@
         <h4>Services</h4>
         <table class="table table-bordered table-striped">
             <tr>
-                <td width="70%">Revenue Integrity</td>
+                <td width="70%" ng-class="{'text-muted' : item.input.services.op1 == null}">Revenue Integrity</td>
                 <td width="30%" class="text-center">
-                    <span ng-show="item.input.services.op1" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op1" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op1" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op1" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>Revenue Integrity process improvement</td>
+                <td ng-class="{'text-muted' : item.input.services.op2 == null}">Revenue Integrity process improvement</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op2" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op2" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op2" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op2" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>Channel Shift</td>
+                <td ng-class="{'text-muted' : item.input.services.op3 == null}">Channel Shift</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op3" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op3" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op3" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op3" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>Ancillary sales</td>
+                <td ng-class="{'text-muted' : item.input.services.op4 == null}">Ancillary sales</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op4" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op4" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op4" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op4" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>CMAP</td>
+                <td ng-class="{'text-muted' : item.input.services.op5 == null}">CMAP</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op5" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op5" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op5" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op5" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>O&D</td>
+                <td ng-class="{'text-muted' : item.input.services.op6 == null}">O&D</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op6" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op6" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op6" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op6" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>POS</td>
+                <td ng-class="{'text-muted' : item.input.services.op7 == null}">POS</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op7" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op7" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op7" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op7" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
             <tr>
-                <td>ARR</td>
+                <td ng-class="{'text-muted' : item.input.services.op8 == null}">Airfare Insight</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op8" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op8" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op8" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op8" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
-            <tr>
-                <td>Insight</td>
+            <tr ng-class="{'text-muted' : item.input.services.op9 == null}">
+                <td>Reprice/re-issue (ARR)</td>
                 <td class="text-center">
-                    <span ng-show="item.input.services.op9" class="glyphicon glyphicon-ok-circle text-success"></span>
-                    <span ng-hide="item.input.services.op9" class="glyphicon glyphicon-remove-circle text-danger"></span>
+                    <span ng-show="item.input.services.op9" class="glyphicon glyphicon-ok-sign text-success"></span>
+                    <span ng-hide="item.input.services.op9" class="glyphicon glyphicon-minus-sign text-muted"></span>
                 </td>
             </tr>
         </table>
     </div>
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="btn-group">
-            <a ui-sref="saved-calculations" class="btn btn-primary btn-gradient"><span
-                  class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
-            <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
-                Display calculator
-            </a>
-            <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">Copy
-                <span class="glyphicon glyphicon glyphicon-plus-sign"></span>
-            </a>
-        </div>
-        <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
-            <span class="glyphicon glyphicon-minus-sign"></span>
-        </a>
+    <div class="col-sm-12 col-md-12 col-lg-12" ng-controller="ListSessionCtrl" ng-init="confirm = false">
 
-        <div ng-hide="confirm == false" class="btn-group pull-right">
-            <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
-                <span class="glyphicon glyphicon-ok"></span>
+        <div class="panel-footer">
+            <div class="btn-group">
+                <a ui-sref="saved-calculations" class="btn btn-primary btn-gradient"><span
+                      class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
+                    Use <span class="glyphicon glyphicon-share-alt"></span>
+                </a>
+                <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
+                    Copy <span class="glyphicon glyphicon-plus-sign"></span>
+                </a>
+            </div>
+            <a ng-hide="confirm == true" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
+                <span class="glyphicon glyphicon-minus-sign"></span>
             </a>
-            <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
-                <span class="glyphicon glyphicon-remove"></span>
-            </a>
+
+            <div ng-hide="confirm == false" class="btn-group pull-right">
+                <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+                <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </a>
+            </div>
         </div>
-        <p ng-hide="confirm == false" class="pull-right" style="margin: 6px; font-size: 10px; opacity: 0.5; font-weight: bold">
-            SURE?</p>
+
     </div>
 
 
 </div>
 <div id="chart" class="panel__2">
-    <div class="row panel panel-default panel__item">
+    <div class="row panel panel-default panel__item" ng-class="{'panel-danger' : confirm == true}">
         <div class="panel-heading pos-rel">Results
             <div class="panel-heading-btn-group pull-right btn-group">
                 <a ui-sref="saved-calculations-detail.chart_high" class="btn btn-primary" ui-sref-active="active">Chart (High)</a>
                 <a ui-sref="saved-calculations-detail.chart_low" class="btn btn-primary" ui-sref-active="active">Chart (Low)</a>
-                <a ui-sref="saved-calculations-detail.table" class="btn btn-primary" ui-sref-active="active">Tables</a>
-                <a ui-sref="saved-calculations-detail.test" class="btn btn-primary" ui-sref-active="active">Test data</a>
+                <a ui-sref="saved-calculations-detail.test" class="btn btn-primary" ui-sref-active="active">Data</a>
             </div>
         </div>
         <div class="panel-body">
@@ -176,180 +177,16 @@
     </div>
 </div>
 
-<!--    <div class="col-md-10 col-md-offset-1">-->
-<!---->
-<!--        <div class="panel panel-default" ng-class="{'panel-danger' : confirm == true}" ng-init="confirm = false">-->
-<!--            <div class="panel-heading">-->
-<!--                <h5>{{ item.info.user.name | uppercase }} <small>SAVED ON: {{ item.info.date.date | date: 'medium' | uppercase }}</small></h5>-->
-<!--            </div>-->
-<!--            <div class="panel-body" ng-class="{'op25' : confirm == true}">-->
-<!--                <div class="col-sm-3 col-md-3 col-lg-4">-->
-<!--                    <h5 class="mb-5">-->
-<!--                        <small>OPPORTUNITY</small>-->
-<!--                    </h5>-->
-<!--                    <h2 class="mt-0 mb-5">{{ item.info.opportunity.name }}</h2>-->
-<!---->
-<!--                    <h5 class="mb-5">-->
-<!--                        <small>AIRLINE</small>-->
-<!--                    </h5>-->
-<!--                    <h2 class="mt-0">{{ item.info.airline.code }}</h2>-->
-<!--                    <hr>-->
-<!--                    <h3>Data</h3>-->
-<!--                    <table class="table table-bordered table-striped">-->
-<!--                        <tr>-->
-<!--                            <td>Current total passengers boarded per year</td>-->
-<!--                            <td>{{ param1 | commas }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Expected passenger growth per year - for the next 5 years</td>-->
-<!--                            <td>{{ param2 }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Number of tickets issued per year</td>-->
-<!--                            <td>{{ param3 | commas }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Percentage of tickets reissued</td>-->
-<!--                            <td>{{ param4 }}%</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Hourly labour costs</td>-->
-<!--                            <td>${{ param5 }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Airline's annual revenue</td>-->
-<!--                            <td>${{ param6 | commas }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Airline's annual cost base</td>-->
-<!--                            <td>${{ param7 | commas }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Annual distribution costs rate</td>-->
-<!--                            <td>{{ param8 }}%</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Average yield per ticket</td>-->
-<!--                            <td>${{ param9 }}</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Annual fuel cost rate</td>-->
-<!--                            <td>{{ param10 }}%</td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!---->
-<!--                    <h3>Services</h3>-->
-<!--                    <table class="table table-bordered table-striped">-->
-<!--                        <tr>-->
-<!--                            <td>Revenue Integrity</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op1" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op1" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Revenue Integrity process improvement</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op2" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op2" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Channel Shift</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op3" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op3" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Ancillary sales</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op4" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op4" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>CMAP</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op5" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op5" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>O&D</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op6" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op6" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>POS</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op7" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op7" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>ARR</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op8" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op8" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>Insight</td>-->
-<!--                            <td class="text-center">-->
-<!--                                <span ng-show="services.op9" class="glyphicon glyphicon-ok-circle text-success"></span>-->
-<!--                                <span ng-hide="services.op9" class="glyphicon glyphicon-remove-circle text-danger"></span>-->
-<!--                            </td>-->
-<!--                        </tr>-->
-<!--                    </table>-->
-<!--                </div>-->
-<!--<!--                <div class="col-sm-9 col-md-9 col-lg-8">-->-->
-<!--<!--                    <div class="panel__padding">-->-->
-<!--<!--                        <div class="row">-->-->
-<!--<!--                            <div class="col-sm-12 text-center">-->-->
-<!--<!--                                <h3>Value of moving to SITA (High) <span class="label label-success">{{ value_total }}</span></h3>-->
--->
-<!--<!--                            </div>-->-->
-<!--<!--                        </div>-->-->
-<!--<!--                        <div class="row">-->-->
-<!--<!--                            <div class="col-sm-12 pos-rel text-center">-->-->
-<!--<!--                                <highchart config="chartConfigHigh"></highchart>-->-->
-<!--<!--                            </div>-->-->
-<!--<!--                        </div>-->-->
-<!--<!--                    </div>-->-->
-<!--<!---->-->
-<!--<!--                </div>-->-->
-<!---->
-<!---->
-<!--            </div>-->
-<!--            <div class="panel-footer">-->
-<!--                <div class="btn-group">-->
-<!--                    <a ui-sref="saved-calculations" class="btn btn-primary btn-gradient"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>-->
-<!--                    <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">-->
-<!--                        Display calculator-->
-<!--                    </a>-->
-<!--                    <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">Copy-->
-<!--                        <span class="glyphicon glyphicon glyphicon-plus-sign"></span>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <a ng-show="confirm == false" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">-->
-<!--                    <span class="glyphicon glyphicon-minus-sign"></span>-->
-<!--                </a>-->
-<!---->
-<!--                <div ng-hide="confirm == false" class="btn-group pull-right">-->
-<!--                    <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">-->
-<!--                        <span class="glyphicon glyphicon-ok"></span>-->
-<!--                    </a>-->
-<!--                    <a ng-click="confirm = false" class="btn btn-danger btn-gradient">-->
-<!--                        <span class="glyphicon glyphicon-remove"></span>-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--                <p ng-hide="confirm == false" class="pull-right" style="margin: 6px; font-size: 10px; opacity: 0.5; font-weight: bold">-->
-<!--                    SURE?</p>-->
-<!--            </div>-->
-<!---->
-<!--        </div>-->
-<!---->
-<!--    </div>-->
+<script type="text/ng-template" id="useSession.html" ng-class="sm">
+    <div class="modal-header text-center">
+        <h3 class="modal-title text-danger">Alert!</h3>
+    </div>
+    <div class="modal-body text-center">
+        <p class="lead mb-0">The current calculation will be replaced!</p>
+    </div>
+    <div class="modal-footer text-center text-capitalize">
+        <strong class="text-muted" style="margin-right: 8px">Go ahead?</strong>
+        <button class="btn btn-danger" ng-click="ok()">YES</button>
+        <button class="btn btn-info" ng-click="cancel()">NO</button>
+    </div>
+</script>

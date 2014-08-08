@@ -13,9 +13,9 @@ var app = angular.module('myApp', [
 			'myApp.services',
 			'myApp.controllers',
 			'myApp.chart_controllers'
-		]).config(['$routeProvider', '$stateProvider', function ($routeProvider, $stateProvider) {
+		]).config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
-			$routeProvider.otherwise({redirectTo : '/info'});
+			$urlRouterProvider.otherwise("/auth");
 
 			$stateProvider
 					.state('info', {
@@ -30,8 +30,23 @@ var app = angular.module('myApp', [
 						url: "/auth",
 						views : {
 							"mainView" : {templateUrl : "partials/auth/form.html"}
-						},
-						controller : 'AuthCtrl'
+						}
+					});
+
+			$stateProvider
+					.state('forgot-password', {
+						url: "/forgot-password",
+						views : {
+							"mainView" : {templateUrl : "partials/auth/forgot-password.html"}
+						}
+					});
+
+			$stateProvider
+					.state('reset-password', {
+						url: "/reset-password",
+						views : {
+							"mainView" : {templateUrl : "partials/auth/reset-password.html"}
+						}
 					});
 
 			$stateProvider

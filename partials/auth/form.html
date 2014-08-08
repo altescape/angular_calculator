@@ -1,8 +1,9 @@
-<div class="col-md-3 col-md-offset-5  mt-50" ng-controller="AuthCtrl">
+<div class="col-md-3 col-md-offset-5" ng-controller="AuthCtrl" ng-show="user_forms_ready">
 
-    <form ng-show="isNotLoggedIn">
+    <form ng-hide="info.loggedIn" name="login">
+        <h1>Sign in</h1>
         <div class="form-group">
-            <label for="email">Username</label>
+            <label for="email">Email</label>
             <input id="email" type="email" ng-model="auth.email" class="form-control input-lg"
                    placeholder="Enter your email" required>
         </div>
@@ -12,19 +13,18 @@
                    placeholder="Enter your Password" required>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary input-lg user-action" ng-click="loginUser()">LOGIN</button>
+            <button type="submit" class="input-lg user-action" ng-click="loginUser();">Sign in <small-loader ng-show="show_loader"></small-loader></button>
         </div>
 
         <p class="alert alert-warning" ng-show="message">{{ message }} {{ reason }}</p>
+
+        <p class="mt-20 mb-20"><a ui-sref="forgot-password">Forgotten password</a> | <a ui-sref="reset-password">Reset password</a></p>
     </form>
 
-    <div ng-show="loginObj.user" class="text-center">
-        <h2>You're logged in, <a ng-click="logoutUser()">Log out?</a></h2>
-        <p class="lead">{{ loginObj.user.email }}</p>
-        <p class="lead"><a href="/#/calculator" class="">Calculation</a></p>
-        <a ui-sref="calculator" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-           class="input-lg user-action">CALCULATE <span class="glyphicon glyphicon-chevron-right"></span></a>
-        <button ng-click="logoutUser()" class="btn btn-primary input-lg user-action">LOGOUT</button>
+    <div ng-show="loginObj.user">
+        <h1>Sign out</h1>
+        <p class="lead">Are you sure you'd like to <a ng-click="logoutUser()" class="text-danger">sign out?</a></p>
+        <p class="alert alert-warning text-capitalize mt-30 mb-0">Signed in as {{ loginObj.user.email }}</p>
     </div>
 
 </div>

@@ -1,46 +1,35 @@
 <div class="snap-drawer snap-drawer-left">
     <ul class="list-unstyled side-nav">
+        <li><a ui-sref="auth">
+                <span ng-show="info.loggedIn"><img ng-src="/app/img/nav-icon-logout.png"> Sign Out</span>
+                <span ng-hide="info.loggedIn"><img ng-src="/app/img/nav-icon-login.png"> Sign In</span>
+            </a>
+        </li>
         <li>
             <a ui-sref="info">
                 <img ng-src="/app/img/nav-icon-user.png">
-                {{ info.session.name }} <span class="edit" ng-show="info.session.name">(Edit)</span>
-                <span ng-hide="info.session.name">Name this calculation</span>
+                {{ info.session.name }} <span class="edit" ng-show="info.session.name">(Edit info)</span>
+                <span ng-hide="info.session.name">New Calculation</span>
             </a>
         </li>
-<!--        <li>-->
-<!--            <a href="/#/user">-->
-<!--                <img ng-src="/app/img/nav-icon-code.png">-->
-<!--                {{ info.airline.code }} <span class="edit" ng-show="info.airline.code">(Edit)</span>-->
-<!--                <span ng-hide="info.airline.code">Enter airline code</span>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--            <a href="/#/user">-->
-<!--                <img ng-src="/app/img/nav-icon-company.png">-->
-<!--                {{ info.opportunity.name }} <span class="edit" ng-show="info.opportunity.name">(Edit)</span>-->
-<!--                <span ng-hide="info.opportunity.name">Name this opportunity</span>-->
-<!--            </a>-->
-<!--        </li>-->
         <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name">
             <a ui-sref="calculator.index">
                 <img src="/app/img/nav-icon-calc.png">Calculator
             </a>
         </li>
-        <li><a ui-sref="saved-calculations"><img ng-src="/app/img/nav-icon-graph.png"> Saved Calculations</a></li>
-        <li>
-                <span class="online" ng-show="isNetUp">
-                    <a>
-                        <img ng-src="/app/img/network-connected.png"> Online
-                    </a>
-                </span>
-                    <span class="offline" ng-hide="isNetUp">
-                        <a>
-                            <img ng-src="/app/img/network-not-connected.png"> Offline
-                        </a>
-                    </span>
-        </li>
-        <!--li ng-controller="SaveSessionCtrl"><a ng-click="saveSession()"><img ng-src="/app/img/nav-icon-graphics.png"> Save this session</a></li-->
-        <li><a ui-sref="clear-data"><img ng-src="/app/img/nav-icon-trash.png"> Clear Local Data</a></li>
-        <li><a ui-sref="auth"><img ng-src="/app/img/nav-icon-logout.png"> Log In/Out</a></li>
+        <li ng-show="info.loggedIn"><a ui-sref="saved-calculations"><img ng-src="/app/img/nav-icon-graph.png"> Saved Calculations</a></li>
+<!--        <li>-->
+<!--                <span class="online" ng-show="isNetUp">-->
+<!--                    <a>-->
+<!--                        <img ng-src="/app/img/network-connected.png"> Online-->
+<!--                    </a>-->
+<!--                </span>-->
+<!--                    <span class="offline" ng-hide="isNetUp">-->
+<!--                        <a>-->
+<!--                            <img ng-src="/app/img/network-not-connected.png"> Offline-->
+<!--                        </a>-->
+<!--                    </span>-->
+<!--        </li>-->
+        <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name"><a ui-sref="clear-data"><img ng-src="/app/img/nav-icon-trash.png"> Clear Local Data</a></li>
     </ul>
 </div>

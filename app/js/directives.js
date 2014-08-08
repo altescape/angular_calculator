@@ -78,4 +78,11 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 				restrict : 'E',
 				templateUrl : 'partials/calculator/services.html'
 			}
+		}]).
+
+		directive('smallLoader', [function () {
+			return {
+				restrict : 'E',
+				templateUrl : 'partials/global/small-loader.html'
+			}
 		}]);

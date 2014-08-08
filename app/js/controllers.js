@@ -9,12 +9,36 @@ angular.module('myApp.controllers', [])
 					'$rootScope',
 					'$scope',
 					'localStorageService',
-					'infoData', function ($rootScope, $scope, localStorageService, infoData) {
+					'$firebaseSimpleLogin',
+					'infoData', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, infoData) {
+
+					$scope.dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
+
+					$scope.loginObj = $firebaseSimpleLogin($scope.dataRef);
+
+					$scope.loginObj.$getCurrentUser().then(
+							function (user) {
+								$scope.user_forms_ready = true;
+								if ( user === null ) {
+									infoData.loggedIn = false;
+								} else {
+									infoData.loggedIn = true;
+								}
+							}
+					);
 
 					/**
 					 *  Fast click, removes time delay for click on mobile
 					 */
 					FastClick.attach(document.body, null);
+
+					/**
+					 * Check logged in
+					 * @type {Firebase}
+					 */
+					$scope.$on('isLoggedInMessage', function (event, msg) {
+						infoData.loggedIn = msg;
+					});
 
 					/**
 					 *  Check net is up
@@ -104,185 +128,243 @@ angular.module('myApp.controllers', [])
 		.controller('ClearDataCtrl',
 				[
 					'$scope',
+					'$window',
 					'localStorageService',
 					'$location',
 					'infoData',
 					'inputData',
-					'$state', function ($scope, localStorageService, $location, infoData, inputData, $state) {
-					/**
-					 *  Logs out the user and clears locally stored data
-					 */
-					$scope.confirmLogout = function () {
-						localStorageService.clearAll();
+					'allData',
+					'$state',
+					'$timeout',
+					function ($scope, $window, localStorageService, $location, infoData, inputData, allData, $state, $timeout) {
+						/**
+						 *  Logs out the user and clears locally stored data
+						 */
+						$scope.orig = angular.copy($scope.input);
 
-						// Reset models
-						infoData = {};
+						$scope.confirmClearData = function () {
 
-						$state.go('clear-data-confirm');
-					};
+							localStorageService.clearAll();
 
-					/**
-					 * Once logout has been confirmed, start over
-					 */
-					$scope.startOver = function () {
-						$state.go('info');
-					};
+							$scope.input = angular.copy($scope.orig);
 
-				}])
+							// Reset factories
+							infoData = {};
+							inputData = {};
+							allData = {};
+
+							// Reset models
+							$scope.info = {
+								data : "reset"
+							};
+							$scope.input = {
+								data : "reset"
+							};
+
+							// Redirect to next step
+							$state.transitionTo('clear-data-confirm');
+							$timeout(function () {
+								$window.location.reload();
+							}, 10);
+						};
+
+						/**
+						 * Once logout has been confirmed, start over
+						 */
+						$scope.startOver = function () {
+							$state.go('info');
+						};
+
+					}])
 
 		.controller('ListSessionCtrl',
 				[
 					'$scope',
 					'$state',
 					'$firebase',
+					'$firebaseSimpleLogin',
 					'localStorageService',
 					'infoData',
 					'inputData',
 					'allData',
 					'$location',
 					'$modal',
-					function ($scope, $state, $firebase, localStorageService, infoData, inputData, allData, $location, $modal) {
+					function ($scope, $state, $firebase, $firebaseSimpleLogin, localStorageService, infoData, inputData, allData, $location, $modal) {
 
-						/**
-						 *  Get current key
-						 */
-						$scope.current_key = localStorageService.get('current_key');
+						$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
 
-						/**
-						 *  Gets saved calculations from firebase
-						 *
-						 * @type {*}
-						 */
-						$scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita'));
+						var dataRef = new Firebase($scope.firebaseAddress),
+								loginObj = $firebaseSimpleLogin(dataRef);
 
-						/**
-						 * Loading data preloading
-						 */
-						$scope.load_status = "loading";
-						$scope.ele_load_status = "hide_on_loading";
-						$scope.items.$on("loaded", function () {
-							$scope.load_status = "loaded";
-							$scope.ele_load_status = "show_on_loaded";
-						});
+						loginObj.$getCurrentUser().then(
+								function (user) {
+									if ( user === null ) {
+										// Logged in: no @todo
+										// - Message 'you need to login before updating'
+										// - redirect to auth page
+										console.log("Not logged in");
+									} else {
+										// Logged in: yes
+										// - get current user id and append to firebase address
+										var userId = user.id;
 
-						/**
-						 * Count saved calculations
-						 *
-						 * @returns {y.length|*|z.length|dummy.length|length|mfn.length}
-						 */
-						$scope.sessionCount = function () {
-							return $scope.items.$getIndex().length;
-						};
+										/**
+										 *  Gets saved calculations from firebase
+										 *
+										 * @type {*}
+										 */
+										$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/"));
 
-						/**
-						 *  Delete saved calculations
-						 *
-						 *  @param id
-						 */
-						$scope.deleteSession = function (id) {
-							$scope.items.$remove(id);
-							$state.go('saved-calculations');
-						};
+										/**
+										 *  Get current key
+										 */
+										$scope.current_key = localStorageService.get('current_key');
 
-						/**
-						 *  Copy a saved calculation
-						 *
-						 *  @param id
-						 */
-						$scope.copySession = function (id) {
+										/**
+										 * Loading data preloading
+										 */
+										$scope.load_status = "loading";
+										$scope.ele_load_status = "hide_on_loading";
+										$scope.items.$on("loaded", function () {
+											$scope.load_status = "loaded";
+											$scope.ele_load_status = "show_on_loaded";
+										});
 
-							// Connect to firebase and retrieve saved calculations
-							var item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+										/**
+										 * Count saved calculations
+										 *
+										 * @returns {y.length|*|z.length|dummy.length|length|mfn.length}
+										 */
+										$scope.sessionCount = function () {
+											return $scope.items.$getIndex().length;
+										};
 
-							// Copy saved data
-							var copy_of_data = item.data,
-									copy_of_info = item.info,
-									copy_of_input = item.input;
+										/**
+										 *  Delete saved calculations
+										 *
+										 *  @param id
+										 */
+										$scope.deleteSession = function (id) {
+											$scope.items.$remove(id);
+											$state.go('saved-calculations');
+										};
 
-							// Update the timestamp and date
-							copy_of_info.date = {
-								timestamp : Math.round(new Date().getTime() / 1000),
-								date : new Date().toISOString()
-							};
+										/**
+										 *  Copy a saved calculation
+										 *
+										 *  @param id
+										 */
+										$scope.copySession = function (id) {
 
-							// Add to items object the copied data
-							$scope.items.$add({
-								data : copy_of_data,
-								info : copy_of_info,
-								input : copy_of_input
-							});
-						};
+											// Connect to firebase and retrieve saved calculations
+											var item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id));
 
-						/**
-						 *  Use a particular saved calculation,
-						 *  replaces data in local storage with this copied calculation
-						 *
-						 *  @param id
-						 */
-						$scope.useSession = function (id) {
+											// Copy saved data
+											var copy_of_data = item.data,
+													copy_of_info = item.info,
+													copy_of_input = item.input;
 
-							$scope.id = id;
+											// Update the timestamp and date
+											copy_of_info.date = {
+												timestamp : Math.round(new Date().getTime() / 1000),
+												date : new Date().toISOString()
+											};
 
-							var modalInstance = $modal.open({
-								templateUrl : 'useSession.html',
-								controller : 'ModalConfirmUseCtrl',
-								size : 'sm',
-								resolve : {
-									id: function () {
-										return id;
+											// Add to items object the copied data
+											$scope.items.$add({
+												data : copy_of_data,
+												info : copy_of_info,
+												input : copy_of_input
+											});
+										};
+
+										/**
+										 *  Use a particular saved calculation,
+										 *  replaces data in local storage with this copied calculation
+										 *
+										 *  @param id
+										 */
+										$scope.useSession = function (id) {
+
+											$scope.id = id;
+
+											var modalInstance = $modal.open({
+												templateUrl : 'useSession.html',
+												controller : 'ModalConfirmUseCtrl',
+												size : 'sm',
+												resolve : {
+													id : function () {
+														return id;
+													}
+												}
+											});
+
+										};
+
 									}
 								}
-							});
-
-						};
-						$scope.$on('updateScopeInfo', function(event, mess) {
-							console.log(mess);
-							console.log('123');
-							//$scope.info = infoData;
-						});
+						);
 
 					}])
 
 		.controller('ModalConfirmUseCtrl',
 				[
 					'$scope',
+					'$window',
 					'$firebase',
+					'$firebaseSimpleLogin',
+					'$state',
 					'allData',
 					'infoData',
 					'inputData',
 					'localStorageService',
 					'$modalInstance',
-					'id', function ($scope, $firebase, allData, infoData, inputData, localStorageService, $modalInstance, id) {
+					'id', function ($scope, $window, $firebase, $firebaseSimpleLogin, $state, allData, infoData, inputData, localStorageService, $modalInstance, id) {
 
+					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
 					$scope.id = id;
 
 					$scope.ok = function () {
 
+						// Check logged in
+						var dataRef = new Firebase($scope.firebaseAddress),
+								loginObj = $firebaseSimpleLogin(dataRef);
+
 						// Connect to firebase to retrieve saved calculation with id
-						var item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + id));
+						loginObj.$getCurrentUser().then(
+								function (user) {
+									if ( user === null ) {
 
-						// Set the locally stored data
-						localStorageService.set('data', item.data);
-						localStorageService.set('info', item.info);
-						localStorageService.set('input', item.input);
+									} else {
+										var userId = user.id;
 
-						// Update the factories
-						allData = item.data;
-						infoData = item.info;
-						inputData = item.input;
+										var item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id));
 
-						// Set the current key in localstorage
-						localStorageService.set('current_key', id);
+										// Set the locally stored data
+										localStorageService.set('data', item.data);
+										localStorageService.set('info', item.info);
+										localStorageService.set('input', item.input);
 
-						// Set current_key
-						$scope.current_key = localStorageService.get('current_key');
+										// Update the factories
+										allData = item.data;
+										infoData = item.info;
+										inputData = item.input;
 
-						// Set running session flag to true
-						infoData.running_session = true;
+										// Set the current key in localstorage
+										localStorageService.set('current_key', id);
 
-						$scope.$emit('updateScopeInfo', 'please change $scope.info');
+										// Set current_key
+										$scope.current_key = localStorageService.get('current_key');
 
-						$modalInstance.close();
+										// Set running session flag to true
+										infoData.running_session = true;
+
+										$window.location.reload();
+
+										$modalInstance.close();
+									}
+								}
+						);
 					};
 
 					$scope.cancel = function () {
@@ -297,66 +379,82 @@ angular.module('myApp.controllers', [])
 					'$scope',
 					'$routeParams',
 					'$firebase',
+					'$firebaseSimpleLogin',
 					'$state',
 					'$stateParams',
-					'chartData', function ($rootScope, $scope, $routeParams, $firebase, $state, $stateParams, chartData) {
+					'chartData', function ($rootScope, $scope, $routeParams, $firebase, $firebaseSimpleLogin, $state, $stateParams, chartData) {
 
-					/* Get associated session item from Firebase */
-					$scope.item = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + $stateParams.id));
+					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
 
-					/* Promise for loaded data */
-					$scope.item.$on("loaded", function () {
+					var dataRef = new Firebase($scope.firebaseAddress),
+							loginObj = $firebaseSimpleLogin(dataRef);
 
-						var data = $scope.item.data;
+					loginObj.$getCurrentUser().then(
+							function (user) {
+								if ( user === null ) {
+									// Logged in: no @todo
+									// - Message 'you need to login before saving'
+									// - redirect to auth page
+									console.log("Not logged in");
+								} else {
 
-						/**
-						 * Calls the factories for each service
-						 */
-						$scope.updateData = function () {
+									var userId = user.id;
 
-							$scope.revenue_integrity = data.revenue_integrity;
+									/* Get associated session item from Firebase */
+									$scope.item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/' + $stateParams.id));
 
-							$scope.revenue_integrity_process_improvement = data.revenue_integrity_process_improvement;
+									/* Promise for loaded data */
+									$scope.item.$on("loaded", function () {
 
-							$scope.cmap = data.cmap;
+										var data = $scope.item.data;
 
-							$scope.origin_and_destination = data.origin_and_destination;
+										/**
+										 * Calls the factories for each service
+										 */
+										$scope.updateData = function () {
 
-							$scope.pos = data.pos;
+											$scope.revenue_integrity = data.revenue_integrity;
 
-							$scope.arr = data.arr;
+											$scope.revenue_integrity_process_improvement = data.revenue_integrity_process_improvement;
 
-							$scope.airfare_insight = data.airfare_insight;
+											$scope.cmap = data.cmap;
 
-//							localStorageService.set('data', allData);
-//							localStorageService.set('input', inputData);
+											$scope.origin_and_destination = data.origin_and_destination;
 
-							// @todo: chart configs are not storing separate values for both graphs.
-							// Need to find out why and stop from using this sort of if/else as makes it fragile.
-							if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
-								$scope.chartConfigLow = chartData.drawChart('low', data);
-							} else {
-								$scope.chartConfigHigh = chartData.drawChart('high', data);
-							}
+											$scope.pos = data.pos;
 
-						};
-						$scope.updateData();
+											$scope.arr = data.arr;
 
-						$state.go('saved-calculations-detail.chart_high');
+											$scope.airfare_insight = data.airfare_insight;
 
-						/**
-						 * View state
-						 *
-						 * Saves the state of the open results view, Charts or table,
-						 * when loaded. Uses state and state change success event ($stateChangeSuccess).
-						 */
-						$rootScope.$on('$stateChangeSuccess',
-								function (event, toState, toParams, fromState, fromParams) {
-									// update chart
-									$scope.updateData();
-								});
+											// @todo: chart configs are not storing separate values for both graphs.
+											// Need to find out why and stop from using this sort of if/else as makes it fragile.
+											if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
+												$scope.chartConfigLow = chartData.drawChart('low', data);
+											} else {
+												$scope.chartConfigHigh = chartData.drawChart('high', data);
+											}
 
-					});
+										};
+										$scope.updateData();
+
+										$state.go('saved-calculations-detail.chart_high');
+
+										/**
+										 * View state
+										 *
+										 * Saves the state of the open results view, Charts or table,
+										 * when loaded. Uses state and state change success event ($stateChangeSuccess).
+										 */
+										$rootScope.$on('$stateChangeSuccess',
+												function (event, toState, toParams, fromState, fromParams) {
+													// update chart
+													$scope.updateData();
+												});
+
+									});
+								}
+							});
 
 				}])
 
@@ -386,16 +484,20 @@ angular.module('myApp.controllers', [])
 					'$scope',
 					'localStorageService',
 					'$firebase',
+					'$firebaseSimpleLogin',
 					'$timeout',
-					'infoData', function ($scope, localStorageService, $firebase, $timeout, infoData) {
+					'infoData', function ($scope, localStorageService, $firebase, $firebaseSimpleLogin, $timeout, infoData) {
 
-					// Watch infoData for updates
-					$scope.$watch(function () {
-								return infoData;
-							},
-							function (newVal, oldVal) {
-								$scope.info = infoData;
-							}, true);
+					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
+
+//					// Watch infoData for updates
+//					$scope.$watch(function () {
+//								return infoData;
+//							},
+//							function (newVal, oldVal) {
+//								$scope.info = infoData;
+//								$scope.$emit('infoDataUpdate', infoData);
+//							}, true);
 
 					/**
 					 * Check current_key exists
@@ -414,37 +516,56 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.saveSession = function () {
 
-						// Store to Firebase address
-						$scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/'));
+						// Check logged in
+						var dataRef = new Firebase($scope.firebaseAddress),
+								loginObj = $firebaseSimpleLogin(dataRef);
 
-						// Set flag: saving to true
-						$scope.saving = true;
+						loginObj.$getCurrentUser().then(
+								function (user) {
+									if ( user === null ) {
+										// Logged in: no @todo
+										// - Message 'you need to login before saving'
+										// - redirect to auth page
+										console.log("Not logged in");
+									} else {
+										// Logged in: yes
+										// - get current user id and append to firebase address
+										var userId = user.id;
 
-						// Add the data from localstorage and add it to Firebase
-						$scope.items.$add({
-							info : localStorageService.get('info'),
-							input : localStorageService.get('input'),
-							data : localStorageService.get('data')
-						}).then(function (ref) {
+										// Store to Firebase address
+										$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/'));
 
-							// Once added retrieve the ref id and set in localstorage
-							localStorageService.set('current_key', ref.name());
+										// Set flag: saving to true
+										$scope.saving = true;
 
-							// Update running_session flag
-							$scope.info.running_session = true;
+										// Add the data from localstorage and add it to Firebase
+										$scope.items.$add({
+											info : localStorageService.get('info'),
+											input : localStorageService.get('input'),
+											data : localStorageService.get('data')
+										}).then(function (ref) {
 
-							// Saving has finished so reset saving flag
-							$scope.saving = false;
+											// Once added retrieve the ref id and set in localstorage
+											localStorageService.set('current_key', ref.name());
 
-							// And flag that it's been saved
-							$scope.saved = true;
+											// Update running_session flag
+											$scope.info.running_session = true;
 
-							// After a while set the saved flag back to default, this takes saved message back off screen
-							$timeout(function () {
-								$scope.saved = false;
-							}, 2500);
+											// Saving has finished so reset saving flag
+											$scope.saving = false;
 
-						});
+											// And flag that it's been saved
+											$scope.saved = true;
+
+											// After a while set the saved flag back to default, this takes saved message back off screen
+											$timeout(function () {
+												$scope.saved = false;
+											}, 2500);
+
+										});
+									}
+								}
+						);
 
 					};
 
@@ -453,34 +574,54 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.updateSession = function () {
 
-						// we are currently running a calculation/session
-						if ( $scope.info.running_session === true ) {
+						// Check logged in
+						var dataRef = new Firebase($scope.firebaseAddress),
+								loginObj = $firebaseSimpleLogin(dataRef);
 
-							// Set flag: saving to true
-							$scope.saving = true;
+						loginObj.$getCurrentUser().then(
+								function (user) {
+									if ( user === null ) {
+										// Logged in: no @todo
+										// - Message 'you need to login before updating'
+										// - redirect to auth page
+										console.log("Not logged in");
+									} else {
+										// Logged in: yes
+										// - get current user id and append to firebase address
+										var userId = user.id;
 
-							// Get the link to the firebase item with id key from localstorage
-							$scope.items = $firebase(new Firebase('https://luminous-fire-1327.firebaseio.com/sita/' + localStorageService.get('current_key')));
+										// we are currently running a calculation/session
+										if ( $scope.info.running_session === true ) {
 
-							// Set and update the firebase item with new values from localstorage
-							$scope.items.$set({
-								info : localStorageService.get('info'),
-								input : localStorageService.get('input'),
-								data : localStorageService.get('data')
-							}).then(function () {
+											// Set flag: saving to true
+											$scope.saving = true;
 
-								// Saving has finished so reset saving flag
-								$scope.saving = false;
+											// Get the link to the firebase item with id key from localstorage
+											$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + localStorageService.get('current_key')));
 
-								// And flag that it's been saved
-								$scope.saved = true;
+											// Set and update the firebase item with new values from localstorage
+											$scope.items.$set({
+												info : localStorageService.get('info'),
+												input : localStorageService.get('input'),
+												data : localStorageService.get('data')
+											}).then(function () {
 
-								// After a while set the saved flag back to default, this takes saved message back off screen
-								$timeout(function () {
-									$scope.saved = false;
-								}, 2500);
-							});
-						}
+												// Saving has finished so reset saving flag
+												$scope.saving = false;
+
+												// And flag that it's been saved
+												$scope.saved = true;
+
+												// After a while set the saved flag back to default, this takes saved message back off screen
+												$timeout(function () {
+													$scope.saved = false;
+												}, 2500);
+											});
+										}
+
+									}
+								}
+						);
 					}
 				}])
 
@@ -582,11 +723,12 @@ angular.module('myApp.controllers', [])
 						 * Saves the state of the open results view, Charts or table,
 						 * when loaded. Uses state and state change success event ($stateChangeSuccess).
 						 */
-						$rootScope.$on('$stateChangeSuccess',
+						$scope.$on('$stateChangeSuccess',
 								function (event, toState, toParams, fromState, fromParams) {
 									// Store state of view in localstorage
 //									localStorageService.set('results_view', toState);
-
+									console.log(toState.name);
+									$scope.resultsView = toState.name;
 									// update chart
 									$scope.updateData();
 								});
@@ -613,61 +755,110 @@ angular.module('myApp.controllers', [])
 
 					}])
 
-		.controller("AuthCtrl", ['$scope', '$firebaseSimpleLogin', 'localStorageService',
-			function ($scope, $firebaseSimpleLogin, localStorageService) {
-				var dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
+		.controller('AuthCtrl', ['$rootScope', '$scope', '$state', '$firebase', '$firebaseSimpleLogin',
+			function ($rootScope, $scope, $state, $firebase, $firebaseSimpleLogin) {
 
-				$scope.loginObj = $firebaseSimpleLogin(dataRef);
+				$scope.dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
+
+				$scope.loginObj = $firebaseSimpleLogin($scope.dataRef);
 
 				$scope.loginObj.$getCurrentUser().then(
 						function (user) {
+							$scope.user_forms_ready = true;
 							if ( user === null ) {
-								$scope.isNotLoggedIn = true;
+								$scope.$emit('isLoggedInMessage', false);
 							} else {
-								$scope.isNotLoggedIn = false;
+								$scope.$emit('isLoggedInMessage', true);
 							}
 						}
 				);
 
 				$scope.loginUser = function () {
-					$scope.loginObj.$login("password", {
-						email : $scope.auth.email,
-						password : $scope.auth.password
-					}).then(function (user) {
 
-						// messaging
-						$scope.message = "You are logged in.";
-						$scope.reason = "Welcome, " + user.email;
-						$scope.isNotLoggedIn = false;
+					// Check form valid completed
+					if ( $scope.login.$valid ) {
+						$scope.show_loader = true;
 
-						// emit logged in message
+						$scope.loginObj.$login("password", {
+									email : $scope.auth.email,
+									password : $scope.auth.password
+								}
 
-					}, function (error) {
-						$scope.message = "Login failed";
-						switch (error.code) {
-							case "INVALID_EMAIL" :
-								$scope.reason = "The specified email address is incorrect.";
-								break;
-							case "INVALID_USER" :
-								$scope.reason = "The specified user does not exist.";
-								break;
-							case "INVALID_PASSWORD" :
-								$scope.reason = "The specified password is incorrect";
-								break;
-							case "UNKNOWN_ERROR" :
-								$scope.reason = "An unknown error occurred. Please contact support@firebase.com.";
-								break;
-							case "USER_DENIED" :
-								$scope.reason = "User denied authentication request.";
-								break;
-						}
-					});
+						).then(function (user) {
+
+									// User is now logged in
+
+									// Emit logged in message
+									$scope.$emit('isLoggedInMessage', true);
+
+									// Hide button loader icon
+									$scope.show_loader = false;
+
+									// Messaging
+									$scope.message = "You are logged in.";
+									$scope.reason = "Welcome, " + user.email;
+
+									// Redirect to info screen
+									$state.transitionTo('info');
+
+								}, function (error) {
+
+									// Hide button loader icon
+									$scope.show_loader = false;
+
+									// Messaging
+									$scope.message = "Login failed";
+
+									// Get error codes and print relevent message
+									switch (error.code) {
+										case "INVALID_EMAIL" :
+											$scope.reason = "The specified email address is incorrect.";
+											break;
+										case "INVALID_USER" :
+											$scope.reason = "The specified user does not exist.";
+											break;
+										case "INVALID_PASSWORD" :
+											$scope.reason = "The specified password is incorrect";
+											break;
+										case "UNKNOWN_ERROR" :
+											$scope.reason = "An unknown error occurred. Please contact support@firebase.com.";
+											break;
+										case "USER_DENIED" :
+											$scope.reason = "User denied authentication request.";
+											break;
+									}
+								});
+					}
 				};
 
 				$scope.logoutUser = function () {
+					$scope.$emit('isLoggedInMessage', false);
 					$scope.message = "";
 					$scope.loginObj.$logout();
-					$scope.isNotLoggedIn = true;
+				};
+
+				$scope.sendPassword = function () {
+					$scope.show_loader = true;
+					if ( $scope.password.$valid ) {
+						$scope.loginObj.$sendPasswordResetEmail($scope.auth.email).then(
+								function () {
+									$scope.message = true;
+									$scope.show_loader = false;
+								}
+						)
+					}
+				};
+
+				$scope.resetPassword = function () {
+					$scope.show_loader = true;
+					if ( $scope.reset.$valid ) {
+						$scope.loginObj.$changePassword($scope.auth.email, $scope.auth.old_password, $scope.auth.new_password).then(
+								function () {
+									$scope.message = true;
+									$scope.show_loader = false;
+								}
+						)
+					}
 				};
 			}
 		]);

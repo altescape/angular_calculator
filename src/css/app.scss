@@ -84,6 +84,7 @@ a:hover {
 	cursor: pointer
 }
 
+/* LOADERS */
 @keyframes rotating {
 	from {
 		transform: rotate(0deg);
@@ -92,17 +93,15 @@ a:hover {
 		transform: rotate(360deg);
 	}
 }
+.spinner {
+	transform-origin: 50% !important;
+	animation: rotating 2s linear infinite;
+	display: inline-block !important;
+	&.ng-hide {
+		display: none !important;
+	}
+}
 
-//.loading {
-//  .loader {
-//    transform-origin: 50%;
-//    animation: rotating 2s linear infinite;
-//    display: block;
-//    &.ng-hide {
-//      display: none !important;
-//    }
-//  }
-//}
 
 $gmb-loader-size: 120px;
 $gmb-loader-color: lighten($brand-grey, 30%);
@@ -510,26 +509,29 @@ $class-slug: pt;
 }
 
 /* USER STYLES */
-a.user-action {
-	color: $body-bg;
-	display: block;
+.user-action {
+	color: darken($body-bg, 8%);
+	display: inline-block;
 	text-align: center;
 	overflow: hidden;
 	font-weight: bold;
-	margin: 28px auto 0;
+	margin: 10px auto 0;
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 	background-image: linear-gradient($brand-success, darken($brand-success, 20%));
 	background-position: 0 100%;
 	background-size: auto 200%;
-	transition: background-position .3s ease-in-out;
+	transition: all .3s ease-in-out;
 	padding: 12px 16px 14px;
-	&:hover {
+	border: none;
+	&:hover, &:focus {
+		color: $body-bg;
 		background-position: 0 0;
 		text-decoration: none;
+		outline: none;
 	}
 }
 
-a.user-action.disabled, a.user-action[disabled] {
+.user-action.disabled, .user-action[disabled] {
 	display: none;
 }
 
