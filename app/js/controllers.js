@@ -136,7 +136,8 @@ angular.module('myApp.controllers', [])
 					'allData',
 					'$state',
 					'$timeout',
-					function ($scope, $window, localStorageService, $location, infoData, inputData, allData, $state, $timeout) {
+					'$templateCache',
+					function ($scope, $window, localStorageService, $location, infoData, inputData, allData, $state, $timeout, $templateCache) {
 						/**
 						 *  Logs out the user and clears locally stored data
 						 */
@@ -147,6 +148,8 @@ angular.module('myApp.controllers', [])
 							localStorageService.clearAll();
 
 							$scope.input = angular.copy($scope.orig);
+
+							$templateCache.removeAll();
 
 							// Reset factories
 							infoData = {};
