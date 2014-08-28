@@ -119,6 +119,27 @@
     </div>
 
     <div class="well">
+        <h4>{{ airfare_insight.name }}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <td width="70%"></td>
+                <td>High</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Graph numbers</td>
+                <td>{{ airfare_insight.high }}</td>
+                <td>{{ airfare_insight.low }}</td>
+            </tr>
+            <tr ng-repeat="item in airfare_insight.summary">
+                <td>{{ item.name }}</td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="well">
         <h4>{{ arr.name }}</h4>
         <table class="table table-bordered">
             <tr>
@@ -139,24 +160,4 @@
         </table>
     </div>
 
-    <div class="well">
-        <h4>{{ airfare_insight.name }}</h4>
-        <table class="table table-bordered">
-            <tr>
-                <td width="70%"></td>
-                <td>High</td>
-                <td>Low</td>
-            </tr>
-            <tr>
-                <td>Graph numbers</td>
-                <td>{{ airfare_insight.high }}</td>
-                <td>{{ airfare_insight.low }}</td>
-            </tr>
-            <tr ng-repeat="item in airfare_insight.summary">
-                <td>{{ item.name }}</td>
-                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
-                <td><span ng-show="item.unit == 'currency'">$</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
-            </tr>
-        </table>
-    </div>
 </div>
