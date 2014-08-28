@@ -694,7 +694,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op1 ) {
+					if ( inputData.services && !inputData.services.op1 ) {
 						allData.revenue_integrity.high = 0;
 						allData.revenue_integrity.low = 0;
 						return;
@@ -870,7 +870,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op2 ) {
+					if ( inputData.services && !inputData.services.op2 ) {
 						allData.revenue_integrity_process_improvement.high = 0;
 						allData.revenue_integrity_process_improvement.low = 0;
 						allData.revenue_integrity_process_improvement.summary = {};
@@ -994,7 +994,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op5 ) {
+					if ( inputData.services && !inputData.services.op5 ) {
 						allData.cmap.high = 0;
 						allData.cmap.low = 0;
 						allData.cmap.summary = {};
@@ -1062,7 +1062,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op6 ) {
+					if ( inputData.services && !inputData.services.op6 ) {
 						allData.origin_and_destination.high = 0;
 						allData.origin_and_destination.low = 0;
 						allData.origin_and_destination.summary = {};
@@ -1122,7 +1122,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op7 ) {
+					if ( inputData.services && !inputData.services.op7 ) {
 						allData.pos.high = 0;
 						allData.pos.low = 0;
 						allData.pos.summary = {};
@@ -1218,7 +1218,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op9 ) {
+					if ( inputData.services && !inputData.services.op9 ) {
 						allData.arr.high = 0;
 						allData.arr.low = 0;
 						allData.arr.summary = {};
@@ -1324,7 +1324,7 @@ angular.module('myApp.services', [])
 				 */
 				initObject : function () {
 					// If option is not selected then return empty object with default values (0)
-					if ( !inputData.services.op8 ) {
+					if ( inputData.services && !inputData.services.op8 ) {
 						allData.airfare_insight.high = 0;
 						allData.airfare_insight.low = 0;
 						allData.airfare_insight.summary = {};

@@ -729,8 +729,7 @@ angular.module('myApp.controllers', [])
 						$scope.$on('$stateChangeSuccess',
 								function (event, toState, toParams, fromState, fromParams) {
 									// Store state of view in localstorage
-//									localStorageService.set('results_view', toState);
-									console.log(toState.name);
+									localStorageService.set('results_view', toState);
 									$scope.resultsView = toState.name;
 									// update chart
 									$scope.updateData();
