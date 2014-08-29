@@ -100,28 +100,62 @@ angular.module('myApp.controllers', [])
 								$scope.info = infoData;
 							}, true);
 
-					var settings = {
-						disable : 'right',
-						hyperextensible : false,
-						transitionSpeed : .3,
-						easing : 'ease'
-					};
+//					var settings = {
+//						disable : 'right',
+//						hyperextensible : false,
+//						transitionSpeed : .3,
+//						easing : 'ease'
+//					};
 
-					var snapper = new Snap({
-						element : document.getElementById('main-content')
-					});
+//					var snapper = new Snap({
+//						element : document.getElementById('main-content')
+//					});
 
-					snapper.settings(settings);
+//					snapper.settings(settings);
 
-					$scope.openLeft = function () {
-						if ( snapper.state().state == "left" ) {
-							snapper.close();
-							return false;
-						} else {
-							snapper.open('left');
-							return true;
-						}
-					};
+//					$scope.openLeft = function () {
+//						if ( snapper.state().state == "left" ) {
+//							snapper.close();
+//							return false;
+//						} else {
+//							snapper.open('left');
+//							return true;
+//						}
+//					};
+
+					/**
+					 * Menu active from state names
+					 */
+					$scope.$on('$stateChangeSuccess',
+							function (event, toState, toParams, fromState, fromParams) {
+								console.log(toState.name);
+								switch (toState.name) {
+									case 'info' :
+										$scope.navActive = 'info';
+										break;
+									case 'calculator.index' :
+										$scope.navActive = 'calculator';
+										break;
+									case 'calculator.chart_high' :
+										$scope.navActive = 'calculator';
+										break;
+									case 'calculator.chart_low' :
+										$scope.navActive = 'calculator';
+										break;
+									case 'calculator.test' :
+										$scope.navActive = 'calculator';
+										break;
+									case 'saved-calculations' :
+										$scope.navActive = 'my-calculations';
+										break;
+									case 'clear-data' :
+										$scope.navActive = 'settings';
+										break;
+									case 'auth' :
+										$scope.navActive = 'auth';
+										break;
+								}
+							});
 
 				}])
 
@@ -702,9 +736,9 @@ angular.module('myApp.controllers', [])
 						 *
 						 * @type {*|Array|Choice|Undefined|Object|array|promise|Object}
 						 */
-						$scope.view_state = localStorageService.get('view_state');
-						$scope.collapseSection = function () {
-							localStorageService.set('view_state', $scope.view_state);
+						$scope.active_tab = localStorageService.get('active_tab');
+						$scope.activeTab = function () {
+							localStorageService.set('active_tab', $scope.active_tab);
 						};
 
 						/**

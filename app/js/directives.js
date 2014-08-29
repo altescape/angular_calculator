@@ -12,7 +12,7 @@ angular.module('myApp.directives', ['LocalStorageModule']).
 		directive('mainNav',function () {
 			return {
 				restrict : 'A',
-				templateUrl : 'partials/main-nav.html'
+				templateUrl : 'partials/main-nav-2.html'
 			};
 		}).
 

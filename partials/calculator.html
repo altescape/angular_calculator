@@ -3,159 +3,184 @@
     <!-- SHEET: VARIABLES C20 - C25 -->
     <div class="panel__1">
 
-        <div class="col-sm-12 form-group">
-            <fieldset>
-                <legend>
-                    Figures
-                    <small class="pull-right">
-                        <a ng-click="view_state.fig_collapsed = true; collapseSection(view_state.fig_collapsed)" ng-hide="view_state.fig_collapsed"
-                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                            collapse <span class="glyphicon glyphicon-resize-small"></span>
-                        </a>
-                        <a ng-click="view_state.fig_collapsed = false; collapseSection(view_state.fig_collapsed)" ng-show="view_state.fig_collapsed"
-                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                            show <span class="glyphicon glyphicon-resize-full"></span>
-                        </a>
-                    </small>
-                </legend>
-                <div class="row" ng-hide="view_state.fig_collapsed">
-                    <div class="col-sm-12 form-group">
-                        <label for="param1">Current total passengers boarded per year</label>
-                        <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number" ng-model="input.param1"
-                               ng-change="updateData();" class="form-control" step="20000"
-                               min="0">
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param2">Expected passenger growth per year - for the next 5 years</label>
+        <div class="row panel panel-default panel__item">
+            <div class="panel-body">
+                <div class="panel__inner">
+                    <tabset>
+                        <tab heading="Figures">
+                            <div class="col-sm-12 pt-25">
+                                <!--                                    <legend>-->
+                                <!--                                        Figures-->
+                                <!--                                        <small class="pull-right">-->
+                                <!--                                            <a ng-click="view_state.fig_collapsed = true; collapseSection(view_state.fig_collapsed)"-->
+                                <!--                                               ng-hide="view_state.fig_collapsed"-->
+                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
+                                <!--                                                collapse <span class="glyphicon glyphicon-resize-small"></span>-->
+                                <!--                                            </a>-->
+                                <!--                                            <a ng-click="view_state.fig_collapsed = false; collapseSection(view_state.fig_collapsed)"-->
+                                <!--                                               ng-show="view_state.fig_collapsed"-->
+                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
+                                <!--                                                show <span class="glyphicon glyphicon-resize-full"></span>-->
+                                <!--                                            </a>-->
+                                <!--                                        </small>-->
+                                <!--                                    </legend>-->
+                                <div class="row" ng-hide="view_state.fig_collapsed">
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param1">Current total passengers boarded per year</label>
+                                        <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number"
+                                               ng-model="input.param1"
+                                               ng-change="updateData();" class="form-control" step="20000"
+                                               min="0">
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param2">Expected passenger growth per year - for the next 5 years</label>
 
-                        <div class="postfix-label">
-                            <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number" ng-model="input.param2"
-                                   ng-change="updateData();" class="form-control"
-                                   step="5"
-                                   min="0"
-                                   max="100">
-                            <span class="label">%</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param3">Number of tickets issued per year</label>
-                        <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number" ng-model="input.param3"
-                               ng-change="updateData();" class="form-control" step="20000"
-                               min="0">
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param4">Percentage of tickets reissued</label>
+                                        <div class="postfix-label">
+                                            <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number"
+                                                   ng-model="input.param2"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="5"
+                                                   min="0"
+                                                   max="100">
+                                            <span class="label">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param3">Number of tickets issued per year</label>
+                                        <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number"
+                                               ng-model="input.param3"
+                                               ng-change="updateData();" class="form-control" step="20000"
+                                               min="0">
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param4">Percentage of tickets reissued</label>
 
-                        <div class="postfix-label">
-                            <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number" ng-model="input.param4"
-                                   ng-change="updateData();" class="form-control"
-                                   step="5"
-                                   min="0"
-                                   max="100">
-                            <span class="label">%</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param5">Hourly labour costs</label>
+                                        <div class="postfix-label">
+                                            <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number"
+                                                   ng-model="input.param4"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="5"
+                                                   min="0"
+                                                   max="100">
+                                            <span class="label">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param5">Hourly labour costs</label>
 
-                        <div class="prefix-label">
-                            <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number" ng-model="input.param5"
-                                   ng-change="updateData();" class="form-control"
-                                   step="10"
-                                   min="0">
-                            <span class="label">$</span>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
+                                        <div class="prefix-label">
+                                            <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number"
+                                                   ng-model="input.param5"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="10"
+                                                   min="0">
+                                            <span class="label">$</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="adjustment">Chart number adjustment</label>
 
-        <!-- SHEET: VARIABLES C27 - C31 -->
-        <div class="col-sm-12 form-group">
-            <fieldset>
-                <legend>
-                    Revenue, etc.
-                    <small class="pull-right">
-                        <a ng-click="view_state.rev_collapsed = true; collapseSection(view_state.rev_collapsed)" ng-hide="view_state.rev_collapsed"
-                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                            collapse <span class="glyphicon glyphicon-resize-small"></span>
-                        </a>
-                        <a ng-click="view_state.rev_collapsed = false; collapseSection(view_state.rev_collapsed)" ng-show="view_state.rev_collapsed"
-                           style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">
-                            show <span class="glyphicon glyphicon-resize-full"></span>
-                        </a>
-                    </small>
-                </legend>
-                <div class="row" ng-hide="view_state.rev_collapsed">
-                    <div class="col-sm-12 form-group">
-                        <label for="param6">Airline's annual revenue</label>
-                        <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number" ng-model="input.param6"
-                               ng-change="updateData();" class="form-control" step="20000"
-                               min="0">
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param7">Airline's annual cost base</label>
-                        <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number" ng-model="input.param7"
-                               ng-change="updateData();" class="form-control" step="20000"
-                               min="0">
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param8">Annual distribution costs rate</label>
+                                        <input id="adjustment" type="number" ng-model="input.adjustment" ng-change="updateData();"
+                                               class="form-control"
+                                               step="1000000"
+                                               min="0">
+                                    </div>
 
-                        <div class="postfix-label">
-                            <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number" ng-model="input.param8"
-                                   ng-change="updateData();" class="form-control"
-                                   step="5"
-                                   min="0"
-                                   max="100">
-                            <span class="label">%</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param9">Average yield per ticket</label>
+                                </div>
+                            </div>
 
-                        <div class="prefix-label">
-                            <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number" ng-model="input.param9"
-                                   ng-change="updateData();" class="form-control"
-                                   step="10"
-                                   min="0">
-                            <span class="label">$</span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 form-group">
-                        <label for="param10">Annual fuel cost rate</label>
+                        </tab>
+                        <tab heading="Revenue">
+                            <div class="col-sm-12 pt-25">
+                                <!--                                    <legend>-->
+                                <!--                                        Revenue, etc.-->
+                                <!--                                        <small class="pull-right">-->
+                                <!--                                            <a ng-click="view_state.rev_collapsed = true; collapseSection(view_state.rev_collapsed)"-->
+                                <!--                                               ng-hide="view_state.rev_collapsed"-->
+                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
+                                <!--                                                collapse <span class="glyphicon glyphicon-resize-small"></span>-->
+                                <!--                                            </a>-->
+                                <!--                                            <a ng-click="view_state.rev_collapsed = false; collapseSection(view_state.rev_collapsed)"-->
+                                <!--                                               ng-show="view_state.rev_collapsed"-->
+                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
+                                <!--                                                show <span class="glyphicon glyphicon-resize-full"></span>-->
+                                <!--                                            </a>-->
+                                <!--                                        </small>-->
+                                <!--                                    </legend>-->
+                                <div class="row" ng-hide="view_state.rev_collapsed">
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param6">Airline's annual revenue</label>
+                                        <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number"
+                                               ng-model="input.param6"
+                                               ng-change="updateData();" class="form-control" step="20000"
+                                               min="0">
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param7">Airline's annual cost base</label>
+                                        <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number"
+                                               ng-model="input.param7"
+                                               ng-change="updateData();" class="form-control" step="20000"
+                                               min="0">
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param8">Annual distribution costs rate</label>
 
-                        <div class="postfix-label">
-                            <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number" ng-model="input.param10"
-                                   ng-change="updateData();" class="form-control"
-                                   step="5"
-                                   min="0"
-                                   max="100">
-                            <span class="label">%</span>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
+                                        <div class="postfix-label">
+                                            <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number"
+                                                   ng-model="input.param8"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="5"
+                                                   min="0"
+                                                   max="100">
+                                            <span class="label">%</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param9">Average yield per ticket</label>
 
-		<services></services>
+                                        <div class="prefix-label">
+                                            <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number"
+                                                   ng-model="input.param9"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="10"
+                                                   min="0">
+                                            <span class="label">$</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 form-group">
+                                        <label for="param10">Annual fuel cost rate</label>
 
-        <div class="col-sm-12 form-group">
-            <div class="row" data-xl-sheet="variables" data-xl-cell="C54">
-                <div class="col-sm-12 form-group">
-                    <label for="adjustment">Chart number adjustment</label>
-                    <input id="adjustment" type="number" ng-model="input.adjustment" ng-change="updateData();" class="form-control"
-                           step="1000000"
-                           min="0">
+                                        <div class="postfix-label">
+                                            <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number"
+                                                   ng-model="input.param10"
+                                                   ng-change="updateData();" class="form-control"
+                                                   step="5"
+                                                   min="0"
+                                                   max="100">
+                                            <span class="label">%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </tab>
+                        <tab heading="Services">
+                            <services></services>
+                        </tab>
+                    </tabset>
+
                 </div>
             </div>
         </div>
+
     </div>
+
     <div id="chart" class="panel__2">
-        <div class="row panel panel-default panel__item">
+        <div class="row panel panel-default panel__item" style="margin-left: 0;">
             <div class="panel-heading pos-rel">Results
                 <div class="panel-heading-btn-group pull-right btn-group">
-                    <a ui-sref="calculator.chart_high" class="btn btn-primary" ng-class="{'active' : resultsView == 'calculator.index' || resultsView == 'calculator.chart_high'}">Chart (High)</a>
+                    <a ui-sref="calculator.chart_high" class="btn btn-primary"
+                       ng-class="{'active' : resultsView == 'calculator.index' || resultsView == 'calculator.chart_high'}">Chart (High)</a>
                     <a ui-sref="calculator.chart_low" class="btn btn-primary" ui-sref-active="active">Chart (Low)</a>
                     <a ui-sref="calculator.test" class="btn btn-primary" ui-sref-active="active">Data</a>
                 </div>
