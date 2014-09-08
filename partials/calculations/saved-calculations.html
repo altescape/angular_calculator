@@ -8,12 +8,25 @@
         </div>
 
         <div class="row">
+            <div class="col-md-12 text-right">
+                <ul ng-model="sort" class="list-inline sort" ng-init="sort = 'unsorted'">
+                    <li>Sort by: </li>
+                    <li><a ng-click="predicate=''; sort = 'unsorted'" ng-class="{'active': sort == 'unsorted'}">Unsorted</a></li>
+                    <li><a ng-click="predicate = 'info.date.timestamp'; reverse=false; sort = 'date_asc'" ng-class="{'active': sort == 'date_asc'}">Date (Asc.)</a></li>
+                    <li><a ng-click="predicate = '-info.date.timestamp'; reverse=false; sort = 'date_desc'" ng-class="{'active': sort == 'date_desc'}">Date (Desc.)</a></li>
+                    <li><a ng-click="predicate = 'info.session.name'; reverse=false; sort = 'name_az'" ng-class="{'active': sort == 'name_az'}">Name (A-Z)</a></li>
+                    <li><a ng-click="predicate = '-info.session.name'; reverse=false; sort = 'name_za'" ng-class="{'active': sort == 'name_za'}">Name (Z-A)</a></li>
+                </ul>
+<!--                <pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
+            </div>
+        </div>
 
-            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }}" ng-cloak>Cannot find any saved calculations<br> . . .
-            </h1>
+        <div class="row">
 
-            <div class="col-xs-6 col-sm-4 col-md-3 {{ ele_load_status }} saved-panels" ng-repeat="item in items | orderByPriority | reverse">
-                <div class="panel " ng-class="{'panel-danger' : confirm == true, 'panel-success' : item.$id == current_key, 'panel-default' : confirm != true && item.$id != current_key}" ng-init="confirm = false">
+            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }} ng-cloak">Cannot find any saved calculations<br> . . .</h1>
+            <h1 ng-show="info.loggedIn == false" class="text-center text-muted mt-80 ng-cloak">You're not logged in. To view saved calculations you must <a ui-sref="auth">log in</a><br> . . .</h1>
+            <div class="col-xs-6 col-sm-4 col-md-3 {{ ele_load_status }} saved-panels" ng-repeat="item in items | orderBy:predicate:reverse">
+                <div class="panel" ng-class="{'panel-danger' : confirm == true, 'panel-success' : item.$id == current_key, 'panel-default' : confirm != true && item.$id != current_key, 'deleting': deleteItemId==item.$id}" ng-init="confirm = false">
                     <div class="panel-heading pos-rel">
                         <strong ng-show="item.$id == current_key">USING: </strong>{{ item.info.session.name | uppercase }}
                         <div class="panel-heading-btn-group pull-right btn-group">
@@ -53,13 +66,16 @@
                             <span class="glyphicon glyphicon-minus-sign"></span>
                         </a>
 
-                        <div ng-hide="confirm == false" class="btn-group pull-right">
-                            <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
-                                <span class="glyphicon glyphicon-ok"></span>
-                            </a>
-                            <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
+                        <div ng-hide="confirm == false" class="pull-right">
+                            <span class="pt-5 plr-5 pull-left text-danger">You want to delete?</span>
+                            <div class="btn-group">
+                                <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </a>
+                                <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

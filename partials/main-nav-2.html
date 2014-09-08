@@ -1,6 +1,7 @@
 <nav class="main-nav white-content" role="navigation">
     <div class="navbar-header">
         <img class="logo" ng-src="/app/img/logo-small.png">
+        <small class="text-white" style="margin-left: 15px" ng-show="loginObj.user">Signed in as {{ loginObj.user.email }}</small>
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -14,7 +15,6 @@
                 <a ui-sref="calculator.index" ng-class="{active : navActive == 'calculator'}">Calculator</a>
             </li>
             <li ng-show="info.loggedIn"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>
-<!--            <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name"><a ui-sref="clear-data">Clear Local Data</a></li>-->
             <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name"><a ui-sref="clear-data" ng-class="{active : navActive == 'settings'}">Settings</a></li>
             <li>
                 <a ui-sref="auth" ng-class="{active : navActive == 'auth'}">
@@ -22,7 +22,6 @@
                     <span ng-hide="info.loggedIn">Sign In</span>
                 </a>
             </li>
-            <!--        <li><a ui-sref="error-log"><img ng-src="/app/img/nav-icon-trash.png"> Error log</a></li>-->
         </ul>
     </div>
 </nav>

@@ -220,13 +220,14 @@ angular.module('myApp.controllers', [])
 					'$state',
 					'$firebase',
 					'$firebaseSimpleLogin',
+					'$timeout',
 					'localStorageService',
 					'infoData',
 					'inputData',
 					'allData',
 					'$location',
 					'$modal',
-					function ($scope, $state, $firebase, $firebaseSimpleLogin, localStorageService, infoData, inputData, allData, $location, $modal) {
+					function ($scope, $state, $firebase, $firebaseSimpleLogin, $timeout, localStorageService, infoData, inputData, allData, $location, $modal) {
 
 						$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
 
@@ -239,7 +240,6 @@ angular.module('myApp.controllers', [])
 										// Logged in: no @todo
 										// - Message 'you need to login before updating'
 										// - redirect to auth page
-										console.log("Not logged in");
 									} else {
 										// Logged in: yes
 										// - get current user id and append to firebase address
@@ -250,7 +250,17 @@ angular.module('myApp.controllers', [])
 										 *
 										 * @type {*}
 										 */
-										$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/"));
+										var sync = $firebase(new Firebase($scope.firebaseAddress + 'user_data/' + userId + "/")),
+												items = sync.$asArray();
+
+										/* Promise for loaded data */
+										items.$loaded().then(
+												function () {
+													$scope.items = items;
+													$scope.load_status = "loaded";
+													$scope.ele_load_status = "show_on_loaded";
+												}
+										);
 
 										/**
 										 *  Get current key
@@ -262,10 +272,6 @@ angular.module('myApp.controllers', [])
 										 */
 										$scope.load_status = "loading";
 										$scope.ele_load_status = "hide_on_loading";
-										$scope.items.$on("loaded", function () {
-											$scope.load_status = "loaded";
-											$scope.ele_load_status = "show_on_loaded";
-										});
 
 										/**
 										 * Count saved calculations
@@ -273,7 +279,7 @@ angular.module('myApp.controllers', [])
 										 * @returns {y.length|*|z.length|dummy.length|length|mfn.length}
 										 */
 										$scope.sessionCount = function () {
-											return $scope.items.$getIndex().length;
+											return items.length;
 										};
 
 										/**
@@ -282,8 +288,17 @@ angular.module('myApp.controllers', [])
 										 *  @param id
 										 */
 										$scope.deleteSession = function (id) {
-											$scope.items.$remove(id);
-											$state.go('saved-calculations');
+
+											var itemToRemove = items.$getRecord(id);
+
+											$scope.deleteItemId = id;
+
+											$timeout(function () {
+												items.$remove(itemToRemove).then(function(ref) {
+													$state.go('saved-calculations');
+												});
+											}, 400);
+
 										};
 
 										/**
@@ -294,25 +309,31 @@ angular.module('myApp.controllers', [])
 										$scope.copySession = function (id) {
 
 											// Connect to firebase and retrieve saved calculations
-											var item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id));
+											var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id)),
+													item = sync.$asObject();
 
-											// Copy saved data
-											var copy_of_data = item.data,
-													copy_of_info = item.info,
-													copy_of_input = item.input;
+											/* Promise for loaded data */
+											item.$loaded().then(
+													function () {
+														// Copy saved data
+														var copy_of_data = item.data,
+																copy_of_info = item.info,
+																copy_of_input = item.input;
 
-											// Update the timestamp and date
-											copy_of_info.date = {
-												timestamp : Math.round(new Date().getTime() / 1000),
-												date : new Date().toISOString()
-											};
+														// Update the timestamp and date
+														copy_of_info.date = {
+															timestamp : Math.round(new Date().getTime() / 1000),
+															date : new Date().toISOString()
+														};
 
-											// Add to items object the copied data
-											$scope.items.$add({
-												data : copy_of_data,
-												info : copy_of_info,
-												input : copy_of_input
-											});
+														// Add to items object the copied data
+														$scope.items.$add({
+															data : copy_of_data,
+															info : copy_of_info,
+															input : copy_of_input
+														});
+													}
+											);
 										};
 
 										/**
@@ -375,30 +396,38 @@ angular.module('myApp.controllers', [])
 									} else {
 										var userId = user.id;
 
-										var item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id));
+										var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id)),
+												item = sync.$asObject();
 
-										// Set the locally stored data
-										localStorageService.set('data', item.data);
-										localStorageService.set('info', item.info);
-										localStorageService.set('input', item.input);
+										/* Promise for loaded data */
+										item.$loaded().then(
+												function () {
 
-										// Update the factories
-										allData = item.data;
-										infoData = item.info;
-										inputData = item.input;
+													// Set the locally stored data
+													localStorageService.set('data', item.data);
+													localStorageService.set('info', item.info);
+													localStorageService.set('input', item.input);
 
-										// Set the current key in localstorage
-										localStorageService.set('current_key', id);
+													// Update the factories
+													allData = item.data;
+													infoData = item.info;
+													inputData = item.input;
 
-										// Set current_key
-										$scope.current_key = localStorageService.get('current_key');
+													// Set the current key in localstorage
+													localStorageService.set('current_key', id);
 
-										// Set running session flag to true
-										infoData.running_session = true;
+													// Set current_key
+													$scope.current_key = localStorageService.get('current_key');
 
-										$window.location.reload();
+													// Set running session flag to true
+													infoData.running_session = true;
 
-										$modalInstance.close();
+													$window.location.reload();
+
+													$modalInstance.close();
+												}
+										);
+
 									}
 								}
 						);
@@ -432,64 +461,69 @@ angular.module('myApp.controllers', [])
 									// Logged in: no @todo
 									// - Message 'you need to login before saving'
 									// - redirect to auth page
-									console.log("Not logged in");
 								} else {
 
 									var userId = user.id;
 
 									/* Get associated session item from Firebase */
-									$scope.item = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/' + $stateParams.id));
+									var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/' + $stateParams.id)),
+											item = sync.$asObject();
 
 									/* Promise for loaded data */
-									$scope.item.$on("loaded", function () {
+									item.$loaded().then(
+											function () {
+												$scope.item = item;
+												console.log(item);
 
-										var data = $scope.item.data;
+												var data = $scope.item.data;
 
-										/**
-										 * Calls the factories for each service
-										 */
-										$scope.updateData = function () {
+												/**
+												 * Calls the factories for each service
+												 */
+												$scope.updateData = function () {
 
-											$scope.revenue_integrity = data.revenue_integrity;
+													$scope.revenue_integrity = data.revenue_integrity;
 
-											$scope.revenue_integrity_process_improvement = data.revenue_integrity_process_improvement;
+													$scope.revenue_integrity_process_improvement = data.revenue_integrity_process_improvement;
 
-											$scope.cmap = data.cmap;
+													$scope.cmap = data.cmap;
 
-											$scope.origin_and_destination = data.origin_and_destination;
+													$scope.origin_and_destination = data.origin_and_destination;
 
-											$scope.pos = data.pos;
+													$scope.pos = data.pos;
 
-											$scope.arr = data.arr;
+													$scope.arr = data.arr;
 
-											$scope.airfare_insight = data.airfare_insight;
+													$scope.airfare_insight = data.airfare_insight;
 
-											// @todo: chart configs are not storing separate values for both graphs.
-											// Need to find out why and stop from using this sort of if/else as makes it fragile.
-											if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
-												$scope.chartConfigLow = chartData.drawChart('low', data);
-											} else {
-												$scope.chartConfigHigh = chartData.drawChart('high', data);
+													// @todo: chart configs are not storing separate values for both graphs.
+													// Need to find out why and stop from using this sort of if/else as makes it fragile.
+													if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
+														$scope.chartConfigLow = chartData.drawChart('low', data);
+													} else {
+														$scope.chartConfigHigh = chartData.drawChart('high', data);
+													}
+
+												};
+												$scope.updateData();
+
+												$state.go('saved-calculations-detail.chart_high');
+
+												/**
+												 * View state
+												 *
+												 * Saves the state of the open results view, Charts or table,
+												 * when loaded. Uses state and state change success event ($stateChangeSuccess).
+												 */
+												$rootScope.$on('$stateChangeSuccess',
+														function (event, toState, toParams, fromState, fromParams) {
+															// update chart
+															$scope.updateData();
+														});
+
 											}
+									);
 
-										};
-										$scope.updateData();
-
-										$state.go('saved-calculations-detail.chart_high');
-
-										/**
-										 * View state
-										 *
-										 * Saves the state of the open results view, Charts or table,
-										 * when loaded. Uses state and state change success event ($stateChangeSuccess).
-										 */
-										$rootScope.$on('$stateChangeSuccess',
-												function (event, toState, toParams, fromState, fromParams) {
-													// update chart
-													$scope.updateData();
-												});
-
-									});
 								}
 							});
 

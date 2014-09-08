@@ -1,22 +1,12 @@
-@import "../../../bower_components/bootstrap-sass-twbs/assets/stylesheets/bootstrap";
+// ++++++++++++++++++++++++++++++++++++++++++++++++
+// Dont forget to overwrite _variables.scss
+// ++++++++++++++++++++++++++++++++++++++++++++++++
+@import "../../libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap";
 
-$gray-darker: lighten(#000, 13.5%) !default;
-// #222
-$gray-dark: lighten(#000, 20%) !default;
-// #333
-$gray: lighten(#000, 33.5%) !default;
-// #555
-$gray-light: lighten(#000, 70%) !default;
-// #999
-$gray-lighter: lighten(#000, 93.5%) !default;
-// #eee
-
-$brand-primary: #003a67 !default;
-$brand-success: #5cb85c !default;
-$brand-info: #5bc0de !default;
-$brand-warning: #f0ad4e !default;
-$brand-danger: #d9534f !default;
-$brand-grey: #003a67;
+$brand-grey: $brand-primary;
+.text-white {
+	color: $body-bg;
+}
 
 .text-capitalize {
 	text-transform: uppercase;
@@ -277,13 +267,65 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		font-size: 12px;
 		border-left: 1px solid rgba(255, 255, 255, 0.46);
 		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-		transition: all .4s linear;
+		transition: all .2s linear;
 		&:last-child {
 			border-radius: 0 5px 0 0;
 		}
 		&:hover, &.active {
 			background-color: $body-bg;
 			color: darken($brand-primary, 15%);
+		}
+	}
+}
+
+.panel-success {
+	$panel-color: mix($brand-success, #DDDDDD, 14%);
+	box-shadow: 0 0 0 5px rgba($panel-color, .4);
+	.panel-heading-btn-group {
+		.btn {
+			background-color: mix($brand-success, #c4c4c4, 14%);
+			color: mix($brand-success, $text-color, 50%);
+			&:hover {
+				background-color: mix($brand-success, #FFF, 14%);
+			}
+		}
+	}
+	.panel-body {
+		background-color: mix($brand-success, $body-bg, 14%);
+	}
+	.panel-footer, .panel-heading {
+		//		background-color: lighten($brand-success, 36%);
+		background-color: $panel-color;
+		border-color: darken($panel-color, 4%);
+		.btn-trans {
+			background-image: linear-gradient(mix($brand-success, $body-bg, 14%), mix($brand-success, #CCC, 14%));
+			color: mix($brand-success, $brand-primary, 50%);
+		}
+	}
+}
+
+.panel-danger, .panel-sucess.panel-danger {
+	$panel-color: mix($brand-danger, #DDDDDD, 14%);
+	box-shadow: 0 0 0 5px rgba($panel-color, .4);
+	.panel-heading-btn-group {
+		.btn {
+			background-color: mix($brand-danger, #c4c4c4, 14%);
+			color: mix($brand-danger, $text-color, 50%);
+			&:hover {
+				background-color: mix($brand-danger, #FFF, 14%);
+			}
+		}
+	}
+	.panel-body {
+		background-color: mix($brand-danger, $body-bg, 14%);
+	}
+	.panel-footer, .panel-heading {
+		//		background-color: lighten($brand-success, 36%);
+		background-color: $panel-color;
+		border-color: darken($panel-color, 4%);
+		.btn-trans {
+			background-image: linear-gradient(mix($brand-danger, $body-bg, 14%), mix($brand-danger, #CCC, 14%));
+			color: mix($brand-danger, $brand-primary, 50%);
 		}
 	}
 }
@@ -370,6 +412,10 @@ $class-slug: pt;
 		padding-top: #{$i * 5}px !important;
 	}
 }
+
+.plr-5 {padding-left: 5px; padding-right: 5px; }
+.plr-10 {padding-left: 10px; padding-right: 10px; }
+.plr-15 {padding-left: 15px; padding-right: 15px; }
 
 /* MENU STYLES */
 .navbar {
@@ -812,6 +858,14 @@ $input-group-height: 34px;
 /* SAVED CALCULATIONS PANELS */
 .saved-panels {
 	height: 290px;
+}
+
+.sort {
+	.active {
+		color: $text-color;
+		text-decoration: underline;
+		font-weight: bold;
+	}
 }
 
 @media (min-width: $screen-xs-min) {

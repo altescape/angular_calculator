@@ -1,6 +1,6 @@
 {
   "name": "hoz_calculator",
-  "version": "0.0.1",
+  "version": "0.1",
   "authors": [
     "Michael Watts <hello@michaelwatts.me>"
   ],
@@ -12,14 +12,16 @@
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
+    "libs",
     "test",
     "tests"
   ],
   "dependencies": {
     "angular": "~1.2.18",
+		"jquery" : "~2.1.1",
+    "bootstrap": "~3.2.0",
     "bootstrap-sass-twbs": "~3.2.0",
-    "angular-route": "1.2.x",
+    "angular-route": "~1.2.x",
     "offline": "~0.7.3",
     "offlinejs-simulate-ui": "~0.1.2",
     "angular-loader": "1.2.x",
@@ -29,6 +31,9 @@
     "angular-animate": "~1.2.19",
     "angular-local-storage": "~0.0.5",
     "angular-ui-router": "~0.2.10",
-    "angularfire": "~0.7.1"
+		"firebase" : "~1.0.17",
+    "angularfire": "~0.8.0",
+    "firebase-simple-login": "~1.6.2",
+		"highcharts-ng": "~0.0.7"
   }
 }
