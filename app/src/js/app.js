@@ -176,7 +176,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('saved-calculations-detail.chart_high', {
-//						url: "/saved-calculations/:id",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculations/saved-calculations-detail.html",
@@ -188,7 +187,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('saved-calculations-detail.chart_low', {
-//						url: "/saved-calculations/:id",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculations/saved-calculations-detail.html",

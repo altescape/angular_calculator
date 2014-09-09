@@ -473,7 +473,6 @@ angular.module('myApp.controllers', [])
 									item.$loaded().then(
 											function () {
 												$scope.item = item;
-												console.log(item);
 
 												var data = $scope.item.data;
 
@@ -597,7 +596,6 @@ angular.module('myApp.controllers', [])
 										// Logged in: no @todo
 										// - Message 'you need to login before saving'
 										// - redirect to auth page
-										console.log("Not logged in");
 									} else {
 										// Logged in: yes
 										// - get current user id and append to firebase address
@@ -655,7 +653,6 @@ angular.module('myApp.controllers', [])
 										// Logged in: no @todo
 										// - Message 'you need to login before updating'
 										// - redirect to auth page
-										console.log("Not logged in");
 									} else {
 										// Logged in: yes
 										// - get current user id and append to firebase address
@@ -744,8 +741,6 @@ angular.module('myApp.controllers', [])
 							airfareInsight.initObject();
 							$scope.airfare_insight = allData.airfare_insight;
 
-//							console.log(channelShift());
-
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);
 
@@ -758,6 +753,7 @@ angular.module('myApp.controllers', [])
 							}
 
 						};
+
 						$scope.updateData();
 
 						// Passengers boarded data. See variables sheet C2 - C16
@@ -780,12 +776,14 @@ angular.module('myApp.controllers', [])
 						 *
 						 * Initiates the process for saving the open results view, Charts or table.
 						 *
+						 * NOTE: This is currently broken
+						 *
 						 * @type {*|Array|Choice|Undefined|Object|array|promise|Object}
 						 */
 						if ( localStorageService.get('results_view') ) {
-							$state.go(localStorageService.get('results_view').name);
+							// $state.go(localStorageService.get('results_view').name);
 						} else {
-							$state.go('calculator.chart_high');
+							// $state.go('calculator.chart_high');
 						}
 
 						/**
