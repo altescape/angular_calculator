@@ -108,6 +108,9 @@ angular.module('myApp.controllers', [])
 							function (event, toState, toParams, fromState, fromParams) {
 								console.log(toState.name);
 								switch (toState.name) {
+									case 'home' :
+										$scope.navActive = 'home';
+										break;
 									case 'info' :
 										$scope.navActive = 'info';
 										break;
