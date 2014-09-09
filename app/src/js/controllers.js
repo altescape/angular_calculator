@@ -100,28 +100,6 @@ angular.module('myApp.controllers', [])
 								$scope.info = infoData;
 							}, true);
 
-//					var settings = {
-//						disable : 'right',
-//						hyperextensible : false,
-//						transitionSpeed : .3,
-//						easing : 'ease'
-//					};
-
-//					var snapper = new Snap({
-//						element : document.getElementById('main-content')
-//					});
-
-//					snapper.settings(settings);
-
-//					$scope.openLeft = function () {
-//						if ( snapper.state().state == "left" ) {
-//							snapper.close();
-//							return false;
-//						} else {
-//							snapper.open('left');
-//							return true;
-//						}
-//					};
 
 					/**
 					 * Menu active from state names
