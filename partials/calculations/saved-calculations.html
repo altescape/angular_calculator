@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-md-12 text-right">
-                <ul ng-model="sort" class="list-inline sort" ng-init="sort = 'unsorted'">
+                <ul ng-model="sort" class="list-inline sort mt-10" ng-init="sort = 'unsorted'">
                     <li>Sort by: </li>
                     <li><a ng-click="predicate=''; sort = 'unsorted'" ng-class="{'active': sort == 'unsorted'}">Unsorted</a></li>
                     <li><a ng-click="predicate = 'info.date.timestamp'; reverse=false; sort = 'date_asc'" ng-class="{'active': sort == 'date_asc'}">Date (Asc.)</a></li>
