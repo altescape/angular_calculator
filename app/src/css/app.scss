@@ -630,6 +630,7 @@ $class-slug: pt;
 /* USER STYLES */
 .user-action {
 	color: darken($body-bg, 8%);
+	display: inline-block;
 	text-align: center;
 	overflow: hidden;
 	font-weight: bold;
