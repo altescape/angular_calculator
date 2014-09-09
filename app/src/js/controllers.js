@@ -148,6 +148,9 @@ angular.module('myApp.controllers', [])
 									case 'saved-calculations' :
 										$scope.navActive = 'my-calculations';
 										break;
+									case 'saved-calculations-detail' :
+										$scope.navActive = 'my-calculations';
+										break;
 									case 'clear-data' :
 										$scope.navActive = 'settings';
 										break;
