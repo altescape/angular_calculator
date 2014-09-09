@@ -108,7 +108,9 @@ figure {
 
 /* line 209, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
 hr {
-  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   height: 0; }
 
 /* line 219, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
@@ -168,7 +170,9 @@ input {
 /* line 333, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
 input[type="checkbox"],
 input[type="radio"] {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
   padding: 0; }
 
 /* line 345, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
@@ -179,6 +183,8 @@ input[type="number"]::-webkit-outer-spin-button {
 /* line 355, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
 input[type="search"] {
   -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
   box-sizing: content-box; }
 
 /* line 369, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_normalize.scss */
@@ -221,7 +227,8 @@ th {
     text-shadow: none !important;
     color: #000 !important;
     background: transparent !important;
-    box-shadow: none !important; }
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important; }
 
   /* line 16, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_print.scss */
   a,
@@ -1121,11 +1128,15 @@ th {
 
 /* line 11, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 /* line 15, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 *:before,
 *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 /* line 22, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
@@ -1152,11 +1163,11 @@ textarea {
 
 /* line 48, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #003a67;
+  color: #0081cb;
   text-decoration: none; }
   /* line 53, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
   a:hover, a:focus {
-    color: #000f1a;
+    color: #00507f;
     text-decoration: underline; }
   /* line 58, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
   a:focus {
@@ -1181,7 +1192,8 @@ img {
 
 /* line 86, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-rounded {
-  border-radius: 6px; }
+  -webkit-border-radius: 6px;
+          border-radius: 6px; }
 
 /* line 93, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-thumbnail {
@@ -1189,7 +1201,8 @@ img {
   line-height: 1.42857;
   background-color: white;
   border: 1px solid #dddddd;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
@@ -1199,7 +1212,8 @@ img {
 
 /* line 106, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 .img-circle {
-  border-radius: 50%; }
+  -webkit-border-radius: 50%;
+          border-radius: 50%; }
 
 /* line 113, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_scaffolding.scss */
 hr {
@@ -1382,11 +1396,11 @@ mark,
 
 /* line 5, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-primary {
-  color: #003a67; }
+  color: #0081cb; }
 
 /* line 8, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 a.text-primary:hover {
-  color: #001d34; }
+  color: #006198; }
 
 /* line 5, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_text-emphasis.scss */
 .text-success {
@@ -1426,11 +1440,11 @@ a.text-danger:hover {
 
 /* line 5, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-primary {
-  background-color: #003a67; }
+  background-color: #0081cb; }
 
 /* line 8, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 a.bg-primary:hover {
-  background-color: #001d34; }
+  background-color: #006198; }
 
 /* line 5, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_background-variant.scss */
 .bg-success {
@@ -1620,7 +1634,8 @@ code {
   font-size: 90%;
   color: #c7254e;
   background-color: #f9f2f4;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
 
 /* line 24, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_code.scss */
 kbd {
@@ -1628,13 +1643,16 @@ kbd {
   font-size: 90%;
   color: white;
   background-color: #333333;
-  border-radius: 3px;
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25); }
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25); }
   /* line 32, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_code.scss */
   kbd kbd {
     padding: 0;
     font-size: 100%;
-    box-shadow: none; }
+    -webkit-box-shadow: none;
+            box-shadow: none; }
 
 /* line 40, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_code.scss */
 pre {
@@ -1648,7 +1666,8 @@ pre {
   color: #333333;
   background-color: whitesmoke;
   border: 1px solid #cccccc;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 54, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_code.scss */
   pre code {
     padding: 0;
@@ -1656,7 +1675,8 @@ pre {
     color: inherit;
     white-space: pre-wrap;
     background-color: transparent;
-    border-radius: 0; }
+    -webkit-border-radius: 0;
+            border-radius: 0; }
 
 /* line 65, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_code.scss */
 .pre-scrollable {
@@ -2810,6 +2830,8 @@ label {
 
 /* line 47, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_forms.scss */
 input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
 /* line 53, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_forms.scss */
@@ -2861,14 +2883,17 @@ output {
   background-color: white;
   background-image: none;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   /* line 53, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
   .form-control:focus {
     border-color: #66afe9;
     outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
   /* line 102, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_vendor-prefixes.scss */
   .form-control::-moz-placeholder {
@@ -3033,7 +3058,8 @@ input[type="checkbox"] {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 /* line 75, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 select.input-sm, .form-horizontal .form-group-sm select.form-control, .input-group-sm > select.form-control,
@@ -3061,7 +3087,8 @@ select[multiple].input-sm,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px; }
+  -webkit-border-radius: 6px;
+          border-radius: 6px; }
 
 /* line 75, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 select.input-lg, .form-horizontal .form-group-lg select.form-control, .input-group-lg > select.form-control,
@@ -3127,10 +3154,12 @@ select[multiple].input-lg,
 /* line 17, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-success .form-control {
   border-color: #3c763d;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
   /* line 20, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
   .has-success .form-control:focus {
     border-color: #2b542c;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
 /* line 27, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-success .input-group-addon {
@@ -3152,10 +3181,12 @@ select[multiple].input-lg,
 /* line 17, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-warning .form-control {
   border-color: #8a6d3b;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
   /* line 20, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
   .has-warning .form-control:focus {
     border-color: #66512c;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
 /* line 27, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-warning .input-group-addon {
@@ -3177,10 +3208,12 @@ select[multiple].input-lg,
 /* line 17, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-error .form-control {
   border-color: #a94442;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
   /* line 20, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
   .has-error .form-control:focus {
     border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
 /* line 27, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_forms.scss */
 .has-error .input-group-addon {
@@ -3310,7 +3343,8 @@ select[multiple].input-lg,
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -3328,6 +3362,7 @@ select[multiple].input-lg,
   .btn:active, .btn.active {
     outline: 0;
     background-image: none;
+    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
   /* line 45, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
   .btn.disabled, .btn[disabled], fieldset[disabled] .btn {
@@ -3335,6 +3370,7 @@ select[multiple].input-lg,
     pointer-events: none;
     opacity: 0.65;
     filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
     box-shadow: none; }
 
 /* line 57, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
@@ -3362,23 +3398,23 @@ select[multiple].input-lg,
 /* line 60, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-primary {
   color: white;
-  background-color: #003a67;
-  border-color: #002c4e; }
+  background-color: #0081cb;
+  border-color: #0071b2; }
   /* line 15, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     color: white;
-    background-color: #001d34;
-    border-color: #000910; }
+    background-color: #006198;
+    border-color: #004a74; }
   /* line 22, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary:active, .btn-primary.active, .open > .btn-primary.dropdown-toggle {
     background-image: none; }
   /* line 32, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-    background-color: #003a67;
-    border-color: #002c4e; }
+    background-color: #0081cb;
+    border-color: #0071b2; }
   /* line 38, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_buttons.scss */
   .btn-primary .badge {
-    color: #003a67;
+    color: #0081cb;
     background-color: white; }
 
 /* line 64, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
@@ -3471,20 +3507,22 @@ select[multiple].input-lg,
 
 /* line 85, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-link {
-  color: #003a67;
+  color: #0081cb;
   font-weight: normal;
   cursor: pointer;
-  border-radius: 0; }
+  -webkit-border-radius: 0;
+          border-radius: 0; }
   /* line 94, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
   .btn-link, .btn-link:active, .btn-link[disabled], fieldset[disabled] .btn-link {
     background-color: transparent;
+    -webkit-box-shadow: none;
     box-shadow: none; }
   /* line 101, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
   .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
     border-color: transparent; }
   /* line 105, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
   .btn-link:hover, .btn-link:focus {
-    color: #000f1a;
+    color: #00507f;
     text-decoration: underline;
     background-color: transparent; }
   /* line 113, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
@@ -3497,21 +3535,24 @@ select[multiple].input-lg,
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
-  border-radius: 6px; }
+  -webkit-border-radius: 6px;
+          border-radius: 6px; }
 
 /* line 128, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-sm, .btn-group-sm > .btn {
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 /* line 132, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-xs, .btn-group-xs > .btn {
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 /* line 140, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_buttons.scss */
 .btn-block {
@@ -3596,9 +3637,12 @@ tbody.collapse.in {
   background-color: white;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  background-clip: padding-box; }
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box; }
   /* line 52, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_dropdowns.scss */
   .dropdown-menu.pull-right {
     right: 0;
@@ -3630,7 +3674,7 @@ tbody.collapse.in {
   color: white;
   text-decoration: none;
   outline: 0;
-  background-color: #003a67; }
+  background-color: #0081cb; }
 
 /* line 103, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_dropdowns.scss */
 .dropdown-menu > .disabled > a, .dropdown-menu > .disabled > a:hover, .dropdown-menu > .disabled > a:focus {
@@ -3758,21 +3802,26 @@ tbody.collapse.in {
 
 /* line 54, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
-  border-radius: 0; }
+  -webkit-border-radius: 0;
+          border-radius: 0; }
 
 /* line 59, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn:first-child {
   margin-left: 0; }
   /* line 61, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
   .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0; }
+    -webkit-border-bottom-right-radius: 0;
+            border-bottom-right-radius: 0;
+    -webkit-border-top-right-radius: 0;
+            border-top-right-radius: 0; }
 
 /* line 67, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 72, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn-group {
@@ -3780,18 +3829,23 @@ tbody.collapse.in {
 
 /* line 75, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
-  border-radius: 0; }
+  -webkit-border-radius: 0;
+          border-radius: 0; }
 
 /* line 80, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn-group:first-child > .btn:last-child,
 .btn-group > .btn-group:first-child > .dropdown-toggle {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0; }
+  -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0; }
 
 /* line 84, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group > .btn-group:last-child > .btn:first-child {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 90, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group .dropdown-toggle:active,
@@ -3810,9 +3864,11 @@ tbody.collapse.in {
 
 /* line 119, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
   /* line 123, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
   .btn-group.open .dropdown-toggle.btn-link {
+    -webkit-box-shadow: none;
     box-shadow: none; }
 
 /* line 130, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
@@ -3856,32 +3912,44 @@ tbody.collapse.in {
 
 /* line 175, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:not(:first-child):not(:last-child) {
-  border-radius: 0; }
+  -webkit-border-radius: 0;
+          border-radius: 0; }
 /* line 178, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:first-child:not(:last-child) {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; }
+  -webkit-border-top-right-radius: 4px;
+          border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0; }
 /* line 182, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn:last-child:not(:first-child) {
-  border-bottom-left-radius: 4px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-bottom-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 187, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
-  border-radius: 0; }
+  -webkit-border-radius: 0;
+          border-radius: 0; }
 
 /* line 192, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn-group:first-child:not(:last-child) > .btn:last-child,
 .btn-group-vertical > .btn-group:first-child:not(:last-child) > .dropdown-toggle {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; }
+  -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0; }
 
 /* line 196, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-vertical > .btn-group:last-child:not(:first-child) > .btn:first-child {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 205, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_button-groups.scss */
 .btn-group-justified {
@@ -3937,7 +4005,8 @@ tbody.collapse.in {
   .input-group-addon:not(:first-child):not(:last-child),
   .input-group-btn:not(:first-child):not(:last-child),
   .input-group .form-control:not(:first-child):not(:last-child) {
-    border-radius: 0; }
+    -webkit-border-radius: 0;
+            border-radius: 0; }
 
 /* line 65, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon,
@@ -3956,21 +4025,24 @@ tbody.collapse.in {
   text-align: center;
   background-color: #eeeeee;
   border: 1px solid #cccccc;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 85, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
   .input-group-addon.input-sm, .form-horizontal .form-group-sm .input-group-addon.form-control,
   .input-group-sm > .input-group-addon,
   .input-group-sm > .input-group-btn > .input-group-addon.btn {
     padding: 5px 10px;
     font-size: 12px;
-    border-radius: 3px; }
+    -webkit-border-radius: 3px;
+            border-radius: 3px; }
   /* line 90, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
   .input-group-addon.input-lg, .form-horizontal .form-group-lg .input-group-addon.form-control,
   .input-group-lg > .input-group-addon,
   .input-group-lg > .input-group-btn > .input-group-addon.btn {
     padding: 10px 16px;
     font-size: 18px;
-    border-radius: 6px; }
+    -webkit-border-radius: 6px;
+            border-radius: 6px; }
   /* line 98, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
   .input-group-addon input[type="radio"],
   .input-group-addon input[type="checkbox"] {
@@ -3984,8 +4056,10 @@ tbody.collapse.in {
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle),
 .input-group-btn:last-child > .btn-group:not(:last-child) > .btn {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0; }
+  -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0; }
 
 /* line 113, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon:first-child {
@@ -3999,8 +4073,10 @@ tbody.collapse.in {
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child),
 .input-group-btn:first-child > .btn-group:not(:first-child) > .btn {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 125, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_input-groups.scss */
 .input-group-addon:last-child {
@@ -4066,7 +4142,7 @@ tbody.collapse.in {
   /* line 48, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
     background-color: #eeeeee;
-    border-color: #003a67; }
+    border-color: #0081cb; }
   /* line 59, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav .nav-divider {
     height: 1px;
@@ -4089,7 +4165,8 @@ tbody.collapse.in {
       margin-right: 2px;
       line-height: 1.42857;
       border: 1px solid transparent;
-      border-radius: 4px 4px 0 0; }
+      -webkit-border-radius: 4px 4px 0 0;
+              border-radius: 4px 4px 0 0; }
       /* line 89, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
       .nav-tabs > li > a:hover {
         border-color: #eeeeee #eeeeee #dddddd; }
@@ -4106,14 +4183,15 @@ tbody.collapse.in {
   float: left; }
   /* line 122, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-pills > li > a {
-    border-radius: 4px; }
+    -webkit-border-radius: 4px;
+            border-radius: 4px; }
   /* line 125, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-pills > li + li {
     margin-left: 2px; }
   /* line 133, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
     color: white;
-    background-color: #003a67; }
+    background-color: #0081cb; }
 
 /* line 144, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
 .nav-stacked > li {
@@ -4152,7 +4230,8 @@ tbody.collapse.in {
   /* line 193, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
     margin-right: 0;
-    border-radius: 4px; }
+    -webkit-border-radius: 4px;
+            border-radius: 4px; }
   /* line 201, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
   .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
@@ -4164,7 +4243,8 @@ tbody.collapse.in {
     /* line 206, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
     .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
       border-bottom: 1px solid #dddddd;
-      border-radius: 4px 4px 0 0; }
+      -webkit-border-radius: 4px 4px 0 0;
+              border-radius: 4px 4px 0 0; }
     /* line 212, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
     .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
     .nav-tabs-justified > .active > a:hover,
@@ -4183,8 +4263,10 @@ tbody.collapse.in {
 /* line 237, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navs.scss */
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 11, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar {
@@ -4202,7 +4284,8 @@ tbody.collapse.in {
   @media (min-width: 768px) {
     /* line 11, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
     .navbar {
-      border-radius: 4px; } }
+      -webkit-border-radius: 4px;
+              border-radius: 4px; } }
 
 /* line 15, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
 .navbar-header:before, .navbar-header:after {
@@ -4222,7 +4305,8 @@ tbody.collapse.in {
   padding-right: 15px;
   padding-left: 15px;
   border-top: 1px solid transparent;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   -webkit-overflow-scrolling: touch; }
   /* line 15, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_clearfix.scss */
   .navbar-collapse:before, .navbar-collapse:after {
@@ -4239,7 +4323,8 @@ tbody.collapse.in {
     .navbar-collapse {
       width: auto;
       border-top: 0;
-      box-shadow: none; }
+      -webkit-box-shadow: none;
+              box-shadow: none; }
       /* line 68, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
       .navbar-collapse.collapse {
         display: block !important;
@@ -4287,7 +4372,8 @@ tbody.collapse.in {
   @media (min-width: 768px) {
     /* line 128, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
     .navbar-static-top {
-      border-radius: 0; } }
+      -webkit-border-radius: 0;
+              border-radius: 0; } }
 
 /* line 139, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-fixed-top,
@@ -4302,7 +4388,8 @@ tbody.collapse.in {
     /* line 139, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
     .navbar-fixed-top,
     .navbar-fixed-bottom {
-      border-radius: 0; } }
+      -webkit-border-radius: 0;
+              border-radius: 0; } }
 
 /* line 151, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-fixed-top {
@@ -4341,7 +4428,8 @@ tbody.collapse.in {
   background-color: transparent;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 203, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-toggle:focus {
     outline: 0; }
@@ -4350,7 +4438,8 @@ tbody.collapse.in {
     display: block;
     width: 22px;
     height: 2px;
-    border-radius: 1px; }
+    -webkit-border-radius: 1px;
+            border-radius: 1px; }
   /* line 214, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
   .navbar-toggle .icon-bar + .icon-bar {
     margin-top: 4px; }
@@ -4376,7 +4465,8 @@ tbody.collapse.in {
       margin-top: 0;
       background-color: transparent;
       border: 0;
-      box-shadow: none; }
+      -webkit-box-shadow: none;
+              box-shadow: none; }
       /* line 249, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
       .navbar-nav .open .dropdown-menu > li > a,
       .navbar-nav .open .dropdown-menu .dropdown-header {
@@ -4418,6 +4508,7 @@ tbody.collapse.in {
   padding: 10px 15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   margin-top: 8px;
   margin-bottom: 8px; }
@@ -4434,6 +4525,7 @@ tbody.collapse.in {
       margin-right: 0;
       padding-top: 0;
       padding-bottom: 0;
+      -webkit-box-shadow: none;
       box-shadow: none; }
       /* line 335, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
       .navbar-form.navbar-right:last-child {
@@ -4442,13 +4534,17 @@ tbody.collapse.in {
 /* line 345, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-nav > li > .dropdown-menu {
   margin-top: 0;
-  border-top-right-radius: 0;
-  border-top-left-radius: 0; }
+  -webkit-border-top-right-radius: 0;
+          border-top-right-radius: 0;
+  -webkit-border-top-left-radius: 0;
+          border-top-left-radius: 0; }
 
 /* line 350, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0; }
+  -webkit-border-bottom-right-radius: 0;
+          border-bottom-right-radius: 0;
+  -webkit-border-bottom-left-radius: 0;
+          border-bottom-left-radius: 0; }
 
 /* line 359, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_navbar.scss */
 .navbar-btn {
@@ -4645,7 +4741,8 @@ tbody.collapse.in {
   margin-bottom: 20px;
   list-style: none;
   background-color: whitesmoke;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 13, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_breadcrumbs.scss */
   .breadcrumb > li {
     display: inline-block; }
@@ -4663,7 +4760,8 @@ tbody.collapse.in {
   display: inline-block;
   padding-left: 0;
   margin: 20px 0;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 10, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
   .pagination > li {
     display: inline; }
@@ -4675,7 +4773,7 @@ tbody.collapse.in {
       padding: 6px 12px;
       line-height: 1.42857;
       text-decoration: none;
-      color: #003a67;
+      color: #0081cb;
       background-color: white;
       border: 1px solid #dddddd;
       margin-left: -1px; }
@@ -4683,18 +4781,22 @@ tbody.collapse.in {
     .pagination > li:first-child > a,
     .pagination > li:first-child > span {
       margin-left: 0;
-      border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px; }
+      -webkit-border-bottom-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+      -webkit-border-top-left-radius: 4px;
+              border-top-left-radius: 4px; }
     /* line 33, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
     .pagination > li:last-child > a,
     .pagination > li:last-child > span {
-      border-bottom-right-radius: 4px;
-      border-top-right-radius: 4px; }
+      -webkit-border-bottom-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+      -webkit-border-top-right-radius: 4px;
+              border-top-right-radius: 4px; }
   /* line 42, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
   .pagination > li > a:hover, .pagination > li > a:focus,
   .pagination > li > span:hover,
   .pagination > li > span:focus {
-    color: #000f1a;
+    color: #00507f;
     background-color: #eeeeee;
     border-color: #dddddd; }
   /* line 53, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
@@ -4704,8 +4806,8 @@ tbody.collapse.in {
   .pagination > .active > span:focus {
     z-index: 2;
     color: white;
-    background-color: #003a67;
-    border-color: #003a67;
+    background-color: #0081cb;
+    border-color: #0081cb;
     cursor: default; }
   /* line 68, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pagination.scss */
   .pagination > .disabled > span,
@@ -4727,13 +4829,17 @@ tbody.collapse.in {
 /* line 12, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:first-child > a,
 .pagination-lg > li:first-child > span {
-  border-bottom-left-radius: 6px;
-  border-top-left-radius: 6px; }
+  -webkit-border-bottom-left-radius: 6px;
+          border-bottom-left-radius: 6px;
+  -webkit-border-top-left-radius: 6px;
+          border-top-left-radius: 6px; }
 /* line 18, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-lg > li:last-child > a,
 .pagination-lg > li:last-child > span {
-  border-bottom-right-radius: 6px;
-  border-top-right-radius: 6px; }
+  -webkit-border-bottom-right-radius: 6px;
+          border-bottom-right-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+          border-top-right-radius: 6px; }
 
 /* line 6, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li > a,
@@ -4743,13 +4849,17 @@ tbody.collapse.in {
 /* line 12, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:first-child > a,
 .pagination-sm > li:first-child > span {
-  border-bottom-left-radius: 3px;
-  border-top-left-radius: 3px; }
+  -webkit-border-bottom-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+          border-top-left-radius: 3px; }
 /* line 18, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_pagination.scss */
 .pagination-sm > li:last-child > a,
 .pagination-sm > li:last-child > span {
-  border-bottom-right-radius: 3px;
-  border-top-right-radius: 3px; }
+  -webkit-border-bottom-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+          border-top-right-radius: 3px; }
 
 /* line 6, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pager.scss */
 .pager {
@@ -4774,7 +4884,8 @@ tbody.collapse.in {
       padding: 5px 14px;
       background-color: white;
       border: 1px solid #dddddd;
-      border-radius: 15px; }
+      -webkit-border-radius: 15px;
+              border-radius: 15px; }
     /* line 24, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_pager.scss */
     .pager li > a:hover,
     .pager li > a:focus {
@@ -4808,7 +4919,8 @@ tbody.collapse.in {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: .25em; }
+  -webkit-border-radius: .25em;
+          border-radius: .25em; }
   /* line 20, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_labels.scss */
   .label:empty {
     display: none; }
@@ -4832,10 +4944,10 @@ a.label:hover, a.label:focus {
 
 /* line 48, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_labels.scss */
 .label-primary {
-  background-color: #003a67; }
+  background-color: #0081cb; }
   /* line 8, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_labels.scss */
   .label-primary[href]:hover, .label-primary[href]:focus {
-    background-color: #001d34; }
+    background-color: #006198; }
 
 /* line 52, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_labels.scss */
 .label-success {
@@ -4878,7 +4990,8 @@ a.label:hover, a.label:focus {
   white-space: nowrap;
   text-align: center;
   background-color: #777777;
-  border-radius: 10px; }
+  -webkit-border-radius: 10px;
+          border-radius: 10px; }
   /* line 22, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_badges.scss */
   .badge:empty {
     display: none; }
@@ -4892,7 +5005,7 @@ a.label:hover, a.label:focus {
     padding: 1px 5px; }
   /* line 40, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_badges.scss */
   a.list-group-item.active > .badge, .nav-pills > .active > a > .badge {
-    color: #003a67;
+    color: #0081cb;
     background-color: white; }
   /* line 44, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_badges.scss */
   .nav-pills > li > a > .badge {
@@ -4924,7 +5037,8 @@ a.badge:hover, a.badge:focus {
     border-top-color: #d5d5d5; }
   /* line 26, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_jumbotron.scss */
   .container .jumbotron {
-    border-radius: 6px; }
+    -webkit-border-radius: 6px;
+            border-radius: 6px; }
   /* line 30, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_jumbotron.scss */
   .jumbotron .container {
     max-width: 100%; }
@@ -4950,7 +5064,8 @@ a.badge:hover, a.badge:focus {
   line-height: 1.42857;
   background-color: white;
   border: 1px solid #dddddd;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out; }
   /* line 18, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_thumbnails.scss */
@@ -4971,14 +5086,15 @@ a.badge:hover, a.badge:focus {
 a.thumbnail:hover,
 a.thumbnail:focus,
 a.thumbnail.active {
-  border-color: #003a67; }
+  border-color: #0081cb; }
 
 /* line 9, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_alerts.scss */
 .alert {
   padding: 15px;
   margin-bottom: 20px;
   border: 1px solid transparent;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
   /* line 16, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_alerts.scss */
   .alert h4 {
     margin-top: 0;
@@ -5078,7 +5194,9 @@ a.thumbnail.active {
   height: 20px;
   margin-bottom: 20px;
   background-color: whitesmoke;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); }
 
 /* line 37, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_progress-bars.scss */
@@ -5090,7 +5208,8 @@ a.thumbnail.active {
   line-height: 20px;
   color: white;
   text-align: center;
-  background-color: #003a67;
+  background-color: #0081cb;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
   transition: width 0.6s ease; }
@@ -5100,7 +5219,8 @@ a.thumbnail.active {
 .progress-bar-striped {
   background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
   background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
-  background-size: 40px 40px; }
+  -webkit-background-size: 40px 40px;
+          background-size: 40px 40px; }
 
 /* line 66, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_progress-bars.scss */
 .progress.active .progress-bar,
@@ -5117,7 +5237,8 @@ a.thumbnail.active {
   min-width: 30px;
   background-color: transparent;
   background-image: none;
-  box-shadow: none; }
+  -webkit-box-shadow: none;
+          box-shadow: none; }
 
 /* line 91, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_progress-bars.scss */
 .progress-bar-success {
@@ -5201,13 +5322,17 @@ a.thumbnail.active {
   border: 1px solid #dddddd; }
   /* line 31, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item:first-child {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px; }
+    -webkit-border-top-right-radius: 4px;
+            border-top-right-radius: 4px;
+    -webkit-border-top-left-radius: 4px;
+            border-top-left-radius: 4px; }
   /* line 34, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item:last-child {
     margin-bottom: 0;
-    border-bottom-right-radius: 4px;
-    border-bottom-left-radius: 4px; }
+    -webkit-border-bottom-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+    -webkit-border-bottom-left-radius: 4px;
+            border-bottom-left-radius: 4px; }
   /* line 40, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item > .badge {
     float: right; }
@@ -5241,8 +5366,8 @@ a.list-group-item {
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
   z-index: 2;
   color: white;
-  background-color: #003a67;
-  border-color: #003a67; }
+  background-color: #0081cb;
+  border-color: #0081cb; }
   /* line 99, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item.active .list-group-item-heading,
   .list-group-item.active .list-group-item-heading > small,
@@ -5254,7 +5379,7 @@ a.list-group-item {
     color: inherit; }
   /* line 102, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_list-group.scss */
   .list-group-item.active .list-group-item-text, .list-group-item.active:hover .list-group-item-text, .list-group-item.active:focus .list-group-item-text {
-    color: #34a6ff; }
+    color: #98d9ff; }
 
 /* line 4, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_list-group.scss */
 .list-group-item-success {
@@ -5355,7 +5480,9 @@ a.list-group-item-danger {
   margin-bottom: 20px;
   background-color: white;
   border: 1px solid transparent;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05); }
 
 /* line 16, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
@@ -5373,8 +5500,10 @@ a.list-group-item-danger {
 .panel-heading {
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px; }
+  -webkit-border-top-right-radius: 3px;
+          border-top-right-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+          border-top-left-radius: 3px; }
   /* line 27, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel-heading > .dropdown .dropdown-toggle {
     color: inherit; }
@@ -5394,8 +5523,10 @@ a.list-group-item-danger {
   padding: 10px 15px;
   background-color: whitesmoke;
   border-top: 1px solid #dddddd;
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px; }
+  -webkit-border-bottom-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+          border-bottom-left-radius: 3px; }
 
 /* line 59, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .list-group {
@@ -5403,17 +5534,22 @@ a.list-group-item-danger {
   /* line 62, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .list-group .list-group-item {
     border-width: 1px 0;
-    border-radius: 0; }
+    -webkit-border-radius: 0;
+            border-radius: 0; }
   /* line 69, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .list-group:first-child .list-group-item:first-child {
     border-top: 0;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px; }
+    -webkit-border-top-right-radius: 3px;
+            border-top-right-radius: 3px;
+    -webkit-border-top-left-radius: 3px;
+            border-top-left-radius: 3px; }
   /* line 76, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .list-group:last-child .list-group-item:last-child {
     border-bottom: 0;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px; }
+    -webkit-border-bottom-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+            border-bottom-left-radius: 3px; }
 
 /* line 85, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel-heading + .list-group .list-group-item:first-child {
@@ -5431,8 +5567,10 @@ a.list-group-item-danger {
 /* line 106, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:first-child,
 .panel > .table-responsive:first-child > .table:first-child {
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px; }
+  -webkit-border-top-right-radius: 3px;
+          border-top-right-radius: 3px;
+  -webkit-border-top-left-radius: 3px;
+          border-top-left-radius: 3px; }
   /* line 113, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
   .panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
@@ -5442,7 +5580,8 @@ a.list-group-item-danger {
   .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
   .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
   .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
-    border-top-left-radius: 3px; }
+    -webkit-border-top-left-radius: 3px;
+            border-top-left-radius: 3px; }
   /* line 117, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
   .panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
@@ -5452,12 +5591,15 @@ a.list-group-item-danger {
   .panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
   .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
   .panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
-    border-top-right-radius: 3px; }
+    -webkit-border-top-right-radius: 3px;
+            border-top-right-radius: 3px; }
 /* line 125, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .table:last-child,
 .panel > .table-responsive:last-child > .table:last-child {
-  border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px; }
+  -webkit-border-bottom-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+          border-bottom-left-radius: 3px; }
   /* line 132, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
   .panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
@@ -5467,7 +5609,8 @@ a.list-group-item-danger {
   .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
   .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
   .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
-    border-bottom-left-radius: 3px; }
+    -webkit-border-bottom-left-radius: 3px;
+            border-bottom-left-radius: 3px; }
   /* line 136, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
   .panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
@@ -5477,7 +5620,8 @@ a.list-group-item-danger {
   .panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
   .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
   .panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
-    border-bottom-right-radius: 3px; }
+    -webkit-border-bottom-right-radius: 3px;
+            border-bottom-right-radius: 3px; }
 /* line 143, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel > .panel-body + .table,
 .panel > .panel-body + .table-responsive {
@@ -5549,7 +5693,8 @@ a.list-group-item-danger {
   /* line 202, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
   .panel-group .panel {
     margin-bottom: 0;
-    border-radius: 4px; }
+    -webkit-border-radius: 4px;
+            border-radius: 4px; }
     /* line 205, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
     .panel-group .panel + .panel {
       margin-top: 5px; }
@@ -5587,22 +5732,22 @@ a.list-group-item-danger {
 
 /* line 229, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel-primary {
-  border-color: #003a67; }
+  border-color: #0081cb; }
   /* line 6, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
   .panel-primary > .panel-heading {
     color: white;
-    background-color: #003a67;
-    border-color: #003a67; }
+    background-color: #0081cb;
+    border-color: #0081cb; }
     /* line 11, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
     .panel-primary > .panel-heading + .panel-collapse > .panel-body {
-      border-top-color: #003a67; }
+      border-top-color: #0081cb; }
     /* line 14, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
     .panel-primary > .panel-heading .badge {
-      color: #003a67;
+      color: #0081cb;
       background-color: white; }
   /* line 20, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_panels.scss */
   .panel-primary > .panel-footer + .panel-collapse > .panel-body {
-    border-bottom-color: #003a67; }
+    border-bottom-color: #0081cb; }
 
 /* line 232, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_panels.scss */
 .panel-success {
@@ -5713,7 +5858,9 @@ a.list-group-item-danger {
   margin-bottom: 20px;
   background-color: whitesmoke;
   border: 1px solid #e3e3e3;
-  border-radius: 4px;
+  -webkit-border-radius: 4px;
+          border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); }
   /* line 15, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_wells.scss */
   .well blockquote {
@@ -5723,12 +5870,14 @@ a.list-group-item-danger {
 /* line 22, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_wells.scss */
 .well-lg {
   padding: 24px;
-  border-radius: 6px; }
+  -webkit-border-radius: 6px;
+          border-radius: 6px; }
 
 /* line 26, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_wells.scss */
 .well-sm {
   padding: 9px;
-  border-radius: 3px; }
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
 
 /* line 6, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_close.scss */
 .close {
@@ -5800,9 +5949,12 @@ button.close {
   background-color: white;
   border: 1px solid #999999;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
   outline: 0; }
 
 /* line 64, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_modals.scss */
@@ -5882,6 +6034,7 @@ button.close {
 
   /* line 140, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_modals.scss */
   .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); }
 
   /* line 145, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_modals.scss */
@@ -5930,7 +6083,8 @@ button.close {
   text-align: center;
   text-decoration: none;
   background-color: black;
-  border-radius: 4px; }
+  -webkit-border-radius: 4px;
+          border-radius: 4px; }
 
 /* line 35, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_tooltip.scss */
 .tooltip-arrow {
@@ -6004,10 +6158,13 @@ button.close {
   padding: 1px;
   text-align: left;
   background-color: white;
-  background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+          background-clip: padding-box;
   border: 1px solid #cccccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  -webkit-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   white-space: normal; }
   /* line 26, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_popovers.scss */
@@ -6032,7 +6189,8 @@ button.close {
   line-height: 18px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
-  border-radius: 5px 5px 0 0; }
+  -webkit-border-radius: 5px 5px 0 0;
+          border-radius: 5px 5px 0 0; }
 
 /* line 43, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_popovers.scss */
 .popover-content {
@@ -6187,6 +6345,7 @@ button.close {
   /* line 84, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/_carousel.scss */
   .carousel-control.left {
     background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.0001) 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1); }
@@ -6195,6 +6354,7 @@ button.close {
     left: auto;
     right: 0;
     background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
+    background-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1); }
@@ -6257,7 +6417,8 @@ button.close {
     margin: 1px;
     text-indent: -999px;
     border: 1px solid white;
-    border-radius: 10px;
+    -webkit-border-radius: 10px;
+            border-radius: 10px;
     cursor: pointer;
     background-color: #000 \9;
     background-color: rgba(0, 0, 0, 0); }
@@ -6580,117 +6741,127 @@ button.close {
   /* line 18, ../../../../../../../Library/WebServer/Documents/hoz_calculator.dev/hoz_calculator/app/libs/bootstrap-sass-twbs/assets/stylesheets/bootstrap/mixins/_responsive-visibility.scss */
   .hidden-print {
     display: none !important; } }
-/* line 7, ../app.scss */
+/* line 6, ../app.scss */
+h1, h2, h3, h4, h5, h6 {
+  color: #0081cb; }
+
+/* line 9, ../app.scss */
 .text-white {
   color: white; }
 
-/* line 11, ../app.scss */
+/* line 13, ../app.scss */
 .text-capitalize {
   text-transform: uppercase; }
 
-/* line 15, ../app.scss */
+/* line 17, ../app.scss */
 .btn-gradient {
-  background-image: -webkit-linear-gradient(#003a67, #000101);
-  background-image: linear-gradient(#003a67, #000101);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#0081cb), to(#004065));
+  background-image: -webkit-linear-gradient(#0081cb, #004065);
+  background-image: linear-gradient(#0081cb, #004065);
   font-weight: bold;
   text-transform: uppercase;
   border: none;
   background-position: 0 100%;
-  background-size: auto 200%;
+  -webkit-background-size: auto 200%;
+          background-size: auto 200%;
   padding: 6px 10px;
   -webkit-transition: background-position .3s ease-in-out;
           transition: background-position .3s ease-in-out;
   font-size: 12px; }
-  /* line 25, ../app.scss */
+  /* line 27, ../app.scss */
   .btn-gradient:hover {
     background-position: 0 0; }
-  /* line 28, ../app.scss */
+  /* line 30, ../app.scss */
   .btn-gradient.btn-success {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#7cae3e), to(#466323));
     background-image: -webkit-linear-gradient(#7cae3e, #466323);
     background-image: linear-gradient(#7cae3e, #466323); }
-  /* line 31, ../app.scss */
+  /* line 33, ../app.scss */
   .btn-gradient.btn-warning {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f0ad4e), to(#c77c11));
     background-image: -webkit-linear-gradient(#f0ad4e, #c77c11);
     background-image: linear-gradient(#f0ad4e, #c77c11); }
-  /* line 34, ../app.scss */
+  /* line 36, ../app.scss */
   .btn-gradient.btn-danger {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#a02622));
     background-image: -webkit-linear-gradient(#d9534f, #a02622);
     background-image: linear-gradient(#d9534f, #a02622); }
-  /* line 37, ../app.scss */
+  /* line 39, ../app.scss */
   .btn-gradient.btn-trans, .btn-gradient.btn-default {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(white), to(#cccccc));
     background-image: -webkit-linear-gradient(white, #cccccc);
     background-image: linear-gradient(white, #cccccc); }
 
-/* line 42, ../app.scss */
+/* line 44, ../app.scss */
 .btn-group .btn + .btn, .btn-group .btn + .btn-group, .btn-group .btn-group + .btn, .btn-group .btn-group + .btn-group {
   margin-left: 0;
   border-left: 1px solid #CCC; }
 
-/* line 47, ../app.scss */
+/* line 49, ../app.scss */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important; }
 
-/* line 51, ../app.scss */
+/* line 53, ../app.scss */
 .ng-cloak.show {
   display: block !important; }
 
-/* line 55, ../app.scss */
+/* line 57, ../app.scss */
 .reveal-animation.ng-enter {
   -webkit-animation: enter_sequence 0.6s cubic-bezier(0.5, 0, 0.5, 1);
           animation: enter_sequence 0.6s cubic-bezier(0.5, 0, 0.5, 1); }
 
 @-webkit-keyframes enter_sequence {
-  /* line 60, ../app.scss */
+  /* line 62, ../app.scss */
   from {
     opacity: 0; }
 
-  /* line 63, ../app.scss */
+  /* line 65, ../app.scss */
   to {
     opacity: 1; } }
 
 @keyframes enter_sequence {
-  /* line 60, ../app.scss */
+  /* line 62, ../app.scss */
   from {
     opacity: 0; }
 
-  /* line 63, ../app.scss */
+  /* line 65, ../app.scss */
   to {
     opacity: 1; } }
 
-/* line 68, ../app.scss */
+/* line 70, ../app.scss */
 .btn.ng-animate, .btn-group.ng-animate {
   -webkit-transition: none !important;
           transition: none !important;
   -webkit-animation: none 0s !important;
           animation: none 0s !important; }
 
-/* line 73, ../app.scss */
+/* line 75, ../app.scss */
 a:hover {
   cursor: pointer; }
 
 /* LOADERS */
 @-webkit-keyframes rotating {
-  /* line 79, ../app.scss */
+  /* line 81, ../app.scss */
   from {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); }
 
-  /* line 82, ../app.scss */
+  /* line 84, ../app.scss */
   to {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
 @keyframes rotating {
-  /* line 79, ../app.scss */
+  /* line 81, ../app.scss */
   from {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); }
 
-  /* line 82, ../app.scss */
+  /* line 84, ../app.scss */
   to {
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg); } }
 
-/* line 87, ../app.scss */
+/* line 89, ../app.scss */
 .spinner {
   -webkit-transform-origin: 50% !important;
       -ms-transform-origin: 50% !important;
@@ -6698,12 +6869,12 @@ a:hover {
   -webkit-animation: rotating 2s linear infinite;
           animation: rotating 2s linear infinite;
   display: inline-block !important; }
-  /* line 91, ../app.scss */
+  /* line 93, ../app.scss */
   .spinner.ng-hide {
     display: none !important; }
 
 @-webkit-keyframes load-bounce {
-  /* line 100, ../app.scss */
+  /* line 102, ../app.scss */
   10% {
     -webkit-transform: translate3d(0, 30px, 0);
             transform: translate3d(0, 30px, 0);
@@ -6711,11 +6882,11 @@ a:hover {
             animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     height: 30px; }
 
-  /* line 105, ../app.scss */
+  /* line 107, ../app.scss */
   14% {
     height: 90px; }
 
-  /* line 108, ../app.scss */
+  /* line 110, ../app.scss */
   15% {
     height: 30px;
     -webkit-transform: translate3d(0, -60px, 0);
@@ -6723,13 +6894,13 @@ a:hover {
     -webkit-animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1);
             animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1); }
 
-  /* line 113, ../app.scss */
+  /* line 115, ../app.scss */
   35% {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); } }
 
 @keyframes load-bounce {
-  /* line 100, ../app.scss */
+  /* line 102, ../app.scss */
   10% {
     -webkit-transform: translate3d(0, 30px, 0);
             transform: translate3d(0, 30px, 0);
@@ -6737,11 +6908,11 @@ a:hover {
             animation-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
     height: 30px; }
 
-  /* line 105, ../app.scss */
+  /* line 107, ../app.scss */
   14% {
     height: 90px; }
 
-  /* line 108, ../app.scss */
+  /* line 110, ../app.scss */
   15% {
     height: 30px;
     -webkit-transform: translate3d(0, -60px, 0);
@@ -6749,12 +6920,12 @@ a:hover {
     -webkit-animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1);
             animation-timing-function: cubic-bezier(0.8, 0, 0.8, 1); }
 
-  /* line 113, ../app.scss */
+  /* line 115, ../app.scss */
   35% {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); } }
 
-/* line 120, ../app.scss */
+/* line 122, ../app.scss */
 .loading .loader {
   font-size: 0;
   display: block;
@@ -6764,46 +6935,104 @@ a:hover {
   left: 50%;
   height: 120px;
   width: 120px; }
-  /* line 131, ../app.scss */
+  /* line 133, ../app.scss */
   .loading .loader div {
-    background: #0190ff;
+    background: #65c7ff;
     width: 30px;
     height: 30px;
-    border-radius: 30px;
+    -webkit-border-radius: 30px;
+            border-radius: 30px;
     position: absolute;
     -webkit-animation: load-bounce 1.75s infinite;
             animation: load-bounce 1.75s infinite;
     top: 50%;
     margin-top: -15px; }
-    /* line 142, ../app.scss */
+    /* line 144, ../app.scss */
     .loading .loader div:nth-child(2) {
       -webkit-animation-delay: 0.25s;
               animation-delay: 0.25s;
       left: 50%;
       margin-left: -15px; }
-    /* line 147, ../app.scss */
+    /* line 149, ../app.scss */
     .loading .loader div:nth-child(3) {
       -webkit-animation-delay: 0.5s;
               animation-delay: 0.5s;
       right: 0; }
 
-/* line 155, ../app.scss */
+/* line 157, ../app.scss */
 .hide_on_loading {
   display: none !important; }
 
-/* line 159, ../app.scss */
+/* line 161, ../app.scss */
 .show_on_loaded {
-  display: inherit !important; }
-  /* line 161, ../app.scss */
+  display: block !important; }
+  /* line 163, ../app.scss */
   .show_on_loaded.ng-hide {
     display: none !important; }
 
-/* line 167, ../app.scss */
+/* line 169, ../app.scss */
 .loaded .loader {
   display: none; }
 
+/* line 174, ../app.scss */
+.content-margin {
+  margin-top: 40px; }
+
+/* HOME SPLASH SCREEN */
+/* line 183, ../app.scss */
+.home .navbar.navbar-static-top,
+.home nav-bottom,
+.home .navbar.navbar-default.navbar-fixed-bottom {
+  display: none; }
+/* line 186, ../app.scss */
+.home #main-content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url(/app/img/home-background.jpg);
+  -webkit-background-size: cover;
+          background-size: cover;
+  margin: 0;
+  overflow: hidden; }
+  /* line 197, ../app.scss */
+  .home #main-content h1, .home #main-content h2, .home #main-content h3, .home #main-content p {
+    color: white !important; }
+  /* line 200, ../app.scss */
+  .home #main-content .home-content-container {
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%; }
+  /* line 208, ../app.scss */
+  .home #main-content .home-logo {
+    width: 300px;
+    padding-bottom: 3em; }
+  /* line 212, ../app.scss */
+  .home #main-content .user-action {
+    -webkit-transition: all .2s linear;
+            transition: all .2s linear;
+    -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
+    background-image: none;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: rgba(124, 174, 62, 0.6); }
+    /* line 222, ../app.scss */
+    .home #main-content .user-action:hover {
+      -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+      background-color: rgba(255, 255, 255, 0.2); }
+
 /* CHART AREA */
-/* line 173, ../app.scss */
+/* line 234, ../app.scss */
 .panel__1 {
   position: absolute;
   top: 0;
@@ -6813,7 +7042,7 @@ a:hover {
   overflow-y: scroll;
   padding-top: 10px; }
 
-/* line 183, ../app.scss */
+/* line 244, ../app.scss */
 .panel__2 {
   position: absolute;
   top: 0;
@@ -6823,16 +7052,16 @@ a:hover {
   height: 100%;
   overflow: hidden; }
 
-/* line 193, ../app.scss */
+/* line 254, ../app.scss */
 .panel__inner {
   overflow-y: scroll;
   height: 100%; }
 
-/* line 198, ../app.scss */
+/* line 259, ../app.scss */
 .panel__padding {
   padding: 15px; }
 
-/* line 202, ../app.scss */
+/* line 263, ../app.scss */
 .panel__item {
   background: #F3F3F3;
   overflow: hidden;
@@ -6842,7 +7071,7 @@ a:hover {
   left: 0;
   right: 0;
   bottom: 0; }
-  /* line 211, ../app.scss */
+  /* line 272, ../app.scss */
   .panel__item .panel-body {
     padding: 0;
     position: absolute;
@@ -6852,138 +7081,147 @@ a:hover {
     bottom: 0;
     overflow: hidden; }
 
-/* line 223, ../app.scss */
+/* line 284, ../app.scss */
 .panel__1 .panel__item .panel-body {
   top: 5px;
   left: 5px;
   right: 5px;
   bottom: 5px;
   overflow: hidden;
-  border-radius: 0 3px 3px 3px; }
+  -webkit-border-radius: 0 3px 3px 3px;
+          border-radius: 0 3px 3px 3px; }
 
-/* line 234, ../app.scss */
+/* line 295, ../app.scss */
 .tab-content {
   background-color: white;
   border: 1px solid #DDD;
   border-top: none;
-  border-radius: 0 0 3px 3px;
+  -webkit-border-radius: 0 0 3px 3px;
+          border-radius: 0 0 3px 3px;
   position: absolute;
   bottom: 0;
   top: 40px;
   left: 0;
   right: 0; }
-  /* line 244, ../app.scss */
+  /* line 305, ../app.scss */
   .tab-content .active {
     overflow-y: scroll;
     height: 100%; }
 
-/* line 250, ../app.scss */
+/* line 311, ../app.scss */
 .panel-default > .panel-heading {
   background-color: #DDDDDD; }
 
-/* line 254, ../app.scss */
+/* line 315, ../app.scss */
 .panel-heading-btn-group {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0; }
-  /* line 259, ../app.scss */
+  /* line 320, ../app.scss */
   .panel-heading-btn-group .btn {
     height: 100%;
     line-height: 25px;
-    border-radius: 0;
+    -webkit-border-radius: 0;
+            border-radius: 0;
     background-color: #c4c4c4;
     font-weight: bold;
     border: none;
-    color: #003a67;
+    color: #0081cb;
     font-size: 12px;
     border-left: 1px solid rgba(255, 255, 255, 0.46);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
     -webkit-transition: all .2s linear;
             transition: all .2s linear; }
-    /* line 271, ../app.scss */
+    /* line 332, ../app.scss */
     .panel-heading-btn-group .btn:last-child {
-      border-radius: 0 5px 0 0; }
-    /* line 274, ../app.scss */
+      -webkit-border-radius: 0 5px 0 0;
+              border-radius: 0 5px 0 0; }
+    /* line 335, ../app.scss */
     .panel-heading-btn-group .btn:hover, .panel-heading-btn-group .btn.active {
       background-color: white;
-      color: #000f1a; }
+      color: #00507f; }
 
-/* line 281, ../app.scss */
+/* line 342, ../app.scss */
 .panel-success {
-  box-shadow: 0 0 0 5px rgba(207, 214, 198, 0.4); }
-  /* line 285, ../app.scss */
+  -webkit-box-shadow: 0 0 0 5px rgba(207, 214, 198, 0.4);
+          box-shadow: 0 0 0 5px rgba(207, 214, 198, 0.4); }
+  /* line 346, ../app.scss */
   .panel-success .panel-heading-btn-group .btn {
     background-color: #b9c0b1;
     color: #577038; }
-    /* line 288, ../app.scss */
+    /* line 349, ../app.scss */
     .panel-success .panel-heading-btn-group .btn:hover {
       background-color: #ecf3e3; }
-  /* line 293, ../app.scss */
+  /* line 354, ../app.scss */
   .panel-success .panel-body {
     background-color: #ecf3e3; }
-  /* line 296, ../app.scss */
+  /* line 357, ../app.scss */
   .panel-success .panel-footer, .panel-success .panel-heading {
     background-color: #cfd6c6;
     border-color: #c5cdba; }
-    /* line 300, ../app.scss */
+    /* line 361, ../app.scss */
     .panel-success .panel-footer .btn-trans, .panel-success .panel-heading .btn-trans {
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#ecf3e3), to(#c0c7b8));
       background-image: -webkit-linear-gradient(#ecf3e3, #c0c7b8);
       background-image: linear-gradient(#ecf3e3, #c0c7b8);
-      color: #3e7452; }
+      color: #3e9784; }
 
-/* line 307, ../app.scss */
+/* line 368, ../app.scss */
 .panel-danger, .panel-sucess.panel-danger {
-  box-shadow: 0 0 0 5px rgba(220, 201, 201, 0.4); }
-  /* line 311, ../app.scss */
+  -webkit-box-shadow: 0 0 0 5px rgba(220, 201, 201, 0.4);
+          box-shadow: 0 0 0 5px rgba(220, 201, 201, 0.4); }
+  /* line 372, ../app.scss */
   .panel-danger .panel-heading-btn-group .btn, .panel-sucess.panel-danger .panel-heading-btn-group .btn {
     background-color: #c6b4b3;
     color: #864341; }
-    /* line 314, ../app.scss */
+    /* line 375, ../app.scss */
     .panel-danger .panel-heading-btn-group .btn:hover, .panel-sucess.panel-danger .panel-heading-btn-group .btn:hover {
       background-color: #f9e6e6; }
-  /* line 319, ../app.scss */
+  /* line 380, ../app.scss */
   .panel-danger .panel-body, .panel-sucess.panel-danger .panel-body {
     background-color: #f9e6e6; }
-  /* line 322, ../app.scss */
+  /* line 383, ../app.scss */
   .panel-danger .panel-footer, .panel-danger .panel-heading, .panel-sucess.panel-danger .panel-footer, .panel-sucess.panel-danger .panel-heading {
     background-color: #dcc9c9;
     border-color: #d4bdbd; }
-    /* line 326, ../app.scss */
+    /* line 387, ../app.scss */
     .panel-danger .panel-footer .btn-trans, .panel-danger .panel-heading .btn-trans, .panel-sucess.panel-danger .panel-footer .btn-trans, .panel-sucess.panel-danger .panel-heading .btn-trans {
+      background-image: -webkit-gradient(linear, left top, left bottom, from(#f9e6e6), to(#cdbbba));
       background-image: -webkit-linear-gradient(#f9e6e6, #cdbbba);
       background-image: linear-gradient(#f9e6e6, #cdbbba);
-      color: #6c465b; }
+      color: #6c6a8d; }
 
 /* TRANSPARENT BUTTON */
-/* line 334, ../app.scss */
+/* line 395, ../app.scss */
 .btn-trans {
   background-color: transparent;
-  color: #003a67;
-  border-color: #003a67; }
-  /* line 338, ../app.scss */
+  color: #0081cb;
+  border-color: #0081cb; }
+  /* line 399, ../app.scss */
   .btn-trans:hover {
     border-color: #222222;
     color: #222222; }
 
-/* line 344, ../app.scss */
+/* line 405, ../app.scss */
 .op25 {
   opacity: 0.25; }
 
-/* line 348, ../app.scss */
+/* line 409, ../app.scss */
 .op50 {
   opacity: 0.5; }
 
-/* line 352, ../app.scss */
+/* line 413, ../app.scss */
 .op75 {
   opacity: 0.75; }
 
 /* GLOBAL STYLES */
-/* line 357, ../app.scss */
+/* line 418, ../app.scss */
 body {
-  background-color: #e6e6e6; }
+  background-color: #eeeeee; }
 
-/* line 361, ../app.scss */
+/* line 422, ../app.scss */
 #wrap {
   overflow: hidden;
   position: absolute;
@@ -6993,402 +7231,403 @@ body {
   bottom: 0;
   height: 100%; }
 
-/* line 371, ../app.scss */
+/* line 432, ../app.scss */
 .snap-drawers, .snap-content {
   margin-top: 50px;
   margin-bottom: 50px; }
 
-/* line 376, ../app.scss */
+/* line 437, ../app.scss */
 .pos-rel {
   position: relative; }
 
-/* line 380, ../app.scss */
+/* line 441, ../app.scss */
 .pos-abs {
   position: absolute; }
 
-/* line 384, ../app.scss */
+/* line 445, ../app.scss */
 .pos-fixed {
   position: fixed; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-0 {
   margin-bottom: 0px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-5 {
   margin-bottom: 5px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-10 {
   margin-bottom: 10px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-15 {
   margin-bottom: 15px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-20 {
   margin-bottom: 20px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-25 {
   margin-bottom: 25px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-30 {
   margin-bottom: 30px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-35 {
   margin-bottom: 35px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-40 {
   margin-bottom: 40px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-45 {
   margin-bottom: 45px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-50 {
   margin-bottom: 50px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-55 {
   margin-bottom: 55px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-60 {
   margin-bottom: 60px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-65 {
   margin-bottom: 65px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-70 {
   margin-bottom: 70px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-75 {
   margin-bottom: 75px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-80 {
   margin-bottom: 80px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-85 {
   margin-bottom: 85px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-90 {
   margin-bottom: 90px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-95 {
   margin-bottom: 95px !important; }
 
-/* line 390, ../app.scss */
+/* line 451, ../app.scss */
 .mb-100 {
   margin-bottom: 100px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-0 {
   margin-top: 0px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-5 {
   margin-top: 5px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-10 {
   margin-top: 10px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-15 {
   margin-top: 15px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-20 {
   margin-top: 20px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-25 {
   margin-top: 25px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-30 {
   margin-top: 30px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-35 {
   margin-top: 35px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-40 {
   margin-top: 40px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-45 {
   margin-top: 45px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-50 {
   margin-top: 50px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-55 {
   margin-top: 55px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-60 {
   margin-top: 60px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-65 {
   margin-top: 65px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-70 {
   margin-top: 70px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-75 {
   margin-top: 75px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-80 {
   margin-top: 80px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-85 {
   margin-top: 85px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-90 {
   margin-top: 90px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-95 {
   margin-top: 95px !important; }
 
-/* line 397, ../app.scss */
+/* line 458, ../app.scss */
 .mt-100 {
   margin-top: 100px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-0 {
   padding-bottom: 0px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-5 {
   padding-bottom: 5px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-10 {
   padding-bottom: 10px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-15 {
   padding-bottom: 15px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-20 {
   padding-bottom: 20px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-25 {
   padding-bottom: 25px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-30 {
   padding-bottom: 30px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-35 {
   padding-bottom: 35px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-40 {
   padding-bottom: 40px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-45 {
   padding-bottom: 45px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-50 {
   padding-bottom: 50px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-55 {
   padding-bottom: 55px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-60 {
   padding-bottom: 60px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-65 {
   padding-bottom: 65px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-70 {
   padding-bottom: 70px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-75 {
   padding-bottom: 75px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-80 {
   padding-bottom: 80px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-85 {
   padding-bottom: 85px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-90 {
   padding-bottom: 90px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-95 {
   padding-bottom: 95px !important; }
 
-/* line 404, ../app.scss */
+/* line 465, ../app.scss */
 .pb-100 {
   padding-bottom: 100px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-0 {
   padding-top: 0px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-5 {
   padding-top: 5px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-10 {
   padding-top: 10px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-15 {
   padding-top: 15px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-20 {
   padding-top: 20px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-25 {
   padding-top: 25px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-30 {
   padding-top: 30px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-35 {
   padding-top: 35px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-40 {
   padding-top: 40px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-45 {
   padding-top: 45px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-50 {
   padding-top: 50px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-55 {
   padding-top: 55px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-60 {
   padding-top: 60px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-65 {
   padding-top: 65px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-70 {
   padding-top: 70px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-75 {
   padding-top: 75px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-80 {
   padding-top: 80px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-85 {
   padding-top: 85px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-90 {
   padding-top: 90px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-95 {
   padding-top: 95px !important; }
 
-/* line 411, ../app.scss */
+/* line 472, ../app.scss */
 .pt-100 {
   padding-top: 100px !important; }
 
-/* line 416, ../app.scss */
+/* line 477, ../app.scss */
 .plr-5 {
   padding-left: 5px;
   padding-right: 5px; }
 
-/* line 417, ../app.scss */
+/* line 478, ../app.scss */
 .plr-10 {
   padding-left: 10px;
   padding-right: 10px; }
 
-/* line 418, ../app.scss */
+/* line 479, ../app.scss */
 .plr-15 {
   padding-left: 15px;
   padding-right: 15px; }
 
 /* MENU STYLES */
-/* line 421, ../app.scss */
+/* line 482, ../app.scss */
 .navbar {
   margin-bottom: 0; }
-  /* line 423, ../app.scss */
+  /* line 484, ../app.scss */
   .navbar .main-nav {
     position: absolute;
     left: 0;
     right: 0;
     top: 0;
     padding: 0 15px;
-    background-color: #003a67;
-    background-image: -webkit-linear-gradient(#004b7c, #003964);
-    background-image: linear-gradient(#004b7c, #003964); }
-    /* line 432, ../app.scss */
+    background-color: #0081cb;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#0071b2), to(#006198));
+    background-image: -webkit-linear-gradient(#0071b2, #006198);
+    background-image: linear-gradient(#0071b2, #006198); }
+    /* line 493, ../app.scss */
     .navbar .main-nav .navbar-header {
       margin-top: 11px; }
-    /* line 436, ../app.scss */
+    /* line 497, ../app.scss */
     .navbar .main-nav .open-left {
       display: block;
       width: 36px;
       height: 36px;
       position: relative;
       float: left; }
-      /* line 443, ../app.scss */
+      /* line 504, ../app.scss */
       .navbar .main-nav .open-left:hover {
         cursor: pointer; }
-      /* line 447, ../app.scss */
+      /* line 508, ../app.scss */
       .navbar .main-nav .open-left span {
         background-color: white;
         display: block;
@@ -7402,37 +7641,37 @@ body {
         -webkit-transform-origin: 4px;
             -ms-transform-origin: 4px;
                 transform-origin: 4px; }
-        /* line 458, ../app.scss */
+        /* line 519, ../app.scss */
         .navbar .main-nav .open-left span:nth-child(2) {
           top: 15px; }
-        /* line 462, ../app.scss */
+        /* line 523, ../app.scss */
         .navbar .main-nav .open-left span:last-child {
           top: 25px; }
-    /* line 467, ../app.scss */
+    /* line 528, ../app.scss */
     .navbar .main-nav .main-nav-header {
       color: white;
       line-height: 36px;
       margin: 0 15px;
       float: left; }
-      /* line 472, ../app.scss */
+      /* line 533, ../app.scss */
       .navbar .main-nav .main-nav-header a {
         color: white; }
-        /* line 474, ../app.scss */
+        /* line 535, ../app.scss */
         .navbar .main-nav .main-nav-header a:hover {
           color: #e6e6e6;
           text-decoration: none; }
 
-/* line 483, ../app.scss */
+/* line 544, ../app.scss */
 .open-left {
   display: block;
   width: 36px;
   height: 36px;
   position: relative;
   float: left; }
-  /* line 489, ../app.scss */
+  /* line 550, ../app.scss */
   .open-left:hover {
     cursor: pointer; }
-  /* line 492, ../app.scss */
+  /* line 553, ../app.scss */
   .open-left span {
     background-color: white;
     display: block;
@@ -7446,22 +7685,22 @@ body {
     -webkit-transform-origin: 4px;
         -ms-transform-origin: 4px;
             transform-origin: 4px; }
-    /* line 502, ../app.scss */
+    /* line 563, ../app.scss */
     .open-left span:nth-child(2) {
       top: 15px; }
-    /* line 505, ../app.scss */
+    /* line 566, ../app.scss */
     .open-left span:last-child {
       top: 25px; }
 
-/* line 514, ../app.scss */
+/* line 575, ../app.scss */
 .snapjs-left .open-left span:first-child {
   -webkit-transform: rotate(45deg);
       -ms-transform: rotate(45deg);
           transform: rotate(45deg); }
-/* line 517, ../app.scss */
+/* line 578, ../app.scss */
 .snapjs-left .open-left span:nth-child(2) {
   opacity: 0; }
-/* line 520, ../app.scss */
+/* line 581, ../app.scss */
 .snapjs-left .open-left span:last-child {
   -webkit-transform-origin: 18px -3px;
       -ms-transform-origin: 18px -3px;
@@ -7471,45 +7710,45 @@ body {
           transform: rotate(-225deg); }
 
 /* SIDE NAV (SNAP DRAW LEFT) */
-/* line 530, ../app.scss */
+/* line 591, ../app.scss */
 .side-nav {
   margin: 0;
   padding: 0; }
-  /* line 533, ../app.scss */
+  /* line 594, ../app.scss */
   .side-nav li {
-    border-bottom: 1px solid rgba(0, 58, 103, 0.15);
+    border-bottom: 1px solid rgba(0, 129, 203, 0.15);
     font-size: 12px; }
-    /* line 536, ../app.scss */
+    /* line 597, ../app.scss */
     .side-nav li:last-child {
       border: none; }
-    /* line 539, ../app.scss */
+    /* line 600, ../app.scss */
     .side-nav li a {
       padding: 1.8em 0.8em;
       display: block;
       border-top: 1px solid white; }
-      /* line 543, ../app.scss */
+      /* line 604, ../app.scss */
       .side-nav li a .edit {
         -webkit-transition: all 0.1s ease-in-out;
                 transition: all 0.1s ease-in-out;
         opacity: 0; }
-      /* line 547, ../app.scss */
+      /* line 608, ../app.scss */
       .side-nav li a:hover {
-        color: #000f1a;
+        color: #00507f;
         text-decoration: none;
         -webkit-transition: all .2s linear;
                 transition: all .2s linear;
-        background-color: rgba(0, 58, 103, 0.1);
+        background-color: rgba(0, 129, 203, 0.1);
         border-top: 1px solid rgba(0, 0, 0, 0); }
-        /* line 553, ../app.scss */
+        /* line 614, ../app.scss */
         .side-nav li a:hover .edit {
           opacity: .7; }
-          /* line 555, ../app.scss */
+          /* line 616, ../app.scss */
           .side-nav li a:hover .edit:hover {
             color: #d9534f; }
-        /* line 559, ../app.scss */
+        /* line 620, ../app.scss */
         .side-nav li a:hover img {
           opacity: 1; }
-      /* line 563, ../app.scss */
+      /* line 624, ../app.scss */
       .side-nav li a img {
         opacity: .5;
         margin-right: 1em;
@@ -7518,7 +7757,7 @@ body {
                 transition: all 0.4s ease-in-out; }
 
 /* USER STYLES */
-/* line 574, ../app.scss */
+/* line 635, ../app.scss */
 .user-action {
   color: #ebebeb;
   display: inline-block;
@@ -7526,33 +7765,37 @@ body {
   overflow: hidden;
   font-weight: bold;
   margin: 10px auto 0;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#7cae3e), to(#466323));
   background-image: -webkit-linear-gradient(#7cae3e, #466323);
   background-image: linear-gradient(#7cae3e, #466323);
   background-position: 0 100%;
-  background-size: auto 200%;
+  -webkit-background-size: auto 200%;
+          background-size: auto 200%;
   -webkit-transition: all .3s ease-in-out;
           transition: all .3s ease-in-out;
   padding: 12px 16px 14px;
   border: none;
   /* DANGER */ }
-  /* line 588, ../app.scss */
+  /* line 649, ../app.scss */
   .user-action:hover, .user-action:focus {
     color: white;
     background-position: 0 0;
     text-decoration: none;
     outline: none; }
-  /* line 595, ../app.scss */
+  /* line 656, ../app.scss */
   .user-action.user-action-danger {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#a02622));
     background-image: -webkit-linear-gradient(#d9534f, #a02622);
     background-image: linear-gradient(#d9534f, #a02622); }
 
-/* line 600, ../app.scss */
+/* line 661, ../app.scss */
 .user-action.disabled, .user-action[disabled] {
   display: none; }
 
 /* SNAPJS STYLES */
-/* line 605, ../app.scss */
+/* line 666, ../app.scss */
 .snap-content {
   background-color: #EEE;
   position: absolute;
@@ -7567,9 +7810,10 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2); }
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2); }
 
-/* line 621, ../app.scss */
+/* line 682, ../app.scss */
 .snap-drawers {
   position: absolute;
   top: 0;
@@ -7579,7 +7823,7 @@ body {
   width: auto;
   height: auto; }
 
-/* line 631, ../app.scss */
+/* line 692, ../app.scss */
 .snap-drawer {
   position: absolute;
   top: 0;
@@ -7592,42 +7836,58 @@ body {
   -webkit-overflow-scrolling: touch;
   -webkit-transition: width 0.3s ease;
           transition: width 0.3s ease;
-  color: #003a67; }
-  /* line 643, ../app.scss */
+  color: #0081cb; }
+  /* line 704, ../app.scss */
   .snap-drawer p, .snap-drawer a, .snap-drawer li {
-    color: #003a67; }
-  /* line 646, ../app.scss */
+    color: #0081cb; }
+  /* line 707, ../app.scss */
   .snap-drawer .padder {
     padding: 1em; }
 
-/* line 651, ../app.scss */
+/* line 712, ../app.scss */
 .snap-drawer-left {
   left: 0;
   z-index: 1;
   position: relative; }
 
-/* line 657, ../app.scss */
+/* line 718, ../app.scss */
 .snap-drawer-right {
   right: 0;
   z-index: 1; }
 
-/* line 663, ../app.scss */
+/* line 724, ../app.scss */
 .snapjs-left .snap-drawer-right,
 .snapjs-right .snap-drawer-left {
   display: none; }
 
-/* line 668, ../app.scss */
+/* line 729, ../app.scss */
 .snapjs-expand-left .snap-drawer-left,
 .snapjs-expand-right .snap-drawer-right {
   width: 100%; }
 
 /* MAIN CONTENT STYLES */
-/* line 673, ../app.scss */
-.main-content {
-  margin-top: 50px; }
+/* line 734, ../app.scss */
+#main-content {
+  background-color: #eeeeee;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  z-index: 2;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
+  margin-top: 50px;
+  margin-bottom: 50px; }
 
 /* CHART STYLES */
-/* line 678, ../app.scss */
+/* line 753, ../app.scss */
 .chart_total {
   display: block;
   text-align: center;
@@ -7636,16 +7896,18 @@ body {
   width: 30px;
   height: 30px;
   line-height: 30px;
-  border-radius: 30px;
+  -webkit-border-radius: 30px;
+          border-radius: 30px;
   color: #FFF;
   position: absolute;
   left: 150px;
   top: 117px;
   z-index: 0;
-  box-shadow: 0 0 0 5px #ffa536; }
+  -webkit-box-shadow: 0 0 0 5px #ffa536;
+          box-shadow: 0 0 0 5px #ffa536; }
 
 /* RADIO BUTTONS */
-/* line 699, ../app.scss */
+/* line 774, ../app.scss */
 .postfix-choice .choice, .input-choices-group .choice {
   height: 36px;
   line-height: 36px;
@@ -7653,33 +7915,36 @@ body {
   padding: 0;
   opacity: .3;
   background-color: transparent;
-  color: #003a67;
+  color: #0081cb;
   border: none;
   text-transform: uppercase;
   font-weight: bold;
   display: inline-block;
   width: 36px;
   float: left;
-  border-radius: 100%;
-  box-shadow: 0 0 3px black inset, 0 0 13px rgba(0, 0, 0, 0.5) inset; }
-  /* line 716, ../app.scss */
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  -webkit-box-shadow: 0 0 3px black inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
+          box-shadow: 0 0 3px black inset, 0 0 13px rgba(0, 0, 0, 0.5) inset; }
+  /* line 791, ../app.scss */
   .postfix-choice .choice.active, .input-choices-group .choice.active {
     background-color: #7cae3e !important;
     color: #eaf3de !important;
     opacity: 1;
-    box-shadow: none; }
-  /* line 722, ../app.scss */
+    -webkit-box-shadow: none;
+            box-shadow: none; }
+  /* line 797, ../app.scss */
   .postfix-choice .choice .glyphicon, .input-choices-group .choice .glyphicon {
     font-weight: normal; }
-  /* line 725, ../app.scss */
+  /* line 800, ../app.scss */
   .postfix-choice .choice:hover, .input-choices-group .choice:hover {
-    background-color: rgba(0, 29, 52, 0.5);
+    background-color: rgba(0, 97, 152, 0.5);
     color: black;
     cursor: pointer; }
-  /* line 730, ../app.scss */
+  /* line 805, ../app.scss */
   .postfix-choice .choice:focus, .input-choices-group .choice:focus {
     outline: none; }
-/* line 734, ../app.scss */
+/* line 809, ../app.scss */
 .postfix-choice input.radio:empty, .input-choices-group input.radio:empty {
   margin: 0 !important;
   margin-left: -999px !important;
@@ -7687,7 +7952,7 @@ body {
   height: 0 !important;
   padding: 0 !important;
   position: absolute; }
-/* line 742, ../app.scss */
+/* line 817, ../app.scss */
 .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
   float: left;
   margin-right: 20px;
@@ -7695,30 +7960,31 @@ body {
   margin-left: 15px;
   margin-top: 10px; }
 
-/* line 751, ../app.scss */
+/* line 826, ../app.scss */
 .postfix-choice {
   border-bottom: 1px solid #EEE;
   margin: 0;
   padding: 7px 0 5px; }
-  /* line 755, ../app.scss */
+  /* line 830, ../app.scss */
   .postfix-choice:hover {
     background-color: #EEE; }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
-/* line 762, ../app.scss */
+/* line 837, ../app.scss */
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
   max-width: 180px; }
-  /* line 766, ../app.scss */
+  /* line 841, ../app.scss */
   .postfix-label .form-control, .prefix-label .form-control {
     position: relative;
     z-index: 2;
-    border-radius: 5px 0 0 5px;
+    -webkit-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
     width: 70%;
     max-width: 250px;
     float: left; }
-  /* line 774, ../app.scss */
+  /* line 849, ../app.scss */
   .postfix-label .label, .prefix-label .label {
     position: relative;
     width: 50px;
@@ -7734,22 +8000,25 @@ body {
     text-transform: uppercase;
     font-weight: normal;
     font-size: 15px;
-    border-radius: 0 5px 5px 0; }
-    /* line 791, ../app.scss */
+    -webkit-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0; }
+    /* line 866, ../app.scss */
     .postfix-label .label .glyphicon, .prefix-label .label .glyphicon {
       font-weight: normal; }
 
-/* line 798, ../app.scss */
+/* line 873, ../app.scss */
 .prefix-label .form-control {
-  border-radius: 0 5px 5px 0;
+  -webkit-border-radius: 0 5px 5px 0;
+          border-radius: 0 5px 5px 0;
   left: 50px; }
-/* line 802, ../app.scss */
+/* line 877, ../app.scss */
 .prefix-label .label {
-  border-radius: 5px 0 0 5px;
+  -webkit-border-radius: 5px 0 0 5px;
+          border-radius: 5px 0 0 5px;
   left: 0;
   position: absolute; }
 
-/* line 809, ../app.scss */
+/* line 884, ../app.scss */
 .message {
   position: fixed;
   left: 25%;
@@ -7758,49 +8027,50 @@ body {
   bottom: -25px;
   z-index: 1040;
   text-align: center;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   -webkit-transition: all .2s ease;
           transition: all .2s ease;
   opacity: 1; }
-  /* line 821, ../app.scss */
+  /* line 896, ../app.scss */
   .message.reveal-animation.ng-hide {
     bottom: -100px;
     opacity: 0; }
 
-/* line 829, ../app.scss */
+/* line 904, ../app.scss */
 .panel-footer .btn {
   font-size: 8px; }
 
-/* line 834, ../app.scss */
+/* line 909, ../app.scss */
 .navbar-default {
   background-color: white;
   border-color: rgba(0, 0, 0, 0); }
 
-/* line 839, ../app.scss */
+/* line 914, ../app.scss */
 .nav-tabs-justified, .nav-tabs.nav-justified, .nav-tabs.nav-justified {
   font-size: 12px;
   white-space: nowrap; }
 
-/* line 844, ../app.scss */
+/* line 919, ../app.scss */
 .info-links {
   margin: 18px 0 0;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px; }
-  /* line 849, ../app.scss */
+  /* line 924, ../app.scss */
   .info-links li {
     border-right: 1px solid #eeeeee;
     padding-right: 10px; }
-    /* line 851, ../app.scss */
+    /* line 926, ../app.scss */
     .info-links li:last-child {
       border: none; }
 
 /* SAVED CALCULATIONS PANELS */
-/* line 859, ../app.scss */
+/* line 934, ../app.scss */
 .saved-panels {
   height: 290px; }
 
-/* line 864, ../app.scss */
+/* line 939, ../app.scss */
 .sort .active {
   color: #333333;
   text-decoration: underline;
@@ -7810,59 +8080,61 @@ body {
   /* rules for mobile horizontal (480 > 768)  */ }
 @media (min-width: 768px) {
   /* rules for tablet (768 > 992) */
-  /* line 880, ../app.scss */
+  /* line 955, ../app.scss */
   .navbar-nav li:first-child a {
-    border-radius: 3px 0 0 0; }
-  /* line 881, ../app.scss */
+    -webkit-border-radius: 3px 0 0 0;
+            border-radius: 3px 0 0 0; }
+  /* line 956, ../app.scss */
   .navbar-nav li:last-child a {
-    border-radius: 0 3px 0 0; }
-  /* line 882, ../app.scss */
+    -webkit-border-radius: 0 3px 0 0;
+            border-radius: 0 3px 0 0; }
+  /* line 957, ../app.scss */
   .navbar-nav li a {
     padding-top: 10px;
     padding-bottom: 10px;
     margin-top: 10px;
-    background-color: #003760;
-    border: 1px solid #002A54;
+    background-color: #0071b2;
+    border: 1px solid #006198;
     border-bottom: 0;
     margin-right: -1px;
     color: #FFF; }
-    /* line 891, ../app.scss */
+    /* line 966, ../app.scss */
     .navbar-nav li a:hover {
       color: white;
-      background-color: #00467a; }
-    /* line 895, ../app.scss */
+      background-color: #0081cb; }
+    /* line 970, ../app.scss */
     .navbar-nav li a.active {
-      color: #002A54;
+      color: #0081cb;
       font-weight: bold;
-      background-color: #EEE; } }
+      background-color: #eeeeee; } }
 @media (min-width: 992px) {
   /* rules for desktop (992 > 1200) */
-  /* line 908, ../app.scss */
+  /* line 983, ../app.scss */
   body {
     font-size: 11px; }
 
-  /* line 912, ../app.scss */
+  /* line 987, ../app.scss */
   .navbar-nav.navbar-right:last-child {
     margin-right: 0; }
 
   /* CHART AREA */
-  /* line 917, ../app.scss */
+  /* line 992, ../app.scss */
   .panel__1 {
     right: 70%; }
 
-  /* line 920, ../app.scss */
+  /* line 995, ../app.scss */
   .panel__2 {
     left: 30%; }
 
-  /* line 924, ../app.scss */
+  /* line 999, ../app.scss */
   .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
     width: 70%; } }
 @media (min-width: 1200px) {
   /* rules for large (> 1200) */
-  /* line 932, ../app.scss */
+  /* line 1007, ../app.scss */
   body {
     font-size: 13px; }
 
-  /* line 936, ../app.scss */
+  /* line 1011, ../app.scss */
   .panel-footer .btn {
     font-size: 12px; } }
