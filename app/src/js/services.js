@@ -628,6 +628,18 @@ angular.module('myApp.services', [])
 					high : 0,
 					low : 0,
 					summary : {}
+				},
+				channel_shift : {
+					name : "Channel Shift",
+					high : 0,
+					low : 0,
+					summary : {}
+				},
+				ancillary_sales : {
+					name : "Ancillary Sales",
+					high : 0,
+					low : 0,
+					summary : {}
 				}
 
 			}
