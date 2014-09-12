@@ -725,6 +725,11 @@ angular.module('myApp.controllers', [])
 							airfareInsight.initObject();
 							$scope.airfare_insight = allData.airfare_insight;
 
+							//console.log(channelShift());
+
+							channelShift.initObject();
+							$scope.channel_shift = allData.channel_shift;
+
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);
 
