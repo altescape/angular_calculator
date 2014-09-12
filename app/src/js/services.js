@@ -21,28 +21,28 @@ angular.module('myApp.services', [])
 			 */
 			if ( !localStorageService.get('input') ) {
 				return {
-						services : {
-							op1 : null,
-							op2 : null,
-							op3 : null,
-							op4 : null,
-							op5 : null,
-							op6 : null,
-							op7 : null,
-							op8 : null,
-							op9 : null
-						},
-						param1 : 6500000,
-						param2 : 3,
-						param3 : 3611111,
-						param4 : 10,
-						param5 : 7,
-						param6 : 2500000000,
-						param7 : 2565000000,
-						param8 : 15,
-						param9 : 100,
-						param10 : 34,
-						adjustment : 1000000,
+					services : {
+						op1 : null,
+						op2 : null,
+						op3 : null,
+						op4 : null,
+						op5 : null,
+						op6 : null,
+						op7 : null,
+						op8 : null,
+						op9 : null
+					},
+					param1 : 6500000,
+					param2 : 3,
+					param3 : 3611111,
+					param4 : 10,
+					param5 : 7,
+					param6 : 2500000000,
+					param7 : 2565000000,
+					param8 : 15,
+					param9 : 100,
+					param10 : 34,
+					adjustment : 1000000,
 
 					// Not used but keeping as might be useful later
 					colors : function () {
@@ -484,7 +484,7 @@ angular.module('myApp.services', [])
 						})()
 					},
 					sabre : { // [variables] C14/D14
-						name : "SABRE",
+						name : "sabre",
 						cost_per_pb : {
 							current_provider : 5.1,
 							sita : 5.1
@@ -793,7 +793,7 @@ angular.module('myApp.services', [])
 				 * These are percentages and divided by 100 to get point value to multiply by.
 				 * PB is passengers boarded
 				 */
-				CURRENT_PB_LIVE_IN_SYSTEM : 3.6 / 100,	// [Revenue Integrity]:C17
+				current_PB_LIVE_IN_SYSTEM : 3.6 / 100,	// [Revenue Integrity]:C17
 				MISC_CONST_1 : 1.8,	// [Revenue Integrity]:C20
 				MISC_CONST_2 : 1.6,	// [Revenue Integrity]:C21
 				CANCEL_1 : 0.0034 / 100,	// [Revenue Integrity]:G30
@@ -815,7 +815,7 @@ angular.module('myApp.services', [])
 				MISC_CONST_10 : 2,	// [Revenue Integrity]:C56
 
 				pnrs : function () {	// REF 1 | [Revenue Integrity]:C19/D19
-					return Math.round(inputData.param1 * this.CURRENT_PB_LIVE_IN_SYSTEM)
+					return Math.round(inputData.param1 * this.current_PB_LIVE_IN_SYSTEM)
 				},
 				segments : function () {  // REF 2 | [Revenue Integrity]:C20/D20
 					return this.pnrs() * this.MISC_CONST_1;
@@ -1374,32 +1374,132 @@ angular.module('myApp.services', [])
 		})
 
 		.factory('channelShift', function (inputData, allData, passengersBoardedData) {
-			return function () {
+			return {
 
-				var TOTAL_PASSENGERS_BOARDED = (function () {
-					var CURRENT = 1250355,
-							YEAR_1 = Math.round(CURRENT + CURRENT * (inputData.param2 / 100)),
-							YEAR_2 = Math.round(YEAR_1 + YEAR_1 * (inputData.param2 / 100)),
-							YEAR_3 = Math.round(YEAR_2 + YEAR_2 * (inputData.param2 / 100)),
-							YEAR_4 = Math.round(YEAR_3 + YEAR_3 * (inputData.param2 / 100)),
-							YEAR_5 = Math.round(YEAR_4 + YEAR_4 * (inputData.param2 / 100));
+				/**
+				 * Constants
+				 *
+				 * These are percentages and divided by 100 to get point value to multiply by.
+				 */
+
+				CURRENT__PAX_BOARDED__TOTAL : 1250355, // [Channel shift] E20
+				EXPECTED_PAX_GROWTH_PER_YEAR : inputData.param2 / 100,  // [Channel shift] I21/M21/Q21/U21/Y21
+				CURRENT__PAX_BOARDED__TOTAL_ETICKETS_ISSUED : 1856002, // [Channel shift] E22
+				CURRENT__PAX_BOARDED__TOTAL_EMDS_ISSUED : 102245, // [Channel shift] E23
+				CURRENT__PAX_BOARDED__TOTAL_REISSUES : 25665, // [Channel shift] E24
+				CURRENT__PAX_BOARDED__TOTAL_OTHER_AIRLINES_BOOKED : 65871, // [Channel shift] E25
+
+				PSS : {
+					CURRENT_PROVIDER : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.current_provider,
+					SITA : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.sita
+				},
+
+				/* Calculation Functions */
+				calcFunctions : function () { // REF No. | [SHEET] CELL No.
+					/* return . . . */
+				},
+
+				totals : function () {
+
+					// total passengers boarded E20
+					var total_passengers_boarded__current = this.CURRENT__PAX_BOARDED__TOTAL,
+							total_passengers_boarded__year_1 = Math.round(total_passengers_boarded__current + total_passengers_boarded__current * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_passengers_boarded__year_2 = Math.round(total_passengers_boarded__year_1 + total_passengers_boarded__year_1 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_passengers_boarded__year_3 = Math.round(total_passengers_boarded__year_2 + total_passengers_boarded__year_2 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_passengers_boarded__year_4 = Math.round(total_passengers_boarded__year_3 + total_passengers_boarded__year_3 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_passengers_boarded__year_5 = Math.round(total_passengers_boarded__year_4 + total_passengers_boarded__year_4 * (this.EXPECTED_PAX_GROWTH_PER_YEAR));
+
+					// total etickets issued E22
+					var total_etickets_issued__current = this.CURRENT__PAX_BOARDED__TOTAL_ETICKETS_ISSUED,
+							total_etickets_issued__year_1 = Math.round(total_etickets_issued__current + total_etickets_issued__current * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_etickets_issued__year_2 = Math.round(total_etickets_issued__year_1 + total_etickets_issued__year_1 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_etickets_issued__year_3 = Math.round(total_etickets_issued__year_2 + total_etickets_issued__year_2 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_etickets_issued__year_4 = Math.round(total_etickets_issued__year_3 + total_etickets_issued__year_3 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_etickets_issued__year_5 = Math.round(total_etickets_issued__year_4 + total_etickets_issued__year_4 * (this.EXPECTED_PAX_GROWTH_PER_YEAR));
+
+					// total EMDs issued E23
+					var total_emds_issued__current = this.CURRENT__PAX_BOARDED__TOTAL_EMDS_ISSUED,
+							total_emds_issued__year_1 = Math.round(total_emds_issued__current + total_emds_issued__current * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_emds_issued__year_2 = Math.round(total_emds_issued__year_1 + total_emds_issued__year_1 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_emds_issued__year_3 = Math.round(total_emds_issued__year_2 + total_emds_issued__year_2 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_emds_issued__year_4 = Math.round(total_emds_issued__year_3 + total_emds_issued__year_3 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_emds_issued__year_5 = Math.round(total_emds_issued__year_4 + total_emds_issued__year_4 * (this.EXPECTED_PAX_GROWTH_PER_YEAR));
+
+					// total reissues E24
+					var total_reissues__current = this.CURRENT__PAX_BOARDED__TOTAL_REISSUES,
+							total_reissues__year_1 = Math.round(total_reissues__current + total_reissues__current * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_reissues__year_2 = Math.round(total_reissues__year_1 + total_reissues__year_1 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_reissues__year_3 = Math.round(total_reissues__year_2 + total_reissues__year_2 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_reissues__year_4 = Math.round(total_reissues__year_3 + total_reissues__year_3 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_reissues__year_5 = Math.round(total_reissues__year_4 + total_reissues__year_4 * (this.EXPECTED_PAX_GROWTH_PER_YEAR));
+
+					// total other airlines booked E25
+					var total_other_airlines_booked__current = this.CURRENT__PAX_BOARDED__TOTAL_OTHER_AIRLINES_BOOKED,
+							total_other_airlines_booked__year_1 = Math.round(total_other_airlines_booked__current + total_other_airlines_booked__current * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_other_airlines_booked__year_2 = Math.round(total_other_airlines_booked__year_1 + total_other_airlines_booked__year_1 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_other_airlines_booked__year_3 = Math.round(total_other_airlines_booked__year_2 + total_other_airlines_booked__year_2 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_other_airlines_booked__year_4 = Math.round(total_other_airlines_booked__year_3 + total_other_airlines_booked__year_3 * (this.EXPECTED_PAX_GROWTH_PER_YEAR)),
+							total_other_airlines_booked__year_5 = Math.round(total_other_airlines_booked__year_4 + total_other_airlines_booked__year_4 * (this.EXPECTED_PAX_GROWTH_PER_YEAR));
+
 					return {
-						CURRENT : CURRENT,
-						YEAR_1 : YEAR_1,
-						YEAR_2 : YEAR_2,
-						YEAR_3 : YEAR_3,
-						YEAR_4 : YEAR_4,
-						YEAR_5 : YEAR_5
+						total_passengers_boarded : {
+							current : total_passengers_boarded__current,
+							year_1 : total_passengers_boarded__year_1,
+							year_2 : total_passengers_boarded__year_2,
+							year_3 : total_passengers_boarded__year_3,
+							year_4 : total_passengers_boarded__year_4,
+							year_5 : total_passengers_boarded__year_5
+						},
+						expected_passenger_growth_per_year : {
+							current : this.EXPECTED_PAX_GROWTH_PER_YEAR,
+							year_1 : this.EXPECTED_PAX_GROWTH_PER_YEAR,
+							year_2 : this.EXPECTED_PAX_GROWTH_PER_YEAR,
+							year_3 : this.EXPECTED_PAX_GROWTH_PER_YEAR,
+							year_4 : this.EXPECTED_PAX_GROWTH_PER_YEAR,
+							year_5 : this.EXPECTED_PAX_GROWTH_PER_YEAR
+						},
+						total_etickets_issued : {
+							current : total_etickets_issued__current,
+							year_1 : total_etickets_issued__year_1,
+							year_2 : total_etickets_issued__year_2,
+							year_3 : total_etickets_issued__year_3,
+							year_4 : total_etickets_issued__year_4,
+							year_5 : total_etickets_issued__year_5
+						},
+						total_emds_issued : {
+							current : total_emds_issued__current,
+							year_1 : total_emds_issued__year_1,
+							year_2 : total_emds_issued__year_2,
+							year_3 : total_emds_issued__year_3,
+							year_4 : total_emds_issued__year_4,
+							year_5 : total_emds_issued__year_5
+						},
+						total_reissues : {
+							current : total_reissues__current,
+							year_1 : total_reissues__year_1,
+							year_2 : total_reissues__year_2,
+							year_3 : total_reissues__year_3,
+							year_4 : total_reissues__year_4,
+							year_5 : total_reissues__year_5
+						},
+						total_other_airlines_booked : {
+							current : total_other_airlines_booked__current,
+							year_1 : total_other_airlines_booked__year_1,
+							year_2 : total_other_airlines_booked__year_2,
+							year_3 : total_other_airlines_booked__year_3,
+							year_4 : total_other_airlines_booked__year_4,
+							year_5 : total_other_airlines_booked__year_5
+						}
 					}
-				})();
+				},
 
-				var DIRECT = (function () {
+				direct : function () {
 
 					// Pax boarded
-					var pax_boarded_1 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_2 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_3 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_4 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+					var pax_boarded_1 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_2 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_3 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_4 = Math.round((passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
 							pax_boarded_total = pax_boarded_1 + pax_boarded_2 + pax_boarded_3 + pax_boarded_4;
 
 					// Call centre [channel shift] ROW 6
@@ -1419,264 +1519,539 @@ angular.module('myApp.services', [])
 							ecommerce__year_1__perc_pax_boarded = ecommerce__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
 
 							ecommerce__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
-							ecommerce__year_2__perc_pax_boarded = ecommerce__year_2__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+							ecommerce__year_2__perc_pax_boarded = ecommerce__year_2__channel_shift + ecommerce__year_1__perc_pax_boarded,
 
 							ecommerce__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
-							ecommerce__year_3__perc_pax_boarded = ecommerce__year_3__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+							ecommerce__year_3__perc_pax_boarded = ecommerce__year_3__channel_shift + ecommerce__year_2__perc_pax_boarded,
 
 							ecommerce__year_4__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
-							ecommerce__year_4__perc_pax_boarded = ecommerce__year_4__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
-
+							ecommerce__year_4__perc_pax_boarded = ecommerce__year_4__channel_shift + ecommerce__year_3__perc_pax_boarded,
 							ecommerce__year_5__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.channel_shift_over_5_yrs / 5,
-							ecommerce__year_5__perc_pax_boarded = ecommerce__year_5__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix;
+							ecommerce__year_5__perc_pax_boarded = ecommerce__year_5__channel_shift + ecommerce__year_4__perc_pax_boarded;
 
-					console.log(passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix);
-					console.log(ecommerce__year_2__perc_pax_boarded);
-					console.log(ecommerce__year_3__perc_pax_boarded);
-					console.log(ecommerce__year_4__perc_pax_boarded);
-					console.log(ecommerce__year_5__perc_pax_boarded);
+					// a2a [channel shift] ROW 8
+					var a2a__year_1__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.channel_shift_over_5_yrs / 5,
+							a2a__year_1__perc_pax_boarded = a2a__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix,
+							a2a__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.channel_shift_over_5_yrs / 5,
+							a2a__year_2__perc_pax_boarded = a2a__year_2__channel_shift + a2a__year_1__perc_pax_boarded,
+							a2a__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.channel_shift_over_5_yrs / 5,
+							a2a__year_3__perc_pax_boarded = a2a__year_3__channel_shift + a2a__year_2__perc_pax_boarded,
+							a2a__year_4__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.channel_shift_over_5_yrs / 5,
+							a2a__year_4__perc_pax_boarded = a2a__year_4__channel_shift + a2a__year_3__perc_pax_boarded,
+							a2a__year_5__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.channel_shift_over_5_yrs / 5,
+							a2a__year_5__perc_pax_boarded = a2a__year_5__channel_shift + a2a__year_4__perc_pax_boarded;
+
+					// mobile [channel shift] ROW 9
+					var mobile__year_1__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
+							mobile__year_1__perc_pax_boarded = mobile__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix,
+
+							mobile__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
+							mobile__year_2__perc_pax_boarded = mobile__year_2__channel_shift + mobile__year_1__perc_pax_boarded,
+							mobile__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
+							mobile__year_3__perc_pax_boarded = mobile__year_3__channel_shift + mobile__year_2__perc_pax_boarded,
+							mobile__year_4__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
+							mobile__year_4__perc_pax_boarded = mobile__year_4__channel_shift + mobile__year_3__perc_pax_boarded,
+							mobile__year_5__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
+							mobile__year_5__perc_pax_boarded = mobile__year_5__channel_shift + mobile__year_4__perc_pax_boarded;
 
 					return {
-						PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.current_channel_mix_total, // [channel shift] D5
-						PAX_BOARDED : pax_boarded_total, // [channel shift] E5
-						CALL_CENTRE : { // [channel shift] ROW 6
-							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.current_provider, // [channel shift] B6
-							SITA : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.sita, // [channel shift] C6
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_1, // [channel shift] D6
-								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix // [channel shift] E6
+						perc_pax_boarded : passengersBoardedData.direct_dist_costs_per_pb.current_channel_mix_total, // [channel shift] D5
+						pax_boarded : pax_boarded_total, // [channel shift] E5
+						call_centre : { // [channel shift] ROW 6
+							cost_per_pb : {
+								current_provider : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.current_provider.toFixed(2), // [channel shift] B6
+								sita : passengersBoardedData.direct_dist_costs_per_pb.call_centre.cost_per_pb.sita.toFixed(2) // [channel shift] C6
 							},
-							YEAR_1 : {
-								CHANNEL_SHIFT : call_centre__year_1__channel_shift, // [channel shift] F6
-								PERC_PAX_BOARDED : call_centre__year_1__perc_pax_boarded, // [channel shift] G6
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] H6
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (call_centre__year_1__perc_pax_boarded / 100) // [channel shift] I6
+							current : {
+								perc_pax_boarded : passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix, // [channel shift] D6
+								pax_boarded : pax_boarded_1
+							},
+							year_1 : {
+								channel_shift : call_centre__year_1__channel_shift, // [channel shift] F6
+								perc_pax_boarded : call_centre__year_1__perc_pax_boarded, // [channel shift] G6
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] H6
+									sita : this.totals().year_1 * (call_centre__year_1__perc_pax_boarded / 100) // [channel shift] I6
 								}
 							},
-							YEAR_2 : {
-								CHANNEL_SHIFT : call_centre__year_2__channel_shift, // [channel shift] J6
-								PERC_PAX_BOARDED : call_centre__year_2__perc_pax_boarded, // [channel shift] K6
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] L6
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (call_centre__year_2__perc_pax_boarded / 100) // [channel shift] M6
+							year_2 : {
+								channel_shift : call_centre__year_2__channel_shift, // [channel shift] J6
+								perc_pax_boarded : call_centre__year_2__perc_pax_boarded, // [channel shift] K6
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] L6
+									sita : this.totals().year_2 * (call_centre__year_2__perc_pax_boarded / 100) // [channel shift] M6
 								}
 							},
-							YEAR_3 : {
-								CHANNEL_SHIFT : call_centre__year_3__channel_shift, // [channel shift] N6
-								PERC_PAX_BOARDED : call_centre__year_3__perc_pax_boarded, // [channel shift] O6
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] P6
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (call_centre__year_3__perc_pax_boarded / 100) // [channel shift] Q6
+							year_3 : {
+								channel_shift : call_centre__year_3__channel_shift, // [channel shift] N6
+								perc_pax_boarded : call_centre__year_3__perc_pax_boarded, // [channel shift] O6
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] P6
+									sita : this.totals().year_3 * (call_centre__year_3__perc_pax_boarded / 100) // [channel shift] Q6
 								}
 							},
-							YEAR_4 : {
-								CHANNEL_SHIFT : call_centre__year_4__channel_shift, // [channel shift] R6
-								PERC_PAX_BOARDED : call_centre__year_4__perc_pax_boarded, // [channel shift] S6
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] T6
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (call_centre__year_4__perc_pax_boarded / 100) // [channel shift] U6
+							year_4 : {
+								channel_shift : call_centre__year_4__channel_shift, // [channel shift] R6
+								perc_pax_boarded : call_centre__year_4__perc_pax_boarded, // [channel shift] S6
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] T6
+									sita : this.totals().year_4 * (call_centre__year_4__perc_pax_boarded / 100) // [channel shift] U6
 								}
 							},
-							YEAR_5 : {
-								CHANNEL_SHIFT : call_centre__year_5__channel_shift, // [channel shift] V6
-								PERC_PAX_BOARDED : call_centre__year_5__perc_pax_boarded, // [channel shift] W6
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] X6
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (call_centre__year_5__perc_pax_boarded / 100) // [channel shift] Y6
-								}
-							}
-						},
-						ECOMMERCE : { // [channel shift] ROW 7
-							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_2,
-								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix
-							},
-							YEAR_1 : {
-								CHANNEL_SHIFT : ecommerce__year_1__channel_shift, // [channel shift] F7
-								PERC_PAX_BOARDED : ecommerce__year_1__perc_pax_boarded, // [channel shift] G7
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] H7
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_1 * (ecommerce__year_1__perc_pax_boarded / 100) // [channel shift] I7
-								}
-							},
-							YEAR_2 : {
-								CHANNEL_SHIFT : ecommerce__year_2__channel_shift, // [channel shift] J7
-								PERC_PAX_BOARDED : ecommerce__year_2__perc_pax_boarded, // [channel shift] K7
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] L7
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_2 * (ecommerce__year_2__perc_pax_boarded / 100) // [channel shift] M7
-								}
-							},
-							YEAR_3 : {
-								CHANNEL_SHIFT : ecommerce__year_3__channel_shift, // [channel shift] N7
-								PERC_PAX_BOARDED : ecommerce__year_3__perc_pax_boarded, // [channel shift] O7
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] P7
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_3 * (ecommerce__year_3__perc_pax_boarded / 100) // [channel shift] Q7
-								}
-							},
-							YEAR_4 : {
-								CHANNEL_SHIFT : ecommerce__year_4__channel_shift, // [channel shift] R7
-								PERC_PAX_BOARDED : ecommerce__year_4__perc_pax_boarded, // [channel shift] S7
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] T7
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_4 * (ecommerce__year_4__perc_pax_boarded / 100) // [channel shift] U7
-								}
-							},
-							YEAR_5 : {
-								CHANNEL_SHIFT : ecommerce__year_5__channel_shift, // [channel shift] V7
-								PERC_PAX_BOARDED : ecommerce__year_5__perc_pax_boarded, // [channel shift] W7
-								PAX_BOARDED : {
-									CURRENT : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] X7
-									SITA : TOTAL_PASSENGERS_BOARDED.YEAR_5 * (ecommerce__year_5__perc_pax_boarded / 100) // [channel shift] Y7
+							year_5 : {
+								channel_shift : call_centre__year_5__channel_shift, // [channel shift] V6
+								perc_pax_boarded : call_centre__year_5__perc_pax_boarded, // [channel shift] W6
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.direct_dist_costs_per_pb.call_centre.channel.current_channel_mix / 100), // [channel shift] X6
+									sita : this.totals().year_5 * (call_centre__year_5__perc_pax_boarded / 100) // [channel shift] Y6
 								}
 							}
 						},
-						A2A : {
-							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_3,
-								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix
+						ecommerce : { // [channel shift] ROW 7
+							cost_per_pb : {
+								current_provider : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.current_provider,
+								sita : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								perc_pax_boarded : passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix,
+								pax_boarded : pax_boarded_2
+							},
+							year_1 : {
+								channel_shift : ecommerce__year_1__channel_shift, // [channel shift] F7
+								perc_pax_boarded : ecommerce__year_1__perc_pax_boarded, // [channel shift] G7
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] H7
+									sita : this.totals().year_1 * (ecommerce__year_1__perc_pax_boarded / 100) // [channel shift] I7
+								}
+							},
+							year_2 : {
+								channel_shift : ecommerce__year_2__channel_shift, // [channel shift] J7
+								perc_pax_boarded : ecommerce__year_2__perc_pax_boarded, // [channel shift] K7
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] L7
+									sita : this.totals().year_2 * (ecommerce__year_2__perc_pax_boarded / 100) // [channel shift] M7
+								}
+							},
+							year_3 : {
+								channel_shift : ecommerce__year_3__channel_shift, // [channel shift] N7
+								perc_pax_boarded : ecommerce__year_3__perc_pax_boarded, // [channel shift] O7
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] P7
+									sita : this.totals().year_3 * (ecommerce__year_3__perc_pax_boarded / 100) // [channel shift] Q7
+								}
+							},
+							year_4 : {
+								channel_shift : ecommerce__year_4__channel_shift, // [channel shift] R7
+								perc_pax_boarded : ecommerce__year_4__perc_pax_boarded, // [channel shift] S7
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] T7
+									sita : this.totals().year_4 * (ecommerce__year_4__perc_pax_boarded / 100) // [channel shift] U7
+								}
+							},
+							year_5 : {
+								channel_shift : ecommerce__year_5__channel_shift, // [channel shift] V7
+								perc_pax_boarded : ecommerce__year_5__perc_pax_boarded, // [channel shift] W7
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.direct_dist_costs_per_pb.ecommerce.channel.current_channel_mix / 100), // [channel shift] X7
+									sita : this.totals().year_5 * (ecommerce__year_5__perc_pax_boarded / 100) // [channel shift] Y7
+								}
+							}
 						},
-						MOBILE : {
-							CURRENT_PROVIDER : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_4,
-								PERC_PAX_BOARDED : passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix
+						a2a : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.current_provider,
+								sita : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								perc_pax_boarded : passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix,
+								pax_boarded : pax_boarded_3
+							},
+							year_1 : {
+								channel_shift : a2a__year_1__channel_shift,
+								perc_pax_boarded : a2a__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100), // [channel shift] H8
+									sita : this.totals().year_1 * (a2a__year_1__perc_pax_boarded / 100) // [channel shift] I8
+								}
+							},
+							year_2 : {
+								channel_shift : a2a__year_2__channel_shift,
+								perc_pax_boarded : a2a__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100), // [channel shift] L8
+									sita : this.totals().year_2 * (a2a__year_2__perc_pax_boarded / 100) // [channel shift] M8
+								}
+							},
+							year_3 : {
+								channel_shift : a2a__year_3__channel_shift,
+								perc_pax_boarded : a2a__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100), // [channel shift] P8
+									sita : this.totals().year_3 * (a2a__year_3__perc_pax_boarded / 100) // [channel shift] Q8
+								}
+							},
+							year_4 : {
+								channel_shift : a2a__year_4__channel_shift,
+								perc_pax_boarded : a2a__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100), // [channel shift] T8
+									sita : this.totals().year_4 * (a2a__year_4__perc_pax_boarded / 100) // [channel shift] U8
+								}
+							},
+							year_5 : {
+								channel_shift : a2a__year_5__channel_shift,
+								perc_pax_boarded : a2a__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.direct_dist_costs_per_pb.travel_agent.channel.current_channel_mix / 100), // [channel shift] X8
+									sita : this.totals().year_5 * (a2a__year_5__perc_pax_boarded / 100) // [channel shift] Y8
+								}
+							}
+						},
+						mobile : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.current_provider,
+								sita : passengersBoardedData.direct_dist_costs_per_pb.mobile.cost_per_pb.sita
+							},
+							current : {
+								perc_pax_boarded : passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix,
+								pax_boarded : pax_boarded_4
+							},
+							year_1 : {
+								channel_shift : mobile__year_1__channel_shift,
+								perc_pax_boarded : mobile__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100), // [channel shift] H9
+									sita : this.totals().year_1 * (mobile__year_1__perc_pax_boarded / 100) // [channel shift] I9
+								}
+							},
+							year_2 : {
+								channel_shift : mobile__year_2__channel_shift,
+								perc_pax_boarded : mobile__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100), // [channel shift] L9
+									sita : this.totals().year_2 * (mobile__year_2__perc_pax_boarded / 100) // [channel shift] M9
+								}
+							},
+							year_3 : {
+								channel_shift : mobile__year_3__channel_shift,
+								perc_pax_boarded : mobile__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100), // [channel shift] P9
+									sita : this.totals().year_3 * (mobile__year_3__perc_pax_boarded / 100) // [channel shift] Q9
+								}
+							},
+							year_4 : {
+								channel_shift : mobile__year_4__channel_shift,
+								perc_pax_boarded : mobile__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100), // [channel shift] T9
+									sita : this.totals().year_4 * (mobile__year_4__perc_pax_boarded / 100) // [channel shift] U9
+								}
+							},
+							year_5 : {
+								channel_shift : mobile__year_5__channel_shift,
+								perc_pax_boarded : mobile__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix / 100), // [channel shift] X9
+									sita : this.totals().year_5 * (mobile__year_5__perc_pax_boarded / 100) // [channel shift] Y9
+								}
+							}
 						}
 					}
-				})();
+				},
 
-				var TOTAL_GDS = (function () {
-					var pax_boarded_1 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_2 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_3 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
-							pax_boarded_4 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100) * TOTAL_PASSENGERS_BOARDED.CURRENT),
+				total_gds : function () {
+					var pax_boarded_1 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_2 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_3 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
+							pax_boarded_4 = Math.round((passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100) * this.totals().total_passengers_boarded.current),
 							pax_boarded_total = pax_boarded_1 + pax_boarded_2 + pax_boarded_3 + pax_boarded_4;
 
+					// amadeus [channel shift] ROW 13
+					var gds_amadeus__year_1__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.channel_shift_over_5_yrs / 5,
+							gds_amadeus__year_1__perc_pax_boarded = gds_amadeus__year_1__channel_shift + passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix,
+							gds_amadeus__year_2__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.channel_shift_over_5_yrs / 5,
+							gds_amadeus__year_2__perc_pax_boarded = gds_amadeus__year_2__channel_shift + gds_amadeus__year_1__perc_pax_boarded,
+							gds_amadeus__year_3__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.channel_shift_over_5_yrs / 5,
+							gds_amadeus__year_3__perc_pax_boarded = gds_amadeus__year_3__channel_shift + gds_amadeus__year_2__perc_pax_boarded,
+							gds_amadeus__year_4__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.channel_shift_over_5_yrs / 5,
+							gds_amadeus__year_4__perc_pax_boarded = gds_amadeus__year_4__channel_shift + gds_amadeus__year_3__perc_pax_boarded,
+							gds_amadeus__year_5__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.channel_shift_over_5_yrs / 5,
+							gds_amadeus__year_5__perc_pax_boarded = gds_amadeus__year_5__channel_shift + gds_amadeus__year_4__perc_pax_boarded;
+
+					// SABRE [channel shift] ROW 14
+					var gds_sabre__year_1__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.channel_shift_over_5_yrs / 5,
+							gds_sabre__year_1__perc_pax_boarded = gds_sabre__year_1__channel_shift + passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix,
+							gds_sabre__year_2__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.channel_shift_over_5_yrs / 5,
+							gds_sabre__year_2__perc_pax_boarded = gds_sabre__year_2__channel_shift + gds_sabre__year_1__perc_pax_boarded,
+							gds_sabre__year_3__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.channel_shift_over_5_yrs / 5,
+							gds_sabre__year_3__perc_pax_boarded = gds_sabre__year_3__channel_shift + gds_sabre__year_2__perc_pax_boarded,
+							gds_sabre__year_4__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.channel_shift_over_5_yrs / 5,
+							gds_sabre__year_4__perc_pax_boarded = gds_sabre__year_4__channel_shift + gds_sabre__year_3__perc_pax_boarded,
+							gds_sabre__year_5__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.channel_shift_over_5_yrs / 5,
+							gds_sabre__year_5__perc_pax_boarded = gds_sabre__year_5__channel_shift + gds_sabre__year_4__perc_pax_boarded;
+
+					// Galileo [channel shift] ROW 15
+					var gds_galileo__year_1__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.channel_shift_over_5_yrs / 5,
+							gds_galileo__year_1__perc_pax_boarded = gds_galileo__year_1__channel_shift + passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix,
+							gds_galileo__year_2__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.channel_shift_over_5_yrs / 5,
+							gds_galileo__year_2__perc_pax_boarded = gds_galileo__year_2__channel_shift + gds_galileo__year_1__perc_pax_boarded,
+							gds_galileo__year_3__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.channel_shift_over_5_yrs / 5,
+							gds_galileo__year_3__perc_pax_boarded = gds_galileo__year_3__channel_shift + gds_galileo__year_2__perc_pax_boarded,
+							gds_galileo__year_4__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.channel_shift_over_5_yrs / 5,
+							gds_galileo__year_4__perc_pax_boarded = gds_galileo__year_4__channel_shift + gds_galileo__year_3__perc_pax_boarded,
+							gds_galileo__year_5__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.channel_shift_over_5_yrs / 5,
+							gds_galileo__year_5__perc_pax_boarded = gds_galileo__year_5__channel_shift + gds_galileo__year_4__perc_pax_boarded;
+
+					// Abacus [channel shift] ROW 16
+					var gds_abacus__year_1__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.channel_shift_over_5_yrs / 5,
+							gds_abacus__year_1__perc_pax_boarded = gds_abacus__year_1__channel_shift + passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix,
+							gds_abacus__year_2__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.channel_shift_over_5_yrs / 5,
+							gds_abacus__year_2__perc_pax_boarded = gds_abacus__year_2__channel_shift + gds_abacus__year_1__perc_pax_boarded,
+							gds_abacus__year_3__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.channel_shift_over_5_yrs / 5,
+							gds_abacus__year_3__perc_pax_boarded = gds_abacus__year_3__channel_shift + gds_abacus__year_2__perc_pax_boarded,
+							gds_abacus__year_4__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.channel_shift_over_5_yrs / 5,
+							gds_abacus__year_4__perc_pax_boarded = gds_abacus__year_4__channel_shift + gds_abacus__year_3__perc_pax_boarded,
+							gds_abacus__year_5__channel_shift = passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.channel_shift_over_5_yrs / 5,
+							gds_abacus__year_5__perc_pax_boarded = gds_abacus__year_5__channel_shift + gds_abacus__year_4__perc_pax_boarded;
+
 					return {
-						PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.current_channel_mix_total,
-						PAX_BOARDED : pax_boarded_total,
-						AMADEUS : {
-							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_1,
-								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix
+						perc_pax_boarded : passengersBoardedData.indirect_dist_costs_per_pb.current_channel_mix_total,
+						pax_boarded : pax_boarded_total,
+						amadeus : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.current_provider,
+								sita : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								pax_boarded : pax_boarded_1,
+								perc_pax_boarded : passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix
+							},
+							year_1 : {
+								channel_shift : gds_amadeus__year_1__channel_shift,
+								perc_pax_boarded : gds_amadeus__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100), // [channel shift] H13
+									sita : this.totals().year_1 * (gds_amadeus__year_1__perc_pax_boarded / 100) // [channel shift] I13
+								}
+							},
+							year_2 : {
+								channel_shift : gds_amadeus__year_2__channel_shift,
+								perc_pax_boarded : gds_amadeus__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100), // [channel shift] L13
+									sita : this.totals().year_2 * (gds_amadeus__year_2__perc_pax_boarded / 100) // [channel shift] M13
+								}
+							},
+							year_3 : {
+								channel_shift : gds_amadeus__year_3__channel_shift,
+								perc_pax_boarded : gds_amadeus__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100), // [channel shift] P13
+									sita : this.totals().year_3 * (gds_amadeus__year_3__perc_pax_boarded / 100) // [channel shift] Q13
+								}
+							},
+							year_4 : {
+								channel_shift : gds_amadeus__year_4__channel_shift,
+								perc_pax_boarded : gds_amadeus__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100), // [channel shift] T13
+									sita : this.totals().year_4 * (gds_amadeus__year_4__perc_pax_boarded / 100) // [channel shift] U13
+								}
+							},
+							year_5 : {
+								channel_shift : gds_amadeus__year_5__channel_shift,
+								perc_pax_boarded : gds_amadeus__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.indirect_dist_costs_per_pb.amadeus.channel.current_channel_mix / 100), // [channel shift] X13
+									sita : this.totals().year_5 * (gds_amadeus__year_5__perc_pax_boarded / 100) // [channel shift] Y13
+								}
+							}
 						},
-						SABRE : {
-							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_2,
-								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix
+						sabre : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.current_provider,
+								sita : passengersBoardedData.indirect_dist_costs_per_pb.sabre.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								pax_boarded : pax_boarded_2,
+								perc_pax_boarded : passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix
+							},
+							year_1 : {
+								channel_shift : gds_sabre__year_1__channel_shift,
+								perc_pax_boarded : gds_sabre__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100), // [channel shift] H14
+									sita : this.totals().year_1 * (gds_sabre__year_1__perc_pax_boarded / 100) // [channel shift] I14
+								}
+							},
+							year_2 : {
+								channel_shift : gds_sabre__year_2__channel_shift,
+								perc_pax_boarded : gds_sabre__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100), // [channel shift] L14
+									sita : this.totals().year_2 * (gds_sabre__year_2__perc_pax_boarded / 100) // [channel shift] M14
+								}
+							},
+							year_3 : {
+								channel_shift : gds_sabre__year_3__channel_shift,
+								perc_pax_boarded : gds_sabre__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100), // [channel shift] P14
+									sita : this.totals().year_3 * (gds_sabre__year_3__perc_pax_boarded / 100) // [channel shift] Q14
+								}
+							},
+							year_4 : {
+								channel_shift : gds_sabre__year_4__channel_shift,
+								perc_pax_boarded : gds_sabre__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100), // [channel shift] T14
+									sita : this.totals().year_4 * (gds_sabre__year_4__perc_pax_boarded / 100) // [channel shift] U14
+								}
+							},
+							year_5 : {
+								channel_shift : gds_sabre__year_5__channel_shift,
+								perc_pax_boarded : gds_sabre__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.indirect_dist_costs_per_pb.sabre.channel.current_channel_mix / 100), // [channel shift] X14
+									sita : this.totals().year_5 * (gds_sabre__year_5__perc_pax_boarded / 100) // [channel shift] Y14
+								}
+							}
 						},
-						GALILEO : {
-							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_3,
-								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix
+						galileo : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.current_provider,
+								sita : passengersBoardedData.indirect_dist_costs_per_pb.galileo.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								pax_boarded : pax_boarded_3,
+								perc_pax_boarded : passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix
+							},
+							year_1 : {
+								channel_shift : gds_galileo__year_1__channel_shift,
+								perc_pax_boarded : gds_galileo__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100), // [channel shift] H15
+									sita : this.totals().year_1 * (gds_galileo__year_1__perc_pax_boarded / 100) // [channel shift] I15
+								}
+							},
+							year_2 : {
+								channel_shift : gds_galileo__year_2__channel_shift,
+								perc_pax_boarded : gds_galileo__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100), // [channel shift] L15
+									sita : this.totals().year_2 * (gds_galileo__year_2__perc_pax_boarded / 100) // [channel shift] M15
+								}
+							},
+							year_3 : {
+								channel_shift : gds_galileo__year_3__channel_shift,
+								perc_pax_boarded : gds_galileo__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100), // [channel shift] P15
+									sita : this.totals().year_3 * (gds_galileo__year_3__perc_pax_boarded / 100) // [channel shift] Q15
+								}
+							},
+							year_4 : {
+								channel_shift : gds_galileo__year_4__channel_shift,
+								perc_pax_boarded : gds_galileo__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100), // [channel shift] T15
+									sita : this.totals().year_4 * (gds_galileo__year_4__perc_pax_boarded / 100) // [channel shift] U15
+								}
+							},
+							year_5 : {
+								channel_shift : gds_galileo__year_5__channel_shift,
+								perc_pax_boarded : gds_galileo__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.indirect_dist_costs_per_pb.galileo.channel.current_channel_mix / 100), // [channel shift] X15
+									sita : this.totals().year_5 * (gds_galileo__year_5__perc_pax_boarded / 100) // [channel shift] Y15
+								}
+							}
 						},
-						ABACUS : {
-							CURRENT_PROVIDER : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.current_provider,
-							SITA : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.sita,
-							CURRENT : {
-								PAX_BOARDED : pax_boarded_4,
-								PERC_PAX_BOARDED : passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix
+						abacus : {
+							cost_per_pb : {
+								current_provider : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.current_provider,
+								sita : passengersBoardedData.indirect_dist_costs_per_pb.abacus.cost_per_pb.sita
 							},
-							YEAR_1 : {},
-							YEAR_2 : {},
-							YEAR_3 : {},
-							YEAR_4 : {},
-							YEAR_5 : {}
+							current : {
+								pax_boarded : pax_boarded_4,
+								perc_pax_boarded : passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix
+							},
+							year_1 : {
+								channel_shift : gds_abacus__year_1__channel_shift,
+								perc_pax_boarded : gds_abacus__year_1__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_1 * (passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100), // [channel shift] H16
+									sita : this.totals().year_1 * (gds_abacus__year_1__perc_pax_boarded / 100) // [channel shift] I16
+								}
+							},
+							year_2 : {
+								channel_shift : gds_abacus__year_2__channel_shift,
+								perc_pax_boarded : gds_abacus__year_2__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_2 * (passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100), // [channel shift] L16
+									sita : this.totals().year_2 * (gds_abacus__year_2__perc_pax_boarded / 100) // [channel shift] M16
+								}
+							},
+							year_3 : {
+								channel_shift : gds_abacus__year_3__channel_shift,
+								perc_pax_boarded : gds_abacus__year_3__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_3 * (passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100), // [channel shift] P16
+									sita : this.totals().year_3 * (gds_abacus__year_3__perc_pax_boarded / 100) // [channel shift] Q16
+								}
+							},
+							year_4 : {
+								channel_shift : gds_abacus__year_4__channel_shift,
+								perc_pax_boarded : gds_abacus__year_4__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_4 * (passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100), // [channel shift] T16
+									sita : this.totals().year_4 * (gds_abacus__year_4__perc_pax_boarded / 100) // [channel shift] U16
+								}
+							},
+							year_5 : {
+								channel_shift : gds_abacus__year_5__channel_shift,
+								perc_pax_boarded : gds_abacus__year_5__perc_pax_boarded,
+								pax_boarded : {
+									current : this.totals().year_5 * (passengersBoardedData.indirect_dist_costs_per_pb.abacus.channel.current_channel_mix / 100), // [channel shift] X16
+									sita : this.totals().year_5 * (gds_abacus__year_5__perc_pax_boarded / 100) // [channel shift] Y16
+								}
+							}
 						}
 					}
-				})();
+				},
 
-				return {
-					/**
-					 * Constants
-					 *
-					 * These are percentages and divided by 100 to get point value to multiply by.
-					 */
+				/**
+				 * allData
+				 *
+				 * Writes data to allData object
+				 */
+				initObject : function () {
 
-					CURRENT__PAX_BOARDED__TOTAL_ETICKETS_ISSUED : 1856002, // [Channel shift] E22
-					CURRENT__PAX_BOARDED__TOTAL_EMDS_ISSUED : 102245, // [Channel shift] E23
-					CURRENT__PAX_BOARDED__TOTAL_REISSUES : 25665, // [Channel shift] E24
-					CURRENT__PAX_BOARDED__TOTAL_OTHER_AIRLINES_BOOKED : 65871, // [Channel shift] E25
+					console.log(this.total_gds());
+					console.log(this.direct());
+					console.log(this.totals());
 
-					TOTAL_PASSENGERS_BOARDED : TOTAL_PASSENGERS_BOARDED,
-
-					PSS : {
-						CURRENT_PROVIDER : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.current_provider,
-						SITA : passengersBoardedData.core_passenger_services_cost_per_pb.cost_per_pb.sita
-					},
-
-					DIRECT : DIRECT,
-					TOTAL_GDS : TOTAL_GDS,
-
-
-
-					/* Calculation Functions */
-					calcFunctions : function () { // REF No. | [SHEET] CELL No.
-						/* return . . . */
-					},
-
-					/**
-					 * allData
-					 *
-					 * Writes data to allData object
-					 */
-					initObject : function () {
-					},
-
-					/**
-					 * Resulting value
-					 *
-					 * @param value : value is 'high' or 'low'.
-					 * @returns {number}
-					 */
-					result : function (value) {
-						return Math.round(0);
+					// If option is not selected then return empty object with default values (0)
+					if ( inputData.services && !inputData.services.op3 ) {
+						allData.channel_shift.high = 0;
+						allData.channel_shift.low = 0;
+						allData.channel_shift.summary = {};
+						return;
 					}
+				},
+
+				/**
+				 * Resulting value
+				 *
+				 * @param value : value is 'high' or 'low'.
+				 * @returns {number}
+				 */
+				result : function (value) {
+					return Math.round(0);
 				}
 			}
+
 		})
 
 		.factory('template', function (inputData, allData) {
