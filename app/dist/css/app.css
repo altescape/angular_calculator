@@ -6979,57 +6979,59 @@ a:hover {
   margin-top: 40px; }
 
 /* HOME SPLASH SCREEN */
-/* line 183, ../app.scss */
-.home .navbar.navbar-static-top,
-.home nav-bottom,
-.home .navbar.navbar-default.navbar-fixed-bottom {
-  display: none; }
-/* line 186, ../app.scss */
-.home #main-content {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background-image: url(/app/img/home-background.jpg);
-  -webkit-background-size: cover;
-          background-size: cover;
-  margin: 0;
-  overflow: hidden; }
-  /* line 197, ../app.scss */
-  .home #main-content h1, .home #main-content h2, .home #main-content h3, .home #main-content p {
-    color: white !important; }
-  /* line 200, ../app.scss */
-  .home #main-content .home-content-container {
+/* line 179, ../app.scss */
+.home {
+  background-color: #0081cb; }
+  /* line 183, ../app.scss */
+  .home .navbar.navbar-static-top,
+  .home nav-bottom,
+  .home .navbar.navbar-default.navbar-fixed-bottom {
+    display: none; }
+  /* line 186, ../app.scss */
+  .home #main-content {
     position: absolute;
-    top: 30%;
+    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    height: 100%; }
-  /* line 208, ../app.scss */
-  .home #main-content .home-logo {
-    width: 300px;
-    padding-bottom: 3em; }
-  /* line 212, ../app.scss */
-  .home #main-content .user-action {
-    -webkit-transition: all .2s linear;
-            transition: all .2s linear;
-    -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
-    background-image: none;
-    font-weight: normal;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: rgba(124, 174, 62, 0.6); }
-    /* line 222, ../app.scss */
-    .home #main-content .user-action:hover {
-      -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
-              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
-      background-color: rgba(255, 255, 255, 0.2); }
+    height: 100%;
+    background-image: url(/app/img/home-background.jpg);
+    -webkit-background-size: cover;
+            background-size: cover;
+    margin: 0;
+    overflow: hidden; }
+    /* line 197, ../app.scss */
+    .home #main-content h1, .home #main-content h2, .home #main-content h3, .home #main-content p {
+      color: white !important; }
+    /* line 200, ../app.scss */
+    .home #main-content .home-content-container {
+      position: absolute;
+      top: 30%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 100%; }
+    /* line 208, ../app.scss */
+    .home #main-content .home-logo {
+      width: 300px;
+      padding-bottom: 3em; }
+    /* line 212, ../app.scss */
+    .home #main-content .user-action {
+      -webkit-transition: all .2s linear;
+              transition: all .2s linear;
+      -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
+              box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
+      background-image: none;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding-left: 20px;
+      padding-right: 20px; }
+      /* line 222, ../app.scss */
+      .home #main-content .user-action:hover {
+        -webkit-box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+                box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.2); }
 
 /* CHART AREA */
 /* line 234, ../app.scss */

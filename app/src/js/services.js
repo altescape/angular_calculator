@@ -1544,7 +1544,6 @@ angular.module('myApp.services', [])
 					// mobile [channel shift] ROW 9
 					var mobile__year_1__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
 							mobile__year_1__perc_pax_boarded = mobile__year_1__channel_shift + passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.current_channel_mix,
-
 							mobile__year_2__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
 							mobile__year_2__perc_pax_boarded = mobile__year_2__channel_shift + mobile__year_1__perc_pax_boarded,
 							mobile__year_3__channel_shift = passengersBoardedData.direct_dist_costs_per_pb.mobile.channel.channel_shift_over_5_yrs / 5,
@@ -2018,6 +2017,215 @@ angular.module('myApp.services', [])
 								}
 							}
 						}
+					}
+				},
+
+				costs : function () { // [channel shift] rows 26 - 43 (not sure what their name is)
+					return {
+						direct : {
+							call_centre: {
+								cost_per_pb: {
+									current : 2.41,
+									sita : 2.01
+								},
+								current : {
+									current : 0,
+									sita : 0
+								},
+								year_1 : {
+									current : 0,
+									current_with_channel_shift : 0,
+									sita : 0
+								},
+								year_2 : {
+									current : 0,
+									current_with_channel_shift : 0,
+									sita : 0
+								},
+								year_3 : {
+									current : 0,
+									current_with_channel_shift : 0,
+									sita : 0
+								},
+								year_4 : {
+									current : 0,
+									current_with_channel_shift : 0,
+									sita : 0
+								},
+								year_5 : {
+									current : 0,
+									current_with_channel_shift : 0,
+									sita : 0
+								}
+							},
+							ecommerce: {},
+							a2a: {},
+							mobile: {}
+						},
+						indirect : {
+							amadeus : {},
+							sabre : {},
+							galileo : {},
+							abacus : {}
+						}
+					}
+				},
+
+				// need to add calcs here to enter data into the objects below
+				costs_2 : function () {
+					return {
+						cost_per_pb: {
+							current : {
+								direct : {
+									call_centre : 2.41,
+									ecommerce : 2.20,
+									a2a : 2.20,
+									mobile : 2.20,
+									other_1 : 1.20,
+									other_2 : 1.20
+								},
+								indirect : {
+									amadeus : 6.30,
+									sabre : 6.30,
+									galileo : 6.30,
+									abacus : 6.30,
+									other_1 : 1.20,
+									other_2 : 1.20
+								}
+							},
+							sita : {
+								direct : {
+									call_centre : 2.01,
+									ecommerce : 1.80,
+									a2a : 1.80,
+									mobile : 1.80,
+									other_1 : 0.80,
+									other_2 : 0.80
+								},
+								indirect : {
+									amadeus : 5.90,
+									sabre : 5.90,
+									galileo : 5.90,
+									abacus : 5.90,
+									other_1 : 0.80,
+									other_2 : 0.80
+								}
+							}
+						},
+						current : {
+							current : {
+								direct : {
+									total : 0,
+									call_centre : 0,
+									ecommerce : 0,
+									a2a : 0,
+									mobile : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								indirect : {
+									total : 0,
+									amadeus : 0,
+									sabre : 0,
+									galileo : 0,
+									abacus : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								total : 0
+							},
+							sita : {
+								direct : {
+									total : 0,
+									call_centre : 0,
+									ecommerce : 0,
+									a2a : 0,
+									mobile : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								indirect : {
+									amadeus : 0,
+									sabre : 0,
+									galileo : 0,
+									abacus : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								total : 0
+							},
+							supplier_does_not_shift__difference : 0,
+							supplier_shifts__difference : 0
+						},
+						year_1 : {
+							current : {
+								direct : {
+									total : 0,
+									call_centre : 0,
+									ecommerce : 0,
+									a2a : 0,
+									mobile : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								indirect : {
+									total : 0,
+									amadeus : 0,
+									sabre : 0,
+									galileo : 0,
+									abacus : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								total : 0
+							},
+							current_with_channel_shift : {
+								direct : {
+									total : 0,
+									call_centre : 0,
+									ecommerce : 0,
+									a2a : 0,
+									mobile : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								indirect : {
+									total : 0,
+									amadeus : 0,
+									sabre : 0,
+									galileo : 0,
+									abacus : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								total : 0
+							},
+							sita : {
+								direct : {
+									total : 0,
+									call_centre : 0,
+									ecommerce : 0,
+									a2a : 0,
+									mobile : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								indirect : {
+									total : 0,
+									amadeus : 0,
+									sabre : 0,
+									galileo : 0,
+									abacus : 0,
+									other_1 : 0,
+									other_2 : 0
+								},
+								total : 0
+							}
+						},
+						year_2 : {},
+						year_3 : {},
+						year_4 : {},
+						year_5 : {}
 					}
 				},
 
