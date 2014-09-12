@@ -176,8 +176,8 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 }
 
 /* HOME SPLASH SCREEN */
-
 .home {
+	background-color: $brand-primary;
 	.navbar.navbar-static-top,
 	nav-bottom,
 	.navbar.navbar-default.navbar-fixed-bottom {
@@ -218,7 +218,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			letter-spacing: 2px;
 			padding-left: 20px;
 			padding-right: 20px;
-			background-color: rgba($brand-success, 0.6);
+//			background-color: rgba($brand-success, 0.6);
 			&:hover {
 				box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
 				background-color: rgba(255,255,255,0.2);
