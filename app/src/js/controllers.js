@@ -221,7 +221,8 @@ angular.module('myApp.controllers', [])
 						loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-										// Logged in: no @todo
+										// TODO-mike add message
+										// Logged in: no
 										// - Message 'you need to login before updating'
 										// - redirect to auth page
 									} else {
@@ -442,7 +443,8 @@ angular.module('myApp.controllers', [])
 					loginObj.$getCurrentUser().then(
 							function (user) {
 								if ( user === null ) {
-									// Logged in: no @todo
+									// TODO-mike add message
+									// Logged in: no
 									// - Message 'you need to login before saving'
 									// - redirect to auth page
 								} else {
@@ -479,7 +481,8 @@ angular.module('myApp.controllers', [])
 
 													$scope.airfare_insight = data.airfare_insight;
 
-													// @todo: chart configs are not storing separate values for both graphs.
+													// TODO-mike separate values for both graph types
+													// chart configs are not storing separate values for both graphs.
 													// Need to find out why and stop from using this sort of if/else as makes it fragile.
 													if ( $state.current.name === 'saved-calculations-detail.chart_low' ) {
 														$scope.chartConfigLow = chartData.drawChart('low', data);
@@ -577,7 +580,8 @@ angular.module('myApp.controllers', [])
 						loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-										// Logged in: no @todo
+										// TODO-mike add message
+										// Logged in: no
 										// - Message 'you need to login before saving'
 										// - redirect to auth page
 									} else {
@@ -634,7 +638,8 @@ angular.module('myApp.controllers', [])
 						loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-										// Logged in: no @todo
+										// TODO-mike add message
+										// Logged in: no
 										// - Message 'you need to login before updating'
 										// - redirect to auth page
 									} else {
@@ -697,7 +702,8 @@ angular.module('myApp.controllers', [])
 					'arr',
 					'airfareInsight',
 					'channelShift',
-					function ($rootScope, $scope, $location, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift) {
+					'ancillarySales',
+					function ($rootScope, $scope, $location, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales) {
 
 						/**
 						 * Calls the factories for each service
@@ -709,6 +715,12 @@ angular.module('myApp.controllers', [])
 
 							revenueIntegrityProcessImprovement.initObject();
 							$scope.revenue_integrity_process_improvement = allData.revenue_integrity_process_improvement;
+
+							channelShift.initObject();
+							$scope.channel_shift = allData.channel_shift;
+
+							ancillarySales.initObject();
+							$scope.ancillary_sales = allData.ancillary_sales;
 
 							cmap.initObject();
 							$scope.cmap = allData.cmap;
@@ -725,15 +737,11 @@ angular.module('myApp.controllers', [])
 							airfareInsight.initObject();
 							$scope.airfare_insight = allData.airfare_insight;
 
-							//console.log(channelShift());
-
-							channelShift.initObject();
-							$scope.channel_shift = allData.channel_shift;
-
 							localStorageService.set('data', allData);
 							localStorageService.set('input', inputData);
 
-							// @todo: chart configs are not storing separate values for both graphs.
+							// TODO-mike separate values for both graph types
+							// chart configs are not storing separate values for both graphs.
 							// Need to find out why and stop from using this sort of if/else as makes it fragile.
 							if ( $state.current.name === 'calculator.chart_low' ) {
 								$scope.chartConfigLow = chartData.drawChart('low', localStorageService.get('data'));

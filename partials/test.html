@@ -44,6 +44,27 @@
     </div>
 
     <div class="well">
+        <h4>{{ channel_shift.name }}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <td width="70%"></td>
+                <td>High</td>
+                <td>Low</td>
+            </tr>
+            <tr>
+                <td>Graph numbers</td>
+                <td>{{ channel_shift.high }}</td>
+                <td>{{ channel_shift.low }}</td>
+            </tr>
+<!--            <tr ng-repeat="item in channel_shift.summary">-->
+<!--                <td>{{ item.name }}</td>-->
+<!--                <td>{{ item.high | commas }}</td>-->
+<!--                <td>{{ item.low | commas }}</td>-->
+<!--            </tr>-->
+        </table>
+    </div>
+
+    <div class="well">
         <h4>{{ cmap.name }}</h4>
         <table class="table table-bordered">
             <tr>
