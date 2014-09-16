@@ -445,7 +445,7 @@ angular.module('myApp.controllers', [])
 						loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-
+										// TODO-mike test it can get to this and add message if so
 									} else {
 										var userId = user.id;
 
@@ -658,13 +658,14 @@ angular.module('myApp.controllers', [])
 										var userId = user.id;
 
 										// Store to Firebase address
-										$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/'));
+										var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/')),
+												items = sync.$asArray();
 
 										// Set flag: saving to true
 										$scope.saving = true;
 
 										// Add the data from localstorage and add it to Firebase
-										$scope.items.$add({
+										items.$add({
 											info : localStorageService.get('info'),
 											input : localStorageService.get('input'),
 											data : localStorageService.get('data')
