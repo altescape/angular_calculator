@@ -9,21 +9,7 @@
                     <tabset>
                         <tab heading="Figures">
                             <div class="col-sm-12 pt-25">
-                                <!--                                    <legend>-->
-                                <!--                                        Figures-->
-                                <!--                                        <small class="pull-right">-->
-                                <!--                                            <a ng-click="view_state.fig_collapsed = true; collapseSection(view_state.fig_collapsed)"-->
-                                <!--                                               ng-hide="view_state.fig_collapsed"-->
-                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
-                                <!--                                                collapse <span class="glyphicon glyphicon-resize-small"></span>-->
-                                <!--                                            </a>-->
-                                <!--                                            <a ng-click="view_state.fig_collapsed = false; collapseSection(view_state.fig_collapsed)"-->
-                                <!--                                               ng-show="view_state.fig_collapsed"-->
-                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
-                                <!--                                                show <span class="glyphicon glyphicon-resize-full"></span>-->
-                                <!--                                            </a>-->
-                                <!--                                        </small>-->
-                                <!--                                    </legend>-->
+
                                 <div class="row" ng-hide="view_state.fig_collapsed">
                                     <div class="col-sm-12 form-group">
                                         <label for="param1">Current total passengers boarded per year</label>
@@ -74,7 +60,7 @@
                                                    ng-change="updateData();" class="form-control"
                                                    step="10"
                                                    min="0">
-                                            <span class="label">$</span>
+                                            <span class="label">{{ info.currency.symbol }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 form-group">
@@ -92,21 +78,7 @@
                         </tab>
                         <tab heading="Revenue">
                             <div class="col-sm-12 pt-25">
-                                <!--                                    <legend>-->
-                                <!--                                        Revenue, etc.-->
-                                <!--                                        <small class="pull-right">-->
-                                <!--                                            <a ng-click="view_state.rev_collapsed = true; collapseSection(view_state.rev_collapsed)"-->
-                                <!--                                               ng-hide="view_state.rev_collapsed"-->
-                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
-                                <!--                                                collapse <span class="glyphicon glyphicon-resize-small"></span>-->
-                                <!--                                            </a>-->
-                                <!--                                            <a ng-click="view_state.rev_collapsed = false; collapseSection(view_state.rev_collapsed)"-->
-                                <!--                                               ng-show="view_state.rev_collapsed"-->
-                                <!--                                               style="cursor: pointer; font-size: 10px; text-transform: uppercase; text-decoration: none">-->
-                                <!--                                                show <span class="glyphicon glyphicon-resize-full"></span>-->
-                                <!--                                            </a>-->
-                                <!--                                        </small>-->
-                                <!--                                    </legend>-->
+
                                 <div class="row" ng-hide="view_state.rev_collapsed">
                                     <div class="col-sm-12 form-group">
                                         <label for="param6">Airline's annual revenue</label>
@@ -144,7 +116,7 @@
                                                    ng-change="updateData();" class="form-control"
                                                    step="10"
                                                    min="0">
-                                            <span class="label">$</span>
+                                            <span class="label">{{ info.currency.symbol }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 form-group">
