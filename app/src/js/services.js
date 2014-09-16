@@ -2996,6 +2996,8 @@ angular.module('myApp.services', [])
 				 *
 				 * These are percentages and divided by 100 to get point value to multiply by.
 				 */
+				MISC_PERCENTAGE_1_HIGH : 0.04, // [summary] B26
+				MISC_PERCENTAGE_1_LOW : 0.02, // [summary] C26
 				REVENUE : inputData.param6,
 				PERCENTAGES : {
 					ECOMMERCE : {
@@ -3054,21 +3056,138 @@ angular.module('myApp.services', [])
 					return this.REVENUE * channelShift.direct().call_centre.year_5.perc_pax_boarded; // ([channel shift]:W6)
 				},
 
-				ancillarySalesRevenue : function () {
+				/**
+				 * Function to get the calculations for each year and then return year object
+				 * @param year
+				 * @param val
+				 * @returns {{ecommerce: , call_centre: , mobile: , total: *}}
+				 */
+				salesYear : function (year, val) {
+
+					var misc_percentage_1 = 0;
+					if (val === 'high') {
+						misc_percentage_1 = this.MISC_PERCENTAGE_1_HIGH;
+					} else {
+						misc_percentage_1 = this.MISC_PERCENTAGE_1_LOW;
+					}
+
+					var ecommerceRevenue,
+							callCentreRevenue,
+							ecommerceSalesPercentage,
+							callCentreSalesPercentage,
+							mobileSalesPercentage;
+
+					switch(year) {
+						case 1 :
+							ecommerceRevenue = this.ecommerceRevenueY1();
+							callCentreRevenue = this.callCentreRevenueY1();
+							ecommerceSalesPercentage = this.PERCENTAGES.ECOMMERCE.Y1;
+							callCentreSalesPercentage = this.PERCENTAGES.CALL_CENTRE.Y1;
+							mobileSalesPercentage = this.PERCENTAGES.MOBILE.Y1;
+							break;
+						case 2 :
+							ecommerceRevenue = this.ecommerceRevenueY2();
+							callCentreRevenue = this.callCentreRevenueY2();
+							ecommerceSalesPercentage = this.PERCENTAGES.ECOMMERCE.Y2;
+							callCentreSalesPercentage = this.PERCENTAGES.CALL_CENTRE.Y2;
+							mobileSalesPercentage = this.PERCENTAGES.MOBILE.Y2;
+							break;
+						case 3 :
+							ecommerceRevenue = this.ecommerceRevenueY3();
+							callCentreRevenue = this.callCentreRevenueY3();
+							ecommerceSalesPercentage = this.PERCENTAGES.ECOMMERCE.Y3;
+							callCentreSalesPercentage = this.PERCENTAGES.CALL_CENTRE.Y3;
+							mobileSalesPercentage = this.PERCENTAGES.MOBILE.Y3;
+							break;
+						case 4 :
+							ecommerceRevenue = this.ecommerceRevenueY4();
+							callCentreRevenue = this.callCentreRevenueY4();
+							ecommerceSalesPercentage = this.PERCENTAGES.ECOMMERCE.Y4;
+							callCentreSalesPercentage = this.PERCENTAGES.CALL_CENTRE.Y4;
+							mobileSalesPercentage = this.PERCENTAGES.MOBILE.Y4;
+							break;
+						case 5 :
+							ecommerceRevenue = this.ecommerceRevenueY5();
+							callCentreRevenue = this.callCentreRevenueY5();
+							ecommerceSalesPercentage = this.PERCENTAGES.ECOMMERCE.Y5;
+							callCentreSalesPercentage = this.PERCENTAGES.CALL_CENTRE.Y5;
+							mobileSalesPercentage = this.PERCENTAGES.MOBILE.Y5;
+							break;
+					}
+
+					var calculation = function (revenue, percentage_1, percentage_2){return revenue * percentage_1 * percentage_2};
+
+					var ecommerceSales = calculation(ecommerceRevenue, misc_percentage_1, ecommerceSalesPercentage),
+							callCentreSales = calculation(callCentreRevenue, misc_percentage_1, callCentreSalesPercentage),
+							mobileSales = calculation(0, misc_percentage_1, mobileSalesPercentage);
+
+					var totals = ecommerceSales + callCentreSales + mobileSales;
+
+					return {
+						ecommerce : ecommerceSales,
+						call_centre : callCentreSales,
+						mobile: mobileSales,
+						total : totals
+					}
+				},
+
+				/**
+				 * Build the years object
+				 * @returns {{year_1: {high: *, low: *}, year_2: {high: *, low: *}, year_3: {high: *, low: *}, year_4: {high: *, low: *}, year_5: {high: *, low: *}}}
+				 */
+				ancillarySalesRevenueYears : function () {
 					return {
 						year_1 : {
-							high: {
-								ecommerce : (function (ecommerceRevenueY1, percentages) {return ecommerceRevenueY1 * 4 * percentages})(this.ecommerceRevenueY1(), this.PERCENTAGES.ECOMMERCE.Y1),
-								call_centre : 0,
-								mobile: 0,
-								total : 0
-							},
-							low : {}
+							high: this.salesYear(1, 'high'),
+							low : this.salesYear(1, 'low')
+						},
+						year_2 : {
+							high: this.salesYear(2, 'high'),
+							low : this.salesYear(2, 'low')
+						},
+						year_3 : {
+							high: this.salesYear(3, 'high'),
+							low : this.salesYear(3, 'low')
+						},
+						year_4 : {
+							high: this.salesYear(4, 'high'),
+							low : this.salesYear(4, 'low')
+						},
+						year_5 : {
+							high: this.salesYear(5, 'high'),
+							low : this.salesYear(5, 'low')
 						}
 					}
 				},
 
+				/**
+				 * Calculates the final totals for high and low values
+				 * @returns {{high: *, low: *}}
+				 */
+				ancillarySalesRevenueTotals : function () {
+					var sales = this.ancillarySalesRevenueYears(),
+							total_high = sales.year_1.high.total + sales.year_2.high.total + sales.year_3.high.total + sales.year_4.high.total + sales.year_5.high.total,
+							total_low = sales.year_1.low.total + sales.year_2.low.total + sales.year_3.low.total + sales.year_4.low.total + sales.year_5.low.total;
 
+					return {
+						high: total_high,
+						low: total_low
+					}
+				},
+
+				/**
+				 * Builds final object
+				 * @returns {{years: {}, totals: {}}}
+				 */
+				ancillarySalesRevenue : function () {
+					var newObj = {
+						years : {},
+						totals : {}
+					};
+					newObj.years = this.ancillarySalesRevenueYears();
+					newObj.totals = this.ancillarySalesRevenueTotals();
+					return newObj;
+				},
 
 				/**
 				 * allData
@@ -3095,6 +3214,7 @@ angular.module('myApp.services', [])
 				 */
 				result : function (value) {
 					console.log(this.ancillarySalesRevenue());
+
 					return Math.round(0);
 				}
 			}
