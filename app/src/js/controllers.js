@@ -92,16 +92,77 @@ angular.module('myApp.controllers', [])
 						localStorageService.set('info', $scope.info);
 					};
 
-					// Watch infoData for updates
+					/**
+					 * Called when infoData updates, changes to infoData go here
+					 */
 					$scope.$watch(function () {
 								return infoData;
 							},
 							function (newVal, oldVal) {
+								$scope.currency();
 								$scope.info = infoData;
 							}, true);
 
+					$scope.currency_symbols = {
+						'Dollar': '$', // Dollar
+						'Euro': '€', // Euro
+						'Colón': '₡', // Colón
+						'Pound': '£', // Pound
+						'Sheqel': '₪', // Sheqel
+						'Rupee': '₹', // Rupee
+						'Yen': '¥', // Yen
+						'Won': '₩', // Won
+						'Naira': '₦', // Naira
+						'Peso': '₱', // Peso
+						'Zloty': 'zł', // Zloty
+						'Guarani': '₲', // Guarani
+						'Baht': '฿', // Baht
+						'Hryvnia': '₴', // Hryvnia
+						'Dong': '₫' // Dong
+					};
 
 					/**
+					 * Currency
+					 */
+					$scope.currency = function () {
+						var currency_symbols = {
+							'ARS': $scope.currency_symbols['Dollar'], // Dollar
+							'AUD': $scope.currency_symbols['Dollar'], // Australian Dollar
+							'USD': $scope.currency_symbols['Dollar'], // US Dollar
+							'EUR': $scope.currency_symbols['Euro'], // Euro
+							'CRC': $scope.currency_symbols['Colón'], // Costa Rican Colón
+							'EGP': $scope.currency_symbols['Pound'], // Egyptian Pound
+							'FKP': $scope.currency_symbols['Pound'], // Falkland Islands Pound
+							'GIP': $scope.currency_symbols['Pound'], // Gibraltar Pound
+							'GBP': $scope.currency_symbols['Pound'], // British Pound Sterling
+							'ILS': $scope.currency_symbols['Sheqel'], // Israeli New Sheqel
+							'INR': $scope.currency_symbols['Rupee'], // Indian Rupee
+							'JPY': $scope.currency_symbols['Yen'], // Japanese Yen
+							'KRW': $scope.currency_symbols['Won'], // South Korean Won
+							'NGN': $scope.currency_symbols['Naira'], // Nigerian Naira
+							'PHP': $scope.currency_symbols['Peso'], // Philippine Peso
+							'PLN': $scope.currency_symbols['Zloty'], // Polish Zloty
+							'PYG': $scope.currency_symbols['Guarani'], // Paraguayan Guarani
+							'THB': $scope.currency_symbols['Baht'], // Thai Baht
+							'UAH': $scope.currency_symbols['Hryvnia'], // Ukrainian Hryvnia
+							'VND': $scope.currency_symbols['Dong'] // Vietnamese Dong
+						};
+
+						if (infoData.currency && currency_symbols[infoData.currency.currency] !== undefined) {
+							infoData.currency = {
+								currency: infoData.currency.currency,
+								symbol : currency_symbols[infoData.currency.currency]
+							}
+						} else {
+							infoData.currency = {
+								currency: infoData.currency.currency,
+								symbol : infoData.currency.currency
+							}
+						}
+					};
+
+					/**
+					 * Called whenever the state changes (pages change)
 					 * Menu active from state names
 					 */
 					$scope.$on('$stateChangeSuccess',
