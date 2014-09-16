@@ -1248,8 +1248,8 @@ angular.module('myApp.services', [])
 						},
 						tickets_issued_by_direct_channels : {
 							name : "Tickets issued through direct channels",
-							high : this.ticketsIssuedByDirectChannels(),
-							low : this.ticketsIssuedByDirectChannels()
+							high : Math.round(this.ticketsIssuedByDirectChannels()),
+							low : Math.round(this.ticketsIssuedByDirectChannels())
 						},
 						tickets_reissued : {
 							name : "Tickets reissued",
@@ -1259,8 +1259,8 @@ angular.module('myApp.services', [])
 						},
 						total_tickets_reissued : {
 							name : "Total tickets reissued",
-							high : this.totalTicketsReissued(),
-							low : this.totalTicketsReissued()
+							high : Math.round(this.totalTicketsReissued()),
+							low : Math.round(this.totalTicketsReissued())
 						},
 						average_labour_cost : {
 							name : "Average labour cost",
@@ -1295,8 +1295,8 @@ angular.module('myApp.services', [])
 						total_cost_saving : {
 							name : "Total cost saving",
 							unit : "currency",
-							high : this.totalCostSaving('high'),
-							low : this.totalCostSaving('low')
+							high : Math.round(this.totalCostSaving('high')),
+							low : Math.round(this.totalCostSaving('low'))
 						}
 					}
 				},
@@ -2998,7 +2998,6 @@ angular.module('myApp.services', [])
 				 */
 				MISC_PERCENTAGE_1_HIGH : 0.04, // [summary] B26
 				MISC_PERCENTAGE_1_LOW : 0.02, // [summary] C26
-				REVENUE : inputData.param6,
 				PERCENTAGES : {
 					ECOMMERCE : {
 						Y1 : 0.3 / 100,
@@ -3025,35 +3024,35 @@ angular.module('myApp.services', [])
 
 				/* Calculation Functions */
 				ecommerceRevenueY1 : function () { // [Ancillary sales] C4.
-					return parseInt(Math.round(this.REVENUE * channelShift.direct().ecommerce.year_1.perc_pax_boarded), 10); // ([channel shift]:G7)
+					return parseInt(Math.round(inputData.param6 * channelShift.direct().ecommerce.year_1.perc_pax_boarded), 10); // ([channel shift]:G7)
 				},
 				ecommerceRevenueY2 : function () { // [Ancillary sales] E4.
-					return parseInt(Math.round(this.REVENUE * channelShift.direct().ecommerce.year_2.perc_pax_boarded), 10); // ([channel shift]:K7)
+					return parseInt(Math.round(inputData.param6 * channelShift.direct().ecommerce.year_2.perc_pax_boarded), 10); // ([channel shift]:K7)
 				},
 				ecommerceRevenueY3 : function () { // [Ancillary sales] G4.
-					return parseInt(Math.round(this.REVENUE * channelShift.direct().ecommerce.year_3.perc_pax_boarded), 10); // ([channel shift]:O7)
+					return parseInt(Math.round(inputData.param6 * channelShift.direct().ecommerce.year_3.perc_pax_boarded), 10); // ([channel shift]:O7)
 				},
 				ecommerceRevenueY4 : function () { // [Ancillary sales] I4.
-					return parseInt(Math.round(this.REVENUE * channelShift.direct().ecommerce.year_4.perc_pax_boarded), 10); // ([channel shift]:S7)
+					return parseInt(Math.round(inputData.param6 * channelShift.direct().ecommerce.year_4.perc_pax_boarded), 10); // ([channel shift]:S7)
 				},
 				ecommerceRevenueY5 : function () { // [Ancillary sales] K4.
-					return parseInt(Math.round(this.REVENUE * channelShift.direct().ecommerce.year_5.perc_pax_boarded), 10); // ([channel shift]:W7)
+					return parseInt(Math.round(inputData.param6 * channelShift.direct().ecommerce.year_5.perc_pax_boarded), 10); // ([channel shift]:W7)
 				},
 
 				callCentreRevenueY1 : function () { // [Ancillary sales] C4.
-					return this.REVENUE * channelShift.direct().call_centre.year_1.perc_pax_boarded; // ([channel shift]:G6)
+					return inputData.param6 * channelShift.direct().call_centre.year_1.perc_pax_boarded; // ([channel shift]:G6)
 				},
 				callCentreRevenueY2 : function () { // [Ancillary sales] E4.
-					return this.REVENUE * channelShift.direct().call_centre.year_2.perc_pax_boarded; // ([channel shift]:K6)
+					return inputData.param6 * channelShift.direct().call_centre.year_2.perc_pax_boarded; // ([channel shift]:K6)
 				},
 				callCentreRevenueY3 : function () { // [Ancillary sales] G4.
-					return this.REVENUE * channelShift.direct().call_centre.year_3.perc_pax_boarded; // ([channel shift]:O6)
+					return inputData.param6 * channelShift.direct().call_centre.year_3.perc_pax_boarded; // ([channel shift]:O6)
 				},
 				callCentreRevenueY4 : function () { // [Ancillary sales] I4.
-					return this.REVENUE * channelShift.direct().call_centre.year_4.perc_pax_boarded; // ([channel shift]:S6)
+					return inputData.param6 * channelShift.direct().call_centre.year_4.perc_pax_boarded; // ([channel shift]:S6)
 				},
 				callCentreRevenueY5 : function () { // [Ancillary sales] K4.
-					return this.REVENUE * channelShift.direct().call_centre.year_5.perc_pax_boarded; // ([channel shift]:W6)
+					return inputData.param6 * channelShift.direct().call_centre.year_5.perc_pax_boarded; // ([channel shift]:W6)
 				},
 
 				/**
@@ -3124,10 +3123,26 @@ angular.module('myApp.services', [])
 					var totals = ecommerceSales + callCentreSales + mobileSales;
 
 					return {
-						ecommerce : ecommerceSales,
-						call_centre : callCentreSales,
-						mobile: mobileSales,
-						total : totals
+						ecommerce : {
+							name : 'Ecommerce',
+							unit : "currency",
+							value : Math.round(ecommerceSales)
+						},
+						call_centre : {
+							name : 'Call centre',
+							unit : "currency",
+							value : Math.round(callCentreSales)
+						},
+						mobile: {
+							name : 'Mobile',
+							unit : "currency",
+							value : Math.round(mobileSales)
+						},
+						total : {
+							name : 'Total',
+							unit : "currency",
+							value : Math.round(totals)
+						}
 					}
 				},
 
@@ -3138,22 +3153,27 @@ angular.module('myApp.services', [])
 				ancillarySalesRevenueYears : function () {
 					return {
 						year_1 : {
+							name : 'Year 1',
 							high: this.salesYear(1, 'high'),
 							low : this.salesYear(1, 'low')
 						},
 						year_2 : {
+							name : 'Year 2',
 							high: this.salesYear(2, 'high'),
 							low : this.salesYear(2, 'low')
 						},
 						year_3 : {
+							name : 'Year 3',
 							high: this.salesYear(3, 'high'),
 							low : this.salesYear(3, 'low')
 						},
 						year_4 : {
+							name : 'Year 4',
 							high: this.salesYear(4, 'high'),
 							low : this.salesYear(4, 'low')
 						},
 						year_5 : {
+							name : 'Year 5',
 							high: this.salesYear(5, 'high'),
 							low : this.salesYear(5, 'low')
 						}
@@ -3166,8 +3186,8 @@ angular.module('myApp.services', [])
 				 */
 				ancillarySalesRevenueTotals : function () {
 					var sales = this.ancillarySalesRevenueYears(),
-							total_high = sales.year_1.high.total + sales.year_2.high.total + sales.year_3.high.total + sales.year_4.high.total + sales.year_5.high.total,
-							total_low = sales.year_1.low.total + sales.year_2.low.total + sales.year_3.low.total + sales.year_4.low.total + sales.year_5.low.total;
+							total_high = sales.year_1.high.total.value + sales.year_2.high.total.value + sales.year_3.high.total.value + sales.year_4.high.total.value + sales.year_5.high.total.value,
+							total_low = sales.year_1.low.total.value + sales.year_2.low.total.value + sales.year_3.low.total.value + sales.year_4.low.total.value + sales.year_5.low.total.value;
 
 					return {
 						high: total_high,
@@ -3189,6 +3209,16 @@ angular.module('myApp.services', [])
 					return newObj;
 				},
 
+				chartValue : function (value) {
+					var result;
+					if (value === 'high') {
+						result = this.ancillarySalesRevenue().totals.high;
+					} else {
+						result = this.ancillarySalesRevenue().totals.low;
+					}
+					return result;
+				},
+
 				/**
 				 * allData
 				 *
@@ -3203,7 +3233,9 @@ angular.module('myApp.services', [])
 						return;
 					}
 
-					allData.ancillary_sales.high = this.result();
+					allData.ancillary_sales.high = this.result('high');
+					allData.ancillary_sales.low = this.result('low');
+					allData.ancillary_sales.summary = this.ancillarySalesRevenue();
 				},
 
 				/**
@@ -3213,9 +3245,7 @@ angular.module('myApp.services', [])
 				 * @returns {number}
 				 */
 				result : function (value) {
-					console.log(this.ancillarySalesRevenue());
-
-					return Math.round(0);
+					return Math.round( (this.chartValue(value) / inputData.adjustment) / 5 );
 				}
 			}
 		});
