@@ -137,10 +137,10 @@
             <div class="btn-group">
                 <a ui-sref="saved-calculations" class="btn btn-primary btn-gradient"><span
                       class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
-                <a ng-click="useSession(item.{{ item.info.currency.symbol }}id)" class="btn btn-trans btn-gradient">
+                <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
                     Use <span class="glyphicon glyphicon-share-alt"></span>
                 </a>
-                <a ng-click="copySession(item.{{ item.info.currency.symbol }}id)" class="btn btn-trans btn-gradient">
+                <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
                     Copy <span class="glyphicon glyphicon-plus-sign"></span>
                 </a>
             </div>
@@ -151,7 +151,7 @@
             <div ng-hide="confirm == false" class="pull-right">
                 <span class="pt-5 plr-5 pull-left text-danger">You want to delete?</span>
                 <div class="btn-group">
-                    <a ng-click="deleteSession(item.{{ item.info.currency.symbol }}id)" class="btn btn-success btn-gradient">
+                    <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                     <a ng-click="confirm = false" class="btn btn-danger btn-gradient">
