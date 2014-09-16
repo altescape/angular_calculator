@@ -15,8 +15,8 @@
             </tr>
             <tr ng-repeat="item in revenue_integrity.summary">
                 <td>{{ item.name }}</td>
-                <td><span ng-show="item.unit == 'currency'">{{ info.currency.symbol }}</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
-                <td><span ng-show="item.unit == 'currency'">{{ info.currency.symbol }}</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">{{ currency }}</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">{{ currency }}</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
             </tr>
         </table>
     </div>

@@ -99,7 +99,8 @@ angular.module('myApp.controllers', [])
 								return infoData;
 							},
 							function (newVal, oldVal) {
-								$scope.currency();
+								$scope.setCurrency();
+								$scope.currency = infoData.currency.symbol;
 								$scope.info = infoData;
 							}, true);
 
@@ -124,7 +125,7 @@ angular.module('myApp.controllers', [])
 					/**
 					 * Currency
 					 */
-					$scope.currency = function () {
+					$scope.setCurrency = function () {
 						var currency_symbols = {
 							'ARS': $scope.currency_symbols['Dollar'], // Dollar
 							'AUD': $scope.currency_symbols['Dollar'], // Australian Dollar
@@ -529,6 +530,8 @@ angular.module('myApp.controllers', [])
 												$scope.item = item;
 
 												var data = $scope.item.data;
+
+												$scope.currency = item.info.currency.symbol;
 
 												/**
 												 * Calls the factories for each service
