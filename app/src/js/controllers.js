@@ -148,15 +148,22 @@ angular.module('myApp.controllers', [])
 							'VND': $scope.currency_symbols['Dong'] // Vietnamese Dong
 						};
 
-						if (infoData.currency && currency_symbols[infoData.currency.currency] !== undefined) {
-							infoData.currency = {
-								currency: infoData.currency.currency,
-								symbol : currency_symbols[infoData.currency.currency]
+						if (infoData.currency) {
+							if (currency_symbols[infoData.currency.currency] !== undefined) {
+								infoData.currency = {
+									currency: infoData.currency.currency,
+									symbol : currency_symbols[infoData.currency.currency]
+								}
+							} else {
+								infoData.currency = {
+									currency: infoData.currency.currency,
+									symbol : infoData.currency.currency
+								}
 							}
 						} else {
 							infoData.currency = {
-								currency: infoData.currency.currency,
-								symbol : infoData.currency.currency
+								currency: 'USD',
+								symbol : '$'
 							}
 						}
 					};
