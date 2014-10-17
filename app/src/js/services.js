@@ -70,7 +70,7 @@ angular.module('myApp.services', [])
 			return localStorageService.get('input');
 		})
 
-		.factory('chartConfig', function () {
+		.factory('chartConfig', function (infoData) {
 			/**
 			 * Draws a chart with highcharts-ng options.
 			 *
@@ -114,7 +114,7 @@ angular.module('myApp.services', [])
 								enabled : true,
 								formatter : function () {
 									if ( this.y != 0 ) {
-										return '<b>' + this.point.name + '</b>: ' + this.point.y;
+										return '<b>' + this.point.name + '</b>: ' + infoData.currency.symbol + this.point.y;
 									} else {
 										return null;
 									}
@@ -168,7 +168,7 @@ angular.module('myApp.services', [])
 						size : '15%',
 						dataLabels : {
 							formatter : function () {
-								return this.y > 0 ? 'Total: ' + this.point.y : null;
+								return this.y > 0 ? 'Total: ' + infoData.currency.symbol + this.point.y : null;
 							},
 //							color: 'white',
 //							distance: -37,

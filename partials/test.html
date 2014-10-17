@@ -10,7 +10,7 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ revenue_integrity.high }}</td>
+                <td>{{ revenue_integrity.high | currency:info.currency.symbol }}</td>
                 <td>{{ revenue_integrity.low }}</td>
             </tr>
             <tr ng-repeat="item in revenue_integrity.summary">

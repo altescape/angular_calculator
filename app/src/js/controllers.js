@@ -158,7 +158,7 @@ angular.module('myApp.controllers', [])
 							} else {
 								infoData.currency = {
 									currency: infoData.currency.currency,
-									symbol : infoData.currency.currency
+									symbol : infoData.currency.symbol
 								}
 							}
 						} else {
