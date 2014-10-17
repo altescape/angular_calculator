@@ -50,10 +50,10 @@ var app = angular.module('myApp', [
 					});
 
 			$stateProvider
-					.state('reset-password', {
-						url: "/reset-password",
+					.state('change-password', {
+						url: "/change-password",
 						views : {
-							"mainView" : {templateUrl : "partials/auth/reset-password.html"}
+							"mainView" : {templateUrl : "partials/auth/change-password.html"}
 						}
 					});
 
