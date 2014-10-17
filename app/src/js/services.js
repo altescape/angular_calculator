@@ -385,6 +385,20 @@ angular.module('myApp.services', [])
 			return $firebase(ref);
 		}])
 
+		.factory('Authorisation',
+            ['$firebase', '$firebaseSimpleLogin', function ($firebase, $firebaseSimpleLogin) {
+
+                var firebaseAddress = "https://luminous-fire-1327.firebaseio.com/",
+                    dataRef = new Firebase(firebaseAddress);
+
+                return {
+                    loginObj : $firebaseSimpleLogin(dataRef),
+                    url : firebaseAddress,
+                    ref : dataRef
+                };
+
+		}])
+
 		.factory('passengersBoardedData', function () {
 
 			var cost_per_pb = {
