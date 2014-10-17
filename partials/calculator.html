@@ -13,63 +13,44 @@
                                 <div class="row" ng-hide="view_state.fig_collapsed">
                                     <div class="col-sm-12 form-group">
                                         <label for="param1">Current total passengers boarded per year</label>
-                                        <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="number"
+                                        <input id="param1" data-xl-sheet="variables" data-xl-cell="C20" type="text"
                                                ng-model="input.param1"
                                                ng-change="updateData();" class="form-control" step="20000"
-                                               min="0">
+                                               min="0" fcsa-number>
                                     </div>
-                                    <div class="col-sm-12 form-group">
+                                    <div class="col-sm-6 form-group">
                                         <label for="param2">Expected passenger growth per year - for the next 5 years</label>
 
-                                        <div class="postfix-label">
-                                            <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="number"
-                                                   ng-model="input.param2"
-                                                   ng-change="updateData();" class="form-control"
-                                                   step="5"
-                                                   min="0"
-                                                   max="100">
-                                            <span class="label">%</span>
-                                        </div>
+                                        <input id="param2" data-xl-sheet="variables" data-xl-cell="C21" type="text"
+                                               ng-model="input.param2"
+                                               ng-change="updateData();" class="form-control"
+                                                   fcsa-number="{ append: '%' }">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param3">Number of tickets issued per year</label>
-                                        <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="number"
+                                        <input id="param3" data-xl-sheet="variables" data-xl-cell="C23" type="text"
                                                ng-model="input.param3"
-                                               ng-change="updateData();" class="form-control" step="20000"
-                                               min="0">
+                                               ng-change="updateData();" class="form-control" fcsa-number>
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param4">Percentage of tickets reissued</label>
-
-                                        <div class="postfix-label">
-                                            <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="number"
-                                                   ng-model="input.param4"
-                                                   ng-change="updateData();" class="form-control"
-                                                   step="5"
-                                                   min="0"
-                                                   max="100">
-                                            <span class="label">%</span>
-                                        </div>
+                                        <input id="param4" data-xl-sheet="variables" data-xl-cell="C24" type="text"
+                                               ng-model="input.param4"
+                                               ng-change="updateData();" class="form-control"
+                                               fcsa-number="{ append: '%' }">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param5">Hourly labour costs</label>
-
-                                        <div class="prefix-label">
-                                            <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="number"
-                                                   ng-model="input.param5"
-                                                   ng-change="updateData();" class="form-control"
-                                                   step="10"
-                                                   min="0">
-                                            <span class="label">{{ info.currency.symbol }}</span>
-                                        </div>
+                                        <input id="param5" data-xl-sheet="variables" data-xl-cell="C25" type="text"
+                                               ng-model="input.param5"
+                                               ng-change="updateData();" class="form-control"
+                                               fcsa-number="{ prepend: '{{info.currency.symbol}}', maxDecimals: 2, preventInvalidInput: true }">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="adjustment">Chart number adjustment</label>
-
-                                        <input id="adjustment" type="number" ng-model="input.adjustment" ng-change="updateData();"
+                                        <input id="adjustment" type="text" ng-model="input.adjustment" ng-change="updateData();"
                                                class="form-control"
-                                               step="1000000"
-                                               min="0">
+                                               fcsa-number>
                                     </div>
 
                                 </div>
@@ -82,55 +63,37 @@
                                 <div class="row" ng-hide="view_state.rev_collapsed">
                                     <div class="col-sm-12 form-group">
                                         <label for="param6">Airline's annual revenue</label>
-                                        <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="number"
+                                        <input id="param6" data-xl-sheet="variables" data-xl-cell="C27" type="text"
                                                ng-model="input.param6"
-                                               ng-change="updateData();" class="form-control" step="20000"
-                                               min="0">
+                                               ng-change="updateData();" class="form-control" fcsa-number="{ prepend: '{{info.currency.symbol}}'}">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param7">Airline's annual cost base</label>
-                                        <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="number"
-                                               ng-model="input.param7"
-                                               ng-change="updateData();" class="form-control" step="20000"
-                                               min="0">
+                                        <input id="param7" data-xl-sheet="variables" data-xl-cell="C28" type="text"
+                                           ng-model="input.param7"
+                                           ng-change="updateData();" class="form-control"
+                                           fcsa-number="{ prepend: '{{info.currency.symbol}}'}">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param8">Annual distribution costs rate</label>
-
-                                        <div class="postfix-label">
-                                            <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="number"
-                                                   ng-model="input.param8"
-                                                   ng-change="updateData();" class="form-control"
-                                                   step="5"
-                                                   min="0"
-                                                   max="100">
-                                            <span class="label">%</span>
-                                        </div>
+                                        <input id="param8" data-xl-sheet="variables" data-xl-cell="C29" type="text"
+                                               ng-model="input.param8"
+                                               ng-change="updateData();" class="form-control"
+                                               fcsa-number="{ append: '%' }">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param9">Average yield per ticket</label>
-
-                                        <div class="prefix-label">
-                                            <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="number"
+                                        <input id="param9" data-xl-sheet="variables" data-xl-cell="C30" type="text"
                                                    ng-model="input.param9"
                                                    ng-change="updateData();" class="form-control"
-                                                   step="10"
-                                                   min="0">
-                                            <span class="label">{{ info.currency.symbol }}</span>
-                                        </div>
+                                                   fcsa-number="{ prepend: '{{info.currency.symbol}}'}">
                                     </div>
                                     <div class="col-sm-12 form-group">
                                         <label for="param10">Annual fuel cost rate</label>
-
-                                        <div class="postfix-label">
-                                            <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="number"
-                                                   ng-model="input.param10"
-                                                   ng-change="updateData();" class="form-control"
-                                                   step="5"
-                                                   min="0"
-                                                   max="100">
-                                            <span class="label">%</span>
-                                        </div>
+                                        <input id="param10" data-xl-sheet="variables" data-xl-cell="C31" type="text"
+                                               ng-model="input.param10"
+                                               ng-change="updateData();" class="form-control"
+                                               fcsa-number="{ append: '%' }">
                                     </div>
                                 </div>
                             </div>

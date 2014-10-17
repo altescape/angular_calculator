@@ -12,7 +12,8 @@ var app = angular.module('myApp', [
 			'myApp.filters',
 			'myApp.services',
 			'myApp.controllers',
-			'myApp.chart_controllers'
+			'myApp.chart_controllers',
+            'fcsa-number'
 		]).config(['$urlRouterProvider', '$stateProvider', function ($urlRouterProvider, $stateProvider) {
 
 			$urlRouterProvider.otherwise("/home");

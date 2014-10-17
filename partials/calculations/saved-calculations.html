@@ -7,8 +7,11 @@
             <div></div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12 text-right">
+        <div class="row mt-5 mb-10">
+            <div class="col-md-6">
+                <a ui-sref="clear-data" class="btn btn-success btn-sm mt-5">New calculation</a>
+            </div>
+            <div class="col-md-6 text-right">
                 <ul ng-model="sort" class="list-inline sort mt-10" ng-init="sort = 'unsorted'">
                     <li>Sort by: </li>
                     <li><a ng-click="predicate=''; sort = 'unsorted'" ng-class="{'active': sort == 'unsorted'}">Unsorted</a></li>

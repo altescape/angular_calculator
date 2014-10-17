@@ -7971,13 +7971,19 @@ body {
   .postfix-choice:hover {
     background-color: #EEE; }
 
-/* POST- AND PRE-FIXED INPUT LABELS */
+/* VALIDATION */
 /* line 837, ../app.scss */
+.ng-invalid, .ng-invalid-fcsa-number {
+  background-color: #f4cecd;
+  border-color: #d9534f; }
+
+/* POST- AND PRE-FIXED INPUT LABELS */
+/* line 844, ../app.scss */
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
   max-width: 180px; }
-  /* line 841, ../app.scss */
+  /* line 848, ../app.scss */
   .postfix-label .form-control, .prefix-label .form-control {
     position: relative;
     z-index: 2;
@@ -7986,7 +7992,7 @@ body {
     width: 70%;
     max-width: 250px;
     float: left; }
-  /* line 849, ../app.scss */
+  /* line 856, ../app.scss */
   .postfix-label .label, .prefix-label .label {
     position: relative;
     width: 50px;
@@ -8004,23 +8010,27 @@ body {
     font-size: 15px;
     -webkit-border-radius: 0 5px 5px 0;
             border-radius: 0 5px 5px 0; }
-    /* line 866, ../app.scss */
+    /* line 873, ../app.scss */
     .postfix-label .label .glyphicon, .prefix-label .label .glyphicon {
       font-weight: normal; }
 
-/* line 873, ../app.scss */
-.prefix-label .form-control {
-  -webkit-border-radius: 0 5px 5px 0;
-          border-radius: 0 5px 5px 0;
-  left: 50px; }
-/* line 877, ../app.scss */
-.prefix-label .label {
-  -webkit-border-radius: 5px 0 0 5px;
-          border-radius: 5px 0 0 5px;
-  left: 0;
-  position: absolute; }
+/* line 879, ../app.scss */
+.prefix-label {
+  max-width: none; }
+  /* line 882, ../app.scss */
+  .prefix-label .form-control {
+    -webkit-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0;
+    left: 50px;
+    max-width: none; }
+  /* line 887, ../app.scss */
+  .prefix-label .label {
+    -webkit-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
+    left: 0;
+    position: absolute; }
 
-/* line 884, ../app.scss */
+/* line 894, ../app.scss */
 .message {
   position: fixed;
   left: 25%;
@@ -8034,45 +8044,45 @@ body {
   -webkit-transition: all .2s ease;
           transition: all .2s ease;
   opacity: 1; }
-  /* line 896, ../app.scss */
+  /* line 906, ../app.scss */
   .message.reveal-animation.ng-hide {
     bottom: -100px;
     opacity: 0; }
 
-/* line 904, ../app.scss */
+/* line 914, ../app.scss */
 .panel-footer .btn {
   font-size: 8px; }
 
-/* line 909, ../app.scss */
+/* line 919, ../app.scss */
 .navbar-default {
   background-color: white;
   border-color: rgba(0, 0, 0, 0); }
 
-/* line 914, ../app.scss */
+/* line 924, ../app.scss */
 .nav-tabs-justified, .nav-tabs.nav-justified, .nav-tabs.nav-justified {
   font-size: 12px;
   white-space: nowrap; }
 
-/* line 919, ../app.scss */
+/* line 929, ../app.scss */
 .info-links {
   margin: 18px 0 0;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px; }
-  /* line 924, ../app.scss */
+  /* line 934, ../app.scss */
   .info-links li {
     border-right: 1px solid #eeeeee;
     padding-right: 10px; }
-    /* line 926, ../app.scss */
+    /* line 936, ../app.scss */
     .info-links li:last-child {
       border: none; }
 
 /* SAVED CALCULATIONS PANELS */
-/* line 934, ../app.scss */
+/* line 944, ../app.scss */
 .saved-panels {
   height: 290px; }
 
-/* line 939, ../app.scss */
+/* line 949, ../app.scss */
 .sort .active {
   color: #333333;
   text-decoration: underline;
@@ -8082,15 +8092,15 @@ body {
   /* rules for mobile horizontal (480 > 768)  */ }
 @media (min-width: 768px) {
   /* rules for tablet (768 > 992) */
-  /* line 955, ../app.scss */
+  /* line 965, ../app.scss */
   .navbar-nav li:first-child a {
     -webkit-border-radius: 3px 0 0 0;
             border-radius: 3px 0 0 0; }
-  /* line 956, ../app.scss */
+  /* line 966, ../app.scss */
   .navbar-nav li:last-child a {
     -webkit-border-radius: 0 3px 0 0;
             border-radius: 0 3px 0 0; }
-  /* line 957, ../app.scss */
+  /* line 967, ../app.scss */
   .navbar-nav li a {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -8100,43 +8110,43 @@ body {
     border-bottom: 0;
     margin-right: -1px;
     color: #FFF; }
-    /* line 966, ../app.scss */
+    /* line 976, ../app.scss */
     .navbar-nav li a:hover {
       color: white;
       background-color: #0081cb; }
-    /* line 970, ../app.scss */
+    /* line 980, ../app.scss */
     .navbar-nav li a.active {
       color: #0081cb;
       font-weight: bold;
       background-color: #eeeeee; } }
 @media (min-width: 992px) {
   /* rules for desktop (992 > 1200) */
-  /* line 983, ../app.scss */
+  /* line 993, ../app.scss */
   body {
     font-size: 11px; }
 
-  /* line 987, ../app.scss */
+  /* line 997, ../app.scss */
   .navbar-nav.navbar-right:last-child {
     margin-right: 0; }
 
   /* CHART AREA */
-  /* line 992, ../app.scss */
+  /* line 1002, ../app.scss */
   .panel__1 {
     right: 70%; }
 
-  /* line 995, ../app.scss */
+  /* line 1005, ../app.scss */
   .panel__2 {
     left: 30%; }
 
-  /* line 999, ../app.scss */
+  /* line 1009, ../app.scss */
   .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
     width: 70%; } }
 @media (min-width: 1200px) {
   /* rules for large (> 1200) */
-  /* line 1007, ../app.scss */
+  /* line 1017, ../app.scss */
   body {
     font-size: 13px; }
 
-  /* line 1011, ../app.scss */
+  /* line 1021, ../app.scss */
   .panel-footer .btn {
     font-size: 12px; } }

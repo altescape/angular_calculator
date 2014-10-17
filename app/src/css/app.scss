@@ -832,6 +832,13 @@ $input-group-fontsize: $input-group-height/2.2;
 	}
 }
 
+/* VALIDATION */
+
+.ng-invalid, .ng-invalid-fcsa-number {
+  background-color: lighten($brand-danger, 30%);
+  border-color: $brand-danger;
+}
+
 /* POST- AND PRE-FIXED INPUT LABELS */
 $input-group-height: 34px;
 .postfix-label, .prefix-label {
@@ -870,9 +877,12 @@ $input-group-height: 34px;
 }
 
 .prefix-label {
+    max-width: none;
+
 	.form-control {
 		border-radius: 0 5px 5px 0;
 		left: 50px;
+        max-width: none;
 	}
 	.label {
 		border-radius: 5px 0 0 5px;

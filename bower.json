@@ -34,6 +34,7 @@
 		"firebase" : "~1.0.17",
     "angularfire": "~0.8.0",
     "firebase-simple-login": "~1.6.2",
-		"highcharts-ng": "~0.0.7"
+		"highcharts-ng": "~0.0.7",
+      "angular-fcsa-number" : "~1.5.2"
   }
 }
