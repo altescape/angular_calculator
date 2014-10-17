@@ -659,7 +659,10 @@ $class-slug: pt;
 }
 
 .user-action.disabled, .user-action[disabled] {
-	display: none;
+	opacity: .3;
+    background-image: none;
+    background-color: #666;
+    box-shadow: none;
 }
 
 /* SNAPJS STYLES */
@@ -834,7 +837,7 @@ $input-group-fontsize: $input-group-height/2.2;
 
 /* VALIDATION */
 
-.ng-invalid, .ng-invalid-fcsa-number {
+input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
   background-color: lighten($brand-danger, 30%);
   border-color: $brand-danger;
 }

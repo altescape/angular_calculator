@@ -13,7 +13,7 @@
                    placeholder="Enter your Password" required>
         </div>
         <div class="form-group">
-            <button type="submit" class="input-lg user-action" ng-click="loginUser();">Sign in <small-loader ng-show="show_loader"></small-loader></button>
+            <button type="submit" class="input-lg user-action" ng-click="loginUser();"><span ng-hide="show_loader">Sign in</span><small-loader ng-show="show_loader"></small-loader></button>
         </div>
 
         <p class="alert alert-warning" ng-show="message">{{ message }} {{ reason }}</p>

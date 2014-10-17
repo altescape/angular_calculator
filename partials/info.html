@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-4 content-margin">
+<div class="col-md-4 col-md-offset-4 content-margin" ng-controller="SaveSessionCtrl">
 
     <h1>Information</h1>
     <p class="lead">Enter information for this session below.</p>
@@ -188,8 +188,11 @@
         </select>
     </div>
     <div class="form-group">
-        <a ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-           class="input-lg user-action">Update information</a>
+        <button ng-hide="info.running_session == true" ng-click="saveSession()" ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
+           class="input-lg user-action">Create Calculation</button>
+
+        <button ng-show="info.running_session == true" ng-click="updateSession()" ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
+                class="input-lg user-action">Update Calculation</button>
     </div>
 
 </div>
