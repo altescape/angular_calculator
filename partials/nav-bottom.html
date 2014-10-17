@@ -3,11 +3,10 @@
         <div class="row">
             <div class="col-xs-7">
                 <ul class="list-inline info-links">
-                    <li ng-show="info.session.name"><span class="text-muted">Name:</span> <a ui-sref="info">{{ info.session.name }}</a></li>
-                    <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a ui-sref="info">{{ info.airline.code }}</a>
-                    </li>
+                    <li ng-show="info.airline.code"><span class="text-muted">Airline:</span> <a ui-sref="info">{{ info.airline.code }}</a></li>
                     <li ng-show="info.opportunity.name"><span class="text-muted">Opportunity:</span> <a ui-sref="info">{{
                             info.opportunity.name }}</a></li>
+                    <li ng-show="info.session.name"><span class="text-muted">Version:</span> <a ui-sref="info">{{ info.session.name }}</a></li>
                 </ul>
             </div>
             <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="user_forms_ready">

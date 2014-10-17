@@ -4,11 +4,6 @@
     <p class="lead">Enter information for this session below.</p>
 
     <div class="form-group">
-        <label for="sname">Name</label>
-        <input id="sname" type="text" ng-model="info.session.name" ng-change="updateInfo()" class="form-control input-lg" ng-value=""
-               placeholder="Please enter a name" required>
-    </div>
-    <div class="form-group">
         <label for="acode">Airline</label>
         <input id="acode" type="text" ng-model="info.airline.code" ng-change="updateInfo()" class="form-control input-lg"
                placeholder="Airline code" required>
@@ -17,6 +12,11 @@
         <label for="oname">Opportunity</label>
         <input id="oname" type="text" ng-model="info.opportunity.name" ng-change="updateInfo()" class="form-control input-lg"
                placeholder="Opportunity name" required>
+    </div>
+    <div class="form-group">
+        <label for="sname">Version</label>
+        <input id="sname" type="text" ng-model="info.session.name" ng-change="updateInfo()" class="form-control input-lg" ng-value=""
+               placeholder="Please enter a version number" required>
     </div>
     <div class="form-group">
         <label for="oname">Currency</label>
