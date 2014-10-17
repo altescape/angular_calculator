@@ -10,13 +10,10 @@ angular.module('myApp.controllers', [])
 					'$scope',
 					'localStorageService',
 					'$firebaseSimpleLogin',
-					'infoData', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, infoData) {
+                    'Authorisation',
+					'infoData', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData) {
 
-					$scope.dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
-
-					$scope.loginObj = $firebaseSimpleLogin($scope.dataRef);
-
-					$scope.loginObj.$getCurrentUser().then(
+                    Authorisation.loginObj.$getCurrentUser().then(
 							function (user) {
 								$scope.user_forms_ready = true;
 								if ( user === null ) {
@@ -273,6 +270,7 @@ angular.module('myApp.controllers', [])
 					'$state',
 					'$firebase',
 					'$firebaseSimpleLogin',
+                    'Authorisation',
 					'$timeout',
 					'localStorageService',
 					'infoData',
@@ -280,14 +278,9 @@ angular.module('myApp.controllers', [])
 					'allData',
 					'$location',
 					'$modal',
-					function ($scope, $state, $firebase, $firebaseSimpleLogin, $timeout, localStorageService, infoData, inputData, allData, $location, $modal) {
+					function ($scope, $state, $firebase, $firebaseSimpleLogin, Authorisation, $timeout, localStorageService, infoData, inputData, allData, $location, $modal) {
 
-						$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
-
-						var dataRef = new Firebase($scope.firebaseAddress),
-								loginObj = $firebaseSimpleLogin(dataRef);
-
-						loginObj.$getCurrentUser().then(
+                        Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
 										// TODO-mike add message
@@ -304,7 +297,7 @@ angular.module('myApp.controllers', [])
 										 *
 										 * @type {*}
 										 */
-										var sync = $firebase(new Firebase($scope.firebaseAddress + 'user_data/' + userId + "/")),
+										var sync = $firebase(new Firebase(Authorisation.url + 'user_data/' + userId + "/")),
 												items = sync.$asArray();
 
 										/* Promise for loaded data */
@@ -363,7 +356,7 @@ angular.module('myApp.controllers', [])
 										$scope.copySession = function (id) {
 
 											// Connect to firebase and retrieve saved calculations
-											var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id)),
+											var sync = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + "/" + id)),
 													item = sync.$asObject();
 
 											/* Promise for loaded data */
@@ -425,32 +418,30 @@ angular.module('myApp.controllers', [])
 					'$window',
 					'$firebase',
 					'$firebaseSimpleLogin',
+                    'Authorisation',
 					'$state',
 					'allData',
 					'infoData',
 					'inputData',
 					'localStorageService',
 					'$modalInstance',
-					'id', function ($scope, $window, $firebase, $firebaseSimpleLogin, $state, allData, infoData, inputData, localStorageService, $modalInstance, id) {
+					'id', function ($scope, $window, $firebase, $firebaseSimpleLogin, Authorisation, $state, allData, infoData, inputData, localStorageService, $modalInstance, id) {
 
-					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
 					$scope.id = id;
 
 					$scope.ok = function () {
 
 						// Check logged in
-						var dataRef = new Firebase($scope.firebaseAddress),
-								loginObj = $firebaseSimpleLogin(dataRef);
 
 						// Connect to firebase to retrieve saved calculation with id
-						loginObj.$getCurrentUser().then(
+                        Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
 										// TODO-mike test it can get to this and add message if so
 									} else {
 										var userId = user.id;
 
-										var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + id)),
+										var sync = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + "/" + id)),
 												item = sync.$asObject();
 
 										/* Promise for loaded data */
@@ -500,16 +491,12 @@ angular.module('myApp.controllers', [])
 					'$routeParams',
 					'$firebase',
 					'$firebaseSimpleLogin',
+                    'Authorisation',
 					'$state',
 					'$stateParams',
-					'chartData', function ($rootScope, $scope, $routeParams, $firebase, $firebaseSimpleLogin, $state, $stateParams, chartData) {
+					'chartData', function ($rootScope, $scope, $routeParams, $firebase, $firebaseSimpleLogin, Authorisation, $state, $stateParams, chartData) {
 
-					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
-
-					var dataRef = new Firebase($scope.firebaseAddress),
-							loginObj = $firebaseSimpleLogin(dataRef);
-
-					loginObj.$getCurrentUser().then(
+                    Authorisation.loginObj.$getCurrentUser().then(
 							function (user) {
 								if ( user === null ) {
 									// TODO-mike add message
@@ -521,7 +508,7 @@ angular.module('myApp.controllers', [])
 									var userId = user.id;
 
 									/* Get associated session item from Firebase */
-									var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/' + $stateParams.id)),
+									var sync = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + '/' + $stateParams.id)),
 											item = sync.$asObject();
 
 									/* Promise for loaded data */
@@ -614,18 +601,8 @@ angular.module('myApp.controllers', [])
 					'$firebase',
 					'$firebaseSimpleLogin',
 					'$timeout',
-					'infoData', function ($scope, localStorageService, $firebase, $firebaseSimpleLogin, $timeout, infoData) {
-
-					$scope.firebaseAddress = "https://luminous-fire-1327.firebaseio.com/";
-
-//					// Watch infoData for updates
-//					$scope.$watch(function () {
-//								return infoData;
-//							},
-//							function (newVal, oldVal) {
-//								$scope.info = infoData;
-//								$scope.$emit('infoDataUpdate', infoData);
-//							}, true);
+					'infoData',
+                    'Authorisation', function ($scope, localStorageService, $firebase, $firebaseSimpleLogin, $timeout, infoData, Authorisation) {
 
 					/**
 					 * Check current_key exists
@@ -644,11 +621,7 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.saveSession = function () {
 
-						// Check logged in
-						var dataRef = new Firebase($scope.firebaseAddress),
-								loginObj = $firebaseSimpleLogin(dataRef);
-
-						loginObj.$getCurrentUser().then(
+                        Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
 										// TODO-mike add message
@@ -661,7 +634,7 @@ angular.module('myApp.controllers', [])
 										var userId = user.id;
 
 										// Store to Firebase address
-										var sync = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + '/')),
+										var sync = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + '/')),
 												items = sync.$asArray();
 
 										// Set flag: saving to true
@@ -704,10 +677,7 @@ angular.module('myApp.controllers', [])
 					$scope.updateSession = function () {
 
 						// Check logged in
-						var dataRef = new Firebase($scope.firebaseAddress),
-								loginObj = $firebaseSimpleLogin(dataRef);
-
-						loginObj.$getCurrentUser().then(
+                        Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
 										// TODO-mike add message
@@ -726,7 +696,7 @@ angular.module('myApp.controllers', [])
 											$scope.saving = true;
 
 											// Get the link to the firebase item with id key from localstorage
-											$scope.items = $firebase(new Firebase($scope.firebaseAddress + '/user_data/' + userId + "/" + localStorageService.get('current_key')));
+											$scope.items = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + "/" + localStorageService.get('current_key')));
 
 											// Set and update the firebase item with new values from localstorage
 											$scope.items.$set({
@@ -761,6 +731,7 @@ angular.module('myApp.controllers', [])
 					'$location',
 					'localStorageService',
 					'$state',
+                    'Authorisation',
 					'chartData',
 					'chartConfig',
 					'inputData',
@@ -775,12 +746,22 @@ angular.module('myApp.controllers', [])
 					'airfareInsight',
 					'channelShift',
 					'ancillarySales',
-					function ($rootScope, $scope, $location, localStorageService, $state, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales) {
+					function ($rootScope, $scope, $location, localStorageService, $state, Authorisation, chartData, chartConfig, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales) {
 
 						/**
 						 * Calls the factories for each service
 						 */
 						$scope.updateData = function () {
+
+                        Authorisation.loginObj.$getCurrentUser().then(
+                                function (user) {
+                                    if (user === null) {
+
+                                    } else {
+                                        console.log(user.id);
+                                    }
+                                }
+                            );
 
 							revenueIntegrity.initObject();
 							$scope.revenue_integrity = allData.revenue_integrity;
@@ -892,14 +873,10 @@ angular.module('myApp.controllers', [])
 
 					}])
 
-		.controller('AuthCtrl', ['$rootScope', '$scope', '$state', '$firebase', '$firebaseSimpleLogin',
-			function ($rootScope, $scope, $state, $firebase, $firebaseSimpleLogin) {
+		.controller('AuthCtrl', ['$rootScope', '$scope', '$state', '$firebase', '$firebaseSimpleLogin', 'Authorisation',
+			function ($rootScope, $scope, $state, $firebase, $firebaseSimpleLogin, Authorisation) {
 
-				$scope.dataRef = new Firebase("https://luminous-fire-1327.firebaseio.com/");
-
-				$scope.loginObj = $firebaseSimpleLogin($scope.dataRef);
-
-				$scope.loginObj.$getCurrentUser().then(
+                Authorisation.loginObj.$getCurrentUser().then(
 						function (user) {
 							$scope.user_forms_ready = true;
 							if ( user === null ) {
@@ -916,7 +893,7 @@ angular.module('myApp.controllers', [])
 					if ( $scope.login.$valid ) {
 						$scope.show_loader = true;
 
-						$scope.loginObj.$login("password", {
+                        Authorisation.loginObj.$login("password", {
 									email : $scope.auth.email,
 									password : $scope.auth.password
 								}
@@ -971,13 +948,13 @@ angular.module('myApp.controllers', [])
 				$scope.logoutUser = function () {
 					$scope.$emit('isLoggedInMessage', false);
 					$scope.message = "";
-					$scope.loginObj.$logout();
+                    Authorisation.loginObj.$logout();
 				};
 
 				$scope.sendPassword = function () {
 					$scope.show_loader = true;
 					if ( $scope.password.$valid ) {
-						$scope.loginObj.$sendPasswordResetEmail($scope.auth.email).then(
+                        Authorisation.loginObj.$sendPasswordResetEmail($scope.auth.email).then(
 								function () {
 									$scope.message = true;
 									$scope.show_loader = false;
@@ -989,7 +966,7 @@ angular.module('myApp.controllers', [])
 				$scope.resetPassword = function () {
 					$scope.show_loader = true;
 					if ( $scope.reset.$valid ) {
-						$scope.loginObj.$changePassword($scope.auth.email, $scope.auth.old_password, $scope.auth.new_password).then(
+                        Authorisation.loginObj.$changePassword($scope.auth.email, $scope.auth.old_password, $scope.auth.new_password).then(
 								function () {
 									$scope.message = true;
 									$scope.show_loader = false;
