@@ -4,15 +4,14 @@
         <h5 class="mb-5">
             <span class="text-muted">DATE:</span> {{ item.info.date.date | date: 'medium' | uppercase }}
         </h5>
-
-        <h5 class="mb-5">
-            <span class="text-muted">NAME:</span> {{ item.info.session.name | uppercase }}
-        </h5>
         <h5 class="mb-5">
             <span class="text-muted">AIRLINE:</span> {{ item.info.airline.code | uppercase }}
         </h5>
         <h5 class="mb-5">
             <span class="text-muted">OPPORTUNITY:</span> {{ item.info.opportunity.name | uppercase }}
+        </h5>
+        <h5 class="mb-5">
+            <span class="text-muted">VERSION:</span> {{ item.info.session.name | uppercase }}
         </h5>
         <hr>
 
