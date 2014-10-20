@@ -881,8 +881,11 @@ angular.module('myApp.controllers', [])
 							$scope.user_forms_ready = true;
 							if ( user === null ) {
 								$scope.$emit('isLoggedInMessage', false);
+                                $scope.logged_in = false;
 							} else {
 								$scope.$emit('isLoggedInMessage', true);
+                                $scope.user = user;
+                                $scope.logged_in = true;
 							}
 						}
 				);
@@ -891,6 +894,7 @@ angular.module('myApp.controllers', [])
 
 					// Check form valid completed
 					if ( $scope.login.$valid ) {
+
 						$scope.show_loader = true;
 
                         Authorisation.loginObj.$login("password", {
@@ -901,19 +905,20 @@ angular.module('myApp.controllers', [])
 						).then(function (user) {
 
 									// User is now logged in
+                                    $scope.logged_in = true;
 
 									// Emit logged in message
 									$scope.$emit('isLoggedInMessage', true);
 
 									// Hide button loader icon
-									$scope.show_loader = false;
+									//$scope.show_loader = false;
 
 									// Messaging
-									$scope.message = "You are logged in.";
-									$scope.reason = "Welcome, " + user.email;
+									//$scope.message = "You are logged in.";
+									//$scope.reason = "Welcome, " + user.email;
 
 									// Redirect to info screen
-									$state.transitionTo('info');
+									$state.go('info');
 
 								}, function (error) {
 
@@ -946,6 +951,7 @@ angular.module('myApp.controllers', [])
 				};
 
 				$scope.logoutUser = function () {
+                    $scope.logged_in = false;
 					$scope.$emit('isLoggedInMessage', false);
 					$scope.message = "";
                     Authorisation.loginObj.$logout();

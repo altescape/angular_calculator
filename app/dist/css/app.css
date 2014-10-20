@@ -8154,3 +8154,6 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
   /* line 1024, ../app.scss */
   .panel-footer .btn {
     font-size: 12px; } }
+/* line 1030, ../app.scss */
+.offline-simulate-ui {
+  display: none; }
