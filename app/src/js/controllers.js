@@ -44,12 +44,7 @@ angular.module('myApp.controllers', [])
                         }
 					});
 
-                    infoData.create_new = false;
-                    $scope.$on('clearInputData', function (event, msg) {
-                        if (msg === true) {
-                            infoData.create_new = true;
-                        }
-                    });
+                    $scope.create_new = infoData.create_new;
 
                     /**
                      * Check for clear infoData broadcast
@@ -739,7 +734,6 @@ angular.module('myApp.controllers', [])
                                         // clear the input and data models
                                         //inputData = {};
                                         //allData = {};
-                                        $scope.$emit('clearInputData', true);
 
 										// Add the data from localstorage and add it to Firebase
 										items.$add({
@@ -850,33 +844,10 @@ angular.module('myApp.controllers', [])
 					'ancillarySales',
 					function ($rootScope, $scope, $location, localStorageService, $state, Authorisation, chartData, chartConfig, infoData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales) {
 
-                        if (infoData.create_new) {
-                            inputData = {
-                                services : {
-                                    op1 : null,
-                                    op2 : null,
-                                    op3 : null,
-                                    op4 : null,
-                                    op5 : null,
-                                    op6 : null,
-                                    op7 : null,
-                                    op8 : null,
-                                    op9 : null
-                                },
-                                param1 : 0,
-                                param2 : 0,
-                                param3 : 0,
-                                param4 : 0,
-                                param5 : 0,
-                                param6 : 0,
-                                param7 : 0,
-                                param8 : 0,
-                                param9 : 0,
-                                param10 : 0,
-                                adjustment : 0
-                            };
-                            allData = chartData.chartObj;
-                            infoData.create_new = false;
+                        if (localStorageService.get('input') === null) {
+                            $scope.input = {};
+                        } else {
+                            $scope.input = localStorageService.get('input');
                         }
 
                         /**
@@ -911,8 +882,10 @@ angular.module('myApp.controllers', [])
 							airfareInsight.initObject();
 							$scope.airfare_insight = allData.airfare_insight;
 
-							localStorageService.set('data', allData);
-							localStorageService.set('input', inputData);
+                            localStorageService.set('data', allData);
+                            localStorageService.set('input', $scope.input);
+
+                            inputData = $scope.input;
 
 							// TODO-mike separate values for both graph types
 							// chart configs are not storing separate values for both graphs.
@@ -929,33 +902,6 @@ angular.module('myApp.controllers', [])
 
 						// Passengers boarded data. See variables sheet C2 - C16
 						$scope.pb_data = passengersBoardedData;
-
-						/**
-						 * View state
-						 *
-						 * Stores the state of collapsed sections, collapsed = true|false.
-						 *
-						 * @type {*|Array|Choice|Undefined|Object|array|promise|Object}
-						 */
-						$scope.active_tab = localStorageService.get('active_tab');
-						$scope.activeTab = function () {
-							localStorageService.set('active_tab', $scope.active_tab);
-						};
-
-						/**
-						 * View state
-						 *
-						 * Initiates the process for saving the open results view, Charts or table.
-						 *
-						 * NOTE: This is currently broken
-						 *
-						 * @type {*|Array|Choice|Undefined|Object|array|promise|Object}
-						 */
-						if ( localStorageService.get('results_view') ) {
-							// $state.go(localStorageService.get('results_view').name);
-						} else {
-							// $state.go('calculator.chart_high');
-						}
 
 						/**
 						 * View state
@@ -977,7 +923,8 @@ angular.module('myApp.controllers', [])
 						 *
 						 * @type {cal|*|$scope.cal}
 						 */
-						$scope.input = inputData;
+						//$scope.input = inputData;
+						//$scope.input = localStorageService.get('input');
 
 						/**
 						 * Watch inputs on calculator
