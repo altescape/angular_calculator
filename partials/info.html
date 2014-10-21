@@ -188,7 +188,7 @@
         </select>
     </div>
     <div class="form-group">
-        <button ng-hide="info.running_session == true" ng-click="saveSession()" ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
+        <button ng-hide="info.running_session == true" ng-click="saveNewSession()" ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
            class="input-lg user-action">Create new calculation</button>
 
         <button ng-show="info.running_session == true" ng-click="updateSession()" ui-sref="calculator.index" ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"

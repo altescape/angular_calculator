@@ -19,7 +19,7 @@
                     <div ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name">
 
                         <!-- Show if session has been saved previously and is now running -->
-                        <a ng-hide="info.running_session == true" ng-click="saveSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
+                        <a ng-hide="info.running_session == true" ng-click="saveNewSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
                             <span ng-show="saving == false">SAVE NEW</span>
                             <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
                         </a>
