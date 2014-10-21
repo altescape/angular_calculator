@@ -17,13 +17,11 @@
         </div>
 
         <p class="alert alert-warning" ng-show="message">{{ message }} {{ reason }}</p>
-
         <p class="mt-20 mb-20"><a ui-sref="forgot-password">Forgotten password</a> | <a ui-sref="change-password">Change password</a></p>
     </form>
 
     <div ng-show="logged_in">
         <h1>Sign Out</h1>
-
         <p class="lead mb-0">Are you sure you would like to sign out?</p>
         <p class="text-capitalize text-muted">(Signed in as {{ user.email }})</p>
         <p><a ng-click="logoutUser()" class="input-lg user-action">Sign out</a></p>

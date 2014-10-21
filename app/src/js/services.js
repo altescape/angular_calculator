@@ -203,8 +203,7 @@ angular.module('myApp.services', [])
 
 		})
 
-		.factory('chartData', function (localStorageService, chartConfig, inputData) {
-			// NOT USED
+		.factory('chartData', function (localStorageService, chartConfig) {
 			/**
 			 * Summary object where default values for service options are stored.
 			 * Creates an object and saves to localstorage with key called 'ls.summary'.
@@ -223,57 +222,57 @@ angular.module('myApp.services', [])
 			 ]
 			 */
 
-			// TODO-mike delete unnecessary code
-			// Not sure this is needed, delete if unecessary
-			var chartObj = {
-				revenue_integrity : {
-					name : 'Revenue Integrity',
-					high : 0,
-					low : 0
-				},
-				revenue_integrity_process_improvement : {
-					name : 'Revenue Integrity Process Improvement',
-					high : 0,
-					low : 0
-				},
-				channel_shift : {
-					name : 'Channel Shift',
-					high : 0,
-					low : 0
-				},
-				ancillary_sales : {
-					name : 'Ancillary Sales',
-					high : 0,
-					low : 0
-				},
-				cmap : {
-					name : 'CMAP',
-					high : 0,
-					low : 0
-				},
-				o_and_d : {
-					name : 'O & D',
-					high : 0,
-					low : 0
-				},
-				pos : {
-					name : 'POS',
-					high : 0,
-					low : 0
-				},
-				arr : {
-					name : 'ARR',
-					high : 0,
-					low : 0
-				},
-				insight : {
-					name : 'Insight',
-					high : 0,
-					low : 0
-				}
-			};
+
 
 			return {
+
+                chartObj : {
+                    revenue_integrity : {
+                        name : 'Revenue Integrity',
+                        high : 0,
+                        low : 0
+                    },
+                    revenue_integrity_process_improvement : {
+                        name : 'Revenue Integrity Process Improvement',
+                        high : 0,
+                        low : 0
+                    },
+                    channel_shift : {
+                        name : 'Channel Shift',
+                        high : 0,
+                        low : 0
+                    },
+                    ancillary_sales : {
+                        name : 'Ancillary Sales',
+                        high : 0,
+                        low : 0
+                    },
+                    cmap : {
+                        name : 'CMAP',
+                        high : 0,
+                        low : 0
+                    },
+                    o_and_d : {
+                        name : 'O & D',
+                        high : 0,
+                        low : 0
+                    },
+                    pos : {
+                        name : 'POS',
+                        high : 0,
+                        low : 0
+                    },
+                    arr : {
+                        name : 'ARR',
+                        high : 0,
+                        low : 0
+                    },
+                    insight : {
+                        name : 'Insight',
+                        high : 0,
+                        low : 0
+                    }
+                },
 
 				/**
 				 * Transpose data between locally stored or firebase

@@ -11,17 +11,19 @@ angular.module('myApp.controllers', [])
 					'localStorageService',
 					'$firebaseSimpleLogin',
                     'Authorisation',
-					'infoData', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData) {
+					'infoData',
+                    '$interval', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval) {
 
                     Authorisation.loginObj.$getCurrentUser().then(
-							function (user) {
-								$scope.user_forms_ready = true;
-								if ( user === null ) {
-									infoData.loggedIn = false;
-								} else {
-									infoData.loggedIn = true;
-								}
-							}
+                        function (user) {
+                            $scope.user_forms_ready = true;
+                            if ( user === null ) {
+                                infoData.loggedIn = false;
+                            } else {
+                                $scope.user = user;
+                                infoData.loggedIn = true;
+                            }
+                        }
 					);
 
 					/**
@@ -30,32 +32,30 @@ angular.module('myApp.controllers', [])
 					FastClick.attach(document.body, null);
 
 					/**
-					 * Check logged in
-					 * @type {Firebase}
+					 * Listen for clearInfoData broadcast
 					 */
-					$scope.$on('isLoggedInMessage', function (event, msg) {
-						infoData.loggedIn = msg;
+					$scope.$on('clearInfoData', function (event, msg) {
+						if (msg === true) {
+                            // reset parts only
+                            infoData.currency = {currency: 'USD', symbol: '$'};
+                            infoData.airline = {code: ''};
+                            infoData.opportunity = {name: ''};
+                            infoData.session = {name: ''};
+                        }
 					});
 
-					/**
-					 *  Check net is up
-					 */
-						// Default value for flag
-					$scope.isNetUp = true;
+                    /**
+                     * Check for clear infoData broadcast
+                     */
+                    $scope.$on('isLoggedInMessage', function (event, msg) {
+                        infoData.loggedIn = msg;
+                    });
 
-					// Checks whether net is up
-					Offline.on('confirmed-up', function () {
-						// Update flag
-						$scope.isNetUp = true;
-						return true;
-					});
+                    // Check on/off-line
 
-					// Checks whether net is down
-					Offline.on('confirmed-down', function () {
-						// Update flag
-						$scope.isNetUp = false;
-						return false;
-					});
+                    $interval(function () {
+                        $scope.OfflineState = Offline.state;
+                    }, 2000);
 
 					/**
 					 *  Resizing the windows updates various elements
@@ -79,7 +79,7 @@ angular.module('myApp.controllers', [])
 					/**
 					 *  User information
 					 */
-						// Update info, store in localstorage and send data back to infoData
+					// Update info, store in localstorage and send data back to infoData
 					$scope.updateInfo = function () {
 						// Add latest timestamp and date
 						$scope.info.date = {
@@ -172,13 +172,16 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.$on('$stateChangeSuccess',
 							function (event, toState, toParams, fromState, fromParams) {
-								console.log(toState.name);
+								//console.log(toState.name);
 								switch (toState.name) {
 									case 'home' :
 										$scope.navActive = 'home';
 										break;
 									case 'info' :
 										$scope.navActive = 'info';
+										break;
+									case 'new-calculation' :
+										$scope.navActive = 'new';
 										break;
 									case 'calculator.index' :
 										$scope.navActive = 'calculator';
@@ -279,6 +282,11 @@ angular.module('myApp.controllers', [])
 					'$location',
 					'$modal',
 					function ($scope, $state, $firebase, $firebaseSimpleLogin, Authorisation, $timeout, localStorageService, infoData, inputData, allData, $location, $modal) {
+
+                        $scope.createNewSession = function () {
+                            $state.go('new-calculation');
+                            $scope.$emit('createNewSession', true);
+                        };
 
                         Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
@@ -514,9 +522,17 @@ angular.module('myApp.controllers', [])
 									/* Promise for loaded data */
 									item.$loaded().then(
 											function () {
+
 												$scope.item = item;
 
-												var data = $scope.item.data;
+                                                // check data exists if not then use default
+                                                if ($scope.item.data) {
+                                                    var data = $scope.item.data;
+                                                    console.log(data);
+                                                } else {
+                                                    var data = chartData.chartObj;
+                                                    console.log(data);
+                                                }
 
 												$scope.currency = item.info.currency.symbol;
 
@@ -594,6 +610,73 @@ angular.module('myApp.controllers', [])
 			};
 		}])
 
+		.controller('NewSessionCtrl',
+                [
+                    '$scope',
+                    'localStorageService',
+                    'inputData',
+                    'infoData',
+                    '$state', function ($scope, localStorageService, infoData, inputData, $state) {
+
+                    /**
+                     * Check for create new session broadcast
+                     */
+                    $scope.$on('createNewSession', function (event, msg) {
+                        console.log('createNewSession emmitted');
+                        $scope.createNewSession();
+                    });
+
+                    $scope.createNewSession = function () {
+
+                        if (runningSession) {
+
+                            confirmOverwrite();
+                            $state.go('info');
+
+                            return true
+                        }
+
+                        $state.go('info');
+
+                        return false;
+                    };
+
+                    $scope.info.running_session = (localStorageService.get('current_key') !== null) ? true : false;
+
+                    var runningSession = function () {
+                        return $scope.info.running_session;
+                    };
+
+                    var confirmOverwrite = function () {
+                        return wipeData();
+                    };
+
+                    var wipeData = function () {
+                        clearInfoData();
+                        clearInputData();
+                        clearLocalStorage();
+
+                        return true;
+                    };
+
+                    var clearInfoData = function () {
+                        // Broadcast clear data message to InfoCtrl
+                        $scope.$emit('clearInfoData', true);
+                    };
+
+                    var clearInputData = function () {
+
+                        // Broadcast clear data message to InfoCtrl
+                        $scope.$emit('clearInputData', true);
+                    };
+
+                    var clearLocalStorage = function() {
+                        return localStorageService.clearAll();
+                    };
+
+
+		}])
+
 		.controller('SaveSessionCtrl',
 				[
 					'$scope',
@@ -608,9 +691,7 @@ angular.module('myApp.controllers', [])
 					 * Check current_key exists
 					 * It means we're currently running a session
 					 */
-					if ( localStorageService.get('current_key') ) {
-						$scope.info.running_session = true;
-					} else $scope.info.running_session = false;
+                    $scope.info.running_session = (localStorageService.get('current_key') !== null) ? true : false;
 
 					// Save status flags
 					$scope.saving = false;
@@ -753,12 +834,12 @@ angular.module('myApp.controllers', [])
 						 */
 						$scope.updateData = function () {
 
-                        Authorisation.loginObj.$getCurrentUser().then(
+                            Authorisation.loginObj.$getCurrentUser().then(
                                 function (user) {
                                     if (user === null) {
 
                                     } else {
-                                        console.log(user.id);
+                                        //console.log(user.id);
                                     }
                                 }
                             );

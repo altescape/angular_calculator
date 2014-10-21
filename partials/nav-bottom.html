@@ -11,7 +11,7 @@
             </div>
             <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="user_forms_ready">
 
-                <div ng-show="info.loggedIn">
+                <div ng-show="info.loggedIn &&  OfflineState == 'up'">
                     <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
                             successful</strong></div>
 
@@ -26,8 +26,8 @@
 
                         <!-- Show if session has not been saved yet -->
                         <div class="btn-group" ng-show="info.running_session == true" ng-cloak>
-                            <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span
-                                  class="glyphicon glyphicon glyphicon-plus-sign"></span></a>
+<!--                            <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span-->
+<!--                                  class="glyphicon glyphicon glyphicon-plus-sign"></span></a>-->
                             <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
                                ng-disabled="saving == true">
                                 <span ng-show="saving == false">SAVE</span>
@@ -37,7 +37,9 @@
                     </div>
                 </div>
 
-                <a ng-hide="info.loggedIn" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
+                <a ng-hide="info.loggedIn || OfflineState == 'up'" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
+
+                <p ng-show="OfflineState == 'down'" class="mt-15 text-danger">No connection to the web detected.</p>
 
             </div>
         </div>

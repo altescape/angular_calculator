@@ -127,7 +127,7 @@ var app = angular.module('myApp', [
 								templateUrl : "partials/calculator.html",
 								controller : 'TestCtrl'
 							},
-							"dataView" : {templateUrl : "partials/test.html"}
+							"dataView" : {templateUrl : "partials/calculator-data.html"}
 						}
 					});
 
@@ -217,7 +217,7 @@ var app = angular.module('myApp', [
 								templateUrl : "partials/calculations/saved-calculations-detail.html",
 								controller : 'SessionsDetailCtrl'
 							},
-							"dataView" : {templateUrl : "partials/test.html"}
+							"dataView" : {templateUrl : "partials/calculator-data.html"}
 						}
 					});
 
@@ -239,6 +239,17 @@ var app = angular.module('myApp', [
 							"mainView" : {
 								templateUrl : "partials/calculations/update-calculation.html",
 								controller : 'UpdateSessionCtrl'
+							}
+						}
+					});
+
+			$stateProvider
+					.state('new-calculation', {
+						url: "/new-calculation",
+						views : {
+							"mainView" : {
+								templateUrl : "partials/calculations/new-calculation.html",
+								controller : 'NewSessionCtrl'
 							}
 						}
 					});

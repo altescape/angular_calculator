@@ -1,0 +1,16 @@
+<div class="col-md-4 col-md-offset-4 content-margin" ng-controller="SaveSessionCtrl">
+
+    <h1>New calculation</h1>
+
+    <div ng-show="info.running_session">
+        <p class="text-danger lead">Current data will be lost! Save your progress before creating a new calculation.</p>
+
+        <p><a ng-click="createNewSession()" class="btn btn-danger btn-lg">Confirmed, I want to create a new
+                calculation</a></p>
+    </div>
+    <div ng-hide="info.running_session">
+        <p class="lead">Create a brand new calculation.</p>
+        <p><a ng-click="createNewSession()" class="btn btn-success user-action btn-lg">Create new calculation</a></p>
+    </div>
+</div>
+</div>

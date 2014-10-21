@@ -1,22 +1,25 @@
 <nav class="main-nav white-content" role="navigation">
     <div class="navbar-header">
         <a ui-sref="home"><img class="logo" ng-src="/app/img/logo-small.png"></a>
-        <small class="text-white" style="margin-left: 15px" ng-show="loginObj.user">Signed in as {{ loginObj.user.email }}</small>
+        <small class="text-white" style="margin-left: 15px" ng-show="user">Signed in as {{ user.email }}</small>
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
             <li>
+                <a ui-sref="new-calculation"
+                   ng-class="{active : navActive == 'new'}">New Calculation</a>
+            </li>
+            <li>
                 <a ui-sref="info" ng-class="{active : navActive == 'info'}">
-                    <span ng-show="info.airline.code && info.session.name && info.opportunity.name">Information</span>
-                    <span ng-hide="info.airline.code && info.session.name && info.opportunity.name">New Calculation</span>
+                    <span>Information</span>
                 </a>
             </li>
             <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name">
                 <a ui-sref="calculator.index" ng-class="{active : navActive == 'calculator'}">Calculator</a>
             </li>
-            <li ng-show="info.loggedIn"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>
-            <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name"><a ui-sref="clear-data" ng-class="{active : navActive == 'settings'}">Settings</a></li>
-            <li>
+            <li ng-hide="OfflineState == 'down'" ng-show="info.loggedIn"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>
+<!--            <li ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name"><a ui-sref="clear-data" ng-class="{active : navActive == 'settings'}">Settings</a></li>-->
+            <li ng-hide="OfflineState == 'down'">
                 <a ui-sref="auth" ng-class="{active : navActive == 'auth'}">
                     <span ng-show="info.loggedIn">Sign Out</span>
                     <span ng-hide="info.loggedIn">Sign In</span>
