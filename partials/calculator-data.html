@@ -10,8 +10,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ revenue_integrity.high | currency:info.currency.symbol }}</td>
-                <td>{{ revenue_integrity.low | currency:info.currency.symbol }}</td>
+                <td>{{ revenue_integrity.high | currency:currency }}</td>
+                <td>{{ revenue_integrity.low | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in revenue_integrity.summary">
                 <td>{{ item.name }}</td>
@@ -31,8 +31,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ revenue_integrity_process_improvement.high | currency:info.currency.symbol }}</td>
-                <td>{{ revenue_integrity_process_improvement.low | currency:info.currency.symbol }}</td>
+                <td>{{ revenue_integrity_process_improvement.high | currency:currency }}</td>
+                <td>{{ revenue_integrity_process_improvement.low | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in revenue_integrity_process_improvement.summary">
                 <td>{{ item.name }}</td>
@@ -53,8 +53,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ channel_shift.high | currency:info.currency.symbol }}</td>
-                <td>{{ channel_shift.low | currency:info.currency.symbol }}</td>
+                <td>{{ channel_shift.high | currency:currency }}</td>
+                <td>{{ channel_shift.low | currency:currency }}</td>
             </tr>
 <!--            <tr ng-repeat="item in channel_shift.summary">-->
 <!--                <td>{{ item.name }}</td>-->
@@ -74,8 +74,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ ancillary_sales.high | currency:info.currency.symbol }}</td>
-                <td>{{ ancillary_sales.low | currency:info.currency.symbol }}</td>
+                <td>{{ ancillary_sales.high | currency:currency }}</td>
+                <td>{{ ancillary_sales.low | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in ancillary_sales.summary.years">
                 <td>{{ item.name }}</td>
@@ -83,7 +83,7 @@
                     <table class="table table-striped">
                         <tr ng-repeat="it in item.high">
                             <td width="50%">{{ it.name }}</td>
-                            <td><span ng-show="it.unit == 'currency'">{{ info.currency.symbol }}</span>{{ it.value | commas }}</td>
+                            <td><span ng-show="it.unit == 'currency'">{{ currency }}</span>{{ it.value | commas }}</td>
                         </tr>
                     </table>
                 </td>
@@ -91,7 +91,7 @@
                     <table class="table table-striped">
                         <tr ng-repeat="it in item.low">
                             <td width="50%">{{ it.name }}</td>
-                            <td><span ng-show="it.unit == 'currency'">{{ info.currency.symbol }}</span>{{ it.value | commas }}</td>
+                            <td><span ng-show="it.unit == 'currency'">{{ currency }}</span>{{ it.value | commas }}</td>
                         </tr>
                     </table>
 
@@ -110,8 +110,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ cmap.high | currency:info.currency.symbol }}</td>
-                <td>{{ cmap.low | currency:info.currency.symbol }}</td>
+                <td>{{ cmap.high | currency:currency }}</td>
+                <td>{{ cmap.low | currency:currency }}</td>
             </tr>
             <tr>
                 <td>{{ cmap.fuel_cost.name }}</td>
@@ -135,8 +135,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ origin_and_destination.high | currency:info.currency.symbol }}</td>
-                <td>{{ origin_and_destination.low | currency:info.currency.symbol }}</td>
+                <td>{{ origin_and_destination.high | currency:currency }}</td>
+                <td>{{ origin_and_destination.low | currency:currency }}</td>
             </tr>
             <tr>
                 <td>Revenue</td>
@@ -160,8 +160,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ pos.high | currency:info.currency.symbol }}</td>
-                <td>{{ pos.low | currency:info.currency.symbol }}</td>
+                <td>{{ pos.high | currency:currency }}</td>
+                <td>{{ pos.low | currency:currency }}</td>
             </tr>
             <tr>
                 <td>Revenue</td>
@@ -185,13 +185,13 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ airfare_insight.high | currency:info.currency.symbol }}</td>
-                <td>{{ airfare_insight.low | currency:info.currency.symbol }}</td>
+                <td>{{ airfare_insight.high | currency:currency }}</td>
+                <td>{{ airfare_insight.low | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in airfare_insight.summary">
                 <td>{{ item.name }}</td>
-                <td><span ng-show="item.unit == 'currency'">{{ info.currency.symbol }}</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
-                <td><span ng-show="item.unit == 'currency'">{{ info.currency.symbol }}</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">{{ currency }}</span>{{ item.high | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
+                <td><span ng-show="item.unit == 'currency'">{{ currency }}</span>{{ item.low | commas }}<span ng-show="item.unit == 'percentage'">%</span></td>
             </tr>
         </table>
     </div>
@@ -206,8 +206,8 @@
             </tr>
             <tr>
                 <td>Graph numbers</td>
-                <td>{{ arr.high | currency:info.currency.symbol }}</td>
-                <td>{{ arr.low | currency:info.currency.symbol }}</td>
+                <td>{{ arr.high | currency:currency }}</td>
+                <td>{{ arr.low | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in arr.summary">
                 <td>{{ item.name }}</td>

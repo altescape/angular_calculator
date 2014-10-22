@@ -58,7 +58,7 @@ angular.module('myApp.controllers', [])
                     // then after 2 secs check actual state and then every 2 secs
                     $interval(function () {
                         $scope.OfflineState = Offline.state;
-                    }, 2000);
+                    }, 200);
 
 					/**
 					 *  Resizing the windows updates various elements
@@ -89,6 +89,10 @@ angular.module('myApp.controllers', [])
 							timestamp : Math.round(new Date().getTime() / 1000),
 							date : new Date().toISOString()
 						};
+
+                        // Currency
+                        $scope.setCurrency();
+
 						localStorageService.set('info', $scope.info);
 					};
 
@@ -99,8 +103,6 @@ angular.module('myApp.controllers', [])
 								return infoData;
 							},
 							function (newVal, oldVal) {
-								$scope.setCurrency();
-								$scope.currency = infoData.currency.symbol;
 								$scope.info = infoData;
 							}, true);
 
@@ -149,24 +151,24 @@ angular.module('myApp.controllers', [])
 							'VND': $scope.currency_symbols['Dong'] // Vietnamese Dong
 						};
 
-						if (infoData.currency) {
-							if (currency_symbols[infoData.currency.currency] !== undefined) {
-								infoData.currency = {
-									currency: infoData.currency.currency,
-									symbol : currency_symbols[infoData.currency.currency]
-								}
-							} else {
-								infoData.currency = {
-									currency: infoData.currency.currency,
-									symbol : infoData.currency.symbol
-								}
-							}
-						} else {
-							infoData.currency = {
-								currency: 'USD',
-								symbol : '$'
-							}
-						}
+
+
+                        var selected_currency = $scope.info.currency;
+
+                        if (selected_currency) {
+                            if (currency_symbols[selected_currency.currency] === undefined) {
+                                $scope.info.currency.symbol = '(' + selected_currency.currency + ')';
+                            } else {
+                                $scope.info.currency.symbol = currency_symbols[selected_currency.currency];
+                            }
+                        } else {
+                            $scope.info.currency = {
+                                currency: 'USD',
+                                symbol: '$'
+                            };
+                            $scope.setCurrency();
+                        }
+
 					};
 
 					/**
@@ -537,6 +539,8 @@ angular.module('myApp.controllers', [])
 
 												$scope.currency = item.info.currency.symbol;
 
+                                                chartData.currency = $scope.currency;
+
 												/**
 												 * Calls the factories for each service
 												 */
@@ -846,7 +850,7 @@ angular.module('myApp.controllers', [])
 
                         // Bind to Firebase
 
-                        var bindToFb = function () {
+                        var syncToFirebase = function () {
 
                             Authorisation.loginObj.$getCurrentUser().then(
                                 function (user) {
@@ -917,7 +921,7 @@ angular.module('myApp.controllers', [])
 
                             $scope.input = inputData;
 
-                            bindToFb();
+                            syncToFirebase();
 
 							// TODO-mike separate values for both graph types
 							// chart configs are not storing separate values for both graphs.
@@ -930,9 +934,7 @@ angular.module('myApp.controllers', [])
 
 						};
 
-                        bindToFb();
-
-                        //$interval(bindToFb, 3000);
+                        syncToFirebase();
 
 						$scope.updateData();
 

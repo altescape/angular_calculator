@@ -49,9 +49,14 @@
                         <h3 class="mt-0 mb-5">{{ item.info.session.name }}</h3>
 
                         <hr class="mt-10 mb-10">
-                        <h5 class="mt-0 mb-0">
-                            <small>SAVED ON: {{ item.info.date.date | date: 'medium' | uppercase }}</small>
-                        </h5>
+                        <div class="row">
+                            <h5 class="mt-0 mb-0 col-lg-6 text-left">
+                                <small>SAVED ON: {{ item.info.date.date | date: 'medium' | uppercase }}</small>
+                            </h5>
+                            <h5 class="mt-0 mb-0 col-lg-6 text-right">
+                                <small>CURRENCY: {{ item.info.currency.symbol | uppercase }} ({{ item.info.currency.currency | uppercase }})</small>
+                            </h5>
+                        </div>
                     </div>
                     <div class="panel-footer">
                         <div class="btn-group">

@@ -86,6 +86,10 @@ angular.module('myApp.services', [])
 			});
 
 			var chartConfigTemplate = {
+                currency: {
+                    currency: 'USD',
+                    symbol: '$'
+                },
 				options : {
 					chart : {
 						type : 'pie',
@@ -105,7 +109,7 @@ angular.module('myApp.services', [])
 								enabled : true,
 								formatter : function () {
 									if ( this.y != 0 ) {
-										return '<b>' + this.point.name + '</b>: ' + infoData.currency.symbol + this.point.y;
+										return '<b>' + this.point.name + '</b>: ' + chartConfigTemplate.currency.symbol + this.point.y;
 									} else {
 										return null;
 									}
@@ -159,7 +163,7 @@ angular.module('myApp.services', [])
 						size : '15%',
 						dataLabels : {
 							formatter : function () {
-								return this.y > 0 ? 'Total: ' + infoData.currency.symbol + this.point.y : null;
+								return this.y > 0 ? 'Total: ' + chartConfigTemplate.currency.symbol + this.point.y : null;
 							},
 //							color: 'white',
 //							distance: -37,
@@ -332,6 +336,8 @@ angular.module('myApp.services', [])
 					}
 				},
 
+                currency : '$',
+
 				/**
 				 * Sets the data for use in the high value chart and the low value chart.
 				 * Returns config object for ng-highcharts.
@@ -343,6 +349,9 @@ angular.module('myApp.services', [])
 				 * @returns {*}
 				 */
 				drawChart : function (value, src) {
+
+                    chartConfig.low.currency.symbol = this.currency;
+                    chartConfig.high.currency.symbol = this.currency;
 
 					if ( value === 'low' ) {
 						chartConfig.low.options.chart.type = "pie";

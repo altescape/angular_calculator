@@ -6,7 +6,7 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li ng-hide="OfflineState == 'down'">
                 <a ui-sref="new-calculation"
                    ng-class="{active : navActive == 'new'}">New Calculation</a>
             </li>
