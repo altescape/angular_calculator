@@ -531,10 +531,8 @@ angular.module('myApp.controllers', [])
                                                 // check data exists if not then use default
                                                 if ($scope.item.data) {
                                                     var data = $scope.item.data;
-                                                    console.log(data);
                                                 } else {
                                                     var data = chartData.chartObj;
-                                                    console.log(data);
                                                 }
 
 												$scope.currency = item.info.currency.symbol;
@@ -620,7 +618,9 @@ angular.module('myApp.controllers', [])
                     'inputData',
                     'infoData',
                     'allData',
-                    '$state', function ($scope, localStorageService, inputData, infoData, allData, $state) {
+                    '$state',
+                    '$timeout',
+                    '$window', function ($scope, localStorageService, inputData, infoData, allData, $state, $timeout, $window) {
 
                     /**
                      * Check for create new session broadcast
@@ -632,7 +632,7 @@ angular.module('myApp.controllers', [])
 
                     $scope.createNewSession = function () {
 
-                        if (runningSession) {
+                        if (runningSession()) {
 
                             confirmOverwrite();
                             $state.go('info');
@@ -657,8 +657,8 @@ angular.module('myApp.controllers', [])
 
                     var wipeData = function () {
                         clearInfoData();
-                        clearInputData();
                         clearLocalStorage();
+                        clearInputData();
 
                         return true;
                     };
@@ -669,11 +669,12 @@ angular.module('myApp.controllers', [])
                     };
 
                     var clearInputData = function () {
+                        // cant clear input data so do hard refresh
+                        $timeout(function () {
+                            // Urksome...
+                            $window.location.reload();
+                        }, 10);
 
-                        // need to broadcast message to TestCtrl
-                        // 1. Broadcast clear data message to parent InfoCtrl
-
-                        //$scope.$emit('clearInputData', true);
                     };
 
                     var clearLocalStorage = function() {
@@ -709,8 +710,6 @@ angular.module('myApp.controllers', [])
 					 * Save session to Firebase
 					 */
 					$scope.saveNewSession = function () {
-
-                        console.log('Save New Session');
 
                         Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
@@ -769,8 +768,6 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.updateSession = function () {
 
-                        console.log('Update current Session');
-
 						// Check logged in
                         Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
@@ -781,42 +778,43 @@ angular.module('myApp.controllers', [])
 										// - redirect to auth page
 									} else {
 										// Logged in: yes
-										// - get current user id and append to firebase address
-										var userId = user.id;
-
 										// we are currently running a calculation/session
 										if ( $scope.info.running_session === true ) {
 
 											// Set flag: saving to true
 											$scope.saving = true;
 
-											// Get the link to the firebase item with id key from localstorage
-											$scope.items = $firebase(new Firebase(Authorisation.url + '/user_data/' + userId + "/" + localStorageService.get('current_key')));
+                                            var userId = user.id;
+                                            var url = Authorisation.url + '/user_data/' + userId + "/" + localStorageService.get('current_key');
+                                            var ref = new Firebase(url);
+                                            var obj = $firebase(ref).$asObject();
 
-											// Set and update the firebase item with new values from localstorage
-											$scope.items.$set({
-												info : localStorageService.get('info'),
-												input : localStorageService.get('input'),
-												data : localStorageService.get('data')
-											}).then(function () {
+                                            obj.$bindTo($scope, 'fb').then(function() {
 
-												// Saving has finished so reset saving flag
-												$scope.saving = false;
+                                                $scope.fb.info = localStorageService.get('info');
+                                                $scope.fb.input = localStorageService.get('input');
+                                                $scope.fb.data = localStorageService.get('data');
 
-												// And flag that it's been saved
-												$scope.saved = true;
+                                            }).then(function () {
 
-												// After a while set the saved flag back to default, this takes saved message back off screen
-												$timeout(function () {
-													$scope.saved = false;
-												}, 2500);
-											});
+                                                // Saving has finished so reset saving flag
+                                                $scope.saving = false;
+
+                                                // And flag that it's been saved
+                                                $scope.saved = true;
+
+                                                // After a while set the saved flag back to default, this takes saved message back off screen
+                                                $timeout(function () {
+                                                    $scope.saved = false;
+                                                }, 2500);
+                                            });
 										}
 
 									}
 								}
 						);
-					}
+					};
+
 				}])
 
 		.controller('TestCtrl',
@@ -842,13 +840,45 @@ angular.module('myApp.controllers', [])
 					'airfareInsight',
 					'channelShift',
 					'ancillarySales',
-					function ($rootScope, $scope, $location, localStorageService, $state, Authorisation, chartData, chartConfig, infoData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales) {
+                    '$firebase',
+                    '$interval',
+					function ($rootScope, $scope, $location, localStorageService, $state, Authorisation, chartData, chartConfig, infoData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales, $firebase, $interval) {
 
-                        if (localStorageService.get('input') === null) {
-                            $scope.input = {};
-                        } else {
-                            $scope.input = localStorageService.get('input');
-                        }
+                        // Bind to Firebase
+
+                        var bindToFb = function () {
+
+                            Authorisation.loginObj.$getCurrentUser().then(
+                                function (user) {
+                                    if ( user === null ) {
+                                        // TODO-mike add message
+                                        // Logged in: no
+                                        // - Message 'you need to login before updating'
+                                        // - redirect to auth page
+                                    } else {
+                                        // Logged in: yes
+                                        // we are currently running a calculation/session
+                                        if ( $scope.info.running_session === true ) {
+
+                                            // Set flag: saving to true
+                                            $scope.saving = true;
+
+                                            var userId = user.id;
+                                            var url = Authorisation.url + '/user_data/' + userId + "/" + localStorageService.get('current_key');
+                                            var ref = new Firebase(url);
+                                            var obj = $firebase(ref);
+
+                                            obj.$set({
+                                                info : localStorageService.get('info'),
+                                                input : localStorageService.get('input'),
+                                                data : localStorageService.get('data')
+                                            });
+                                        }
+
+                                    }
+                                }
+                            );
+                        };
 
                         /**
 						 * Calls the factories for each service
@@ -883,9 +913,11 @@ angular.module('myApp.controllers', [])
 							$scope.airfare_insight = allData.airfare_insight;
 
                             localStorageService.set('data', allData);
-                            localStorageService.set('input', $scope.input);
+                            localStorageService.set('input', inputData);
 
-                            inputData = $scope.input;
+                            $scope.input = inputData;
+
+                            bindToFb();
 
 							// TODO-mike separate values for both graph types
 							// chart configs are not storing separate values for both graphs.
@@ -897,6 +929,10 @@ angular.module('myApp.controllers', [])
 							}
 
 						};
+
+                        bindToFb();
+
+                        //$interval(bindToFb, 3000);
 
 						$scope.updateData();
 

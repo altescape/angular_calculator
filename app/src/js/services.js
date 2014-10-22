@@ -54,16 +54,7 @@ angular.module('myApp.services', [])
                     param8 : 0,
                     param9 : 0,
                     param10 : 0,
-                    adjustment : 0,
-
-					// Not used but keeping as might be useful later
-					colors : function () {
-						{
-							return angular.forEach(Highcharts.getOptions().colors, function (value, key) {
-								key : value[key];
-							})
-						}
-					}
+                    adjustment : 0
 				}
 			}
 
