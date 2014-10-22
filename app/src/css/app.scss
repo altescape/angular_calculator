@@ -642,6 +642,7 @@ $class-slug: pt;
 	font-weight: bold;
 	margin: 10px auto 0;
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    background-color: $brand-success;
 	background-image: linear-gradient($brand-success, darken($brand-success, 20%));
 	background-position: 0 100%;
 	background-size: auto 200%;
@@ -656,7 +657,8 @@ $class-slug: pt;
 	}
 	/* DANGER */
 	&.user-action-danger {
-		background-image: linear-gradient($brand-danger, darken($brand-danger, 20%));
+      background-color: darken($brand-success, 20%);
+      background-image: linear-gradient($brand-danger, darken($brand-danger, 20%));
 	}
 }
 

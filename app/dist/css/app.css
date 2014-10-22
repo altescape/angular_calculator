@@ -7735,6 +7735,7 @@ body {
   margin: 10px auto 0;
   -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
           box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+  background-color: #7cae3e;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#7cae3e), to(#466323));
   background-image: -webkit-linear-gradient(#7cae3e, #466323);
   background-image: linear-gradient(#7cae3e, #466323);
@@ -7746,19 +7747,20 @@ body {
   padding: 12px 16px 14px;
   border: none;
   /* DANGER */ }
-  /* line 651, ../app.scss */
+  /* line 652, ../app.scss */
   .user-action:hover, .user-action:focus {
     color: #fff;
     background-position: 0 0;
     text-decoration: none;
     outline: none; }
-  /* line 658, ../app.scss */
+  /* line 659, ../app.scss */
   .user-action.user-action-danger {
+    background-color: #466323;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#d9534f), to(#a02622));
     background-image: -webkit-linear-gradient(#d9534f, #a02622);
     background-image: linear-gradient(#d9534f, #a02622); }
 
-/* line 663, ../app.scss */
+/* line 665, ../app.scss */
 .user-action.disabled, .user-action[disabled] {
   opacity: .3;
   background-image: none;
@@ -7767,7 +7769,7 @@ body {
           box-shadow: none; }
 
 /* SNAPJS STYLES */
-/* line 671, ../app.scss */
+/* line 673, ../app.scss */
 .snap-content {
   background-color: #EEE;
   position: absolute;
@@ -7785,7 +7787,7 @@ body {
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2); }
 
-/* line 687, ../app.scss */
+/* line 689, ../app.scss */
 .snap-drawers {
   position: absolute;
   top: 0;
@@ -7795,7 +7797,7 @@ body {
   width: auto;
   height: auto; }
 
-/* line 697, ../app.scss */
+/* line 699, ../app.scss */
 .snap-drawer {
   position: absolute;
   top: 0;
@@ -7809,36 +7811,36 @@ body {
   -webkit-transition: width 0.3s ease;
           transition: width 0.3s ease;
   color: #0081cb; }
-  /* line 709, ../app.scss */
+  /* line 711, ../app.scss */
   .snap-drawer p, .snap-drawer a, .snap-drawer li {
     color: #0081cb; }
-  /* line 712, ../app.scss */
+  /* line 714, ../app.scss */
   .snap-drawer .padder {
     padding: 1em; }
 
-/* line 717, ../app.scss */
+/* line 719, ../app.scss */
 .snap-drawer-left {
   left: 0;
   z-index: 1;
   position: relative; }
 
-/* line 723, ../app.scss */
+/* line 725, ../app.scss */
 .snap-drawer-right {
   right: 0;
   z-index: 1; }
 
-/* line 728, ../app.scss */
+/* line 730, ../app.scss */
 .snapjs-left .snap-drawer-right,
 .snapjs-right .snap-drawer-left {
   display: none; }
 
-/* line 733, ../app.scss */
+/* line 735, ../app.scss */
 .snapjs-expand-left .snap-drawer-left,
 .snapjs-expand-right .snap-drawer-right {
   width: 100%; }
 
 /* MAIN CONTENT STYLES */
-/* line 739, ../app.scss */
+/* line 741, ../app.scss */
 #main-content {
   background-color: #eeeeee;
   position: absolute;
@@ -7859,7 +7861,7 @@ body {
   margin-bottom: 50px; }
 
 /* CHART STYLES */
-/* line 758, ../app.scss */
+/* line 760, ../app.scss */
 .chart_total {
   display: block;
   text-align: center;
@@ -7879,7 +7881,7 @@ body {
           box-shadow: 0 0 0 5px #ffa536; }
 
 /* RADIO BUTTONS */
-/* line 779, ../app.scss */
+/* line 781, ../app.scss */
 .postfix-choice .choice, .input-choices-group .choice {
   height: 36px;
   line-height: 36px;
@@ -7898,25 +7900,25 @@ body {
           border-radius: 100%;
   -webkit-box-shadow: 0 0 3px #000 inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
           box-shadow: 0 0 3px #000 inset, 0 0 13px rgba(0, 0, 0, 0.5) inset; }
-  /* line 796, ../app.scss */
+  /* line 798, ../app.scss */
   .postfix-choice .choice.active, .input-choices-group .choice.active {
     background-color: #7cae3e !important;
     color: #eaf3de !important;
     opacity: 1;
     -webkit-box-shadow: none;
             box-shadow: none; }
-  /* line 802, ../app.scss */
+  /* line 804, ../app.scss */
   .postfix-choice .choice .glyphicon, .input-choices-group .choice .glyphicon {
     font-weight: normal; }
-  /* line 805, ../app.scss */
+  /* line 807, ../app.scss */
   .postfix-choice .choice:hover, .input-choices-group .choice:hover {
     background-color: rgba(0, 97, 152, 0.5);
     color: black;
     cursor: pointer; }
-  /* line 810, ../app.scss */
+  /* line 812, ../app.scss */
   .postfix-choice .choice:focus, .input-choices-group .choice:focus {
     outline: none; }
-/* line 814, ../app.scss */
+/* line 816, ../app.scss */
 .postfix-choice input.radio:empty, .input-choices-group input.radio:empty {
   margin: 0 !important;
   margin-left: -999px !important;
@@ -7924,7 +7926,7 @@ body {
   height: 0 !important;
   padding: 0 !important;
   position: absolute; }
-/* line 822, ../app.scss */
+/* line 824, ../app.scss */
 .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
   float: left;
   margin-right: 20px;
@@ -7932,28 +7934,28 @@ body {
   margin-left: 15px;
   margin-top: 10px; }
 
-/* line 831, ../app.scss */
+/* line 833, ../app.scss */
 .postfix-choice {
   border-bottom: 1px solid #EEE;
   margin: 0;
   padding: 7px 0 5px; }
-  /* line 835, ../app.scss */
+  /* line 837, ../app.scss */
   .postfix-choice:hover {
     background-color: #EEE; }
 
 /* VALIDATION */
-/* line 842, ../app.scss */
+/* line 844, ../app.scss */
 input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
   background-color: #f4cecd;
   border-color: #d9534f; }
 
 /* POST- AND PRE-FIXED INPUT LABELS */
-/* line 849, ../app.scss */
+/* line 851, ../app.scss */
 .postfix-label, .prefix-label {
   position: relative;
   overflow: hidden;
   max-width: 180px; }
-  /* line 853, ../app.scss */
+  /* line 855, ../app.scss */
   .postfix-label .form-control, .prefix-label .form-control {
     position: relative;
     z-index: 2;
@@ -7962,7 +7964,7 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
     width: 70%;
     max-width: 250px;
     float: left; }
-  /* line 861, ../app.scss */
+  /* line 863, ../app.scss */
   .postfix-label .label, .prefix-label .label {
     position: relative;
     width: 50px;
@@ -7980,27 +7982,27 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
     font-size: 15px;
     -webkit-border-radius: 0 5px 5px 0;
             border-radius: 0 5px 5px 0; }
-    /* line 878, ../app.scss */
+    /* line 880, ../app.scss */
     .postfix-label .label .glyphicon, .prefix-label .label .glyphicon {
       font-weight: normal; }
 
-/* line 884, ../app.scss */
+/* line 886, ../app.scss */
 .prefix-label {
   max-width: none; }
-  /* line 887, ../app.scss */
+  /* line 889, ../app.scss */
   .prefix-label .form-control {
     -webkit-border-radius: 0 5px 5px 0;
             border-radius: 0 5px 5px 0;
     left: 50px;
     max-width: none; }
-  /* line 892, ../app.scss */
+  /* line 894, ../app.scss */
   .prefix-label .label {
     -webkit-border-radius: 5px 0 0 5px;
             border-radius: 5px 0 0 5px;
     left: 0;
     position: absolute; }
 
-/* line 899, ../app.scss */
+/* line 901, ../app.scss */
 .message {
   position: fixed;
   left: 25%;
@@ -8014,45 +8016,45 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
   -webkit-transition: all .2s ease;
           transition: all .2s ease;
   opacity: 1; }
-  /* line 911, ../app.scss */
+  /* line 913, ../app.scss */
   .message.reveal-animation.ng-hide {
     bottom: -100px;
     opacity: 0; }
 
-/* line 919, ../app.scss */
+/* line 921, ../app.scss */
 .panel-footer .btn {
   font-size: 8px; }
 
-/* line 924, ../app.scss */
+/* line 926, ../app.scss */
 .navbar-default {
   background-color: #fff;
   border-color: transparent; }
 
-/* line 929, ../app.scss */
+/* line 931, ../app.scss */
 .nav-tabs-justified, .nav-tabs.nav-justified, .nav-tabs.nav-justified {
   font-size: 12px;
   white-space: nowrap; }
 
-/* line 934, ../app.scss */
+/* line 936, ../app.scss */
 .info-links {
   margin: 18px 0 0;
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 1px; }
-  /* line 939, ../app.scss */
+  /* line 941, ../app.scss */
   .info-links li {
     border-right: 1px solid #eeeeee;
     padding-right: 10px; }
-    /* line 941, ../app.scss */
+    /* line 943, ../app.scss */
     .info-links li:last-child {
       border: none; }
 
 /* SAVED CALCULATIONS PANELS */
-/* line 949, ../app.scss */
+/* line 951, ../app.scss */
 .saved-panels {
   height: 290px; }
 
-/* line 954, ../app.scss */
+/* line 956, ../app.scss */
 .sort .active {
   color: #333333;
   text-decoration: underline;
@@ -8062,15 +8064,15 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
   /* rules for mobile horizontal (480 > 768)  */ }
 @media (min-width: 768px) {
   /* rules for tablet (768 > 992) */
-  /* line 970, ../app.scss */
+  /* line 972, ../app.scss */
   .navbar-nav li:first-child a {
     -webkit-border-radius: 3px 0 0 0;
             border-radius: 3px 0 0 0; }
-  /* line 971, ../app.scss */
+  /* line 973, ../app.scss */
   .navbar-nav li:last-child a {
     -webkit-border-radius: 0 3px 0 0;
             border-radius: 0 3px 0 0; }
-  /* line 972, ../app.scss */
+  /* line 974, ../app.scss */
   .navbar-nav li a {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -8080,43 +8082,43 @@ input.ng-dirty.ng-invalid, input.ng-dirty.ng-invalid-fcsa-number {
     border-bottom: 0;
     margin-right: -1px;
     color: #FFF; }
-    /* line 981, ../app.scss */
+    /* line 983, ../app.scss */
     .navbar-nav li a:hover {
       color: #fff;
       background-color: #0081cb; }
-    /* line 985, ../app.scss */
+    /* line 987, ../app.scss */
     .navbar-nav li a.active {
       color: #0081cb;
       font-weight: bold;
       background-color: #eeeeee; } }
 @media (min-width: 992px) {
   /* rules for desktop (992 > 1200) */
-  /* line 998, ../app.scss */
+  /* line 1000, ../app.scss */
   body {
     font-size: 11px; }
 
-  /* line 1002, ../app.scss */
+  /* line 1004, ../app.scss */
   .navbar-nav.navbar-right:last-child {
     margin-right: 0; }
 
   /* CHART AREA */
-  /* line 1007, ../app.scss */
+  /* line 1009, ../app.scss */
   .panel__1 {
     right: 70%; }
 
-  /* line 1010, ../app.scss */
+  /* line 1012, ../app.scss */
   .panel__2 {
     left: 30%; }
 
-  /* line 1014, ../app.scss */
+  /* line 1016, ../app.scss */
   .postfix-choice .postfix-choice-label, .input-choices-group .postfix-choice-label {
     width: 70%; } }
 @media (min-width: 1200px) {
   /* rules for large (> 1200) */
-  /* line 1022, ../app.scss */
+  /* line 1024, ../app.scss */
   body {
     font-size: 13px; }
 
-  /* line 1026, ../app.scss */
+  /* line 1028, ../app.scss */
   .panel-footer .btn {
     font-size: 12px; } }
