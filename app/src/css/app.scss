@@ -215,6 +215,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			transition: all .2s linear;
 			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
 			background-image: none;
+            background-color: transparent;
 			font-weight: normal;
 			text-transform: uppercase;
 			letter-spacing: 2px;
@@ -254,7 +255,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 }
 
 .panel__inner {
-	overflow-y: scroll;
+	overflow: hidden;
 	height: 100%;
 }
 
