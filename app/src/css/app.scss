@@ -243,6 +243,11 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 	overflow-y: scroll;
 	padding-top: 10px;
 }
+.calculator {
+  .panel__1 {
+    overflow-y: hidden;
+  }
+}
 
 .panel__2 {
 	position: absolute;
@@ -305,8 +310,10 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 	top: 40px;
 	left: 0;
 	right: 0;
+    overflow: hidden;
+
 	.active {
-			overflow-y: scroll;
+			overflow-y: auto;
 			height: 100%;
 	}
 }
@@ -392,6 +399,33 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			color: mix($brand-danger, $brand-primary, 50%);
 		}
 	}
+}
+
+/* SUMMARY FOR CALCULATOR LIST DETAIL PAGES */
+.panel__inner__content {
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-radius: 0 0 3px 3px;
+  position: absolute;
+  bottom: 40px;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+
+  .panel__inner__content__scroll {
+    overflow: auto;
+    height: 100%;
+  }
+}
+
+.panel__inner__footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  padding: 8px 1px 0;
 }
 
 /* TRANSPARENT BUTTON */
@@ -795,6 +829,7 @@ $input-group-fontsize: $input-group-height/2.2;
 		float: left;
 		border-radius: 100%;
 		box-shadow: 0 0 3px #000 inset, 0 0 13px rgba(0, 0, 0, 0.5) inset;
+        overflow: hidden;
 
 		&.active {
 			background-color: $brand-success !important;
