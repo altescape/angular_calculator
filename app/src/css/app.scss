@@ -257,6 +257,10 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 	bottom: 0;
 	height: 100%;
 	overflow: hidden;
+
+  .panel__inner {
+    overflow-y: auto;
+  }
 }
 
 .panel__inner {
