@@ -978,6 +978,10 @@ angular.module('myApp.controllers', [])
                                     // put save here
                                 }, true);
 
+                        // Add currency to calculation
+                        $scope.currency = infoData.currency.symbol;
+                        chartData.currency = $scope.currency;
+
 					}])
 
 		.controller('AuthCtrl', ['$rootScope', '$scope', '$state', '$firebase', '$firebaseSimpleLogin', 'Authorisation',
