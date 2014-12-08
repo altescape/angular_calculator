@@ -54,17 +54,26 @@ $brand-grey: $brand-primary;
 	display: block !important;
 }
 
-.reveal-animation.ng-enter {
-	animation: enter_sequence .6s cubic-bezier(.5, 0, .5, 1);
+.reveal-animation[ui-view] {
+  overflow: hidden;
 }
 
-@keyframes enter_sequence {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+.reveal-animation[ui-view].ng-enter {
+  opacity: 0;
+  transition: opacity .35s ease-in-out;
+}
+
+.reveal-animation[ui-view].ng-enter-active {
+  opacity: 1;
+}
+
+.reveal-animation[ui-view].ng-leave {
+  transition: none;
+  opacity: 1;
+}
+
+.reveal-animation[ui-view].ng-leave-active {
+  opacity: 0;
 }
 
 .btn.ng-animate, .btn-group.ng-animate {
