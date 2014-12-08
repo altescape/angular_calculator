@@ -44,8 +44,6 @@ angular.module('myApp.controllers', [])
                         }
 					});
 
-                    $scope.create_new = infoData.create_new;
-
                     /**
                      * Check for clear infoData broadcast
                      */
@@ -691,6 +689,7 @@ angular.module('myApp.controllers', [])
 		.controller('SaveSessionCtrl',
 				[
 					'$scope',
+					'$state',
 					'localStorageService',
 					'$firebase',
 					'$firebaseSimpleLogin',
@@ -698,7 +697,7 @@ angular.module('myApp.controllers', [])
 					'infoData',
                     'inputData',
                     'allData',
-                    'Authorisation', function ($scope, localStorageService, $firebase, $firebaseSimpleLogin, $timeout, infoData, inputData, allData, Authorisation) {
+                    'Authorisation', function ($scope, $state, localStorageService, $firebase, $firebaseSimpleLogin, $timeout, infoData, inputData, allData, Authorisation) {
 
 					/**
 					 * Check current_key exists
@@ -710,6 +709,20 @@ angular.module('myApp.controllers', [])
 					$scope.saving = false;
 					$scope.saved = false;
 
+					// Check auth
+					var isLoggedIn = false;
+					var checkAuth = function () {
+						Authorisation.loginObj.$getCurrentUser().then(
+							function (user) {
+								if (user === null) {
+									// Redirect to login page
+									$state.go('auth');
+								} else {
+									isLoggedIn = true;
+								}
+							})
+					}();
+
 					/**
 					 * Save session to Firebase
 					 */
@@ -718,10 +731,8 @@ angular.module('myApp.controllers', [])
                         Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-										// TODO-mike add message
-										// Logged in: no
-										// - Message 'you need to login before saving'
-										// - redirect to auth page
+										// Redirect to login page
+										$state.go('auth');
 									} else {
 										// Logged in: yes
 										// - get current user id and append to firebase address
@@ -733,10 +744,6 @@ angular.module('myApp.controllers', [])
 
 										// Set flag: saving to true
 										$scope.saving = true;
-
-                                        // clear the input and data models
-                                        //inputData = {};
-                                        //allData = {};
 
 										// Add the data from localstorage and add it to Firebase
 										items.$add({
@@ -776,10 +783,8 @@ angular.module('myApp.controllers', [])
                         Authorisation.loginObj.$getCurrentUser().then(
 								function (user) {
 									if ( user === null ) {
-										// TODO-mike add message
-										// Logged in: no
-										// - Message 'you need to login before updating'
-										// - redirect to auth page
+										// Redirect to login page
+										$state.go('auth');
 									} else {
 										// Logged in: yes
 										// we are currently running a calculation/session
@@ -821,7 +826,7 @@ angular.module('myApp.controllers', [])
 
 				}])
 
-		.controller('TestCtrl',
+		.controller('CalcCtrl',
 				[
 					'$rootScope',
 					'$scope',
@@ -855,10 +860,8 @@ angular.module('myApp.controllers', [])
                             Authorisation.loginObj.$getCurrentUser().then(
                                 function (user) {
                                     if ( user === null ) {
-                                        // TODO-mike add message
-                                        // Logged in: no
-                                        // - Message 'you need to login before updating'
-                                        // - redirect to auth page
+                                        // Redirect to login page
+										$state.go('auth');
                                     } else {
                                         // Logged in: yes
                                         // we are currently running a calculation/session
@@ -883,6 +886,8 @@ angular.module('myApp.controllers', [])
                                 }
                             );
                         };
+
+						syncToFirebase();
 
                         /**
 						 * Calls the factories for each service
@@ -934,8 +939,6 @@ angular.module('myApp.controllers', [])
 
 						};
 
-                        syncToFirebase();
-
 						$scope.updateData();
 
 						// Passengers boarded data. See variables sheet C2 - C16
@@ -956,13 +959,6 @@ angular.module('myApp.controllers', [])
 									$scope.updateData();
 								});
 
-						/**
-						 * Get the defaults values from inputData Factory
-						 *
-						 * @type {cal|*|$scope.cal}
-						 */
-						//$scope.input = inputData;
-						//$scope.input = localStorageService.get('input');
 
 						/**
 						 * Watch inputs on calculator

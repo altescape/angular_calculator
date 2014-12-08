@@ -65,7 +65,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {
 								templateUrl : "partials/results/chart_high.html"
@@ -79,7 +79,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {
 								templateUrl : "partials/results/chart_high.html"
@@ -92,7 +92,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/chart_high.html"}
 						}
@@ -103,7 +103,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/chart_low.html"}
 						}
@@ -114,7 +114,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/table.html"}
 						}
@@ -125,7 +125,7 @@ var app = angular.module('myApp', [
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
-								controller : 'TestCtrl'
+								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/calculator-data.html"}
 						}
@@ -211,7 +211,6 @@ var app = angular.module('myApp', [
 
 			$stateProvider
 					.state('saved-calculations-detail.test', {
-//						url: "/saved-calculations/:id",
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculations/saved-calculations-detail.html",
