@@ -12,7 +12,8 @@ angular.module('myApp.controllers', [])
 					'$firebaseSimpleLogin',
                     'Authorisation',
 					'infoData',
-                    '$interval', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval) {
+                    '$interval',
+					'appVersion', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval, appVersion) {
 
                     Authorisation.loginObj.$getCurrentUser().then(
                         function (user) {
@@ -25,6 +26,8 @@ angular.module('myApp.controllers', [])
                             }
                         }
 					);
+
+					$scope.appIsCurrent = appVersion;
 
 					/**
 					 *  Fast click, removes time delay for click on mobile
@@ -628,7 +631,6 @@ angular.module('myApp.controllers', [])
                      * Check for create new session broadcast
                      */
                     $scope.$on('createNewSession', function (event, msg) {
-                        console.log('createNewSession emmitted');
                         $scope.createNewSession();
                     });
 
@@ -654,10 +656,10 @@ angular.module('myApp.controllers', [])
                     };
 
                     var confirmOverwrite = function () {
-                        return wipeData();
+                        return $scope.wipeData();
                     };
 
-                    var wipeData = function () {
+                    $scope.wipeData = function () {
                         clearInfoData();
                         clearLocalStorage();
                         clearInputData();

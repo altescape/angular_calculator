@@ -13,6 +13,22 @@ angular.module('myApp.services', [])
 			return localStorageService.get('info') ? localStorageService.get('info') : {}
 		})
 
+		.factory('appVersion', function (localStorageService) {
+			var appVersion = 3,
+				appIsCurrent = false;
+
+			// if no locally stored app version then write one
+			if (!localStorageService.get('app-version')) {
+				localStorageService.set('app-version', appVersion);
+			}
+
+			if (localStorageService.get('app-version') >= appVersion) {
+				appIsCurrent = true
+			} else { /* App is out of date */}
+
+			return appIsCurrent;
+		})
+
 		.factory('inputData', function (localStorageService) {
 			/**
 			 * Default values for inputs.
