@@ -1410,8 +1410,8 @@ angular.module('myApp.services', [])
 						airfare_insight : {
 							name : "Airfare Insight",
 							unit : "currency",
-							high : this.airfareInsight('high'),
-							low : this.airfareInsight('low')
+							high : this.airfareInsight('high').toFixed(2),
+							low : this.airfareInsight('low').toFixed(2)
 						}
 					}
 				},
