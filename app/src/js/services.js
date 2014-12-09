@@ -779,8 +779,8 @@ angular.module('myApp.services', [])
 						dist_costs : {
 							name : "Distribution costs",
 							unit : "currency",
-							high : this.distribution_costs(),
-							low : this.distribution_costs()
+							high : this.distribution_costs().toFixed(2),
+							low : this.distribution_costs().toFixed(2)
 						},
 						revenue_improvement : {
 							name : "Revenue improvement",
@@ -791,8 +791,8 @@ angular.module('myApp.services', [])
 						value_1 : {
 							name : "Value 1",
 							unit : "currency",
-							high : this.value_1('high'),
-							low : this.value_1('low')
+							high : this.value_1('high').toFixed(2),
+							low : this.value_1('low').toFixed(2)
 						},
 						cost_saving : {
 							name : "Cost saving",
@@ -803,8 +803,8 @@ angular.module('myApp.services', [])
 						value_2 : {
 							name : "Value 2",
 							unit : "currency",
-							high : this.value_2('high'),
-							low : this.value_2('low')
+							high : this.value_2('high').toFixed(2),
+							low : this.value_2('low').toFixed(2)
 						},
 						real_time : {
 							name : "Real-time",
@@ -821,8 +821,8 @@ angular.module('myApp.services', [])
 						total : {
 							name : "Total",
 							unit : "currency",
-							high : this.total('high'),
-							low : this.total('low')
+							high : this.total('high').toFixed(2),
+							low : this.total('low').toFixed(2)
 						}
 					}
 				},
