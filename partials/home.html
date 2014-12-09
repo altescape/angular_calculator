@@ -2,14 +2,14 @@
     
     <img src="/app/img/logo-large.png" class="home-logo">
 
-    <div ng-hide="appIsCurrent" ng-controller="NewSessionCtrl">
-        <p class="lead"><i class="glyphicon glyphicon-warning-sign"></i> The application needs to be updated.</p>
-        <p><a ng-click="wipeData()" class="btn btn-gradient btn-danger">Click here to update.</a></p>
-    </div>
-
-    <div ng-show="appIsCurrent">
+    <div>
         <p ng-hide="info.loggedIn"><a ui-sref="auth" class="input-lg user-action">Proceed <span class="glyphicon glyphicon-arrow-right"></span></a></p>
         <p ng-show="info.loggedIn"><a ui-sref="info" class="input-lg user-action">Proceed <span class="glyphicon glyphicon-arrow-right"></span></a></p>
+    </div>
+
+    <div ng-controller="NewSessionCtrl">
+        <p class="text-muted pt-50 op75"><i class="glyphicon glyphicon-info-sign"></i> If this application is behaving strangely. Save all work and click reset.
+        <small><a ng-click="wipeData()" class="btn btn-xs btn-primary">reset</a></small></p>
     </div>
 
 </div>

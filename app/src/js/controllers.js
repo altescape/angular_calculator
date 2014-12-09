@@ -13,7 +13,7 @@ angular.module('myApp.controllers', [])
                     'Authorisation',
 					'infoData',
                     '$interval',
-					'appVersion', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval, appVersion) {
+					'appVersion', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval) {
 
                     Authorisation.loginObj.$getCurrentUser().then(
                         function (user) {
@@ -27,7 +27,7 @@ angular.module('myApp.controllers', [])
                         }
 					);
 
-					$scope.appIsCurrent = appVersion;
+					//$scope.appIsCurrent = appVersion;
 
 					/**
 					 *  Fast click, removes time delay for click on mobile

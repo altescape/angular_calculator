@@ -1,6 +1,6 @@
 <nav class="main-nav white-content" role="navigation">
     <div class="navbar-header">
-        <a ui-sref="home"><img class="logo" ng-src="/app/img/logo-small.png"> <span class="updates badge badge-danger" ng-hide="appIsCurrent"><i class="glyphicon glyphicon-warning-sign"></i></span></a>
+        <a ui-sref="home"><img class="logo" ng-src="/app/img/logo-small.png"> <span class="updates badge badge-danger" ng-show="appIsCurrent"><i class="glyphicon glyphicon-warning-sign"></i></span></a>
         <small class="text-white" style="margin-left: 15px" ng-show="user">Signed in as {{ user.email }}</small>
     </div>
     <div class="navbar-collapse collapse">

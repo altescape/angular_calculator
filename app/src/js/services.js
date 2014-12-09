@@ -13,19 +13,32 @@ angular.module('myApp.services', [])
 			return localStorageService.get('info') ? localStorageService.get('info') : {}
 		})
 
-		.factory('appVersion', function (localStorageService) {
-			var appVersion = 3,
-				appIsCurrent = false;
+		.factory('appVersion', function (localStorageService, $firebase, Authorisation) {
+			var thisCode = 3,
+				codeVersion = 0,
+				appIsCurrent = true;
 
-			// if no locally stored app version then write one
-			if (!localStorageService.get('app-version')) {
-				localStorageService.set('app-version', appVersion);
-			}
+			var syncToFirebase = function () {
 
-			if (localStorageService.get('app-version') >= appVersion) {
-				appIsCurrent = true
-			} else { /* App is out of date */}
+				Authorisation.loginObj.$getCurrentUser().then(
+					function (user) {
+						if ( user !== null ) {
+							var url = Authorisation.url + 'app/version';
+							var ref = new Firebase(url);
+							var obj = $firebase(ref).$asObject();
 
+							obj.$loaded().then(function() {
+								codeVersion = obj.$value;
+							});
+						}
+
+						//if (thisCode >= codeVersion) {
+						//	appIsCurrent = true;
+						//} else {/* App is out of date */}
+
+					}
+				);
+			}();
 			return appIsCurrent;
 		})
 
