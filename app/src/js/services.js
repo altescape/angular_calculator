@@ -815,8 +815,8 @@ angular.module('myApp.services', [])
 						wtf_1 : {
 							name : "*",
 							unit : "currency",
-							high : this.wtf_1('high'),
-							low : this.wtf_1('low')
+							high : this.wtf_1('high').toFixed(2),
+							low : this.wtf_1('low').toFixed(2)
 						},
 						total : {
 							name : "Total",
