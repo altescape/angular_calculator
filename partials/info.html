@@ -196,12 +196,12 @@
         <div class="form-group">
             <button ng-hide="info.running_session == true" ng-click="saveNewSession()" ui-sref="calculator.index"
                     ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-                    class="btn btn-gradient user-action">Create new calculation <i class="glyphicon glyphicon-chevron-right"></i>
+                    class="btn btn-primary user-action">Create new calculation <i class="glyphicon glyphicon-chevron-right"></i>
             </button>
 
             <button ng-show="info.running_session == true" ng-click="updateSession()" ui-sref="calculator.index"
                     ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-                    class="btn btn-gradient user-action">Update Calculation <i class="glyphicon glyphicon-ok"></i>
+                    class="btn btn-primary user-action">Update Calculation <i class="glyphicon glyphicon-ok"></i>
             </button>
         </div>
 
