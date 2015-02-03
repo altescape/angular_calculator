@@ -180,12 +180,12 @@
 
                     <div class="btn-group">
                         <a ui-sref="saved-calculations" class="btn btn-primary btn-gradient"><span
-                                class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                                class="glyphicon glyphicon-circle-arrow-left"></span></a>
                         <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
-                            Use <span class="glyphicon glyphicon-share-alt"></span>
+                            Use
                         </a>
                         <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
-                            Copy <span class="glyphicon glyphicon-plus-sign"></span>
+                            Copy
                         </a>
                     </div>
                     <a ng-hide="confirm == true" ng-click="confirm = true"
@@ -194,8 +194,6 @@
                     </a>
 
                     <div ng-hide="confirm == false" class="pull-right">
-                        <span class="pt-5 plr-5 pull-left text-danger">Delete?</span>
-
                         <div class="btn-group">
                             <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
                                 <span class="glyphicon glyphicon-ok"></span>

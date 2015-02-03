@@ -226,7 +226,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		}
 		.home-content-container {
 			position: absolute;
-			top: 30%;
+			top: 20%;
 			left: 0;
 			right: 0;
 			bottom: 0;
@@ -240,16 +240,19 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			transition: all .2s linear;
 			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
 			background-image: none;
-            background-color: transparent;
+            background-color: mix($brand-primary, $brand-success, 70%);
 			font-weight: normal;
 			text-transform: uppercase;
 			letter-spacing: 2px;
 			padding-left: 20px;
 			padding-right: 20px;
+			padding-top: 16px;
+			padding-bottom: 15px;
 //			background-color: rgba($brand-success, 0.6);
 			&:hover {
-				box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
-				background-color: rgba(255,255,255,0.2);
+			  box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
+			  background-color: mix($brand-primary, $brand-success, 40%);
+			  cursor: pointer;
 			}
 		}
 	}
@@ -264,7 +267,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 	top: 0;
 	left: 0;
 	bottom: 0;
-	right: 50%;
+	right: 67%;
 	overflow-y: scroll;
 	padding-top: 10px;
 }
@@ -277,7 +280,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 .panel__2 {
 	position: absolute;
 	top: 0;
-	left: 50%;
+	left: 33%;
 	right: 0;
 	bottom: 0;
 	height: 100%;
@@ -362,18 +365,17 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		border-radius: 0;
 		background-color: darken(#DDD, 10%);
 		font-weight: bold;
-		border: none;
 		color: $brand-primary;
-		font-size: 12px;
-		border-left: 1px solid rgba(255, 255, 255, 0.46);
-		box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+		font-size: 8px;
+		border: 0;
+		border-left: 1px solid #CCC;
 		transition: all .2s linear;
+	  	text-transform: uppercase;
 		&:last-child {
 			border-radius: 0 5px 0 0;
 		}
 		&:hover, &.active {
-			background-color: $body-bg;
-			color: darken($brand-primary, 15%);
+		  border-left: 1px solid #CCC;
 		}
 	}
 }
@@ -889,8 +891,7 @@ $input-group-fontsize: $input-group-height/2.2;
 	}
 	.postfix-choice-label {
 		float: left;
-		margin-right: 20px;
-		width: 50%;
+		width: 66%;
 		margin-left: 15px;
 		margin-top: 10px;
 	}
@@ -1015,7 +1016,18 @@ $input-group-height: 34px;
 
 /* SAVED CALCULATIONS PANELS */
 .saved-panels {
-	height: 290px;
+	height: 280px;
+  	overflow: hidden;
+
+  .panel-default {
+	.panel-heading {
+	  white-space: nowrap;
+	}
+  }
+
+  .panel-footer {
+	padding: 5px;
+  }
 }
 
 .sort {
@@ -1039,8 +1051,6 @@ $input-group-height: 34px;
 
 	.navbar-nav {
 		li {
-			&:first-child a {border-radius: 3px 0 0 0}
-			&:last-child a {border-radius: 0 3px 0 0}
 			a {
 				padding-top: 10px;
 				padding-bottom: 10px;
@@ -1094,7 +1104,7 @@ $input-group-height: 34px;
 	body {
 		font-size: 12px;
 	}
-	.panel-footer {
+	.panel-footer, .panel-heading-btn-group {
 		.btn {
 			font-size: 12px;
 		}

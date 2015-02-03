@@ -30,8 +30,8 @@
                     <div class="panel-heading pos-rel">
                         <strong ng-show="item.$id == current_key">USING: </strong>{{ item.info.airline.code | uppercase }}
                         <div class="panel-heading-btn-group pull-right btn-group">
-                            <a ui-sref="saved-calculations-detail({id:item.$id})" class="btn btn-primary">
-                                Summary
+                            <a ui-sref="saved-calculations-detail({id:item.$id})" class="btn btn-trans btn-gradient">
+                                VIEW
                             </a>
                         </div>
                     </div>
@@ -61,10 +61,10 @@
                     <div class="panel-footer">
                         <div class="btn-group">
                             <a ng-click="useSession(item.$id)" class="btn btn-trans btn-gradient">
-                                Use <span class="glyphicon glyphicon-share-alt"></span>
+                                Use
                             </a>
                             <a ng-click="copySession(item.$id)" class="btn btn-trans btn-gradient">
-                                Copy <span class="glyphicon glyphicon-plus-sign"></span>
+                                Copy
                             </a>
                         </div>
                         <a ng-hide="confirm == true" ng-click="confirm = true" class="btn btn-danger btn-gradient pull-right">
@@ -72,7 +72,7 @@
                         </a>
 
                         <div ng-hide="confirm == false" class="pull-right">
-                            <span class="pt-5 plr-5 pull-left text-danger">Delete?</span>
+                            <span class="pt-5 plr-5 pull-left text-danger small">Delete?</span>
                             <div class="btn-group">
                                 <a ng-click="deleteSession(item.$id)" class="btn btn-success btn-gradient">
                                     <span class="glyphicon glyphicon-ok"></span>
