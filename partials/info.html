@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-4 content-margin" ng-controller="SaveSessionCtrl">
+<div class="col-sm-4 col-sm-offset-4 content-margin" ng-controller="SaveSessionCtrl">
 
     <div class="well">
 
@@ -9,24 +9,24 @@
         <div class="form-group">
             <label for="acode">Airline</label>
             <input id="acode" type="text" ng-model="info.airline.code" ng-change="updateInfo()"
-                   class="form-control input-lg"
+                   class="form-control"
                    placeholder="Airline code" required>
         </div>
         <div class="form-group">
             <label for="oname">Opportunity</label>
             <input id="oname" type="text" ng-model="info.opportunity.name" ng-change="updateInfo()"
-                   class="form-control input-lg"
+                   class="form-control"
                    placeholder="Opportunity name" required>
         </div>
         <div class="form-group">
             <label for="sname">Version</label>
             <input id="sname" type="text" ng-model="info.session.name" ng-change="updateInfo()"
-                   class="form-control input-lg" ng-value=""
+                   class="form-control" ng-value=""
                    placeholder="Please enter a version number" required>
         </div>
         <div class="form-group">
             <label for="oname">Currency</label>
-            <select class="form-control input-lg" ng-model="info.currency.currency" ng-change="updateInfo()">
+            <select class="form-control" ng-model="info.currency.currency" ng-change="updateInfo()">
                 <option value="USD">US Dollar</option>
                 <option value="GBP">British Pound Sterling</option>
                 <option value="AFA">Afghan Afghani (1927–2002)</option>
@@ -196,12 +196,12 @@
         <div class="form-group">
             <button ng-hide="info.running_session == true" ng-click="saveNewSession()" ui-sref="calculator.index"
                     ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-                    class="input-lg user-action">Create new calculation <i class="glyphicon glyphicon-chevron-right"></i>
+                    class="btn btn-gradient user-action">Create new calculation <i class="glyphicon glyphicon-chevron-right"></i>
             </button>
 
             <button ng-show="info.running_session == true" ng-click="updateSession()" ui-sref="calculator.index"
                     ng-disabled="!info.airline.code || !info.session.name || !info.opportunity.name"
-                    class="input-lg user-action">Update Calculation <i class="glyphicon glyphicon-ok"></i>
+                    class="btn btn-gradient user-action">Update Calculation <i class="glyphicon glyphicon-ok"></i>
             </button>
         </div>
 
