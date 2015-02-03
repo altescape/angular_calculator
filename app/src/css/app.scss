@@ -483,6 +483,7 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 /* GLOBAL STYLES */
 body {
 	background-color: $gray-lighter;
+  	font-size: 12px;
 }
 
 #wrap {
@@ -711,7 +712,7 @@ $class-slug: pt;
 	background-position: 0 100%;
 	background-size: auto 200%;
 	transition: all .3s ease-in-out;
-	padding: 12px 16px 14px;
+	padding: 8px 16px 9px;
 	border: none;
 	&:hover, &:focus {
 		color: $body-bg;
@@ -1063,7 +1064,7 @@ $input-group-height: 34px;
 @media (min-width: $screen-md-min) {
 	/* rules for desktop (992 > 1200) */
 	body {
-		font-size: 11px;
+		font-size: 12px;
 	}
 
 	.navbar-nav.navbar-right:last-child {
@@ -1087,7 +1088,7 @@ $input-group-height: 34px;
 @media (min-width: $screen-lg-min) {
 	/* rules for large (> 1200) */
 	body {
-		font-size: 13px;
+		font-size: 12px;
 	}
 	.panel-footer {
 		.btn {
