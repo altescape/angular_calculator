@@ -14,7 +14,7 @@
                        placeholder="Enter your Password" required>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary user-action" ng-click="loginUser();"><span ng-hide="show_loader">Sign in <i class="glyphicon glyphicon-log-out"></i></span><small-loader ng-show="show_loader"></small-loader></button>
+                <button type="submit" id="sign-in" class="btn btn-primary user-action" ng-click="loginUser();"><span ng-hide="show_loader">Sign in <i class="glyphicon glyphicon-log-out"></i></span><small-loader ng-show="show_loader"></small-loader></button>
             </div>
 
             <p class="alert alert-warning" ng-show="message">{{ message }} {{ reason }}</p>
@@ -26,7 +26,7 @@
         <h2>Sign Out</h2>
         <p class="lead mb-0">Are you sure you would like to sign out?</p>
         <p class="text-capitalize text-muted">(Signed in as {{ user.email }})</p>
-        <p><a ng-click="logoutUser()" class="btn btn-primary user-action">Sign out <i class="glyphicon glyphicon-log-out"></i></a></p>
+        <p><a ng-click="logoutUser()" id="sign-out" class="btn btn-primary user-action">Sign out <i class="glyphicon glyphicon-log-out"></i></a></p>
     </div>
 
 </div>

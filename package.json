@@ -12,7 +12,10 @@
     "gulp-autoprefixer": "latest",
     "gulp-uglifyjs": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "firebase": "^2.1.2",
+    "protractor": "^1.6.1"
+  },
   "scripts": {
     "test": "npm test"
   },

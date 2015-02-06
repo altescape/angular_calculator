@@ -1,4 +1,4 @@
-'use strict';
+  'use strict';
 
 /* Controllers */
 
@@ -10,11 +10,22 @@ angular.module('myApp.controllers', [])
 					'$scope',
 					'localStorageService',
 					'$firebaseSimpleLogin',
-                    'Authorisation',
+          			'Authorisation',
 					'infoData',
-                    '$interval',
-					'appVersion', function ($rootScope, $scope, localStorageService, $firebaseSimpleLogin, Authorisation, infoData, $interval) {
+          			'$interval',
+					'appVersion',
 
+          function ($rootScope, 
+                    $scope, 
+                    localStorageService, 
+                    $firebaseSimpleLogin, 
+                    Authorisation, 
+                    infoData, 
+                    $interval) {
+
+			  		/**
+					 * Firebase simple auth
+					 */
                     Authorisation.loginObj.$getCurrentUser().then(
                         function (user) {
                             $scope.user_forms_ready = true;
@@ -25,14 +36,12 @@ angular.module('myApp.controllers', [])
                                 infoData.loggedIn = true;
                             }
                         }
-					);
-
-					//$scope.appIsCurrent = appVersion;
+                    );
 
 					/**
 					 *  Fast click, removes time delay for click on mobile
 					 */
-					FastClick.attach(document.body, null);
+					//FastClick.attach(document.body, null);
 
 					/**
 					 * Listen for clearInfoData broadcast
@@ -66,7 +75,9 @@ angular.module('myApp.controllers', [])
 					 */
 					$scope.resizeContentWrapper = function (ele_id) {
 						$scope.winHeight = document.documentElement.clientHeight;
-						ele_id.setAttribute('style', 'height: ' + $scope.winHeight + 'px');
+						if (ele_id) {
+							ele_id.setAttribute('style', 'height: ' + $scope.winHeight + 'px');
+						}
 					};
 
 					// Store ele in variable
@@ -152,24 +163,23 @@ angular.module('myApp.controllers', [])
 							'VND': $scope.currency_symbols['Dong'] // Vietnamese Dong
 						};
 
+						if ($scope.info){
+                        	var selected_currency = $scope.info.currency;
 
-
-                        var selected_currency = $scope.info.currency;
-
-                        if (selected_currency) {
-                            if (currency_symbols[selected_currency.currency] === undefined) {
-                                $scope.info.currency.symbol = '(' + selected_currency.currency + ')';
-                            } else {
-                                $scope.info.currency.symbol = currency_symbols[selected_currency.currency];
-                            }
-                        } else {
-                            $scope.info.currency = {
-                                currency: 'USD',
-                                symbol: '$'
-                            };
-                            $scope.setCurrency();
-                        }
-
+							if (selected_currency) {
+								if (currency_symbols[selected_currency.currency] === undefined) {
+									$scope.info.currency.symbol = '(' + selected_currency.currency + ')';
+								} else {
+									$scope.info.currency.symbol = currency_symbols[selected_currency.currency];
+								}
+							} else {
+								$scope.info.currency = {
+									currency: 'USD',
+									symbol: '$'
+								};
+								$scope.setCurrency();
+							}
+						}
 					};
 
 					/**

@@ -11,8 +11,8 @@ var uglify = require('gulp-uglifyjs');
 
 gulp.task('default', function () {
   return gulp.src('app/src/css/app.scss')
-      //.pipe(sass({lineNumbers: true}))
-      .pipe(sass({lineNumbers: false, style: 'compressed'}))
+      .pipe(sass({lineNumbers: true}))
+      //.pipe(sass({lineNumbers: false, style: 'compressed'}))
       .pipe(prefix("last 10 version", "> 0.5%", "ie 8", "ie 7", { cascade: true }))
       .pipe(gulp.dest('app/dist/css'));
 });

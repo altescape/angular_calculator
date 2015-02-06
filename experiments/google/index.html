@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html ng-app="myApp2">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript" src="/app/libs/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/app/libs/angular/angular.js"></script>
+    <script src="js/controllers.js"></script>
+    <style>
+        .chart_wrapper {
+            position: relative;
+        }
+        .chart_total {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            height: 100px;
+            z-index: 1;
+            font-size: 50px;
+            font-family: sans-serif;
+            right: 0;
+        }
+        .red_square {
+            position: absolute;
+            background-color: rgba(255,0,0,0.3);
+        }
+    </style>
+</head>
+<body ng-controller="GoogleChartCtrl">
+
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1','packages':['corechart']}]}"></script>
+<!--<script src="chart.js"></script>-->
+<div class="chart_wrapper" ng-init="updateData()">
+    <div class="red_square" style="left: {{ chart_left }}px; top: {{ chart_top }}px; width: {{ chart_width }}px; height: {{ chart_height }}px"></div>
+    <div class="chart_total">{{ chart_total }}</div>
+    <div id="donut_single" style="width: 63%; height: 600px;"></div>
+</div>
+
+<form>
+    <p><input type="number" ng-model="data.ri.value" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.ripi.value" placeholder="RI PI" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.wb.value" placeholder="WB" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.od.value" placeholder="OD" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.pos.value" placeholder="POS" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.arr.value" placeholder="ARR" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.ai.value" placeholder="AI" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.cs.value" placeholder="CS" ng-change="updateData()"></p>
+    <p><input type="number" ng-model="data.as.value" placeholder="AS" ng-change="updateData()"></p>
+</form>
+
+<p>Hello: {{ data.ri }}</p>
+</body>
+</html>
