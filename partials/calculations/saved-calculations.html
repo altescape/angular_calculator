@@ -17,7 +17,6 @@
                     <li><a ng-click="predicate = 'info.airline.code'; reverse=false; sort = 'name_az'" ng-class="{'active': sort == 'name_az'}">Airline (A-Z)</a></li>
                     <li><a ng-click="predicate = '-info.airline.code'; reverse=false; sort = 'name_za'" ng-class="{'active': sort == 'name_za'}">Airline (Z-A)</a></li>
                 </ul>
-<!--                <pre>Sorting predicate = {{predicate}}; reverse = {{reverse}}</pre>-->
             </div>
         </div>
 
@@ -25,10 +24,10 @@
 
             <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }} ng-cloak">Cannot find any saved calculations<br> . . .<br><a ui-sref="new-calculation" class="btn btn-success btn-lg user-action mt-5">New calculation</a></h1>
             <h1 ng-show="info.loggedIn == false" class="text-center text-muted mt-80 ng-cloak">You're not logged in. To view saved calculations you must <a ui-sref="auth">log in</a><br> . . .</h1>
-            <div class="col-xs-6 col-sm-4 col-md-3 {{ ele_load_status }} saved-panels" ng-repeat="item in items | orderBy:predicate:reverse">
+            <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2 {{ ele_load_status }} saved-panels" ng-repeat="item in items | orderBy:predicate:reverse">
                 <div class="panel" ng-class="{'panel-danger' : confirm == true, 'panel-success' : item.$id == current_key, 'panel-default' : confirm != true && item.$id != current_key, 'deleting': deleteItemId==item.$id}" ng-init="confirm = false">
-                    <div class="panel-heading pos-rel">
-                        <strong ng-show="item.$id == current_key">USING: </strong>{{ item.info.airline.code | uppercase }}
+                    <div class="panel-heading pos-rel" title="{{ item.info.airline.code }}">
+                        <strong ng-show="item.$id == current_key">USING: </strong>{{ item.info.airline.code | uppercase | limitTo : 16 }}
                         <div class="panel-heading-btn-group pull-right btn-group">
                             <a ui-sref="saved-calculations-detail({id:item.$id})" class="btn btn-trans btn-gradient">
                                 VIEW
@@ -40,13 +39,16 @@
                         <h5 class="mb-5 mt-0">
                             <small>OPPORTUNITY</small>
                         </h5>
-                        <h3 class="mt-0 mb-0">
-                            {{ item.info.opportunity.name }}</h3>
+                        <p class="mt-0 mb-0" title="{{ item.info.opportunity.name }}">
+                            <strong>{{ item.info.opportunity.name | limitTo : 16 }}</strong>
+                        </p>
 
-                        <h5 class="mb-5 mt-0">
+                        <h5 class="mb-5 mt-10">
                             <small>VERSION</small>
                         </h5>
-                        <h3 class="mt-0 mb-5">{{ item.info.session.name }}</h3>
+                        <p class="mt-0 mb-5" title="{{ item.info.session.name }}">
+                            <strong>{{ item.info.session.name | limitTo : 16 }}</strong>
+                        </p>
 
                         <hr class="mt-10 mb-10">
                         <div class="row">

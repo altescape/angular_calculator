@@ -25,15 +25,11 @@
                         </a>
 
                         <!-- Show if session has not been saved yet -->
-                        <div class="btn-group" ng-show="info.running_session == true" ng-cloak>
-<!--                            <a ng-click="saveSession()" class="btn btn-trans btn-gradient btn-sm mt-10">COPY <span-->
-<!--                                  class="glyphicon glyphicon glyphicon-plus-sign"></span></a>-->
-                            <a ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
-                               ng-disabled="saving == true">
-                                <span ng-show="saving == false">SAVE</span>
-                                <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
-                            </a>
-                        </div>
+                        <a ng-show="info.running_session == true" ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
+                           ng-disabled="saving == true">
+                            <span ng-show="saving == false">SAVE</span>
+                            <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
+                        </a>
                     </div>
                 </div>
 

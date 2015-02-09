@@ -4,4 +4,5 @@
 .idea
 .git
 .idea/codeStyleSettings.xml
-tests/
+.env
+/tests/conf.js

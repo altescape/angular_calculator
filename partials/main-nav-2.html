@@ -19,7 +19,7 @@
             </li>
             <li ng-show="info.loggedIn && OfflineState == 'up'"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>
             <li ng-hide="OfflineState == 'down'">
-                <a ui-sref="auth" ng-class="{active : navActive == 'auth'}">
+                <a ui-sref="auth" ng-class="{active : navActive == 'auth'}" class="so_link">
                     <span ng-show="info.loggedIn">Sign Out</span>
                     <span ng-hide="info.loggedIn">Sign In</span>
                 </a>
