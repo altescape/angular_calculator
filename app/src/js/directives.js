@@ -12,21 +12,14 @@ angular.module('myApp.directives', ['LocalStorageModule']).
     directive('mainNav', function () {
         return {
             restrict: 'A',
-            templateUrl: 'partials/global/main-nav.html'
+            templateUrl: 'partials/global/nav-top.html'
         };
-    }).
-
-    directive("snapDrawLeft", function () {
-        return {
-            restrict: "A",
-            templateUrl: "partials/snap-draw-left.html"
-        }
     }).
 
     directive('navBottom', function () {
         return {
             restrict: "E",
-            templateUrl: "partials/nav-bottom.html"
+            templateUrl: "partials/global/nav-bottom.html"
         }
     }).
 
