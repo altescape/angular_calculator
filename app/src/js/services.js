@@ -31,11 +31,6 @@ angular.module('myApp.services', [])
 								codeVersion = obj.$value;
 							});
 						}
-
-						//if (thisCode >= codeVersion) {
-						//	appIsCurrent = true;
-						//} else {/* App is out of date */}
-
 					}
 				);
 			}();
@@ -93,18 +88,18 @@ angular.module('myApp.services', [])
 			 * Note: The the service names (categories) are hard coded in here.
 			 */
 
-			Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
-				return {
-					radialGradient : { cx : 0.5, cy : 0.3, r : 0.7 },
-					stops : [
-						[0, color],
-						[1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
-					]
-				};
-			});
-
 			Highcharts.setOptions({
-				colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
+				colors: [
+					'#E0586A',
+					'#E05AAD',
+					'#576CDF',
+					'#5AAFE0',
+					'#5DE08C',
+					'#6DE05E',
+					'#AFE05F',
+					'#E1CE5F',
+					'#E0895B'
+				]
 			});
 
 			var chartConfigTemplate = {
@@ -116,15 +111,13 @@ angular.module('myApp.services', [])
 					chart : {
 						type : 'pie',
 						backgroundColor : 'rgba(255, 255, 255, 0)',
-						plotBackgroundColor : 'rgba(255, 255, 255, 0)',
-						spacingBottom : 50
+						plotBackgroundColor : 'rgba(255, 255, 255, 0)'
 					},
 					plotOptions : {
 						series : {
 							animation : true
 						},
 						pie : {
-							borderWidth : 0,
 							allowPointSelect : true,
 							cursor : 'pointer',
 							dataLabels : {
@@ -144,8 +137,14 @@ angular.module('myApp.services', [])
 						}
 					},
 					tooltip : {
-						enabled : false,
-						pointFormat : '<b>{point.y}</b>'
+						enabled : true,
+						formatter : function () {
+							if ( this.y != 0 ) {
+								return '<b>' + this.point.name + '</b>: ' + chartConfigTemplate.currency.symbol + this.point.y;
+							} else {
+								return null;
+							}
+						}
 					}
 				},
 				title : {
@@ -161,14 +160,9 @@ angular.module('myApp.services', [])
 						data : [],
 						innerSize : '30%',
 						dataLabels : {
-//							formatter: function() {
-//								return this.y > 0 ? this.point.y : null;
-//							},
 							style : {
 								fontWeight : 'bold'
 							}
-//							color: 'white',
-//							distance: -43
 						},
 						point : {
 							events : {
@@ -185,19 +179,20 @@ angular.module('myApp.services', [])
 						size : '15%',
 						dataLabels : {
 							formatter : function () {
-								return this.y > 0 ? 'Total: ' + chartConfigTemplate.currency.symbol + this.point.y : null;
+								return this.y > 0 ? chartConfigTemplate.currency.symbol + this.point.y : null;
 							},
-//							color: 'white',
-//							distance: -37,
 							style : {
 								fontWeight : 'bold',
-								color : 'white'
-							}
+								color : 'white',
+								fontSize: '18px',
+								textShadow: '0px 1px 2px black'
+							},
+							distance: -40
 						},
 						allowPointSelect : false,
 						enableMouseTracking : false,
 						borderWidth : 0,
-						colors : ['#36474F']
+						colors : ['#006EAC']
 					}
 				],
 				yAxis : {
@@ -220,7 +215,7 @@ angular.module('myApp.services', [])
 
 		})
 
-		.factory('chartData', function (localStorageService, chartConfig) {
+		.factory('chartData', function (localStorageService, chartConfig, allData) {
 			/**
 			 * Summary object where default values for service options are stored.
 			 * Creates an object and saves to localstorage with key called 'ls.summary'.
@@ -239,67 +234,9 @@ angular.module('myApp.services', [])
 			 ]
 			 */
 
-
-
 			return {
 
-                chartObj : {
-					revenue_integrity : {
-						name : "Revenue Integrity",
-						short_name : "RI",
-						high : 0,
-						low : 0
-					},
-					revenue_integrity_process_improvement : {
-						name : "Revenue Integrity Process Improvement",
-						short_name : "RIPI",
-						high : 0,
-						low : 0
-					},
-					cmap : {
-						name : "Weight and Balance",
-						short_name : "W&B",
-						high : 0,
-						low : 0
-					},
-					origin_and_destination : {
-						name : "Origin and Destination",
-						short_name : "O&D",
-						high : 0,
-						low : 0
-					},
-					pos : {
-						name : "Point of Sale",
-						short_name : "POS",
-						high : 0,
-						low : 0
-					},
-					arr : {
-						name : "ARR",
-						short_name : "ARR",
-						high : 0,
-						low : 0
-					},
-					airfare_insight : {
-						name : "Airfare Insight",
-						short_name : "AI",
-						high : 0,
-						low : 0
-					},
-					channel_shift : {
-						name : "Channel Shift",
-						short_name : "CS",
-						high : 0,
-						low : 0
-					},
-					ancillary_sales : {
-						name : "Ancillary Sales",
-						short_name : "AS",
-						high : 0,
-						low : 0
-					}
-
-				},
+                chartObj : allData,
 
 				/**
 				 * Transpose data between locally stored or firebase
@@ -655,70 +592,69 @@ angular.module('myApp.services', [])
 
 		.factory('allData', function () {
 			return {
-				revenue_integrity : {
-					name : "Revenue Integrity",
-					short_name : "RI",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
-				revenue_integrity_process_improvement : {
-					name : "Revenue Integrity Process Improvement",
-					short_name : "RIPI",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
-				cmap : {
-					name : "Weight and Balance",
-					short_name : "W&B",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
-				origin_and_destination : {
-					name : "Origin and Destination",
-					short_name : "O&D",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
-				pos : {
-					name : "Point of Sale",
-					short_name : "POS",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
-				arr : {
-					name : "ARR",
-					short_name : "ARR",
-					high : 0,
-					low : 0,
-					summary : {}
-				},
 				airfare_insight : {
 					name : "Airfare Insight",
 					short_name : "AI",
 					high : 0,
 					low : 0,
-					summary : {}
-				},
-				channel_shift : {
-					name : "Channel Shift",
-					short_name : "CS",
-					high : 0,
-					low : 0,
-					summary : {}
+					summary: {}
 				},
 				ancillary_sales : {
 					name : "Ancillary Sales",
 					short_name : "AS",
 					high : 0,
 					low : 0,
-					summary : {}
+					summary: {}
+				},
+				arr : {
+					name : "ARR",
+					short_name : "ARR",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				channel_shift : {
+					name : "Channel Shift",
+					short_name : "CS",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				cmap : {
+					name : "Weight and Balance",
+					short_name : "W&B",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				origin_and_destination : {
+					name : "Origin and Destination",
+					short_name : "O&D",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				pos : {
+					name : "Point of Sale",
+					short_name : "POS",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				revenue_integrity : {
+					name : "Revenue Integrity",
+					short_name : "RI",
+					high : 0,
+					low : 0,
+					summary: {}
+				},
+				revenue_integrity_process_improvement : {
+					name : "Revenue Integrity Process Improvement",
+					short_name : "RIPI",
+					high : 0,
+					low : 0,
+					summary: {}
 				}
-
 			}
 		})
 
