@@ -115,7 +115,7 @@
             </tr>
             <tr>
                 <td>{{ cmap.fuel_cost.name }}</td>
-                <td colspan="2">{{ cmap.fuel_cost.value | commas }}</td>
+                <td colspan="2">{{ cmap.fuel_cost.value | currency:currency }}</td>
             </tr>
             <tr ng-repeat="item in cmap.summary">
                 <td>{{ item.name }}</td>
