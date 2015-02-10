@@ -63,7 +63,7 @@ var app = angular.module('myApp', [
 						url: "/calculator",
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {
@@ -77,7 +77,7 @@ var app = angular.module('myApp', [
 						url: "",
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {
@@ -90,7 +90,7 @@ var app = angular.module('myApp', [
 					.state('calculator.chart_high', {
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/chart_high.html"}
@@ -101,7 +101,7 @@ var app = angular.module('myApp', [
 					.state('calculator.chart_low', {
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/chart_low.html"}
@@ -112,7 +112,7 @@ var app = angular.module('myApp', [
 					.state('calculator.table', {
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "partials/results/table.html"}
@@ -123,7 +123,7 @@ var app = angular.module('myApp', [
 					.state('calculator.data', {
 						views : {
 							"mainView" : {
-								templateUrl : "partials/calculator.html",
+								templateUrl : "../../../partials/calculator/calculator.html",
 								controller : 'CalcCtrl'
 							},
 							"dataView" : {templateUrl : "../../../partials/calculator/_data.html"}
