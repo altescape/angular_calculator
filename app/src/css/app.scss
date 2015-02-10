@@ -218,12 +218,25 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		right: 0;
 		height: 100%;
 		background-image: url(/app/img/home-background.jpg);
+	  	background-position: 50% 50%;
 		background-size: cover;
 		margin: 0;
 		overflow: hidden;
 		h1, h2, h3, p {
 			color: $body-bg !important;
 		}
+
+	  	h1 {
+		  background: white;
+		  color: $brand-primary !important;
+		  padding: 0;
+		}
+
+	  	.background-white {
+		  background-color: $body-bg;
+		  padding: 2em 0;
+		}
+
 		.home-content-container {
 			position: absolute;
 			top: 20%;
@@ -233,14 +246,14 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			height: 100%;
 		}
 		.home-logo {
-			width: 300px;
-			padding-bottom: 3em;
+			width: 180px;
 		}
 		.user-action {
 			transition: all .2s linear;
-			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5), 3px 3px 16px rgba(0, 0, 0, 0.2);
 			background-image: none;
-            background-color: mix($brand-primary, $brand-success, 70%);
+			box-shadow: 0 0 0 2px rgba(255,255,255,0.6) inset;
+			background-color: darken($brand-primary, 8%);
+			color: $body-bg;
 			font-weight: normal;
 			text-transform: uppercase;
 			letter-spacing: 2px;
@@ -248,10 +261,11 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 			padding-right: 20px;
 			padding-top: 16px;
 			padding-bottom: 15px;
-//			background-color: rgba($brand-success, 0.6);
+
 			&:hover {
-			  box-shadow: 0 0 0 2px rgba(255,255,255,0.6);
-			  background-color: mix($brand-primary, $brand-success, 40%);
+			  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+			  background-color: $body-bg;
+			  color: mix($brand-primary, $brand-success, 70%);
 			  cursor: pointer;
 			}
 		}
@@ -457,6 +471,44 @@ $gmb-loader-color: lighten($brand-grey, 30%);
   right: 0;
   height: 40px;
   padding: 8px 1px 0;
+}
+
+.chart-legend {
+  $CHART_COLOURS: #E0586A, #E05AAD, #576CDF, #5AAFE0, #5DE08C, #6DE05E, #AFE05F, #E1CE5F, #E0895B;
+
+  width: 70%;
+  margin: 0 auto;
+
+  li {
+	padding: 5px;
+  }
+
+  .chart-legend-styles {
+	content: "";
+	display: block;
+	width: 20px;
+	height: 20px;
+	float: left;
+	margin-right: 4px;
+	margin-top: -2px;
+	border-radius: 50%;
+  }
+
+  @mixin ch-x {
+	@for $i from 1 through 9 {
+
+	  $nth: nth($CHART_COLOURS, $i);
+
+	  .ch-#{$i}, li:nth-child(#{$i}) {
+		&:before {
+			@extend .chart-legend-styles; background-color: #{$nth}
+		}
+	  }
+	}
+  }
+
+  @include ch-x;
+
 }
 
 /* TRANSPARENT BUTTON */
