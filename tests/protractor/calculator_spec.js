@@ -41,6 +41,7 @@ describe('Sita Calculator Calculator', function () {
         airline_text.clear().sendKeys('airline code test');
         opportunity_text.clear().sendKeys('opportunity test ');
         version_text.clear().sendKeys(Date.now());
+        var select_currency = element(by.cssContainingText('option', 'US Dollar')).click();
         create_button.click();
         browser.sleep(200);
     };

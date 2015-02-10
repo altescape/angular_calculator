@@ -80,6 +80,13 @@ angular.module('myApp.directives', ['LocalStorageModule']).
         }
     }]).
 
+    directive('chartlegend', [function () {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/results/_legend.html'
+        }
+    }]).
+
     directive('smallLoader', [function () {
         return {
             restrict: 'E',
