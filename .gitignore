@@ -5,4 +5,5 @@
 .git
 .idea/codeStyleSettings.xml
 .env
-/tests/spec/protractor.js
+/tests/protractor/protractor.config.js
+/tests/unit/karma.config.js
