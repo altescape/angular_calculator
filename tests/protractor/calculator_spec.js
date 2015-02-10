@@ -131,7 +131,7 @@ describe('Sita Calculator Calculator', function () {
         });
 
         var click_data_tab = function () {
-            var tab = element(by.css('a[ui-sref="calculator.test"]'));
+            var tab = element(by.css('a[ui-sref="calculator.data"]'));
             tab.click();
         };
 

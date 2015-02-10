@@ -120,13 +120,13 @@ var app = angular.module('myApp', [
 					});
 
 			$stateProvider
-					.state('calculator.test', {
+					.state('calculator.data', {
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculator.html",
 								controller : 'CalcCtrl'
 							},
-							"dataView" : {templateUrl : "partials/calculator-data.html"}
+							"dataView" : {templateUrl : "../../../partials/calculator/_data.html"}
 						}
 					});
 
@@ -209,13 +209,13 @@ var app = angular.module('myApp', [
 					});
 
 			$stateProvider
-					.state('saved-calculations-detail.test', {
+					.state('saved-calculations-detail.data', {
 						views : {
 							"mainView" : {
 								templateUrl : "partials/calculations/saved-calculations-detail.html",
 								controller : 'SessionsDetailCtrl'
 							},
-							"dataView" : {templateUrl : "partials/calculator-data.html"}
+							"dataView" : {templateUrl : "../../../partials/calculator/_data.html"}
 						}
 					});
 

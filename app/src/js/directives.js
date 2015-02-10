@@ -76,7 +76,7 @@ angular.module('myApp.directives', ['LocalStorageModule']).
     directive('services', [function () {
         return {
             restrict: 'E',
-            templateUrl: 'partials/calculator/services.html'
+            templateUrl: 'partials/calculator/_services.html'
         }
     }]).
 
