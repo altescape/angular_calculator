@@ -61,17 +61,6 @@ angular.module('myApp.services', [])
 						op8 : null,
 						op9 : null
 					},
-					//param1 : 6500000,
-					//param2 : 3,
-					//param3 : 3611111,
-					//param4 : 10,
-					//param5 : 7,
-					//param6 : 2500000000,
-					//param7 : 2565000000,
-					//param8 : 15,
-					//param9 : 100,
-					//param10 : 34,
-					//adjustment : 1000000,
 
                     param1 : 0,
                     param2 : 0,
@@ -112,6 +101,10 @@ angular.module('myApp.services', [])
 						[1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
 					]
 				};
+			});
+
+			Highcharts.setOptions({
+				colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4']
 			});
 
 			var chartConfigTemplate = {
@@ -251,52 +244,62 @@ angular.module('myApp.services', [])
 			return {
 
                 chartObj : {
-                    revenue_integrity : {
-                        name : 'Revenue Integrity',
-                        high : 0,
-                        low : 0
-                    },
-                    revenue_integrity_process_improvement : {
-                        name : 'Revenue Integrity Process Improvement',
-                        high : 0,
-                        low : 0
-                    },
-                    channel_shift : {
-                        name : 'Channel Shift',
-                        high : 0,
-                        low : 0
-                    },
-                    ancillary_sales : {
-                        name : 'Ancillary Sales',
-                        high : 0,
-                        low : 0
-                    },
-                    cmap : {
-                        name : 'CMAP',
-                        high : 0,
-                        low : 0
-                    },
-                    o_and_d : {
-                        name : 'O & D',
-                        high : 0,
-                        low : 0
-                    },
-                    pos : {
-                        name : 'POS',
-                        high : 0,
-                        low : 0
-                    },
-                    arr : {
-                        name : 'ARR',
-                        high : 0,
-                        low : 0
-                    },
-                    insight : {
-                        name : 'Insight',
-                        high : 0,
-                        low : 0
-                    }
-                },
+					revenue_integrity : {
+						name : "Revenue Integrity",
+						short_name : "RI",
+						high : 0,
+						low : 0
+					},
+					revenue_integrity_process_improvement : {
+						name : "Revenue Integrity Process Improvement",
+						short_name : "RIPI",
+						high : 0,
+						low : 0
+					},
+					cmap : {
+						name : "Weight and Balance",
+						short_name : "W&B",
+						high : 0,
+						low : 0
+					},
+					origin_and_destination : {
+						name : "Origin and Destination",
+						short_name : "O&D",
+						high : 0,
+						low : 0
+					},
+					pos : {
+						name : "Point of Sale",
+						short_name : "POS",
+						high : 0,
+						low : 0
+					},
+					arr : {
+						name : "ARR",
+						short_name : "ARR",
+						high : 0,
+						low : 0
+					},
+					airfare_insight : {
+						name : "Airfare Insight",
+						short_name : "AI",
+						high : 0,
+						low : 0
+					},
+					channel_shift : {
+						name : "Channel Shift",
+						short_name : "CS",
+						high : 0,
+						low : 0
+					},
+					ancillary_sales : {
+						name : "Ancillary Sales",
+						short_name : "AS",
+						high : 0,
+						low : 0
+					}
+
+				},
 
 				/**
 				 * Transpose data between locally stored or firebase
@@ -318,11 +321,20 @@ angular.module('myApp.services', [])
 				 * @returns {Array}
 				 */
 				chartData : function (va, src) {
-					var chartArrayHigh = [],
-							chartArrayLow = [];
+					var chartArrayHigh = [], chartArrayLow = [];
 					angular.forEach(this.dataSource(src), function (value, key) {
-						chartArrayHigh.push([value.name, value.high]);
-						chartArrayLow.push([value.name, value.low]);
+
+						// the following is a hackey way of checking for shortname
+						var name;
+						if (value.short_name) {
+							name = value.short_name;
+						} else {
+							name = value.name;
+						}
+						// end of hackey way
+
+						chartArrayHigh.push([name, value.high]);
+						chartArrayLow.push([name, value.low]);
 					});
 					if ( va === 'high' ) {
 						return chartArrayHigh;
@@ -644,54 +656,64 @@ angular.module('myApp.services', [])
 		.factory('allData', function () {
 			return {
 				revenue_integrity : {
-					name : "Revenue integrity",
+					name : "Revenue Integrity",
+					short_name : "RI",
 					high : 0,
-					low : 0
+					low : 0,
+					summary : {}
 				},
 				revenue_integrity_process_improvement : {
 					name : "Revenue Integrity Process Improvement",
+					short_name : "RIPI",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				cmap : {
 					name : "Weight and Balance",
+					short_name : "W&B",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				origin_and_destination : {
 					name : "Origin and Destination",
+					short_name : "O&D",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				pos : {
 					name : "Point of Sale",
+					short_name : "POS",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				arr : {
 					name : "ARR",
+					short_name : "ARR",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				airfare_insight : {
 					name : "Airfare Insight",
+					short_name : "AI",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				channel_shift : {
 					name : "Channel Shift",
+					short_name : "CS",
 					high : 0,
 					low : 0,
 					summary : {}
 				},
 				ancillary_sales : {
 					name : "Ancillary Sales",
+					short_name : "AS",
 					high : 0,
 					low : 0,
 					summary : {}
@@ -3005,11 +3027,6 @@ angular.module('myApp.services', [])
 				 * Writes data to allData object
 				 */
 				initObject : function () {
-
-//					console.log(this.indirect());
-//					console.log(this.direct());
-//					console.log(this.totals());
-//					console.log(this.costs());
 
 					// If option is not selected then return empty object with default values (0)
 					if ( inputData.services && !inputData.services.op3 ) {
