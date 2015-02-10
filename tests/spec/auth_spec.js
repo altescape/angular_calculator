@@ -3,7 +3,6 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-
 describe('Sita Calculator Auth', function () {
 
     var login = function () {
