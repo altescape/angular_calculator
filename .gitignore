@@ -7,3 +7,4 @@
 .env
 /tests/protractor/protractor.config.js
 /tests/unit/karma.config.js
+npm-debug.log
