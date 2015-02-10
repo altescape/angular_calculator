@@ -3,7 +3,6 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-
 describe('Sita Calculator Info', function () {
 
     /**
@@ -49,7 +48,7 @@ describe('Sita Calculator Info', function () {
             login();
         });
 
-        xit('should disable Create new calculation button when all fields are empty', function () {
+        it('should disable Create new calculation button when all fields are empty', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             airline_text.clear();
             opportunity_text.clear();
@@ -58,7 +57,7 @@ describe('Sita Calculator Info', function () {
             expect(update_button.isDisplayed()).toBeFalsy();
         });
 
-        xit('should disable Create new calculation button when one field is empty (Airline)', function () {
+        it('should disable Create new calculation button when one field is empty (Airline)', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             airline_text.clear();
             opportunity_text.clear().sendKeys(123);
@@ -67,7 +66,7 @@ describe('Sita Calculator Info', function () {
             expect(update_button.isDisplayed()).toBeFalsy();
         });
 
-        xit('should disable Create new calculation button when one field is empty (Opportunity)', function () {
+        it('should disable Create new calculation button when one field is empty (Opportunity)', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             airline_text.clear().sendKeys(123);
             opportunity_text.clear();
@@ -76,7 +75,7 @@ describe('Sita Calculator Info', function () {
             expect(update_button.isDisplayed()).toBeFalsy();
         });
 
-        xit('should disable Create new calculation button when one field is empty (Version)', function () {
+        it('should disable Create new calculation button when one field is empty (Version)', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             airline_text.clear().sendKeys(123);
             opportunity_text.clear().sendKeys('XYZ');
@@ -85,7 +84,7 @@ describe('Sita Calculator Info', function () {
             expect(update_button.isDisplayed()).toBeFalsy();
         });
 
-        xit('should enable button once form is completed', function() {
+        it('should enable button once form is completed', function() {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             expect(create_button.getAttribute('disabled')).toBeTruthy();
             airline_text.clear().sendKeys(123);
@@ -95,7 +94,7 @@ describe('Sita Calculator Info', function () {
             expect(update_button.isDisplayed()).toBeFalsy();
         });
 
-        xit('should update footer', function() {
+        it('should update footer', function() {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             airline_text.clear().sendKeys(123);
             opportunity_text.clear().sendKeys(456);
@@ -110,7 +109,7 @@ describe('Sita Calculator Info', function () {
             expect(footer_info_session_name.getText()).toEqual(version_text.getAttribute('value'));
         });
 
-        xit('should change currency', function() {
+        it('should change currency', function() {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             var dd = element(by.cssContainingText('option', 'British Pound Sterling')).click();
             expect(dd.getAttribute('value')).toMatch('GBP');
@@ -125,7 +124,7 @@ describe('Sita Calculator Info', function () {
             expect(browser.getLocationAbsUrl()).toMatch(/\/calculator/);
         });
 
-        xit('should change button to update calculation once form is saved', function () {
+        it('should change button to update calculation once form is saved', function () {
             // test should still be logged in and in a current session
             browser.driver.get('http://hoz-calculator-dev.com/#/info');
             expect(update_button.isDisplayed()).toBeTruthy();
