@@ -5,13 +5,21 @@
 
     <div class="background-white pb-30">
         <h1>Value Calculator</h1>
-        <p ng-hide="info.loggedIn"><a ui-sref="auth" class="user-action btn btn-lg">START</a></p>
-        <p ng-show="info.loggedIn"><a ui-sref="info" class="user-action btn btn-lg">START</a></p>
+        <p ng-hide="info.loggedIn"><a ui-sref="auth" class="user-action user-action-white btn btn-lg">START</a></p>
+        <p ng-show="info.loggedIn"><a ui-sref="info" class="user-action user-action-white btn btn-lg">START</a></p>
     </div>
 
-    <div ng-controller="NewSessionCtrl">
-        <p class="text-muted pt-10 op75"><i class="glyphicon glyphicon-info-sign"></i> If this application is behaving strangely. Save all work and click reset.
-        <small><a ng-click="wipeData()" class="btn btn-xs user-action user-action-danger">RESET</a></small></p>
+    <div ng-controller="NewSessionCtrl" class="home-help">
+        <p class="pt-20">
+            <a ng-click="is_help_msg_open = !is_help_msg_open" class="btn btn-xs user-action user-action-white">
+                <span ng-hide="is_help_msg_open"><span class="glyphicon glyphicon-eye-open"></span> Help</span>
+                <span ng-show="is_help_msg_open"><span class="glyphicon glyphicon-eye-close"></span> Help</span>
+            </a>
+        </p>
+        <div ng-show="is_help_msg_open">
+            <p><i class="glyphicon glyphicon-info-sign"></i> If this application is behaving strangely. Save all work and click reset.
+                <small><a ng-click="wipeData()" class="btn btn-xs user-action user-action-danger">RESET</a></small></p>
+        </div>
     </div>
 
 </div>

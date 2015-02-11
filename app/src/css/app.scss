@@ -227,13 +227,11 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		}
 
 	  	h1 {
-		  background: white;
-		  color: $brand-primary !important;
 		  padding: 0;
 		}
 
 	  	.background-white {
-		  background-color: $body-bg;
+		  background-color: rgba($body-bg, 0.2);
 		  padding: 2em 0;
 		}
 
@@ -247,6 +245,15 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		}
 		.home-logo {
 			width: 180px;
+		}
+
+	  	.home-help {
+		  transition: opacity 1s linear;
+		  opacity: .5;
+
+		  &:hover {
+			opacity: 1;
+		  }
 		}
 	}
 }
@@ -753,11 +760,20 @@ $class-slug: pt;
 		outline: none;
 	  	text-shadow: 0px -2px darken($brand-success, 10%);
 	}
-	/* DANGER */
+
+	/* Danger */
 	&.user-action-danger {
       background-color: darken($brand-success, 20%);
       background-image: linear-gradient($brand-danger, darken($brand-danger, 20%));
 	  text-shadow: 0px -2px darken($brand-danger, 20%);
+	}
+
+	/* White */
+	&.user-action-white {
+	  color: $brand-primary;
+      background-color: $body-bg;
+      background-image: linear-gradient($body-bg, darken($body-bg, 20%));
+	  text-shadow: 0px -2px darken($body-bg, 10%);
 	}
 
   	&.btn-lg {
