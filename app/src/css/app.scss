@@ -248,32 +248,8 @@ $gmb-loader-color: lighten($brand-grey, 30%);
 		.home-logo {
 			width: 180px;
 		}
-		.user-action {
-			transition: all .2s linear;
-			background-image: none;
-			box-shadow: 0 0 0 2px rgba(255,255,255,0.6) inset;
-			background-color: darken($brand-primary, 8%);
-			color: $body-bg;
-			font-weight: normal;
-			text-transform: uppercase;
-			letter-spacing: 2px;
-			padding-left: 20px;
-			padding-right: 20px;
-			padding-top: 16px;
-			padding-bottom: 15px;
-
-			&:hover {
-			  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
-			  background-color: $body-bg;
-			  color: mix($brand-primary, $brand-success, 70%);
-			  cursor: pointer;
-			}
-		}
 	}
 }
-
-
-
 
 /* CHART AREA */
 .panel__1 {
@@ -768,16 +744,29 @@ $class-slug: pt;
 	transition: all .3s ease-in-out;
 	padding: 8px 16px 9px;
 	border: none;
+  	text-shadow: 0px -2px darken($brand-success, 20%);
+
 	&:hover, &:focus {
 		color: $body-bg;
 		background-position: 0 0;
 		text-decoration: none;
 		outline: none;
+	  	text-shadow: 0px -2px darken($brand-success, 10%);
 	}
 	/* DANGER */
 	&.user-action-danger {
       background-color: darken($brand-success, 20%);
       background-image: linear-gradient($brand-danger, darken($brand-danger, 20%));
+	  text-shadow: 0px -2px darken($brand-danger, 20%);
+	}
+
+  	&.btn-lg {
+	  padding: 15px 40px;
+	}
+
+  	&.btn-xs {
+	  padding: 5px 10px;
+	  margin: 0;
 	}
 }
 

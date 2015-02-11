@@ -3,15 +3,15 @@
     <img src="/app/img/logo-large.png" class="home-logo pb-50">
 
 
-    <div class="background-white">
-        <h1 class="text-center">Value Calculator</h1>
-        <p ng-hide="info.loggedIn"><a ui-sref="auth" class="btn btn-default btn-lg user-action">Proceed <span class="glyphicon glyphicon-share-alt"></span></a></p>
-        <p ng-show="info.loggedIn"><a ui-sref="info" class="btn btn-default btn-lg user-action">Proceed <span class="glyphicon glyphicon-share-alt"></span></a></p>
+    <div class="background-white pb-30">
+        <h1>Value Calculator</h1>
+        <p ng-hide="info.loggedIn"><a ui-sref="auth" class="user-action btn btn-lg">START</a></p>
+        <p ng-show="info.loggedIn"><a ui-sref="info" class="user-action btn btn-lg">START</a></p>
     </div>
 
     <div ng-controller="NewSessionCtrl">
         <p class="text-muted pt-10 op75"><i class="glyphicon glyphicon-info-sign"></i> If this application is behaving strangely. Save all work and click reset.
-        <small><a ng-click="wipeData()" class="btn btn-xs btn-primary">reset</a></small></p>
+        <small><a ng-click="wipeData()" class="btn btn-xs user-action user-action-danger">RESET</a></small></p>
     </div>
 
 </div>
