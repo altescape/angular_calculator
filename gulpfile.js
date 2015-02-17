@@ -43,8 +43,8 @@ gulp.task('ug_base', function() {
 		'app/libs/angular-route/angular-route.js',
 		'app/libs/angular-local-storage/angular-local-storage.js'
 	])
-			.pipe(uglify('base.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('base.min.js', ug_options))
+	.pipe(ug_dest)
 });
 
 gulp.task('ug_app', function() {
@@ -55,8 +55,8 @@ gulp.task('ug_app', function() {
 		'app/src/js/services.js',
 		'app/src/js/controllers.js'
 	])
-			.pipe(uglify('app.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('app.min.js', ug_options))
+	.pipe(ug_dest)
 });
 
 gulp.task('ug_firebase', function() {
@@ -65,8 +65,8 @@ gulp.task('ug_firebase', function() {
 		'app/libs/angularfire/dist/angularfire.min.js',
 		'app/libs/firebase-simple-login/firebase-simple-login.js'
 	])
-			.pipe(uglify('fb.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('fb.min.js', ug_options))
+	.pipe(ug_dest)
 });
 
 gulp.task('ug_highcharts', function() {
@@ -75,8 +75,8 @@ gulp.task('ug_highcharts', function() {
 		'app/src/js/charts/exporting.js',
 		'app/libs/highcharts-ng/dist/highcharts-ng.js'
 	])
-			.pipe(uglify('hc.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('hc.min.js', ug_options))
+	.pipe(ug_dest)
 });
 
 gulp.task('ug_angularjs_components', function() {
@@ -86,8 +86,8 @@ gulp.task('ug_angularjs_components', function() {
 		'app/libs/angular-ui-router/release/angular-ui-router.js',
 		'app/libs/angular-fcsa-number/src/fcsaNumber.js'
 	])
-			.pipe(uglify('c1.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('c1.min.js', ug_options))
+	.pipe(ug_dest)
 });
 
 gulp.task('ug_ui_components', function() {
@@ -97,6 +97,6 @@ gulp.task('ug_ui_components', function() {
 		'app/src/js/ui/appscroll.min.js',
 		'app/libs/offline/offline.min.js'
 	])
-			.pipe(uglify('c2.min.js', ug_options))
-			.pipe(ug_dest)
+	.pipe(uglify('c2.min.js', ug_options))
+	.pipe(ug_dest)
 });
