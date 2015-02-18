@@ -24,8 +24,8 @@
 
     <div ng-show="logged_in" class="well text-center">
         <h2>Sign Out</h2>
-        <p class="lead mb-0">Are you sure you would like to sign out?</p>
-        <p class="text-capitalize text-muted">(Signed in as {{ user.email }})</p>
+        <p class="lead">Are you sure you would like to sign out?</p>
+        <p class="text-capitalize text-muted">You are signed in as <strong>{{ user.email }}</strong></p>
         <p><a ng-click="logoutUser()" id="sign-out" class="btn btn-primary user-action">Sign out <i class="glyphicon glyphicon-log-out"></i></a></p>
     </div>
 
