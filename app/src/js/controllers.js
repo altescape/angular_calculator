@@ -29,6 +29,9 @@ angular.module('myApp.controllers', [])
                     infoData.airline = {code: ''};
                     infoData.opportunity = {name: ''};
                     infoData.session = {name: ''};
+
+                    // Clear local storage
+                    localStorageService.clearAll()
                 }
             });
 
@@ -896,6 +899,7 @@ angular.module('myApp.controllers', [])
             $scope.logoutUser = function () {
                 $scope.logged_in = false;
                 $scope.$emit('isLoggedInMessage', false);
+                $scope.$emit('clearInfoData', true);
                 $scope.message = "";
                 ref.unauth();
             };

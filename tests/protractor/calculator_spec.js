@@ -50,7 +50,7 @@ describe('Sita Calculator', function () {
         //browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
-    describe('calculator page', function () {
+    describe('Calculator functionality', function () {
         // Figures
         var fig_field_1 = element(by.id('param1')),
             fig_field_2 = element(by.id('param2')),

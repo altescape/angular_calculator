@@ -14,7 +14,7 @@
                     <span>Information</span>
                 </a>
             </li>
-            <li ng-show="info.loggedIn && (info.airline.code || info.session.name || info.opportunity.name)">
+            <li ng-show="info.loggedIn && info.airline.code && info.session.name && info.opportunity.name">
                 <a ui-sref="calculator.index" ng-class="{active : navActive == 'calculator'}">Calculator</a>
             </li>
             <li ng-show="info.loggedIn && OfflineState == 'up'"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>

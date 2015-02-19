@@ -33,7 +33,7 @@ describe('Sita Calculator', function () {
         //browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
-    describe('info page', function () {
+    describe('info functionality', function () {
 
         var airline_text = element(by.id('acode')),
             opportunity_text = element(by.id('oname')),

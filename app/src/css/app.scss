@@ -893,27 +893,18 @@ $class-slug: pt;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	transform: translate3d(0, 0, 0);
-	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3), 0 0 13px rgba(0, 0, 0, 0.2);
 	margin-top: 50px;
 	margin-bottom: 50px;
 }
+.navbar-fixed-bottom {
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  opacity: 1;
+  transition: opacity 0.2s linear;
 
-/* CHART STYLES */
-.chart_total {
-	display: block;
-	text-align: center;
-	font-weight: bold;
-	background: #8D4653;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	border-radius: 30px;
-	color: #FFF;
-	position: absolute;
-	left: 150px;
-	top: 117px;
-	z-index: 0;
-	box-shadow: 0 0 0 5px rgba(255, 165, 54, 1);
+  &.ng-hide {
+	opacity: 0;
+	display: block !important;
+  }
 }
 
 /* RADIO BUTTONS */

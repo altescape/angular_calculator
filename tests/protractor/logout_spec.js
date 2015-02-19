@@ -33,7 +33,7 @@ describe('Sita Calculator', function () {
         //browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
-    describe('info page', function () {
+    describe('Logout functionality', function () {
 
         var airline_text = element(by.id('acode')),
             opportunity_text = element(by.id('oname')),
@@ -89,11 +89,21 @@ describe('Sita Calculator', function () {
 
         it('should hide bottom navbar on logout', function() {
             login();
-            browser.driver.get('http://hoz-calculator-dev.com/#/auth'); //should be sign out
+            browser.sleep(2000);
+            // login automatically goes to info screen, fill in info
+            airline_text.clear().sendKeys(info.airline);
+            opportunity_text.clear().sendKeys(info.opportunity);
+            version_text.clear().sendKeys(info.version);
+
+            // nav at bottom should appear when info ias added
+            var nav_bottom = element(by.css('.navbar-fixed-bottom'));
+            expect(nav_bottom.isDisplayed()).toBeTruthy();
+
+            // Logout
+            browser.driver.get('http://hoz-calculator-dev.com/#/auth'); //should be to sign out
             var sign_out_button = element(by.css('a[ng-click="logoutUser()"]'));
             sign_out_button.click();
-
-            expect(element(by.css('.navbar-fixed-bottom')).isPresent()).toBe(false);
+            expect(nav_bottom.isDisplayed()).toBeFalsy();
         });
     });
 });

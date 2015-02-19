@@ -3,7 +3,7 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-describe('Sita Calculator Saved Calculations', function () {
+describe('Sita Calculator', function () {
 
     /**
      * A little more involved than the function in auth_spec
@@ -28,7 +28,7 @@ describe('Sita Calculator Saved Calculations', function () {
         browser.sleep(4000);
     };
 
-    describe('saved calculations page', function () {
+    describe('saved calculations functionality', function () {
         // Figures
         var fig_field_1 = element(by.id('param1')),
             fig_field_2 = element(by.id('param2')),
