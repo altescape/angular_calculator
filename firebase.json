@@ -4,6 +4,9 @@
   "ignore": [
     "firebase.json",
     ".*",
-    "**/node_modules/**"
+    "**/.sass-cache/**",
+    "**/experiments/**",
+    "**/node_modules/**",
+    "**/tests/**"
   ]
 }

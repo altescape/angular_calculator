@@ -3,7 +3,7 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-describe('Sita Calculator Calculator', function () {
+describe('Sita Calculator', function () {
 
     /**
      * A little more involved than the function in auth_spec
@@ -47,10 +47,10 @@ describe('Sita Calculator Calculator', function () {
     };
 
     beforeEach(function () {
-        browser.get('http://hoz-calculator-dev.com/index.html');
+        //browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
-    describe('calculator page', function () {
+    describe('Calculator functionality', function () {
         // Figures
         var fig_field_1 = element(by.id('param1')),
             fig_field_2 = element(by.id('param2')),
@@ -141,8 +141,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('revenue_integrity.high')).getText()).toEqual('$90.00');
-            expect(element(by.binding('revenue_integrity.low')).getText()).toEqual('$33.00');
+            expect(element(by.exactBinding('revenue_integrity.high')).getText()).toEqual('$90.00');
+            expect(element(by.exactBinding('revenue_integrity.low')).getText()).toEqual('$33.00');
         });
 
         it('should give correct value to Revenue Integrity Process Improvement', function () {
@@ -150,8 +150,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('revenue_integrity_process_improvement.high')).getText()).toEqual('$286.00');
-            expect(element(by.binding('revenue_integrity_process_improvement.low')).getText()).toEqual('$101.00');
+            expect(element(by.exactBinding('revenue_integrity_process_improvement.high')).getText()).toEqual('$286.00');
+            expect(element(by.exactBinding('revenue_integrity_process_improvement.low')).getText()).toEqual('$101.00');
         });
 
         it('should give correct value to Channel Shift', function () {
@@ -159,8 +159,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('channel_shift.high')).getText()).toEqual('$8.00');
-            expect(element(by.binding('channel_shift.low')).getText()).toEqual('$5.00');
+            expect(element(by.exactBinding('channel_shift.high')).getText()).toEqual('$8.00');
+            expect(element(by.exactBinding('channel_shift.low')).getText()).toEqual('$5.00');
         });
 
         it('should give correct value to Ancillary Sales', function () {
@@ -168,8 +168,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('ancillary_sales.high')).getText()).toEqual('$9.00');
-            expect(element(by.binding('ancillary_sales.low')).getText()).toEqual('$5.00');
+            expect(element(by.exactBinding('ancillary_sales.high')).getText()).toEqual('$9.00');
+            expect(element(by.exactBinding('ancillary_sales.low')).getText()).toEqual('$5.00');
         });
 
         it('should give correct value to Weight and Balance', function () {
@@ -177,9 +177,9 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('cmap.high')).getText()).toEqual('$0.00');
-            expect(element(by.binding('cmap.low')).getText()).toEqual('$0.00');
-            expect(element(by.binding('cmap.fuel_cost.value')).getText()).toEqual('$29.00'); // extra test as high/low are 0
+            expect(element(by.exactBinding('cmap.high')).getText()).toEqual('$0.00');
+            expect(element(by.exactBinding('cmap.low')).getText()).toEqual('$0.00');
+            expect(element(by.exactBinding('cmap.fuel_cost.value')).getText()).toEqual('$29.00'); // extra test as high/low are 0
         });
 
         it('should give correct value to Origin and Destination', function () {
@@ -187,8 +187,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('origin_and_destination.high')).getText()).toEqual('$60.00');
-            expect(element(by.binding('origin_and_destination.low')).getText()).toEqual('$30.00');
+            expect(element(by.exactBinding('origin_and_destination.high')).getText()).toEqual('$60.00');
+            expect(element(by.exactBinding('origin_and_destination.low')).getText()).toEqual('$30.00');
         });
 
         it('should give correct value to Point of Sale', function () {
@@ -196,8 +196,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('pos.high')).getText()).toEqual('$15.00');
-            expect(element(by.binding('pos.low')).getText()).toEqual('$8.00');
+            expect(element(by.exactBinding('pos.high')).getText()).toEqual('$15.00');
+            expect(element(by.exactBinding('pos.low')).getText()).toEqual('$8.00');
         });
 
         it('should give correct value to Airfare Insight', function () {
@@ -205,8 +205,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('airfare_insight.high')).getText()).toEqual('$30.00');
-            expect(element(by.binding('airfare_insight.low')).getText()).toEqual('$15.00');
+            expect(element(by.exactBinding('airfare_insight.high')).getText()).toEqual('$30.00');
+            expect(element(by.exactBinding('airfare_insight.low')).getText()).toEqual('$15.00');
         });
 
         it('should give correct value to ARR', function () {
@@ -214,8 +214,8 @@ describe('Sita Calculator Calculator', function () {
 
             click_data_tab();
 
-            expect(element(by.binding('arr.high')).getText()).toEqual('$47.00');
-            expect(element(by.binding('arr.low')).getText()).toEqual('$28.00');
+            expect(element(by.exactBinding('arr.high')).getText()).toEqual('$47.00');
+            expect(element(by.exactBinding('arr.low')).getText()).toEqual('$28.00');
         });
     });
 });

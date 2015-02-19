@@ -13,30 +13,6 @@ angular.module('myApp.services', [])
 			return localStorageService.get('info') ? localStorageService.get('info') : {}
 		})
 
-		.factory('appVersion', function (localStorageService, $firebase, Authorisation) {
-			var thisCode = 3,
-				codeVersion = 0,
-				appIsCurrent = true;
-
-			var syncToFirebase = function () {
-
-				Authorisation.loginObj.$getCurrentUser().then(
-					function (user) {
-						if ( user !== null ) {
-							var url = Authorisation.url + 'app/version';
-							var ref = new Firebase(url);
-							var obj = $firebase(ref).$asObject();
-
-							obj.$loaded().then(function() {
-								codeVersion = obj.$value;
-							});
-						}
-					}
-				);
-			}();
-			return appIsCurrent;
-		})
-
 		.factory('inputData', function (localStorageService) {
 			/**
 			 * Default values for inputs.
@@ -362,18 +338,16 @@ angular.module('myApp.services', [])
 			return $firebase(ref);
 		}])
 
-		.factory('Authorisation',
-            ['$firebase', '$firebaseSimpleLogin', function ($firebase, $firebaseSimpleLogin) {
+		.factory('Authorisation', ['$firebaseAuth', function ($firebaseAuth) {
+			var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/");
+			return $firebaseAuth(ref);
+		}])
 
-                var firebaseAddress = "https://luminous-fire-1327.firebaseio.com/",
-                    dataRef = new Firebase(firebaseAddress);
-
-                return {
-                    loginObj : $firebaseSimpleLogin(dataRef),
-                    url : firebaseAddress,
-                    ref : dataRef
-                };
-
+		.factory('authData', ['Authorisation', function(Authorisation) {
+			var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
+			var auth_ref = new Firebase(fb_base_url);
+			var authData = auth_ref.getAuth();
+			return authData;
 		}])
 
 		.factory('passengersBoardedData', function () {

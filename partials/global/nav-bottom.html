@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="info.airline.code || info.opportunity.name || info.session.name">
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-7">
@@ -9,21 +9,18 @@
                     <li ng-show="info.session.name"><span class="text-muted">Version:</span> <a ui-sref="info">{{ info.session.name }}</a></li>
                 </ul>
             </div>
-            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="user_forms_ready">
 
-                <div ng-show="info.loggedIn &&  OfflineState == 'up'">
+            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="info.running_session">
+                <div ng-show="info.loggedIn &&  OfflineState == 'up'" ng-cloak>
                     <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
                             successful</strong></div>
-
                     <!-- hide button if user hasnt entered any information yet -->
                     <div ng-hide="!info.airline.code || !info.session.name || !info.opportunity.name">
-
                         <!-- Show if session has been saved previously and is now running -->
                         <a ng-hide="info.running_session == true" ng-click="saveNewSession()" class="btn btn-warning btn-gradient btn-sm mt-10">
                             <span ng-show="saving == false">SAVE NEW</span>
                             <span ng-show="saving == true">SAVING</span> <span class="glyphicon glyphicon-export"></span>
                         </a>
-
                         <!-- Show if session has not been saved yet -->
                         <a ng-show="info.running_session == true" ng-click="updateSession()" class="btn btn-success btn-gradient btn-sm mt-10"
                            ng-disabled="saving == true">
@@ -32,11 +29,8 @@
                         </a>
                     </div>
                 </div>
-
-                <a ng-hide="info.loggedIn || OfflineState == 'up'" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
-
-                <p ng-show="OfflineState == 'down'" class="mt-15 text-danger">No connection to the web detected.</p>
-
+                <a ng-cloak ng-hide="info.loggedIn || OfflineState == 'up'" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
+                <p ng-cloak ng-show="OfflineState == 'down'" class="mt-15 text-danger">No connection to the web detected.</p>
             </div>
         </div>
     </div>

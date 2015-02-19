@@ -7,43 +7,39 @@
 <html lang="en" ng-app="myApp" class="lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="myApp" class=""> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Horizon Calculator</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon-precomposed" href="/app/img/apple-touch-icon-precomposed.png">
-    <link rel="icon" type="image/png" href="/app/img/favicon.png">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Horizon Calculator</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon-precomposed" href="/app/img/apple-touch-icon-precomposed.png">
+        <link rel="icon" type="image/png" href="/app/img/favicon.png">
+        <link rel="stylesheet" href="/app/dist/css/app.css">
+        <link rel="stylesheet" href="/app/libs/offline/themes/offline-theme-dark.css">
+        <link rel="stylesheet" href="/app/libs/offline/themes/offline-language-english.css">
+        <script type="text/javascript" src="/app/dist/js/base.min.js"></script>
+        <script type="text/javascript" src="/app/dist/js/fb.min.js"></script>
+        <script type="text/javascript" src="/app/dist/js/c1.min.js"></script>
+        <script type="text/javascript" src="/app/dist/js/hc.min.js"></script>
+        <script type="text/javascript" src="/app/dist/js/app.min.js"></script>
+        <script type="text/javascript" src="/app/dist/js/c2.min.js"></script>
+        <style>
+            [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+                display: none !important;
+            }
+        </style>
+    </head>
 
-    <link rel="stylesheet" href="/app/dist/css/app.css">
-
-    <link rel="stylesheet" href="app/libs/offline/themes/offline-theme-dark.css">
-    <link rel="stylesheet" href="app/libs/offline/themes/offline-language-english.css">
-
-</head>
-<body>
-
-<div id="wrap" ng-controller="InfoCtrl as info" class="{{ navActive }}">
-
-    <div main-nav ng-cloak class="navbar navbar-static-top"></div>
-
-    <div id="main-content" class="container-fluid">
-        <div class="row">
-            <div ui-view="mainView" class="reveal-animation"></div>
+    <body>
+        <div id="wrap" ng-controller="InfoCtrl as info" class="{{ navActive }}">
+            <div main-nav ng-cloak class="navbar navbar-static-top"></div>
+            <div id="main-content" class="container-fluid">
+                <div class="row">
+                    <div ui-view="mainView" class="reveal-animation"></div>
+                </div>
+            </div>
+            <nav-bottom></nav-bottom>
         </div>
-    </div>
-
-    <nav-bottom></nav-bottom>
-
-</div>
-
-<script type="text/javascript" src="app/dist/js/base.min.js"></script>
-<script type="text/javascript" src="app/dist/js/fb.min.js"></script>
-<script type="text/javascript" src="app/dist/js/c1.min.js"></script>
-<script type="text/javascript" src="app/dist/js/hc.min.js"></script>
-<script type="text/javascript" src="app/dist/js/app.min.js"></script>
-<script type="text/javascript" src="app/dist/js/c2.min.js"></script>
-
-</body>
+    </body>
 </html>

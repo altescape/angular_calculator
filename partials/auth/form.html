@@ -1,4 +1,4 @@
-<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 content-margin" ng-controller="AuthCtrl" ng-show="user_forms_ready">
+<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 content-margin" ng-controller="AuthCtrl" ng-cloak>
 
     <div ng-hide="logged_in" class="well">
         <form name="login">
@@ -22,11 +22,10 @@
         </form>
     </div>
 
-    <div ng-show="logged_in" class="well text-center">
-        <h2>Sign Out</h2>
-        <p class="lead mb-0">Are you sure you would like to sign out?</p>
-        <p class="text-capitalize text-muted">(Signed in as {{ user.email }})</p>
-        <p><a ng-click="logoutUser()" id="sign-out" class="btn btn-primary user-action">Sign out <i class="glyphicon glyphicon-log-out"></i></a></p>
+    <div ng-show="logged_in" class="well">
+        <h2>Sign Out?</h2>
+        <p class="lead">You are signed in with: <strong>{{ user.email }}</strong></p>
+        <p><a ng-click="logoutUser()" id="sign-out" class="btn btn-primary user-action mt-0">Sign out <i class="glyphicon glyphicon-log-out"></i></a></p>
     </div>
 
 </div>

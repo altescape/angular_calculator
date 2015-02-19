@@ -3,7 +3,7 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-describe('Sita Calculator Auth', function () {
+describe('Sita Calculator', function () {
 
     var login = function () {
         browser.driver.get('http://hoz-calculator-dev.com/#/auth');
@@ -17,7 +17,7 @@ describe('Sita Calculator Auth', function () {
         browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
-    describe('Auth page', function () {
+    describe('Auth functionality', function () {
 
         it('should redirect to /auth when not logged in', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/info');

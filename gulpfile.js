@@ -8,6 +8,19 @@ var gulp = require('gulp');
 var sass = require('gulp-ruby-sass');
 var prefix = require('gulp-autoprefixer');
 var uglify = require('gulp-uglifyjs');
+var watch = require('gulp-watch');
+var jsValidate = require('gulp-jsvalidate');
+
+// ****************************************************************************************************
+// SASS
+//
+// Watch src scss files
+gulp.task('watch_sass', function () {
+	watch('app/src/css/*.scss', function (event) {
+		console.log('           Doing SASS stuff. File ' + event.path);
+		gulp.start('default');
+	});
+});
 
 gulp.task('default', function () {
   //return sass('app/src/css/app.scss', {lineNumbers: true})
@@ -16,24 +29,25 @@ gulp.task('default', function () {
       .pipe(gulp.dest('app/dist/css'));
 });
 
-// Watch src scss files
-var sass_watcher = gulp.watch('app/src/css/*.scss', ['default']);
-sass_watcher.on('change', function(event) {
-  console.log('File '+event.path+' was '+event.type+', running tasks...');
+
+// ****************************************************************************************************
+// JS
+//
+// Watch JS (App files only)
+gulp.task('watch_js', function () {
+	gulp.watch('app/src/js/*.js', ['ug_app']);
 });
 
 var ug_options = {
 	mangle: false,
 	output: {
-		beautify: false
+		beautify: true
 	},
 	compress : {
-		conditionals: true
-	},
-	outSourceMap: true
+		conditionals: false,
+		warnings: false
+	}
 };
-
-var ug_dest = gulp.dest('app/dist/js');
 
 gulp.task('ug_base', function() {
 	gulp.src([
@@ -41,10 +55,10 @@ gulp.task('ug_base', function() {
 		'app/libs/angular/angular.js',
 		'app/libs/angular-mocks/angular-mocks.js',
 		'app/libs/angular-route/angular-route.js',
-		'app/libs/angular-local-storage/angular-local-storage.js'
+		'app/libs/angular-local-storage/dist/angular-local-storage.min.js'
 	])
 	.pipe(uglify('base.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
 
 gulp.task('ug_app', function() {
@@ -55,18 +69,19 @@ gulp.task('ug_app', function() {
 		'app/src/js/services.js',
 		'app/src/js/controllers.js'
 	])
+	.pipe(jsValidate())
 	.pipe(uglify('app.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
 
 gulp.task('ug_firebase', function() {
 	gulp.src([
 		'app/libs/firebase/firebase.js',
-		'app/libs/angularfire/dist/angularfire.min.js',
-		'app/libs/firebase-simple-login/firebase-simple-login.js'
+		'app/libs/angularfire/dist/angularfire.min.js'
+		//'app/libs/firebase-simple-login/firebase-simple-login.js'
 	])
 	.pipe(uglify('fb.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
 
 gulp.task('ug_highcharts', function() {
@@ -76,7 +91,7 @@ gulp.task('ug_highcharts', function() {
 		'app/libs/highcharts-ng/dist/highcharts-ng.js'
 	])
 	.pipe(uglify('hc.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
 
 gulp.task('ug_angularjs_components', function() {
@@ -87,7 +102,7 @@ gulp.task('ug_angularjs_components', function() {
 		'app/libs/angular-fcsa-number/src/fcsaNumber.js'
 	])
 	.pipe(uglify('c1.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
 
 gulp.task('ug_ui_components', function() {
@@ -98,5 +113,7 @@ gulp.task('ug_ui_components', function() {
 		'app/libs/offline/offline.min.js'
 	])
 	.pipe(uglify('c2.min.js', ug_options))
-	.pipe(ug_dest)
+	.pipe(gulp.dest('app/dist/js'))
 });
+
+gulp.task('uglify_all_js', ['ug_base', 'ug_app', 'ug_firebase', 'ug_highcharts', 'ug_angularjs_components', 'ug_ui_components']);
