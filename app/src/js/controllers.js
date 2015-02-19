@@ -633,11 +633,7 @@ angular.module('myApp.controllers', [])
             var result = uid.split(":");
             return result[1];
         };
-        if (authData) {
-            $scope.user_forms_ready = true;
-        } else {
-            $state.go('auth');
-        }
+        if (!authData) { $state.go('auth'); }
 
         /**
          * Save session to Firebase
@@ -853,12 +849,10 @@ angular.module('myApp.controllers', [])
             var authData = ref.getAuth();
 
             if (authData) {
-                $scope.user_forms_ready = true;
                 $scope.$emit('isLoggedInMessage', true);
                 $scope.user = authData.password;
                 $scope.logged_in = true;
             } else {
-                $scope.user_forms_ready = true;
                 $scope.$emit('isLoggedInMessage', false);
                 $scope.logged_in = false;
             }

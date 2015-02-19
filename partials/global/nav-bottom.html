@@ -10,8 +10,8 @@
                 </ul>
             </div>
 
-            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="user_forms_ready">
-                <div ng-show="info.loggedIn &&  OfflineState == 'up'">
+            <div class="col-xs-5 text-right" ng-controller="SaveSessionCtrl" ng-show="info.running_session">
+                <div ng-show="info.loggedIn &&  OfflineState == 'up'" ng-cloak>
                     <div class="alert alert-success message reveal-animation" role="alert" ng-show="saved == true"><strong>Save
                             successful</strong></div>
                     <!-- hide button if user hasnt entered any information yet -->
@@ -29,8 +29,8 @@
                         </a>
                     </div>
                 </div>
-                <a ng-hide="info.loggedIn || OfflineState == 'up'" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
-                <p ng-show="OfflineState == 'down'" class="mt-15 text-danger">No connection to the web detected.</p>
+                <a ng-cloak ng-hide="info.loggedIn || OfflineState == 'up'" ui-sref="auth" class="btn btn-success btn-gradient btn-sm mt-10"> Sign in</a>
+                <p ng-cloak ng-show="OfflineState == 'down'" class="mt-15 text-danger">No connection to the web detected.</p>
             </div>
         </div>
     </div>

@@ -3,18 +3,18 @@
         <a ui-sref="home"><img class="logo" ng-src="/app/img/logo-small.png"> <span class="updates badge badge-danger" ng-show="appIsCurrent"><i class="glyphicon glyphicon-warning-sign"></i></span></a>
         <small class="text-white hidden" style="margin-left: 15px" ng-show="user">Signed in as {{ user.email }}</small>
     </div>
-    <div class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse" ng-cloak>
         <ul class="nav navbar-nav navbar-right">
             <li ng-show="info.loggedIn && OfflineState == 'up'">
                 <a ui-sref="new-calculation"
                    ng-class="{active : navActive == 'new'}">New Calculation</a>
             </li>
-            <li ng-cloak ng-show="info.loggedIn">
+            <li ng-show="info.loggedIn">
                 <a ui-sref="info" ng-class="{active : navActive == 'info'}">
                     <span>Information</span>
                 </a>
             </li>
-            <li ng-cloak ng-show="info.loggedIn && (info.airline.code || info.session.name || info.opportunity.name)">
+            <li ng-show="info.loggedIn && (info.airline.code || info.session.name || info.opportunity.name)">
                 <a ui-sref="calculator.index" ng-class="{active : navActive == 'calculator'}">Calculator</a>
             </li>
             <li ng-show="info.loggedIn && OfflineState == 'up'"><a ui-sref="saved-calculations" ng-class="{active : navActive == 'my-calculations'}">My Calculations</a></li>
