@@ -748,7 +748,7 @@ $class-slug: pt;
 	background-image: linear-gradient($brand-success, darken($brand-success, 20%));
 	background-position: 0 100%;
 	background-size: auto 200%;
-	transition: all .3s ease-in-out;
+	transition: color .3s ease-in-out;
 	padding: 8px 16px 9px;
 	border: none;
   	text-shadow: 0px -2px darken($brand-success, 20%);
@@ -761,11 +761,23 @@ $class-slug: pt;
 	  	text-shadow: 0px -2px darken($brand-success, 10%);
 	}
 
+  	&:active {
+	  background-color: darken($brand-success, 12%);
+	  text-shadow: 0px 2px darken($brand-success, 20%);
+	  box-shadow: 1px 3px 5px darken($brand-success, 20%) inset;
+	}
+
 	/* Danger */
 	&.user-action-danger {
-      background-color: darken($brand-success, 20%);
+      background-color: darken($brand-danger, 20%);
       background-image: linear-gradient($brand-danger, darken($brand-danger, 20%));
 	  text-shadow: 0px -2px darken($brand-danger, 20%);
+
+	  &:active {
+		background-color: darken($brand-danger, 12%);
+		text-shadow: 0px 2px darken($brand-danger, 20%);
+		box-shadow: 1px 3px 5px darken($brand-danger, 20%) inset;
+	  }
 	}
 
 	/* White */
@@ -774,6 +786,12 @@ $class-slug: pt;
       background-color: $body-bg;
       background-image: linear-gradient($body-bg, darken($body-bg, 20%));
 	  text-shadow: 0px -2px darken($body-bg, 10%);
+
+	  &:active {
+		background-color: darken($body-bg, 12%);
+		text-shadow: 0px 2px darken($body-bg, 20%);
+		box-shadow: 1px 3px 5px darken($body-bg, 24%) inset;
+	  }
 	}
 
   	&.btn-lg {
