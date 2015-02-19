@@ -85,54 +85,63 @@ describe('Sita Calculator Saved Calculations', function () {
             });
         });
 
-        var calculation_uid = "-Jhnt2Gq_w7qOgXwPgJo";
+
+        // this is depending on an a calculation with a particular id
+        // and particular values
+        var info = {
+            id: "-JiSWdTf4yaOfYIi_bOI",
+            airline: "AIRLINE: THIS IS A PROPER AIRLINE NAME",
+            opportunity: "OPPORTUNITY: OPP NAME",
+            version: "VERSION: VERSION 121",
+            currency: "CURRENCY: $ (USD)",
+            annual_revenue: "$10,212,121,210,112,212.00"
+        };
         var click_saved_calculation = function(){
-            var calculation_view_button = element(by.css('a[href="#/saved-calculations/'+calculation_uid+'"]'));
+            var calculation_view_button = element(by.css('a[href="#/saved-calculations/'+info.id+'"]'));
             calculation_view_button.click();
         };
 
-        // this is depending on an a calculation with id -Jhnt2Gq_w7qOgXwPgJo
-        // change calculation_uid above accordingly for correct id
+        // change info.id above accordingly for correct id
         it('should click into calculation', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations');
             browser.sleep(2000);
             click_saved_calculation();
-            expect(browser.getLocationAbsUrl()).toBe('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            expect(browser.getLocationAbsUrl()).toBe('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
         });
 
         it('should show correct airline value', function(){
-            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
-            var version = element(by.binding('item.info.session.name'));
-            expect(version.getText()).toEqual('VERSION: ZXY');
+            var version = element(by.exactBinding('item.info.airline.code'));
+            expect(version.getText()).toEqual(info.airline);
         });
 
         it('should show correct opportunity value', function(){
-            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
-            var expectation = element(by.binding('item.info.opportunity.name'));
-            expect(expectation.getText()).toEqual('OPPORTUNITY: CVB');
+            var expectation = element(by.exactBinding('item.info.opportunity.name'));
+            expect(expectation.getText()).toEqual(info.opportunity);
         });
 
         it('should show correct opportunity value', function(){
-            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
-            var expectation = element(by.binding('item.info.session.name'));
-            expect(expectation.getText()).toEqual('VERSION: ZXY');
+            var expectation = element(by.exactBinding('item.info.session.name'));
+            expect(expectation.getText()).toEqual(info.version);
         });
 
         it('should show correct currency value and symbol', function(){
-            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
-            var expectation1 = element(by.binding('item.info.currency.symbol'));
-            expect(expectation1.getText()).toEqual('CURRENCY: $ (USD)');
+            var expectation1 = element(by.exactBinding('item.info.currency.symbol'));
+            expect(expectation1.getText()).toEqual(info.currency);
         });
 
         it('should show correct airline annual revenue value', function(){
-            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+calculation_uid);
+            browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
-            var expectation1 = element(by.binding('item.input.param6'));
-            expect(expectation1.getText()).toEqual('$550,000,000,000.00');
+            var expectation1 = element(by.exactBinding('item.input.param6'));
+            expect(expectation1.getText()).toEqual(info.annual_revenue);
         });
 
     });

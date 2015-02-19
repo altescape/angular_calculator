@@ -3,7 +3,7 @@
 var protractor = require('protractor');
 var Firebase = require('firebase');
 
-describe('Sita Calculator Info', function () {
+describe('Sita Calculator', function () {
 
     /**
      * A little more involved than the function in auth_spec
@@ -15,9 +15,7 @@ describe('Sita Calculator Info', function () {
 
         var logged_in = false,
             main_nav_check = element(by.css('.so_link')).getText().then(function (text) {
-            if (text === "Sign Out") {
-                logged_in = true;
-            }
+            if (text === "Sign Out") { logged_in = true; }
         });
 
         if (logged_in) {
@@ -32,7 +30,7 @@ describe('Sita Calculator Info', function () {
     };
 
     beforeEach(function () {
-        browser.get('http://hoz-calculator-dev.com/index.html');
+        //browser.get('http://hoz-calculator-dev.com/index.html');
     });
 
     describe('info page', function () {
@@ -44,7 +42,7 @@ describe('Sita Calculator Info', function () {
             create_button = element(by.id('create_button')),
             update_button = element(by.id('update_button'));
 
-        it('should log in', function () {
+        it('should be able to log in', function () {
             login();
         });
 
@@ -100,9 +98,11 @@ describe('Sita Calculator Info', function () {
             opportunity_text.clear().sendKeys(456);
             version_text.clear().sendKeys(789);
 
-            var footer_airline_code = element(by.binding('info.airline.code')),
-                footer_opportunity_name = element(by.binding('info.opportunity.name')),
-                footer_info_session_name = element(by.binding('info.session.name'));
+            browser.sleep(1000);
+
+            var footer_airline_code = element(by.css('.info-links li:nth-child(1) a')),
+                footer_opportunity_name = element(by.css('.info-links li:nth-child(2) a')),
+                footer_info_session_name = element(by.css('.info-links li:nth-child(3) a'));
 
             expect(footer_airline_code.getText()).toEqual(airline_text.getAttribute('value'));
             expect(footer_opportunity_name.getText()).toEqual(opportunity_text.getAttribute('value'));

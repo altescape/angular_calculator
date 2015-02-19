@@ -84,6 +84,7 @@ angular.module('myApp.controllers', [])
                 },
                 function (newVal, oldVal) {
                     $scope.info = infoData;
+                    $scope.updateInfo();
                 }, true);
 
             // Currency symbols
@@ -634,6 +635,8 @@ angular.module('myApp.controllers', [])
         };
         if (authData) {
             $scope.user_forms_ready = true;
+        } else {
+            $state.go('auth');
         }
 
         /**

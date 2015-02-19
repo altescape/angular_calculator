@@ -46,8 +46,7 @@ var ug_options = {
 	compress : {
 		conditionals: false,
 		warnings: false
-	},
-	outSourceMap: true
+	}
 };
 
 gulp.task('ug_base', function() {
