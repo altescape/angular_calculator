@@ -321,57 +321,19 @@ angular.module('myApp.services', [])
         };
     })
 
-    .factory('FbService', ['$firebase', function ($firebase) {
-        /**
-         * Firebase
-         */
-        var ref = new Firebase('https://luminous-fire-1327.firebaseio.com/sita');
-        return $firebase(ref);
-    }])
-
-    .factory('FbService2', ['$firebase', function ($firebase) {
-        /**
-         * Firebase 2
-         */
-        var ref = new Firebase('https://luminous-fire-1327.firebaseio.com/text');
-        return $firebase(ref);
-    }])
-
-    .factory('Authorisation', ['$firebaseAuth', function ($firebaseAuth) {
-        var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/");
-        return $firebaseAuth(ref);
-    }])
-
-    .factory('authData', ['Authorisation', function (Authorisation) {
-        var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-        var auth_ref = new Firebase(fb_base_url);
-        var authData = auth_ref.getAuth();
-        return authData;
-    }])
-
-    .factory('addThing', function () {
-
-        // addThing.setTest(1223);
-
-        var test = "122";
-
-        var setTest = function(test) {
-            console.log(test);
-            this.test = test;
-        };
-
-        return {
-            setTest: setTest
-        };
-    })
-
     .factory('Authorise', ['$rootScope', '$firebaseAuth', function($rootScope, $firebaseAuth) {
 
-        var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-        var ref = new Firebase(fb_base_url);
+
+        var FB_BASE_URL = "https://luminous-fire-1327.firebaseio.com";
+        var ref = new Firebase(FB_BASE_URL);
         var authObj = $firebaseAuth(ref);
         var authData = ref.getAuth();
 
+        // This splits the defualt uid response from Firebase
+        // into a number - which is what it was originally. On the update
+        // they introduced more auth services so changed uid of '1' to
+        // 'simplelogin:1'.
+        // This function returns '1' or false.
         var num_uid = function () {
             if (ref.getAuth()) {
                 var uid = authData.uid;
@@ -381,9 +343,15 @@ angular.module('myApp.services', [])
             return false;
         };
 
-        var broadcast_auth_event = function (msg) {
-          $rootScope.$broadcast('authEvent', msg);
-          $rootScope.$broadcast('isLoggedInMessage', msg.success);
+        var check_login_status = function () {
+            var authData = authObj.$getAuth();
+            if (authData) {
+                $rootScope.$broadcast('isLoggedInMessage', true);
+                $rootScope.$broadcast('isAuthorised', {success: true, msg: authData.password.email});
+
+            } else {
+                $rootScope.$broadcast('isAuthorised', {success: false, msg: "Logged out"});
+            }
         };
 
         var login = function (email, password) {
@@ -392,20 +360,60 @@ angular.module('myApp.services', [])
                 password: password
             })
                 .then(function(result) {
-                    broadcast_auth_event({success: true, msg: result});
+                    $rootScope.$broadcast('authEvent', { success: true, msg: result });
+                    $rootScope.$broadcast('isLoggedInMessage', true);
                 })
                 .catch(function(error) {
-                    broadcast_auth_event({success: false, msg: error});
+                    $rootScope.$broadcast('authEvent', { success: false, msg: error.toString() });
+                    $rootScope.$broadcast('isLoggedInMessage', false);
+                })
+        };
+
+        var logout = function () {
+            authObj.$unauth();
+            $rootScope.$broadcast('isLoggedInMessage', false);
+            $rootScope.$broadcast('clearInfoData', true);
+        };
+
+        // Forgotten password
+        var retrieve_password = function (email) {
+            authObj.$resetPassword({
+                email: email
+            })
+                .then(function () {
+                    $rootScope.$broadcast('passwordUtil', { success: true, msg: "Check your inbox for your new temporary password. You can then <a ui-sref=\"change-password\" href=\"/#/change-password\"><strong>change your password here</strong></a> to something more memorable." });
+                })
+                .catch(function (error) {
+                    $rootScope.$broadcast('passwordUtil', { success: false, msg: error.toString()});
+                })
+        };
+
+        // Change password
+        var change_password = function (email, old_password, new_password) {
+            authObj.$changePassword({
+                email: email,
+                oldPassword: old_password,
+                newPassword: new_password
+            })
+                .then(function () {
+                    $rootScope.$broadcast('passwordUtil', { success: true, msg: "Your password has been changed. <a ui-sref=\"auth\" href=\"/#/auth\"><strong>Sign in here</strong></a>." });
+                })
+                .catch(function (error) {
+                    $rootScope.$broadcast('passwordUtil', { success: false, msg: error.toString()});
                 })
         };
 
         return {
-            fb_base_url: fb_base_url,
+            fb_base_url: FB_BASE_URL,
             ref: ref,
             authObj: authObj,
             authData: authData,
-            num_uid: num_uid(),
-            login: login
+            num_uid: num_uid,
+            check_login_status: check_login_status,
+            login: login,
+            logout: logout,
+            retrieve_password: retrieve_password,
+            change_password: change_password
         }
     }])
 

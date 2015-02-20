@@ -11,13 +11,12 @@ angular.module('myApp.controllers', [])
         'localStorageService',
         'infoData',
         '$interval',
-        'addThing',
 
         function ($rootScope,
                   $scope,
                   localStorageService,
                   infoData,
-                  $interval,addThing) {
+                  $interval) {
 
             //Fast click, removes time delay for click on mobile
             //FastClick.attach(document.body, null);
@@ -445,11 +444,10 @@ angular.module('myApp.controllers', [])
         '$routeParams',
         '$firebase',
         '$firebaseAuth',
-        'Authorisation',
         '$state',
         '$stateParams',
         'chartData',
-        function ($rootScope, $scope, $routeParams, $firebase, $firebaseAuth, Authorisation, $state, $stateParams, chartData) {
+        function ($rootScope, $scope, $routeParams, $firebase, $firebaseAuth, $state, $stateParams, chartData) {
 
             var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
             var auth_ref = new Firebase(fb_base_url);
@@ -518,27 +516,6 @@ angular.module('myApp.controllers', [])
 
 
         }])
-
-    .controller('SessionsCtrl', ['$scope', 'FbService', 'FbService2', function ($scope, FbService, FbService2) {
-
-        /**
-         *  Firebase
-         */
-        $scope.fbtest = function () {
-            $scope.text.sum = 0;
-            FbService2.$bind($scope, "text");
-        };
-
-        /**
-         * Firebase: testing - not used in app
-         * @param num
-         * @param num2
-         * @returns {Number}
-         */
-        $scope.sum = function (num, num2) {
-            return parseInt(num + num2);
-        };
-    }])
 
     .controller('NewSessionCtrl',
     [
@@ -843,95 +820,60 @@ angular.module('myApp.controllers', [])
 
         }])
 
-    .controller('AuthCtrl', ['$rootScope', '$scope', 'Authorise', '$state', '$firebase',
-        function ($rootScope, $scope, Authorise, $state, $firebase) {
+    .controller('AuthCtrl', ['$rootScope', '$scope', '$sce', 'Authorise', '$state',
+        function ($rootScope, $scope, $sce, Authorise, $state) {
+
+            // watch login and logout
+            $scope.$on('authEvent', function(event, broadcast) {
+                $scope.show_loader = false;
+                if (broadcast.success === true) {
+                    $scope.logged_in = true;
+                    $state.go('info');
+                } else {
+                    $scope.reason = broadcast.msg;
+                }
+            });
+
+            // watch auth status on page load
+            $scope.$on('isAuthorised', function(event, broadcast) {
+                if (broadcast.success === true) {
+                    $scope.user = broadcast.msg;
+                    $scope.logged_in = true;
+                } else {
+                    $scope.show_loader = false;
+                }
+            });
+
+            // watch on forgot password
+            $scope.$on('passwordUtil', function(event, broadcast) {
+                $scope.show_loader = false;
+                $scope.reason = $sce.trustAsHtml(broadcast.msg);
+            });
+
+            $scope.checkLoginStatus = function () {
+                Authorise.check_login_status();
+            };
 
             $scope.loginUser = function () {
                 $scope.show_loader = true;
                 Authorise.login($scope.auth.email, $scope.auth.password);
             };
 
-            $scope.$on('authEvent', function(event, broadcast) {
-                if (broadcast.success === true) {
-                    $scope.show_loader = false;
-                    $scope.logged_in = true;
-                    $state.go('info');
-                } else {
-                    $scope.show_loader = false;
-                    $scope.reason = broadcast.msg.toString();
-                }
-            });
-
-
-            var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-            var ref = new Firebase(fb_base_url);
-            var authData = ref.getAuth();
-
-            if (authData) {
-                $scope.$emit('isLoggedInMessage', true);
-                $scope.user = authData.password;
-                $scope.logged_in = true;
-            } else {
-                $scope.$emit('isLoggedInMessage', false);
-                $scope.logged_in = false;
-            }
-
             $scope.logoutUser = function () {
+                Authorise.logout();
                 $scope.logged_in = false;
-                $scope.$emit('isLoggedInMessage', false);
-                $scope.$emit('clearInfoData', true);
-                $scope.message = "";
-                ref.unauth();
             };
 
-            // For forgotten password
+            // Forgotten password
             $scope.retrievePassword = function () {
                 $scope.show_loader = true;
-                var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/");
-                ref.resetPassword({
-                    email: $scope.auth.email
-                }, function (error) {
-                    if (error) {
-                        switch (error.code) {
-                            case "INVALID_USER":
-                                $scope.reason = "The specified user account does not exist.";
-                                break;
-                            default:
-                                $scope.reason = "Error resetting password" + error;
-                        }
-                    } else {
-                        $scope.show_loader = false;
-                        $scope.message = true;
-                        $scope.reason = "Password reset email sent successfully!";
-                    }
-                });
+                Authorise.retrieve_password($scope.auth.email);
             };
 
+            // Change password
             $scope.changePassword = function () {
                 $scope.show_loader = true;
-                var ref = new Firebase("https://luminous-fire-1327.firebaseio.com/");
-                ref.changePassword({
-                    email: $scope.auth.email,
-                    oldPassword: $scope.auth.old_password,
-                    newPassword: $scope.auth.new_password
-                }, function (error) {
-                    if (error) {
-                        switch (error.code) {
-                            case "INVALID_PASSWORD":
-                                $scope.reason = "The specified user account password is incorrect.";
-                                break;
-                            case "INVALID_USER":
-                                $scope.reason = "The specified user account does not exist.";
-                                break;
-                            default:
-                                $scope.reason = "Error changing password:" + error;
-                        }
-                    } else {
-                        $scope.show_loader = false;
-                        $scope.message = true;
-                        $scope.reason = "User password changed successfully!";
-                    }
-                });
+                Authorise.change_password($scope.auth.email, $scope.auth.old_password, $scope.auth.new_password);
             };
         }
     ]);
