@@ -321,8 +321,7 @@ angular.module('myApp.services', [])
         };
     })
 
-    .factory('Authorise', ['$rootScope', '$firebaseAuth', function($rootScope, $firebaseAuth) {
-
+    .factory('Authorise', ['$rootScope', '$firebaseAuth', '$state', function($rootScope, $firebaseAuth, $state) {
 
         var FB_BASE_URL = "https://luminous-fire-1327.firebaseio.com";
         var ref = new Firebase(FB_BASE_URL);
@@ -344,13 +343,13 @@ angular.module('myApp.services', [])
         };
 
         var check_login_status = function () {
-            var authData = authObj.$getAuth();
-            if (authData) {
+            var logged_in_user = authObj.$getAuth();
+            if (logged_in_user) {
                 $rootScope.$broadcast('isLoggedInMessage', true);
-                $rootScope.$broadcast('isAuthorised', {success: true, msg: authData.password.email});
-
+                $rootScope.$broadcast('isAuthorised', {status: true, msg: logged_in_user.password.email});
             } else {
-                $rootScope.$broadcast('isAuthorised', {success: false, msg: "Logged out"});
+                $rootScope.$broadcast('isAuthorised', {status: false, msg: "Logged out"});
+                $state.go('auth');
             }
         };
 
@@ -360,11 +359,12 @@ angular.module('myApp.services', [])
                 password: password
             })
                 .then(function(result) {
-                    $rootScope.$broadcast('authEvent', { success: true, msg: result });
+                    $rootScope.$broadcast('authEvent', { status: true, msg: result });
                     $rootScope.$broadcast('isLoggedInMessage', true);
+                    $state.go('info');
                 })
                 .catch(function(error) {
-                    $rootScope.$broadcast('authEvent', { success: false, msg: error.toString() });
+                    $rootScope.$broadcast('authEvent', { status: false, msg: error.toString() });
                     $rootScope.$broadcast('isLoggedInMessage', false);
                 })
         };
@@ -381,10 +381,13 @@ angular.module('myApp.services', [])
                 email: email
             })
                 .then(function () {
-                    $rootScope.$broadcast('passwordUtil', { success: true, msg: "Check your inbox for your new temporary password. You can then <a ui-sref=\"change-password\" href=\"/#/change-password\"><strong>change your password here</strong></a> to something more memorable." });
+                    $rootScope.$broadcast('passwordUtil', {
+                        status: true,
+                        msg: "Check your inbox for your new temporary password. You can then <a ui-sref=\"change-password\" href=\"/#/change-password\"><strong>change your password here</strong></a> to something more memorable."
+                    });
                 })
                 .catch(function (error) {
-                    $rootScope.$broadcast('passwordUtil', { success: false, msg: error.toString()});
+                    $rootScope.$broadcast('passwordUtil', { status: false, msg: error.toString()});
                 })
         };
 
@@ -396,10 +399,13 @@ angular.module('myApp.services', [])
                 newPassword: new_password
             })
                 .then(function () {
-                    $rootScope.$broadcast('passwordUtil', { success: true, msg: "Your password has been changed. <a ui-sref=\"auth\" href=\"/#/auth\"><strong>Sign in here</strong></a>." });
+                    $rootScope.$broadcast('passwordUtil', {
+                        status: true,
+                        msg: "Your password has been changed. <a ui-sref=\"auth\" href=\"/#/auth\"><strong>Sign in here</strong></a>."
+                    });
                 })
                 .catch(function (error) {
-                    $rootScope.$broadcast('passwordUtil', { success: false, msg: error.toString()});
+                    $rootScope.$broadcast('passwordUtil', { status: false, msg: error.toString()});
                 })
         };
 

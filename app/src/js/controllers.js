@@ -676,6 +676,7 @@ angular.module('myApp.controllers', [])
     [
         '$rootScope',
         '$scope',
+        'Authorise',
         '$location',
         'localStorageService',
         '$state',
@@ -696,25 +697,16 @@ angular.module('myApp.controllers', [])
         'ancillarySales',
         '$firebase',
         '$interval',
-        function ($rootScope, $scope, $location, localStorageService, $state, chartData, chartConfig, infoData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales, $firebase, $interval) {
-            // Bind to Firebase
-            var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-            var auth_ref = new Firebase(fb_base_url);
-            var authData = auth_ref.getAuth();
+        function ($rootScope, $scope, Authorise, $location, localStorageService, $state, chartData, chartConfig, infoData, inputData, allData, revenueIntegrity, revenueIntegrityProcessImprovement, cmap, originAndDestination, pointOfSale, passengersBoardedData, arr, airfareInsight, channelShift, ancillarySales, $firebase, $interval) {
 
-            var num_uid = function () {
-                var uid = authData.uid;
-                var result = uid.split(":");
-                return result[1];
-            };
-
-            var syncToFirebase = function () {
-                if (authData) {
-                    // Logged in and running a calculation/session
+            // watch auth status on page load
+            $scope.$on('isAuthorised', function(event, broadcast) {
+                var auth_status = broadcast.status;
+                if (auth_status) {
                     if ($scope.info.running_session === true) {
                         $scope.saving = true;
-                        var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-                        var url = fb_base_url + "/user_data/" + num_uid() + "/" + localStorageService.get('current_key');
+                        var fb_base_url = Authorise.fb_base_url;
+                        var url = fb_base_url + "/user_data/" + Authorise.num_uid() + "/" + localStorageService.get('current_key');
                         var ref = new Firebase(url);
                         var obj = $firebase(ref);
                         obj.$set({
@@ -723,15 +715,14 @@ angular.module('myApp.controllers', [])
                             data: localStorageService.get('data')
                         });
                     }
-                } else {
-                    $state.go('auth');
                 }
-            };
-            syncToFirebase();
+            });
 
-            /**
-             * Calls the factories for each service
-             */
+            $scope.syncToFirebase = function () {
+                Authorise.check_login_status();
+            };
+
+            // Calls the factories for each service
             $scope.updateData = function () {
 
                 revenueIntegrity.initObject();
@@ -763,10 +754,9 @@ angular.module('myApp.controllers', [])
 
                 localStorageService.set('data', allData);
                 localStorageService.set('input', inputData);
-
                 $scope.input = inputData;
 
-                syncToFirebase();
+                $scope.syncToFirebase();
 
                 // TODO-mike separate values for both graph types
                 // chart configs are not storing separate values for both graphs.
@@ -776,10 +766,7 @@ angular.module('myApp.controllers', [])
                 } else {
                     $scope.chartConfigHigh = chartData.drawChart('high', localStorageService.get('data'));
                 }
-
             };
-
-            $scope.updateData();
 
             // Passengers boarded data. See variables sheet C2 - C16
             $scope.pb_data = passengersBoardedData;
@@ -826,22 +813,16 @@ angular.module('myApp.controllers', [])
             // watch login and logout
             $scope.$on('authEvent', function(event, broadcast) {
                 $scope.show_loader = false;
-                if (broadcast.success === true) {
-                    $scope.logged_in = true;
-                    $state.go('info');
-                } else {
-                    $scope.reason = broadcast.msg;
-                }
+                $scope.logged_in = broadcast.status;
+                $scope.reason = broadcast.msg;
             });
 
             // watch auth status on page load
             $scope.$on('isAuthorised', function(event, broadcast) {
-                if (broadcast.success === true) {
-                    $scope.user = broadcast.msg;
-                    $scope.logged_in = true;
-                } else {
-                    $scope.show_loader = false;
-                }
+                var auth_status = broadcast.status;
+                $scope.show_loader = auth_status;
+                $scope.logged_in = auth_status;
+                if (status) { $scope.user = broadcast.msg; }
             });
 
             // watch on forgot password
