@@ -6,6 +6,7 @@ app/libs
 .git
 .idea/codeStyleSettings.xml
 .env
+.bin
 /tests/protractor/protractor.config.js
 /tests/unit/karma.config.js
 npm-debug.log

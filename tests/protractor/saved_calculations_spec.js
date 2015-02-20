@@ -85,7 +85,6 @@ describe('Sita Calculator', function () {
             });
         });
 
-
         // this is depending on an a calculation with a particular id
         // and particular values
         var info = {

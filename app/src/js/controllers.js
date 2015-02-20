@@ -11,12 +11,13 @@ angular.module('myApp.controllers', [])
         'localStorageService',
         'infoData',
         '$interval',
+        'addThing',
 
         function ($rootScope,
                   $scope,
                   localStorageService,
                   infoData,
-                  $interval) {
+                  $interval,addThing) {
 
             //Fast click, removes time delay for click on mobile
             //FastClick.attach(document.body, null);
@@ -74,10 +75,8 @@ angular.module('myApp.controllers', [])
                     timestamp: Math.round(new Date().getTime() / 1000),
                     date: new Date().toISOString()
                 };
-
                 // Currency
                 $scope.setCurrency();
-
                 localStorageService.set('info', $scope.info);
             };
 
@@ -844,8 +843,25 @@ angular.module('myApp.controllers', [])
 
         }])
 
-    .controller('AuthCtrl', ['$rootScope', '$scope', '$state', '$firebase', 'Authorisation',
-        function ($rootScope, $scope, $state, $firebase, Authorisation) {
+    .controller('AuthCtrl', ['$rootScope', '$scope', 'Authorise', '$state', '$firebase',
+        function ($rootScope, $scope, Authorise, $state, $firebase) {
+
+            $scope.loginUser = function () {
+                $scope.show_loader = true;
+                Authorise.login($scope.auth.email, $scope.auth.password);
+            };
+
+            $scope.$on('authEvent', function(event, broadcast) {
+                if (broadcast.success === true) {
+                    $scope.show_loader = false;
+                    $scope.logged_in = true;
+                    $state.go('info');
+                } else {
+                    $scope.show_loader = false;
+                    $scope.reason = broadcast.msg.toString();
+                }
+            });
+
 
             var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
             var ref = new Firebase(fb_base_url);
@@ -859,42 +875,6 @@ angular.module('myApp.controllers', [])
                 $scope.$emit('isLoggedInMessage', false);
                 $scope.logged_in = false;
             }
-
-            $scope.loginUser = function () {
-                $scope.show_loader = true;
-                ref.authWithPassword({
-                    email: $scope.auth.email,
-                    password: $scope.auth.password
-                }, function (error, authData) {
-                    if (error) {
-                        $scope.show_loader = false;
-                        $scope.message = "Login failed";
-                        // Get error codes and print relevent message
-                        switch (error.code) {
-                            case "INVALID_EMAIL" :
-                                $scope.reason = "The specified email address is incorrect.";
-                                break;
-                            case "INVALID_USER" :
-                                $scope.reason = "The specified user does not exist.";
-                                break;
-                            case "INVALID_PASSWORD" :
-                                $scope.reason = "The specified password is incorrect";
-                                break;
-                            case "UNKNOWN_ERROR" :
-                                $scope.reason = "An unknown error occurred. Please contact support@firebase.com.";
-                                break;
-                            case "USER_DENIED" :
-                                $scope.reason = "User denied authentication request.";
-                                break;
-                        }
-                    } else {
-                        $scope.show_loader = false;
-                        $scope.logged_in = true;
-                        $scope.$emit('isLoggedInMessage', true);
-                        $state.go('info');
-                    }
-                });
-            };
 
             $scope.logoutUser = function () {
                 $scope.logged_in = false;
