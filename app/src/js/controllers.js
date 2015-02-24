@@ -253,6 +253,7 @@ angular.module('myApp.controllers', [])
         '$scope',
         '$state',
         'localStorageService',
+        'Authorise',
         '$modal',
         '$timeout',
         'infoData',
@@ -260,112 +261,115 @@ angular.module('myApp.controllers', [])
         'allData',
         '$location',
         '$firebase',
-        function ($scope, $state, localStorageService, $modal, $timeout, infoData, inputData, allData, $location, $firebase) {
+        function ($scope, $state, localStorageService, Authorise, $modal, $timeout, infoData, inputData, allData, $location, $firebase) {
 
             $scope.createNewSession = function () {
                 $state.go('new-calculation');
                 $scope.$emit('createNewSession', true);
             };
 
-            var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-            var auth_ref = new Firebase(fb_base_url);
-            var authData = auth_ref.getAuth();
-            var num_uid = function () {
-                var uid = authData.uid;
-                var result = uid.split(":");
-                return result[1];
+            // auth status on page load
+            $scope.$on('isAuthorised', function(event, broadcast) {
+                var auth_status = broadcast.status;
+                if (broadcast.status) {
+                    // logged in, do stuff.
+                    if (get_items_from_fb()) {
+                        var items = get_items_from_fb();
+                        fb_items_promise(items);
+                    }
+
+                    $scope.current_key = localStorageService.get('current_key');
+                    $scope.load_status = "loading";
+                    $scope.ele_load_status = "hide_on_loading";
+                    $scope.sessionCount = function () { return items.length; };
+
+                } else { $state.go('auth'); }
+            });
+
+            $scope.checkLoginStatus = function () {
+                Authorise.check_login_status();
             };
 
-            if (authData) {
-                var url = fb_base_url + '/user_data/' + num_uid() + "/";
+            var get_items_from_fb = function() {
+                var url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid() + "/";
                 var ref = new Firebase(url);
                 var sync = $firebase(ref);
-                var items = sync.$asArray();
+                return sync.$asArray();
+            };
 
-                // Promise for loaded data
-                items.$loaded().then(
+            var fb_items_promise = function(items) {
+                return items.$loaded().then(
                     function () {
                         $scope.items = items;
                         $scope.load_status = "loaded";
                         $scope.ele_load_status = "show_on_loaded";
                     }
                 );
+            };
 
-                $scope.current_key = localStorageService.get('current_key');
-                $scope.load_status = "loading";
-                $scope.ele_load_status = "hide_on_loading";
+            var copy_data = function (items) {
+                var copy_of_data = items.data,
+                    copy_of_info = items.info,
+                    copy_of_input = items.input;
 
-                // Count calculations
-                $scope.sessionCount = function () {
-                    return items.length;
+                copy_of_info.date = {
+                    timestamp: Math.round(new Date().getTime() / 1000),
+                    date: new Date().toISOString()
                 };
 
-                // Delete calculation
-                $scope.deleteSession = function (id) {
-                    var itemRef = new Firebase(url + "/" + id);
-                    var onComplete = function (error) {
-                        if (error) {
-                            console.log('Sync failed');
-                        } else {
-                            $scope.deleteItemId = id;
-                            $state.go('saved-calculations');
-                        }
-                    };
-                    itemRef.remove(onComplete);
+                return {
+                    data: copy_of_data,
+                    info: copy_of_info,
+                    input: copy_of_input
                 };
+            };
 
-                // Copy calculation
-                $scope.copySession = function (id) {
-                    var url = fb_base_url + '/user_data/' + num_uid() + "/" + id;
-                    var ref = new Firebase(url);
-                    var sync = $firebase(ref);
-                    var items = sync.$asObject();
+            var save_a_copy = function (id) {
+                var user_url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid(),
+                    user_ref = new Firebase(user_url),
+                    user_calculations = $firebase(user_ref).$asArray();
 
-                    /* Promise for loaded data */
-                    items.$loaded().then(
+                var url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid() + "/" + id,
+                    ref = new Firebase(url),
+                    items = $firebase(ref).$asObject();
+
+                items.$loaded()
+                    .then(
                         function () {
-                            // Copy saved data
-                            var copy_of_data = items.data,
-                                copy_of_info = items.info,
-                                copy_of_input = items.input;
-
-                            // Update the timestamp and date
-                            copy_of_info.date = {
-                                timestamp: Math.round(new Date().getTime() / 1000),
-                                date: new Date().toISOString()
-                            };
-
-                            // Add to items object the copied data
-                            $scope.items.$add({
-                                data: copy_of_data,
-                                info: copy_of_info,
-                                input: copy_of_input
-                            });
+                            user_calculations.$add(copy_data(items));
                         }
-                    );
-                };
+                );
+            };
 
-                /**
-                 *  Use a particular saved calculation,
-                 *  replaces data in local storage with this copied calculation
-                 *
-                 *  @param id
-                 */
-                $scope.useSession = function (id) {
-                    $scope.id = id;
-                    var modalInstance = $modal.open({
-                        templateUrl: 'useSession.html',
-                        controller: 'ModalConfirmUseCtrl',
-                        size: 'sm',
-                        resolve: {
-                            id: function () {
-                                return id;
-                            }
+            $scope.deleteSession = function (id) {
+                var url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid() + "/" + id;
+                var ref = new Firebase(url);
+                var obj = $firebase(ref).$asObject();
+                obj.$remove().then(function(ref) {
+                   return true;
+                }, function (error) {
+                    console.log("Error:", error);
+                    return false;
+                });
+            };
+
+            $scope.copySession = function (id) {
+                save_a_copy(id);
+            };
+
+            $scope.useSession = function (id) {
+                $scope.id = id;
+                var modalInstance = $modal.open({
+                    templateUrl: 'useSession.html',
+                    controller: 'ModalConfirmUseCtrl',
+                    size: 'sm',
+                    resolve: {
+                        id: function () {
+                            return id;
                         }
-                    });
-
-                };
-            } else { $state.go('auth'); }
+                    }
+                });
+            };
         }])
 
     .controller('ModalConfirmUseCtrl',
@@ -810,19 +814,19 @@ angular.module('myApp.controllers', [])
     .controller('AuthCtrl', ['$rootScope', '$scope', '$sce', 'Authorise', '$state',
         function ($rootScope, $scope, $sce, Authorise, $state) {
 
-            // watch login and logout
+            // login and logout
             $scope.$on('authEvent', function(event, broadcast) {
                 $scope.show_loader = false;
                 $scope.logged_in = broadcast.status;
                 $scope.reason = broadcast.msg;
             });
 
-            // watch auth status on page load
+            // auth status on page load
             $scope.$on('isAuthorised', function(event, broadcast) {
                 var auth_status = broadcast.status;
                 $scope.show_loader = auth_status;
                 $scope.logged_in = auth_status;
-                if (status) { $scope.user = broadcast.msg; }
+                if (auth_status) { $scope.user = broadcast.msg; }
             });
 
             // watch on forgot password
@@ -842,6 +846,7 @@ angular.module('myApp.controllers', [])
 
             $scope.logoutUser = function () {
                 Authorise.logout();
+                $scope.show_loader = false;
                 $scope.logged_in = false;
             };
 
