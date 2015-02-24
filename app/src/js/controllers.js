@@ -377,6 +377,7 @@ angular.module('myApp.controllers', [])
         '$scope',
         '$window',
         'localStorageService',
+        'Authorise',
         '$state',
         'allData',
         'infoData',
@@ -384,60 +385,63 @@ angular.module('myApp.controllers', [])
         '$modalInstance',
         'id',
         '$firebase',
-        function ($scope, $window, localStorageService, $state, allData, infoData, inputData, $modalInstance, id, $firebase) {
+        function ($scope, $window, localStorageService, Authorise, $state, allData, infoData, inputData, $modalInstance, id, $firebase) {
 
         $scope.id = id;
 
-        $scope.ok = function () {
+        // auth status on page load
+        $scope.$on('isAuthorised', function(event, broadcast) {
+            var auth_status = broadcast.status;
+            if (broadcast.status) {
+                // logged in, do stuff.
+                if (get_item_from_fb()) {
+                    var item = get_item_from_fb();
+                    fb_item_promise(item);
+                }
 
-            // Check logged in
-            var fb_base_url = "https://luminous-fire-1327.firebaseio.com";
-            var auth_ref = new Firebase(fb_base_url);
-            var authData = auth_ref.getAuth();
-            var num_uid = function () {
-                var uid = authData.uid;
-                var result = uid.split(":");
-                return result[1];
-            };
-
-            if (authData) {
-                var url = fb_base_url + '/user_data/' + num_uid() + "/" + id;
-                var ref = new Firebase(url);
-                var sync = $firebase(ref);
-                var item = sync.$asObject();
-
-                /* Promise for loaded data */
-                item.$loaded().then(
-                    function () {
-                        // Set the locally stored data
-                        localStorageService.set('data', item.data);
-                        localStorageService.set('info', item.info);
-                        localStorageService.set('input', item.input);
-
-                        // Update the factories
-                        allData = item.data;
-                        infoData = item.info;
-                        inputData = item.input;
-
-                        // Set localstorage
-                        localStorageService.set('current_key', id);
-
-                        // Set current_key
-                        $scope.current_key = localStorageService.get('current_key');
-
-                        // Set running session flag to true
-                        infoData.running_session = true;
-
-                        $window.location.reload();
-                        $modalInstance.close();
-                    }
-                );
             } else { $state.go('auth'); }
+        });
+
+        $scope.checkLoginStatus = function () {
+            Authorise.check_login_status();
         };
 
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+        var get_item_from_fb = function() {
+            var url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid() + "/" + id;
+            var ref = new Firebase(url);
+            var sync = $firebase(ref);
+            return sync.$asObject();
         };
+
+        var fb_item_promise = function(item) {
+            return item.$loaded().then(
+                function () {
+                    localStorageService.set('data', item.data);
+                    localStorageService.set('info', item.info);
+                    localStorageService.set('input', item.input);
+
+                    // Update the factories
+                    allData = item.data;
+                    infoData = item.info;
+                    inputData = item.input;
+
+                    // Set localstorage
+                    localStorageService.set('current_key', id);
+
+                    // Set current_key
+                    $scope.current_key = localStorageService.get('current_key');
+
+                    // Set running session flag to true
+                    infoData.running_session = true;
+
+                    $window.location.reload();
+                    $modalInstance.close();
+                }
+            );
+        };
+
+        $scope.ok = function () { $scope.checkLoginStatus(); };
+        $scope.cancel = function () { $modalInstance.dismiss('cancel'); };
 
     }])
 

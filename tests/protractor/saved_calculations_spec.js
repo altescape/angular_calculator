@@ -88,12 +88,12 @@ describe('Sita Calculator', function () {
         // this is depending on an a calculation with a particular id
         // and particular values
         var info = {
-            id: "-JiSWdTf4yaOfYIi_bOI",
-            airline: "AIRLINE: THIS IS A PROPER AIRLINE NAME",
-            opportunity: "OPPORTUNITY: OPP NAME",
-            version: "VERSION: VERSION 121",
+            id: "-JivDxXrm0vRfYQs5lFo",
+            airline: "AIRLINE: AN ADDED CALCULATION",
+            opportunity: "OPPORTUNITY: VIRGIN",
+            version: "VERSION: 1.0",
             currency: "CURRENCY: $ (USD)",
-            annual_revenue: "$10,212,121,210,112,212.00"
+            annual_revenue: "$1,233,123,123,123,123.00"
         };
         var click_saved_calculation = function(){
             var calculation_view_button = element(by.css('a[href="#/saved-calculations/'+info.id+'"]'));
