@@ -1,6 +1,8 @@
 <div ng-cloak class="{{ load_status }}" ng-init="checkLoginStatus()">
     <div class="col-md-12">
 
+        <a ng-click="checkLoginStatus()">Get records</a>
+
         <div class="loader">
             <div></div>
             <div></div>
@@ -22,7 +24,7 @@
 
         <div class="row">
 
-            <h1 ng-show="sessionCount() == 0" class="text-center text-muted mt-80 {{ ele_load_status }} ng-cloak">Cannot find any saved calculations<br> . . .<br><a ui-sref="new-calculation" class="btn btn-success btn-lg user-action mt-5">New calculation</a></h1>
+            <h1 ng-show="session_count == 0" class="text-center text-muted mt-80 {{ ele_load_status }} ng-cloak">Cannot find any saved calculations<br> . . .<br><a ui-sref="new-calculation" class="btn btn-success btn-lg user-action mt-5">New calculation</a></h1>
             <h1 ng-show="info.loggedIn == false" class="text-center text-muted mt-80 ng-cloak">You're not logged in. To view saved calculations you must <a ui-sref="auth">log in</a><br> . . .</h1>
             <calculations></calculations>
         </div>

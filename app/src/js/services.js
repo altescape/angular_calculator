@@ -326,7 +326,7 @@ angular.module('myApp.services', [])
         var FB_BASE_URL = "https://luminous-fire-1327.firebaseio.com";
         var ref = new Firebase(FB_BASE_URL);
         var authObj = $firebaseAuth(ref);
-        var authData = ref.getAuth();
+        var authData = authObj.$getAuth();
 
         // This splits the defualt uid response from Firebase
         // into a number - which is what it was originally. On the update
@@ -334,8 +334,9 @@ angular.module('myApp.services', [])
         // 'simplelogin:1'.
         // This function returns '1' or false.
         var num_uid = function () {
-            if (ref.getAuth()) {
-                var uid = authData.uid;
+            var user = authObj.$getAuth();
+            if (user) {
+                var uid = user.uid;
                 var result = uid.split(":");
                 return result[1];
             }

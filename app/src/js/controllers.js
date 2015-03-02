@@ -270,19 +270,12 @@ angular.module('myApp.controllers', [])
 
             // auth status on page load
             $scope.$on('isAuthorised', function(event, broadcast) {
-                var auth_status = broadcast.status;
                 if (broadcast.status) {
                     // logged in, do stuff.
-                    if (get_items_from_fb()) {
-                        var items = get_items_from_fb();
-                        fb_items_promise(items);
-                    }
-
+                    fb_items_promise( get_items_from_fb() );
                     $scope.current_key = localStorageService.get('current_key');
                     $scope.load_status = "loading";
                     $scope.ele_load_status = "hide_on_loading";
-                    $scope.sessionCount = function () { return items.length; };
-
                 } else { $state.go('auth'); }
             });
 
@@ -292,17 +285,21 @@ angular.module('myApp.controllers', [])
 
             var get_items_from_fb = function() {
                 var url = Authorise.fb_base_url + '/user_data/' + Authorise.num_uid() + "/";
+                console.log(url);
                 var ref = new Firebase(url);
+                console.log(ref);
                 var sync = $firebase(ref);
+                console.log(sync);
                 return sync.$asArray();
             };
 
             var fb_items_promise = function(items) {
                 return items.$loaded().then(
-                    function () {
-                        $scope.items = items;
+                    function (data) {
+                        $scope.items = data;
                         $scope.load_status = "loaded";
                         $scope.ele_load_status = "show_on_loaded";
+                        $scope.session_count = data.length;
                     }
                 );
             };

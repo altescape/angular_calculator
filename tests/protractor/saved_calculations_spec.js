@@ -25,7 +25,7 @@ describe('Sita Calculator', function () {
         element(by.id('email')).clear().sendKeys(browser.params.login.user);
         element(by.id('pword')).clear().sendKeys(browser.params.login.password);
         element(by.id('sign-in')).click();
-        browser.sleep(4000);
+        browser.sleep(2000);
     };
 
     describe('saved calculations functionality', function () {
@@ -69,7 +69,16 @@ describe('Sita Calculator', function () {
             tab.click();
         };
 
-        it('should log in and navigate to saved calculations', function () {
+        it('should log in, navigate and see if calculations exist', function () {
+            login();
+            click_my_calculations_tab();
+            browser.sleep(4000);
+            element.all(by.css('.saved-panels')).then(function(items){
+                expect(items.length).toBeGreaterThan(0); // there should be some saved calculations
+            });
+        });
+
+        xit('should log in and navigate to saved calculations', function () {
             login();
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations');
             browser.sleep(2000);
@@ -77,7 +86,7 @@ describe('Sita Calculator', function () {
             expect(browser.getLocationAbsUrl()).toBe('http://hoz-calculator-dev.com/#/saved-calculations');
         });
 
-        it('should show a list of saved calculations', function () {
+        xit('should show a list of saved calculations', function () {
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations');
             browser.sleep(2000);
             element.all(by.css('.saved-panels')).then(function(items){
@@ -101,42 +110,42 @@ describe('Sita Calculator', function () {
         };
 
         // change info.id above accordingly for correct id
-        it('should click into calculation', function(){
+        xit('should click into calculation', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations');
             browser.sleep(2000);
             click_saved_calculation();
             expect(browser.getLocationAbsUrl()).toBe('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
         });
 
-        it('should show correct airline value', function(){
+        xit('should show correct airline value', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
             var version = element(by.exactBinding('item.info.airline.code'));
             expect(version.getText()).toEqual(info.airline);
         });
 
-        it('should show correct opportunity value', function(){
+        xit('should show correct opportunity value', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
             var expectation = element(by.exactBinding('item.info.opportunity.name'));
             expect(expectation.getText()).toEqual(info.opportunity);
         });
 
-        it('should show correct opportunity value', function(){
+        xit('should show correct opportunity value', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
             var expectation = element(by.exactBinding('item.info.session.name'));
             expect(expectation.getText()).toEqual(info.version);
         });
 
-        it('should show correct currency value and symbol', function(){
+        xit('should show correct currency value and symbol', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
             var expectation1 = element(by.exactBinding('item.info.currency.symbol'));
             expect(expectation1.getText()).toEqual(info.currency);
         });
 
-        it('should show correct airline annual revenue value', function(){
+        xit('should show correct airline annual revenue value', function(){
             browser.driver.get('http://hoz-calculator-dev.com/#/saved-calculations/'+info.id);
             browser.sleep(2000);
             var expectation1 = element(by.exactBinding('item.input.param6'));
